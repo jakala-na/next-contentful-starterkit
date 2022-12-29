@@ -1,0 +1,2 @@
+schema: 'gql/schema.graphql'
+documents: ["app/**/*.{graphql,js,ts,jsx,tsx}", 'ui/**/*.{graphql,js,ts,jsx,tsx}']
