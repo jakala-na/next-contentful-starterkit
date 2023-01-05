@@ -26,6 +26,27 @@
     "@graphql-codegen/cli": "2.15.0",
     "@graphql-codegen/client-preset": "1.2.1",
     "@graphql-codegen/introspection": "2.2.1",
-    "@graphql-codegen/schema-ast": "^2.6.0"
+    "@graphql-codegen/schema-ast": "^2.6.0",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "axe-core": "^4.6.1",
+    "cypress": "^12.2.0",
+    "cypress-axe": "^1.2.0",
+    "cypress-image-snapshot": "^4.0.1",
+    "@badeball/cypress-cucumber-preprocessor": "^15.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
+    "@cypress/webpack-dev-server": "^3.2.1",
+    "@types/cypress-image-snapshot": "^3.1.6"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "cypress/e2e/[filepath]/**/*.{js,ts}",
+      "cypress/e2e/[filepath].{js,ts}",
+      "[filepath].steps.{js,jsx,ts,tsx}",
+      "cypress/support/step_definitions/**/*.{js,ts}"
+    ],
+    "html": {
+      "enabled": true
+    }
   }
 }

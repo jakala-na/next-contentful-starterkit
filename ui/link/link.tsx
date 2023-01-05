@@ -4,9 +4,6 @@ import { default as NextLink } from "next/link";
 
 const LinkFields = graphql(/* GraphQL */ `
   fragment LinkFields on MenuLink {
-    sys {
-      id
-    }
     linkUrl
     linkText
     linkReference {
@@ -26,7 +23,7 @@ const getLinkProps = (link: LinkFieldsFragment) => {
   };
 };
 
-type LinkProps = {
+export type LinkProps = {
   link: FragmentType<typeof LinkFields>;
 };
 

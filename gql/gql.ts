@@ -14,7 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkFields\n        }\n      }\n    }\n  ": types.MenuLinksDocument,
-    "\n  fragment LinkFields on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n": types.LinkFieldsFragmentDoc,
+    "\n  fragment LinkFields on MenuLink {\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n": types.LinkFieldsFragmentDoc,
 };
 
 /**
@@ -24,7 +24,7 @@ export function graphql(source: "\n    query MenuLinks {\n      menuLinkCollecti
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment LinkFields on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"): (typeof documents)["\n  fragment LinkFields on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"];
+export function graphql(source: "\n  fragment LinkFields on MenuLink {\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"): (typeof documents)["\n  fragment LinkFields on MenuLink {\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"];
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

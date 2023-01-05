@@ -1,0 +1,10 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "cucumberautocomplete.steps": [
+    "cypress/e2e/**/*.{js,ts}",
+    "cypress/support/step_definitions/*.{js,ts}",
+    "ui/**/*.steps.{js,ts,jsx,tsx}"
+  ],
+  "cucumberautocomplete.strictGherkinCompletion": false
+}
