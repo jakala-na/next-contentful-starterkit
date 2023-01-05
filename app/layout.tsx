@@ -3,6 +3,7 @@ import { previewData } from "next/headers";
 import "./globals.css";
 import { graphql } from "../gql";
 import { Link } from "#/ui/link";
+import { LinkItemFragment } from "#/gql/graphql";
 
 export default async function RootLayout({
   children,
@@ -16,7 +17,7 @@ export default async function RootLayout({
     query MenuLinks {
       menuLinkCollection(limit: 100) {
         items {
-          ...LinkFields
+          ...LinkItem
         }
       }
     }
@@ -35,11 +36,14 @@ export default async function RootLayout({
         {isPreviewMode ? <h1>Preview Mode</h1> : <h1>Not in Preview Mode</h1>}
         <nav>
           <ul>
-            {layoutData.menuLinkCollection?.items.map((item) => (
-              <li key={item?.sys.id}>
-                <Link link={item} />
-              </li>
-            ))}
+            {layoutData.menuLinkCollection?.items.map(
+              (item) =>
+                item && (
+                  <li key={(item as LinkItemFragment)?.sys.id}>
+                    <Link link={item} />
+                  </li>
+                )
+            )}
           </ul>
         </nav>
         {children}
