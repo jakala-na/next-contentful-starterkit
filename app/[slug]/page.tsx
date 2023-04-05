@@ -1,12 +1,12 @@
+import { notFound } from 'next/navigation';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { graphql } from '#/gql';
-
-interface Params {
-  slug: string;
-}
+import { Page } from '#/gql/graphql';
 
 interface Props {
-  params: Params;
+  params: {
+    slug: string;
+  };
 }
 
 const PageFieldsFragment = graphql(/* GraphQL */ `
@@ -19,9 +19,7 @@ const PageFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
-const Page = async (props: Props) => {
-  const { params } = props;
-
+const PageBySlug = async ({ params }: Props) => {
   // Get a Page entry by slug
   const pageQuery = graphql(/* GraphQL */ `
     query PageBySlug($slug: String!) {
@@ -37,11 +35,16 @@ const Page = async (props: Props) => {
     slug: params.slug
   });
 
-  const page = pageData.pageCollection?.items[0]
+  if (!pageData.pageCollection?.items.length) notFound();
+
+  const page = pageData.pageCollection?.items[0] as Page;
 
   return (
-    <h1>{page ? page.title : '404: Not found'}</h1>
-  )
+    <>
+      <h1>{page.title}</h1>
+      <div>Id: {page.sys.id}</div>
+    </>
+  );
 };
 
-export default Page;
+export default PageBySlug;
