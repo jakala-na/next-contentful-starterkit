@@ -9,6 +9,16 @@ interface Props {
   params: Params;
 }
 
+const PageFieldsFragment = graphql(/* GraphQL */ `
+  fragment PageItem on Page {
+    sys {
+      id
+    }
+    slug
+    title
+  }
+`);
+
 const Page = async (props: Props) => {
   const { params } = props;
 
@@ -17,8 +27,7 @@ const Page = async (props: Props) => {
     query PageBySlug($slug: String!) {
       pageCollection(limit: 1, where: { slug: $slug }) {
         items {
-          slug
-          title
+          ...PageItem
         }
       }
     }

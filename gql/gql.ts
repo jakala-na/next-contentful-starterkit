@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n    query PageBySlug($slug: String!) {\n      pageCollection(limit: 1, where: { slug: $slug }) {\n        items {\n          slug\n          title\n        }\n      }\n    }\n  ": types.PageBySlugDocument,
+    "\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n  }\n": types.PageItemFragmentDoc,
+    "\n    query PageBySlug($slug: String!) {\n      pageCollection(limit: 1, where: { slug: $slug }) {\n        items {\n          ...PageItem\n        }\n      }\n    }\n  ": types.PageBySlugDocument,
     "\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkItem\n        }\n      }\n    }\n  ": types.MenuLinksDocument,
     "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n": types.LinkItemFragmentDoc,
 };
@@ -21,7 +22,11 @@ const documents = {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query PageBySlug($slug: String!) {\n      pageCollection(limit: 1, where: { slug: $slug }) {\n        items {\n          slug\n          title\n        }\n      }\n    }\n  "): (typeof documents)["\n    query PageBySlug($slug: String!) {\n      pageCollection(limit: 1, where: { slug: $slug }) {\n        items {\n          slug\n          title\n        }\n      }\n    }\n  "];
+export function graphql(source: "\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n  }\n"): (typeof documents)["\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query PageBySlug($slug: String!) {\n      pageCollection(limit: 1, where: { slug: $slug }) {\n        items {\n          ...PageItem\n        }\n      }\n    }\n  "): (typeof documents)["\n    query PageBySlug($slug: String!) {\n      pageCollection(limit: 1, where: { slug: $slug }) {\n        items {\n          ...PageItem\n        }\n      }\n    }\n  "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
