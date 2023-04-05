@@ -2988,7 +2988,6 @@ export type Redirect = Entry & {
   contentfulMetadata: ContentfulMetadata;
   from?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<RedirectLinkingCollections>;
-  statusCode?: Maybe<Scalars['String']>;
   sys: Sys;
   to?: Maybe<Scalars['String']>;
 };
@@ -3003,12 +3002,6 @@ export type RedirectFromArgs = {
 /** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/redirect) */
 export type RedirectLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/redirect) */
-export type RedirectStatusCodeArgs = {
-  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -3036,13 +3029,6 @@ export type RedirectFilter = {
   from_not?: InputMaybe<Scalars['String']>;
   from_not_contains?: InputMaybe<Scalars['String']>;
   from_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  statusCode?: InputMaybe<Scalars['String']>;
-  statusCode_contains?: InputMaybe<Scalars['String']>;
-  statusCode_exists?: InputMaybe<Scalars['Boolean']>;
-  statusCode_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  statusCode_not?: InputMaybe<Scalars['String']>;
-  statusCode_not_contains?: InputMaybe<Scalars['String']>;
-  statusCode_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
   to?: InputMaybe<Scalars['String']>;
   to_contains?: InputMaybe<Scalars['String']>;
@@ -3069,8 +3055,6 @@ export type RedirectLinkingCollectionsEntryCollectionArgs = {
 export enum RedirectOrder {
   FromAsc = 'from_ASC',
   FromDesc = 'from_DESC',
-  StatusCodeAsc = 'statusCode_ASC',
-  StatusCodeDesc = 'statusCode_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -3343,6 +3327,13 @@ export type CfSeoNestedFilter = {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+export type PageBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type PageBySlugQuery = { __typename?: 'Query', pageCollection?: { __typename?: 'PageCollection', items: Array<{ __typename?: 'Page', slug?: string | null, title?: string | null } | null> } | null };
+
 export type MenuLinksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3354,4 +3345,5 @@ export type MenuLinksQuery = { __typename?: 'Query', menuLinkCollection?: { __ty
 export type LinkItemFragment = { __typename?: 'MenuLink', linkUrl?: string | null, linkText?: string | null, sys: { __typename?: 'Sys', id: string }, linkReference?: { __typename?: 'Page', title?: string | null, slug?: string | null } | null } & { ' $fragmentName'?: 'LinkItemFragment' };
 
 export const LinkItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"MenuLink"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"linkUrl"}},{"kind":"Field","name":{"kind":"Name","value":"linkText"}},{"kind":"Field","name":{"kind":"Name","value":"linkReference"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<LinkItemFragment, unknown>;
+export const PageBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<PageBySlugQuery, PageBySlugQueryVariables>;
 export const MenuLinksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MenuLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"menuLinkCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkItem"}}]}}]}}]}},...LinkItemFragmentDoc.definitions]} as unknown as DocumentNode<MenuLinksQuery, MenuLinksQueryVariables>;

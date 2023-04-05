@@ -1701,7 +1701,6 @@ type Redirect implements Entry {
   contentfulMetadata: ContentfulMetadata!
   from(locale: String): String
   linkedFrom(allowedLocales: [String]): RedirectLinkingCollections
-  statusCode(locale: String): String
   sys: Sys!
   to(locale: String): String
 }
@@ -1724,13 +1723,6 @@ input RedirectFilter {
   from_not: String
   from_not_contains: String
   from_not_in: [String]
-  statusCode: String
-  statusCode_contains: String
-  statusCode_exists: Boolean
-  statusCode_in: [String]
-  statusCode_not: String
-  statusCode_not_contains: String
-  statusCode_not_in: [String]
   sys: SysFilter
   to: String
   to_contains: String
@@ -1748,8 +1740,6 @@ type RedirectLinkingCollections {
 enum RedirectOrder {
   from_ASC
   from_DESC
-  statusCode_ASC
-  statusCode_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC

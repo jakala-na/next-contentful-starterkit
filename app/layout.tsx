@@ -1,12 +1,14 @@
-import { graphqlClient } from "../lib/graphqlClient";
-import { previewData } from "next/headers";
-import "./globals.css";
-import { graphql } from "../gql";
-import { Link } from "#/ui/link";
-import { LinkItemFragment } from "#/gql/graphql";
+import { graphqlClient } from '../lib/graphqlClient';
+import { previewData } from 'next/headers';
+import './globals.css';
+import styles from './page.module.css';
+import { graphql } from '../gql';
+import { Link } from '#/ui/link';
+import { LinkItemFragment } from '#/gql/graphql';
+import Image from 'next/image';
 
 export default async function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
@@ -46,7 +48,26 @@ export default async function RootLayout({
             )}
           </ul>
         </nav>
-        {children}
+        <div className={styles.container}>
+          <main className={styles.main}>{children}</main>
+        </div>
+        <footer className={styles.footer}>
+          <a
+            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Powered by{' '}
+            <span className={styles.logo}>
+              <Image
+                src="/vercel.svg"
+                alt="Vercel Logo"
+                width={72}
+                height={16}
+              />
+            </span>
+          </a>
+        </footer>
       </body>
     </html>
   );
