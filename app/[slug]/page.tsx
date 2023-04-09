@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { graphql } from '#/gql';
 import { Page } from '#/gql/graphql';
+import PageLanding from '#/ui/pageLanding/pageLanding';
 
 interface Props {
   params: {
@@ -16,33 +17,39 @@ const PageFieldsFragment = graphql(/* GraphQL */ `
     }
     slug
     title
+    content {
+      ... on PageLanding {
+        ...PageLandingItem
+      }
+    }
+  }
+`);
+
+const PageBySlugDocument = graphql(/* GraphQL */ `
+  query PageBySlug($slug: String!) {
+    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {
+      items {
+        ...PageItem
+      }
+    }
   }
 `);
 
 const PageBySlug = async ({ params }: Props) => {
   // Get a Page entry by slug
-  const pageQuery = graphql(/* GraphQL */ `
-    query PageBySlug($slug: String!) {
-      pageCollection(limit: 1, where: { slug: $slug }) {
-        items {
-          ...PageItem
-        }
-      }
-    }
-  `);
-
-  const pageData = await graphqlClient.request(pageQuery, {
+  const result = await graphqlClient.request(PageBySlugDocument, {
     slug: params.slug
   });
 
-  if (!pageData.pageCollection?.items.length) notFound();
+  if (!result.pageCollection?.items.length) notFound();
 
-  const page = pageData.pageCollection?.items[0] as Page;
+  const page = result.pageCollection?.items[0] as Page;
 
   return (
     <>
       <h1>{page.title}</h1>
       <div>Id: {page.sys.id}</div>
+      {page.content && <PageLanding pageLanding={page.content} />}
     </>
   );
 };

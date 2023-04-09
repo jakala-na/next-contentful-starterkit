@@ -13,20 +13,27 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n  }\n": types.PageItemFragmentDoc,
-    "\n    query PageBySlug($slug: String!) {\n      pageCollection(limit: 1, where: { slug: $slug }) {\n        items {\n          ...PageItem\n        }\n      }\n    }\n  ": types.PageBySlugDocument,
+    "\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n    content {\n      ... on PageLanding {\n        ...PageLandingItem\n      }\n    }\n  }\n": types.PageItemFragmentDoc,
+    "\n  query PageBySlug($slug: String!) {\n    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        ...PageItem\n      }\n    }\n  }\n": types.PageBySlugDocument,
     "\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkItem\n        }\n      }\n    }\n  ": types.MenuLinksDocument,
+    "\n  fragment ComponentArticleCardItem on ComponentArticleCard {\n    sys {\n      id\n    }\n    eyebrow\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n": types.ComponentArticleCardItemFragmentDoc,
+    "\n  fragment ComponentImageAndTextItem on ComponentImageAndText {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n": types.ComponentImageAndTextItemFragmentDoc,
+    "\n  fragment ComponentMarqueeBannerItem on ComponentMarqueeBanner {\n    sys {\n      id\n    }\n    title\n    subtextString: subtext\n    backgroundImage {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n": types.ComponentMarqueeBannerItemFragmentDoc,
+    "\n  fragment ComponentTextCtaItem on ComponentTextCta {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    link\n  }\n": types.ComponentTextCtaItemFragmentDoc,
+    "\n  fragment ComponentTextSectionItem on ComponentTextSection {\n    sys {\n      id\n    }\n    body {\n      json\n    }\n  }\n": types.ComponentTextSectionItemFragmentDoc,
+    "\n  fragment ComponentThreeCardCollectionItem on ComponentThreeCardCollection {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    cardsCollection(limit: 3, preview: false) {\n      items {\n        __typename\n        ...ComponentArticleCardItem\n      }\n    }\n  }\n": types.ComponentThreeCardCollectionItemFragmentDoc,
     "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n": types.LinkItemFragmentDoc,
+    "\n  fragment PageLandingItem on PageLanding {\n    sys {\n      id\n    }\n    name\n    sectionsCollection(preview: false) {\n      items {\n        __typename\n        ... on ComponentTextCta {\n          ...ComponentTextCtaItem\n        }\n        ... on ComponentTextSection {\n          ...ComponentTextSectionItem\n        }\n        ... on ComponentImageAndText {\n          ...ComponentImageAndTextItem\n        }\n        ... on ComponentMarqueeBanner {\n          ...ComponentMarqueeBannerItem\n        }\n        ... on ComponentThreeCardCollection {\n          ...ComponentThreeCardCollectionItem\n        }\n      }\n    }\n  }\n": types.PageLandingItemFragmentDoc,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n  }\n"): (typeof documents)["\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n  }\n"];
+export function graphql(source: "\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n    content {\n      ... on PageLanding {\n        ...PageLandingItem\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n    content {\n      ... on PageLanding {\n        ...PageLandingItem\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query PageBySlug($slug: String!) {\n      pageCollection(limit: 1, where: { slug: $slug }) {\n        items {\n          ...PageItem\n        }\n      }\n    }\n  "): (typeof documents)["\n    query PageBySlug($slug: String!) {\n      pageCollection(limit: 1, where: { slug: $slug }) {\n        items {\n          ...PageItem\n        }\n      }\n    }\n  "];
+export function graphql(source: "\n  query PageBySlug($slug: String!) {\n    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        ...PageItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query PageBySlug($slug: String!) {\n    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        ...PageItem\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -34,7 +41,35 @@ export function graphql(source: "\n    query MenuLinks {\n      menuLinkCollecti
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  fragment ComponentArticleCardItem on ComponentArticleCard {\n    sys {\n      id\n    }\n    eyebrow\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n"): (typeof documents)["\n  fragment ComponentArticleCardItem on ComponentArticleCard {\n    sys {\n      id\n    }\n    eyebrow\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ComponentImageAndTextItem on ComponentImageAndText {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n"): (typeof documents)["\n  fragment ComponentImageAndTextItem on ComponentImageAndText {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ComponentMarqueeBannerItem on ComponentMarqueeBanner {\n    sys {\n      id\n    }\n    title\n    subtextString: subtext\n    backgroundImage {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n"): (typeof documents)["\n  fragment ComponentMarqueeBannerItem on ComponentMarqueeBanner {\n    sys {\n      id\n    }\n    title\n    subtextString: subtext\n    backgroundImage {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ComponentTextCtaItem on ComponentTextCta {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    link\n  }\n"): (typeof documents)["\n  fragment ComponentTextCtaItem on ComponentTextCta {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    link\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ComponentTextSectionItem on ComponentTextSection {\n    sys {\n      id\n    }\n    body {\n      json\n    }\n  }\n"): (typeof documents)["\n  fragment ComponentTextSectionItem on ComponentTextSection {\n    sys {\n      id\n    }\n    body {\n      json\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ComponentThreeCardCollectionItem on ComponentThreeCardCollection {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    cardsCollection(limit: 3, preview: false) {\n      items {\n        __typename\n        ...ComponentArticleCardItem\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment ComponentThreeCardCollectionItem on ComponentThreeCardCollection {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    cardsCollection(limit: 3, preview: false) {\n      items {\n        __typename\n        ...ComponentArticleCardItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"): (typeof documents)["\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment PageLandingItem on PageLanding {\n    sys {\n      id\n    }\n    name\n    sectionsCollection(preview: false) {\n      items {\n        __typename\n        ... on ComponentTextCta {\n          ...ComponentTextCtaItem\n        }\n        ... on ComponentTextSection {\n          ...ComponentTextSectionItem\n        }\n        ... on ComponentImageAndText {\n          ...ComponentImageAndTextItem\n        }\n        ... on ComponentMarqueeBanner {\n          ...ComponentMarqueeBannerItem\n        }\n        ... on ComponentThreeCardCollection {\n          ...ComponentThreeCardCollectionItem\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment PageLandingItem on PageLanding {\n    sys {\n      id\n    }\n    name\n    sectionsCollection(preview: false) {\n      items {\n        __typename\n        ... on ComponentTextCta {\n          ...ComponentTextCtaItem\n        }\n        ... on ComponentTextSection {\n          ...ComponentTextSectionItem\n        }\n        ... on ComponentImageAndText {\n          ...ComponentImageAndTextItem\n        }\n        ... on ComponentMarqueeBanner {\n          ...ComponentMarqueeBannerItem\n        }\n        ... on ComponentThreeCardCollection {\n          ...ComponentThreeCardCollectionItem\n        }\n      }\n    }\n  }\n"];
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
