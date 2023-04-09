@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { graphql } from '#/gql';
 import { Page } from '#/gql/graphql';
-import ComposePage from '#/ui/page/page';
+import { Page as ComposePage } from '#/ui/page';
 
 interface Props {
   params: {

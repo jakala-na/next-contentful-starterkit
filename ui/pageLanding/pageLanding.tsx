@@ -1,9 +1,9 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
-import ComponentImageAndText from '../componentImageAndText/componentImageAndText';
-import ComponentMarqueeBanner from '../componentMarqueeBanner/componentMarqueeBanner';
-import ComponentTextCta from '../componentTextCta/componentTextCta';
-import ComponentTextSection from '../componentTextSection/componentTextSection';
-import ComponentThreeCardCollection from '../componentThreeCardCollection/componentThreeCardCollection';
+import { ComponentImageAndText } from '../componentImageAndText';
+import { ComponentMarqueeBanner } from '../componentMarqueeBanner';
+import { ComponentTextCta } from '../componentTextCta';
+import { ComponentTextSection } from '../componentTextSection';
+import { ComponentThreeCardCollection } from '../componentThreeCardCollection';
 
 const PageLandingFieldsFragment = graphql(/* GraphQL */ `
   fragment PageLandingItem on PageLanding {

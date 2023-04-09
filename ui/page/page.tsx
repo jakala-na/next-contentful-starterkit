@@ -1,5 +1,5 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
-import PageLanding from '../pageLanding/pageLanding';
+import { PageLanding } from '../pageLanding';
 
 const PageFieldsFragment = graphql(/* GraphQL */ `
   fragment PageItem on Page {

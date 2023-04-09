@@ -1,6 +1,6 @@
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { FragmentType, graphql, useFragment } from '#/gql';
-import ComponentArticleCard from '../componentArticleCard/componentArticleCard';
+import { ComponentArticleCard } from '../componentArticleCard';
 
 const ComponentThreeCardCollectionFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentThreeCardCollectionItem on ComponentThreeCardCollection {
