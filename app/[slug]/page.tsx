@@ -28,13 +28,11 @@ const PageBySlug = async ({ params }: Props) => {
 
   if (!result.pageCollection?.items.length) notFound();
 
-  const page = result.pageCollection?.items[0] as Page;
+  const page = result.pageCollection?.items[0];
 
-  return (
-    <>
-      <ComposePage page={page} />
-    </>
-  );
+  if (!page) notFound();
+
+  return <ComposePage page={page} />;
 };
 
 export default PageBySlug;
