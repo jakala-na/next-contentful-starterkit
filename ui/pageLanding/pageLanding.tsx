@@ -41,13 +41,16 @@ export type PageLandingProps = {
 const PageLanding = (props: PageLandingProps) => {
   const pageLanding = useFragment(PageLandingFieldsFragment, props.pageLanding);
   const { sys, name, sectionsCollection } = pageLanding;
+
   if (!sys?.id) return null;
+
   return (
     <>
       <h1>{name}</h1>
       <div>Id: {sys.id}</div>
       {sectionsCollection?.items.map((item, idx) => {
         if (!item) return null;
+
         switch (item.__typename) {
           case 'ComponentTextSection':
             return (
@@ -70,6 +73,8 @@ const PageLanding = (props: PageLandingProps) => {
                 componentThreeCardCollection={item}
               />
             );
+          default:
+            return null;
         }
       })}
     </>

@@ -33,14 +33,18 @@ const ComponentTextSection = (props: ComponentTextSectionProps) => {
     props.componentTextSection
   );
   const { sys, body } = getComponentTextSectionProps(componentTextSection);
-  if (!body) return null;
+
+  if (!sys.id) return null;
+
   return (
     <>
       <h2>ComponentTextSection</h2>
       <div>Id: {sys.id}</div>
-      <div
-        dangerouslySetInnerHTML={{ __html: documentToHtmlString(body.json) }}
-      />
+      {body && (
+        <div
+          dangerouslySetInnerHTML={{ __html: documentToHtmlString(body.json) }}
+        />
+      )}
     </>
   );
 };

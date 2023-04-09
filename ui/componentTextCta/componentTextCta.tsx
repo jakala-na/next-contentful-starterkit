@@ -27,7 +27,9 @@ const ComponentTextCta = (props: ComponentTextCtaProps) => {
   );
   const { sys, title, subtext, buttonLabel, buttonExternalUrl } =
     componentTextCta;
+
   if (!sys?.id) return null;
+
   return (
     <>
       <h2>ComponentTextCta</h2>

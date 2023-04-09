@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { graphql } from '#/gql';
 import { Page } from '#/gql/graphql';
-import PageLanding from '#/ui/pageLanding/pageLanding';
+import ComposePage from '#/ui/page/page';
 
 interface Props {
   params: {
@@ -10,22 +10,7 @@ interface Props {
   };
 }
 
-const PageFieldsFragment = graphql(/* GraphQL */ `
-  fragment PageItem on Page {
-    sys {
-      id
-    }
-    slug
-    title
-    content {
-      ... on PageLanding {
-        ...PageLandingItem
-      }
-    }
-  }
-`);
-
-const PageBySlugDocument = graphql(/* GraphQL */ `
+const PageBySlugQuery = graphql(/* GraphQL */ `
   query PageBySlug($slug: String!) {
     pageCollection(limit: 1, where: { slug: $slug }, preview: false) {
       items {
@@ -37,7 +22,7 @@ const PageBySlugDocument = graphql(/* GraphQL */ `
 
 const PageBySlug = async ({ params }: Props) => {
   // Get a Page entry by slug
-  const result = await graphqlClient.request(PageBySlugDocument, {
+  const result = await graphqlClient.request(PageBySlugQuery, {
     slug: params.slug
   });
 
@@ -47,9 +32,7 @@ const PageBySlug = async ({ params }: Props) => {
 
   return (
     <>
-      <h1>{page.title}</h1>
-      <div>Id: {page.sys.id}</div>
-      {page.content && <PageLanding pageLanding={page.content} />}
+      <ComposePage page={page} />
     </>
   );
 };
