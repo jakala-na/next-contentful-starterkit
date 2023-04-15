@@ -718,6 +718,7 @@ input ComponentThreeCardCollectionFilter {
   buttonLabel_not_in: [String]
   buttonReference: cfPageNestedFilter
   buttonReference_exists: Boolean
+  cards: cfComponentArticleCardNestedFilter
   cardsCollection_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
   internalName: String
@@ -1053,8 +1054,10 @@ type MegaMenuDropdownColumnTwoItemsCollection {
 input MegaMenuDropdownFilter {
   AND: [MegaMenuDropdownFilter]
   OR: [MegaMenuDropdownFilter]
+  columnOneItems: cfMenuLinkGroupNestedFilter
   columnOneItemsCollection_exists: Boolean
   columnThreeItemsCollection_exists: Boolean
+  columnTwoItems: cfMenuLinkGroupNestedFilter
   columnTwoItemsCollection_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
   linkReference: cfPageNestedFilter
@@ -1098,6 +1101,7 @@ input MegaMenuFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  items: cfMegaMenuDropdownNestedFilter
   itemsCollection_exists: Boolean
   sys: SysFilter
 }
@@ -1197,6 +1201,7 @@ input MenuLinkGroupFilter {
   groupTitle_not: String
   groupTitle_not_contains: String
   groupTitle_not_in: [String]
+  links: cfMenuLinkNestedFilter
   linksCollection_exists: Boolean
   sys: SysFilter
 }
@@ -1610,6 +1615,7 @@ input ProductSectionFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  products: cfProductNestedFilter
   productsCollection_exists: Boolean
   sys: SysFilter
   title: String
@@ -1692,6 +1698,8 @@ type Query {
   redirectCollection(limit: Int = 100, locale: String, order: [RedirectOrder], preview: Boolean, skip: Int = 0, where: RedirectFilter): RedirectCollection
   seo(id: String!, locale: String, preview: Boolean): Seo
   seoCollection(limit: Int = 100, locale: String, order: [SeoOrder], preview: Boolean, skip: Int = 0, where: SeoFilter): SeoCollection
+  testPage(id: String!, locale: String, preview: Boolean): TestPage
+  testPageCollection(limit: Int = 100, locale: String, order: [TestPageOrder], preview: Boolean, skip: Int = 0, where: TestPageFilter): TestPageCollection
 }
 
 """
@@ -1884,6 +1892,198 @@ input SysFilter {
   publishedVersion_not_in: [Float]
 }
 
+"""
+Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage)
+"""
+type TestPage implements Entry {
+  body(locale: String): String
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): TestPageLinkingCollections
+  referenceCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): TestPageReferenceCollection
+  richText(locale: String): TestPageRichText
+  sys: Sys!
+  title(locale: String): String
+}
+
+type TestPageCollection {
+  items: [TestPage]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input TestPageFilter {
+  AND: [TestPageFilter]
+  OR: [TestPageFilter]
+  body: String
+  body_contains: String
+  body_exists: Boolean
+  body_in: [String]
+  body_not: String
+  body_not_contains: String
+  body_not_in: [String]
+  contentfulMetadata: ContentfulMetadataFilter
+  referenceCollection_exists: Boolean
+  richText_contains: String
+  richText_exists: Boolean
+  richText_not_contains: String
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+type TestPageLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum TestPageOrder {
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+type TestPageReferenceCollection {
+  items: [Entry]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+type TestPageRichText {
+  json: JSON!
+  links: TestPageRichTextLinks!
+}
+
+type TestPageRichTextAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type TestPageRichTextEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type TestPageRichTextLinks {
+  assets: TestPageRichTextAssets!
+  entries: TestPageRichTextEntries!
+}
+
+input cfComponentArticleCardNestedFilter {
+  AND: [cfComponentArticleCardNestedFilter]
+  OR: [cfComponentArticleCardNestedFilter]
+  buttonExternalUrl: String
+  buttonExternalUrl_contains: String
+  buttonExternalUrl_exists: Boolean
+  buttonExternalUrl_in: [String]
+  buttonExternalUrl_not: String
+  buttonExternalUrl_not_contains: String
+  buttonExternalUrl_not_in: [String]
+  buttonLabel: String
+  buttonLabel_contains: String
+  buttonLabel_exists: Boolean
+  buttonLabel_in: [String]
+  buttonLabel_not: String
+  buttonLabel_not_contains: String
+  buttonLabel_not_in: [String]
+  buttonReference_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  eyebrow: String
+  eyebrow_contains: String
+  eyebrow_exists: Boolean
+  eyebrow_in: [String]
+  eyebrow_not: String
+  eyebrow_not_contains: String
+  eyebrow_not_in: [String]
+  image_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  subtext_contains: String
+  subtext_exists: Boolean
+  subtext_not_contains: String
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+input cfMegaMenuDropdownNestedFilter {
+  AND: [cfMegaMenuDropdownNestedFilter]
+  OR: [cfMegaMenuDropdownNestedFilter]
+  columnOneItemsCollection_exists: Boolean
+  columnThreeItemsCollection_exists: Boolean
+  columnTwoItemsCollection_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  linkReference_exists: Boolean
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+input cfMenuLinkGroupNestedFilter {
+  AND: [cfMenuLinkGroupNestedFilter]
+  OR: [cfMenuLinkGroupNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  groupTitle: String
+  groupTitle_contains: String
+  groupTitle_exists: Boolean
+  groupTitle_in: [String]
+  groupTitle_not: String
+  groupTitle_not_contains: String
+  groupTitle_not_in: [String]
+  linksCollection_exists: Boolean
+  sys: SysFilter
+}
+
+input cfMenuLinkNestedFilter {
+  AND: [cfMenuLinkNestedFilter]
+  OR: [cfMenuLinkNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  linkReference_exists: Boolean
+  linkText: String
+  linkText_contains: String
+  linkText_exists: Boolean
+  linkText_in: [String]
+  linkText_not: String
+  linkText_not_contains: String
+  linkText_not_in: [String]
+  linkUrl: String
+  linkUrl_contains: String
+  linkUrl_exists: Boolean
+  linkUrl_in: [String]
+  linkUrl_not: String
+  linkUrl_not_contains: String
+  linkUrl_not_in: [String]
+  sys: SysFilter
+}
+
 input cfPageNestedFilter {
   AND: [cfPageNestedFilter]
   OR: [cfPageNestedFilter]
@@ -1897,6 +2097,47 @@ input cfPageNestedFilter {
   name_not_contains: String
   name_not_in: [String]
   seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+input cfProductNestedFilter {
+  AND: [cfProductNestedFilter]
+  OR: [cfProductNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  description_contains: String
+  description_exists: Boolean
+  description_not_contains: String
+  image_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  price: Float
+  price_exists: Boolean
+  price_gt: Float
+  price_gte: Float
+  price_in: [Float]
+  price_lt: Float
+  price_lte: Float
+  price_not: Float
+  price_not_in: [Float]
   slug: String
   slug_contains: String
   slug_exists: Boolean

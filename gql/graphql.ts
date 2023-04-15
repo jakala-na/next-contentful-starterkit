@@ -1250,6 +1250,7 @@ export type ComponentThreeCardCollectionFilter = {
   buttonLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   buttonReference?: InputMaybe<CfPageNestedFilter>;
   buttonReference_exists?: InputMaybe<Scalars['Boolean']>;
+  cards?: InputMaybe<CfComponentArticleCardNestedFilter>;
   cardsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   internalName?: InputMaybe<Scalars['String']>;
@@ -1625,8 +1626,10 @@ export type MegaMenuDropdownColumnTwoItemsCollection = {
 export type MegaMenuDropdownFilter = {
   AND?: InputMaybe<Array<InputMaybe<MegaMenuDropdownFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<MegaMenuDropdownFilter>>>;
+  columnOneItems?: InputMaybe<CfMenuLinkGroupNestedFilter>;
   columnOneItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   columnThreeItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  columnTwoItems?: InputMaybe<CfMenuLinkGroupNestedFilter>;
   columnTwoItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   linkReference?: InputMaybe<CfPageNestedFilter>;
@@ -1687,6 +1690,7 @@ export type MegaMenuFilter = {
   internalName_not?: InputMaybe<Scalars['String']>;
   internalName_not_contains?: InputMaybe<Scalars['String']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  items?: InputMaybe<CfMegaMenuDropdownNestedFilter>;
   itemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
 };
@@ -1842,6 +1846,7 @@ export type MenuLinkGroupFilter = {
   groupTitle_not?: InputMaybe<Scalars['String']>;
   groupTitle_not_contains?: InputMaybe<Scalars['String']>;
   groupTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  links?: InputMaybe<CfMenuLinkNestedFilter>;
   linksCollection_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
 };
@@ -2559,6 +2564,7 @@ export type ProductSectionFilter = {
   internalName_not?: InputMaybe<Scalars['String']>;
   internalName_not_contains?: InputMaybe<Scalars['String']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  products?: InputMaybe<CfProductNestedFilter>;
   productsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
@@ -2647,6 +2653,8 @@ export type Query = {
   redirectCollection?: Maybe<RedirectCollection>;
   seo?: Maybe<Seo>;
   seoCollection?: Maybe<SeoCollection>;
+  testPage?: Maybe<TestPage>;
+  testPageCollection?: Maybe<TestPageCollection>;
 };
 
 
@@ -2982,6 +2990,23 @@ export type QuerySeoCollectionArgs = {
   where?: InputMaybe<SeoFilter>;
 };
 
+
+export type QueryTestPageArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryTestPageCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<TestPageOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TestPageFilter>;
+};
+
 /** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/redirect) */
 export type Redirect = Entry & {
   __typename?: 'Redirect';
@@ -3259,6 +3284,245 @@ export type SysFilter = {
   publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
+/** Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage) */
+export type TestPage = Entry & {
+  __typename?: 'TestPage';
+  body?: Maybe<Scalars['String']>;
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<TestPageLinkingCollections>;
+  referenceCollection?: Maybe<TestPageReferenceCollection>;
+  richText?: Maybe<TestPageRichText>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+/** Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage) */
+export type TestPageBodyArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage) */
+export type TestPageLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage) */
+export type TestPageReferenceCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage) */
+export type TestPageRichTextArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage) */
+export type TestPageTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type TestPageCollection = {
+  __typename?: 'TestPageCollection';
+  items: Array<Maybe<TestPage>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type TestPageFilter = {
+  AND?: InputMaybe<Array<InputMaybe<TestPageFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<TestPageFilter>>>;
+  body?: InputMaybe<Scalars['String']>;
+  body_contains?: InputMaybe<Scalars['String']>;
+  body_exists?: InputMaybe<Scalars['Boolean']>;
+  body_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  body_not?: InputMaybe<Scalars['String']>;
+  body_not_contains?: InputMaybe<Scalars['String']>;
+  body_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  referenceCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  richText_contains?: InputMaybe<Scalars['String']>;
+  richText_exists?: InputMaybe<Scalars['Boolean']>;
+  richText_not_contains?: InputMaybe<Scalars['String']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type TestPageLinkingCollections = {
+  __typename?: 'TestPageLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type TestPageLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum TestPageOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export type TestPageReferenceCollection = {
+  __typename?: 'TestPageReferenceCollection';
+  items: Array<Maybe<Entry>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type TestPageRichText = {
+  __typename?: 'TestPageRichText';
+  json: Scalars['JSON'];
+  links: TestPageRichTextLinks;
+};
+
+export type TestPageRichTextAssets = {
+  __typename?: 'TestPageRichTextAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type TestPageRichTextEntries = {
+  __typename?: 'TestPageRichTextEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type TestPageRichTextLinks = {
+  __typename?: 'TestPageRichTextLinks';
+  assets: TestPageRichTextAssets;
+  entries: TestPageRichTextEntries;
+};
+
+export type CfComponentArticleCardNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfComponentArticleCardNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfComponentArticleCardNestedFilter>>>;
+  buttonExternalUrl?: InputMaybe<Scalars['String']>;
+  buttonExternalUrl_contains?: InputMaybe<Scalars['String']>;
+  buttonExternalUrl_exists?: InputMaybe<Scalars['Boolean']>;
+  buttonExternalUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  buttonExternalUrl_not?: InputMaybe<Scalars['String']>;
+  buttonExternalUrl_not_contains?: InputMaybe<Scalars['String']>;
+  buttonExternalUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  buttonLabel?: InputMaybe<Scalars['String']>;
+  buttonLabel_contains?: InputMaybe<Scalars['String']>;
+  buttonLabel_exists?: InputMaybe<Scalars['Boolean']>;
+  buttonLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  buttonLabel_not?: InputMaybe<Scalars['String']>;
+  buttonLabel_not_contains?: InputMaybe<Scalars['String']>;
+  buttonLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  buttonReference_exists?: InputMaybe<Scalars['Boolean']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  eyebrow?: InputMaybe<Scalars['String']>;
+  eyebrow_contains?: InputMaybe<Scalars['String']>;
+  eyebrow_exists?: InputMaybe<Scalars['Boolean']>;
+  eyebrow_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  eyebrow_not?: InputMaybe<Scalars['String']>;
+  eyebrow_not_contains?: InputMaybe<Scalars['String']>;
+  eyebrow_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  image_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subtext_contains?: InputMaybe<Scalars['String']>;
+  subtext_exists?: InputMaybe<Scalars['Boolean']>;
+  subtext_not_contains?: InputMaybe<Scalars['String']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type CfMegaMenuDropdownNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfMegaMenuDropdownNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfMegaMenuDropdownNestedFilter>>>;
+  columnOneItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  columnThreeItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  columnTwoItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  linkReference_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type CfMenuLinkGroupNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfMenuLinkGroupNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfMenuLinkGroupNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  groupTitle?: InputMaybe<Scalars['String']>;
+  groupTitle_contains?: InputMaybe<Scalars['String']>;
+  groupTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  groupTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  groupTitle_not?: InputMaybe<Scalars['String']>;
+  groupTitle_not_contains?: InputMaybe<Scalars['String']>;
+  groupTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linksCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type CfMenuLinkNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfMenuLinkNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfMenuLinkNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  linkReference_exists?: InputMaybe<Scalars['Boolean']>;
+  linkText?: InputMaybe<Scalars['String']>;
+  linkText_contains?: InputMaybe<Scalars['String']>;
+  linkText_exists?: InputMaybe<Scalars['Boolean']>;
+  linkText_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linkText_not?: InputMaybe<Scalars['String']>;
+  linkText_not_contains?: InputMaybe<Scalars['String']>;
+  linkText_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linkUrl?: InputMaybe<Scalars['String']>;
+  linkUrl_contains?: InputMaybe<Scalars['String']>;
+  linkUrl_exists?: InputMaybe<Scalars['Boolean']>;
+  linkUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linkUrl_not?: InputMaybe<Scalars['String']>;
+  linkUrl_not_contains?: InputMaybe<Scalars['String']>;
+  linkUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
 export type CfPageNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfPageNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfPageNestedFilter>>>;
@@ -3272,6 +3536,47 @@ export type CfPageNestedFilter = {
   name_not_contains?: InputMaybe<Scalars['String']>;
   name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   seo_exists?: InputMaybe<Scalars['Boolean']>;
+  slug?: InputMaybe<Scalars['String']>;
+  slug_contains?: InputMaybe<Scalars['String']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  slug_not?: InputMaybe<Scalars['String']>;
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type CfProductNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfProductNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfProductNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  image_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  price?: InputMaybe<Scalars['Float']>;
+  price_exists?: InputMaybe<Scalars['Boolean']>;
+  price_gt?: InputMaybe<Scalars['Float']>;
+  price_gte?: InputMaybe<Scalars['Float']>;
+  price_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  price_lt?: InputMaybe<Scalars['Float']>;
+  price_lte?: InputMaybe<Scalars['Float']>;
+  price_not?: InputMaybe<Scalars['Float']>;
+  price_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
   slug?: InputMaybe<Scalars['String']>;
   slug_contains?: InputMaybe<Scalars['String']>;
   slug_exists?: InputMaybe<Scalars['Boolean']>;
