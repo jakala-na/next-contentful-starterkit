@@ -34,7 +34,7 @@ const PageLandingFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
-export type PageLandingProps = {
+type PageLandingProps = {
   pageLanding: FragmentType<typeof PageLandingFieldsFragment>;
 };
 

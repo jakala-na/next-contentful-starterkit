@@ -23,7 +23,7 @@ const getComponentTextSectionProps = (
   };
 };
 
-export type ComponentTextSectionProps = {
+type ComponentTextSectionProps = {
   componentTextSection: FragmentType<typeof ComponentTextSectionFieldsFragment>;
 };
 

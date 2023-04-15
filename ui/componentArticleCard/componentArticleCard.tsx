@@ -27,7 +27,7 @@ const ComponentArticleCardFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
-export type ComponentArticleCardProps = {
+type ComponentArticleCardProps = {
   componentArticleCard: FragmentType<typeof ComponentArticleCardFieldsFragment>;
 };
 

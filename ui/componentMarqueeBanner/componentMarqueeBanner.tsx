@@ -21,7 +21,7 @@ const ComponentMarqueeBannerFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
-export type ComponentMarqueeBannerProps = {
+type ComponentMarqueeBannerProps = {
   componentMarqueeBanner: FragmentType<
     typeof ComponentMarqueeBannerFieldsFragment
   >;

@@ -16,7 +16,7 @@ const ComponentTextCtaFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
-export type ComponentTextCtaProps = {
+type ComponentTextCtaProps = {
   componentTextCta: FragmentType<typeof ComponentTextCtaFieldsFragment>;
 };
 

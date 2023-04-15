@@ -26,7 +26,7 @@ const ComponentImageAndTextFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
-export type ComponentImageAndTextProps = {
+type ComponentImageAndTextProps = {
   componentImageAndText: FragmentType<
     typeof ComponentImageAndTextFieldsFragment
   >;

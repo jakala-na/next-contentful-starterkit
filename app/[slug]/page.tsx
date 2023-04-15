@@ -1,8 +1,8 @@
-import { notFound } from 'next/navigation';
+// import { notFound } from 'next/navigation';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { graphql } from '#/gql';
-import { Page } from '#/gql/graphql';
-import { Page as ComposePage } from '#/ui/page';
+// import { Page } from '#/ui/page';
+import { PageList } from '#/ui/page';
 
 interface Props {
   params: {
@@ -12,27 +12,24 @@ interface Props {
 
 const PageBySlugQuery = graphql(/* GraphQL */ `
   query PageBySlug($slug: String!) {
-    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {
-      items {
-        ...PageItem
-      }
-    }
+    ...PageBySlugQueryFragment
   }
 `);
 
 const PageBySlug = async ({ params }: Props) => {
+  const { slug } = params;
+
   // Get a Page entry by slug
-  const result = await graphqlClient.request(PageBySlugQuery, {
-    slug: params.slug
-  });
+  const result = await graphqlClient.request(PageBySlugQuery, { slug });
 
-  if (!result.pageCollection?.items.length) notFound();
+  // if (!result.pageCollection?.items.length) notFound();
 
-  const page = result.pageCollection?.items[0];
+  // const page = result.pageCollection?.items[0];
 
-  if (!page) notFound();
+  // if (!page) notFound();
 
-  return <ComposePage page={page} />;
+  // return <Page page={page} />;
+  return <PageList query={result} />;
 };
 
 export default PageBySlug;
