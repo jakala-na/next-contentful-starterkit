@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { graphqlClient } from '#/lib/graphqlClient';
-import { graphql, useFragment } from '#/gql';
+import { graphql } from '#/gql';
 import { PageItemFragment } from '#/gql/graphql';
 import { Page } from '#/ui/page';
 
