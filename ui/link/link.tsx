@@ -1,6 +1,6 @@
-import { FragmentType, graphql, useFragment } from "#/gql";
-import { LinkItemFragment } from "#/gql/graphql";
-import { default as NextLink } from "next/link";
+import { FragmentType, graphql, useFragment } from '#/gql';
+import { LinkItemFragment } from '#/gql/graphql';
+import { default as NextLink } from 'next/link';
 
 const LinkFieldsFragment = graphql(/* GraphQL */ `
   fragment LinkItem on MenuLink {
@@ -10,8 +10,14 @@ const LinkFieldsFragment = graphql(/* GraphQL */ `
     linkUrl
     linkText
     linkReference {
-      title
-      slug
+      ... on Page {
+        title
+        slug
+      }
+      ... on Product {
+        title
+        slug
+      }
     }
   }
 `);
@@ -22,7 +28,7 @@ const getLinkProps = (link: LinkItemFragment) => {
   const { linkText, linkUrl, linkReference } = link;
   return {
     linkText: linkReference?.title ?? linkText,
-    linkUrl: (linkReference?.slug && slugToUrl(linkReference?.slug)) ?? linkUrl,
+    linkUrl: (linkReference?.slug && slugToUrl(linkReference?.slug)) ?? linkUrl
   };
 };
 

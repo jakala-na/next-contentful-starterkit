@@ -1135,7 +1135,7 @@ enum MegaMenuOrder {
 """
 type MenuLink implements Entry {
   contentfulMetadata: ContentfulMetadata!
-  linkReference(locale: String, preview: Boolean): Page
+  linkReference(locale: String, preview: Boolean): MenuLinkLinkReference
   linkText(locale: String): String
   linkUrl(locale: String): String
   linkedFrom(allowedLocales: [String]): MenuLinkLinkingCollections
@@ -1153,7 +1153,6 @@ input MenuLinkFilter {
   AND: [MenuLinkFilter]
   OR: [MenuLinkFilter]
   contentfulMetadata: ContentfulMetadataFilter
-  linkReference: cfPageNestedFilter
   linkReference_exists: Boolean
   linkText: String
   linkText_contains: String
@@ -1230,6 +1229,8 @@ enum MenuLinkGroupOrder {
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
 }
+
+union MenuLinkLinkReference = Page | Product
 
 type MenuLinkLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
@@ -1563,6 +1564,7 @@ input ProductFilter {
 
 type ProductLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  menuLinkCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MenuLinkCollection
   productSectionCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ProductSectionCollection
 }
 
