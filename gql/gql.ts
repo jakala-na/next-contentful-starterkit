@@ -14,7 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkItem\n        }\n      }\n    }\n  ": types.MenuLinksDocument,
-    "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n": types.LinkItemFragmentDoc,
+    "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      ... on Page {\n        title\n        slug\n      }\n      ... on Product {\n        title\n        slug\n      }\n    }\n  }\n": types.LinkItemFragmentDoc,
 };
 
 /**
@@ -24,7 +24,7 @@ export function graphql(source: "\n    query MenuLinks {\n      menuLinkCollecti
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"): (typeof documents)["\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"];
+export function graphql(source: "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      ... on Page {\n        title\n        slug\n      }\n      ... on Product {\n        title\n        slug\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      ... on Page {\n        title\n        slug\n      }\n      ... on Product {\n        title\n        slug\n      }\n    }\n  }\n"];
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

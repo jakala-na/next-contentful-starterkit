@@ -10,8 +10,14 @@ const LinkFieldsFragment = graphql(/* GraphQL */ `
     linkUrl
     linkText
     linkReference {
-      title
-      slug
+      ... on Page {
+        title
+        slug
+      }
+      ... on Product {
+        title
+        slug
+      }
     }
   }
 `);
