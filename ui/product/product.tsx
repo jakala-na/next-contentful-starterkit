@@ -22,6 +22,17 @@ const ProductFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
+const ProductBySlugQuery = graphql(/* GraphQL */ `
+  fragment ProductBySlugQuery on Query {
+    productCollection(limit: 1, where: { slug: $slug }, preview: false) {
+      items {
+        __typename
+        ...ProductItem
+      }
+    }
+  }
+`);
+
 type ProductProps = {
   product: FragmentType<typeof ProductFieldsFragment>;
 };

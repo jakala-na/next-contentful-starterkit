@@ -17,6 +17,17 @@ const PageFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
+const PageBySlugQuery = graphql(/* GraphQL */ `
+  fragment PageBySlugQuery on Query {
+    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {
+      items {
+        __typename
+        ...PageItem
+      }
+    }
+  }
+`);
+
 type PageProps = {
   page: FragmentType<typeof PageFieldsFragment>;
 };
@@ -29,9 +40,7 @@ const Page = (props: PageProps) => {
     <>
       <h1>{title}</h1>
       <div>Id: {sys.id}</div>
-      {content && (
-        <PageLanding pageLanding={content} />
-      )}
+      {content && <PageLanding pageLanding={content} />}
     </>
   );
 };
