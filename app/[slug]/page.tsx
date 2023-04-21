@@ -27,33 +27,23 @@ const EntryBySlug = async ({ params }: Props) => {
   // Get a Page entry by slug
   const data = await graphqlClient.request(EntryBySlugQuery, { slug });
 
-  const result = Object.keys(data)
-    .map((collectionKey) => {
-      return data[collectionKey].items.map((entry) => {
-        const typename = entry.__typename,
-          ComponentName = componentTypes[typename],
-          paramName = typename.charAt(0).toLowerCase() + typename.slice(1),
-          props = { [`${paramName}`]: entry };
-        return <ComponentName key={entry.sys.id} {...props} />;
-      });
-    })
-    .flat();
+  const found = Object.keys(data).some((collectionName) => {
+    if (data[collectionName].items.length) {
+      return true;
+    }
+  });
 
-  if (!result.length) notFound();
+  if (!found) notFound();
 
-  return result;
-
-  // const entry =
-  //   result.pageCollection?.items[0] || result.productCollection?.items[0];
-
-  // if (!entry) notFound();
-
-  // switch (entry.__typename) {
-  //   case 'Page':
-  //     return <Page page={entry} />;
-  //   case 'Product':
-  //     return <Product product={entry} />;
-  // }
+  return Object.keys(data).map((collectionKey) => {
+    return data[collectionKey].items.map((entry) => {
+      const typename = entry.__typename,
+        ComponentName = componentTypes[typename],
+        paramName = typename.charAt(0).toLowerCase() + typename.slice(1),
+        props = { [`${paramName}`]: entry };
+      return <ComponentName key={entry.sys.id} {...props} />;
+    });
+  });
 };
 
 export default EntryBySlug;
