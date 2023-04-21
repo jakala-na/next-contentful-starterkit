@@ -24,9 +24,11 @@ const documents = {
     "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      ... on Page {\n        title\n        slug\n      }\n      ... on Product {\n        title\n        slug\n      }\n    }\n  }\n": types.LinkItemFragmentDoc,
     "\n  fragment PageItem on Page {\n    sys {\n      id\n    }\n    slug\n    title\n    content {\n      __typename\n      ... on PageLanding {\n        ...PageLandingItem\n      }\n    }\n  }\n": types.PageItemFragmentDoc,
     "\n  fragment PageBySlugQuery on Query {\n    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...PageItem\n      }\n    }\n  }\n": types.PageBySlugQueryFragmentDoc,
+    "\n  fragment AllPageQuery on Query {\n    pageCollection(preview: false) {\n      items {\n        __typename\n        ...PageItem\n      }\n    }\n  }\n": types.AllPageQueryFragmentDoc,
     "\n  fragment PageLandingItem on PageLanding {\n    sys {\n      id\n    }\n    name\n    sectionsCollection(preview: false) {\n      items {\n        __typename\n        ... on ComponentTextCta {\n          ...ComponentTextCtaItem\n        }\n        ... on ComponentTextSection {\n          ...ComponentTextSectionItem\n        }\n        ... on ComponentImageAndText {\n          ...ComponentImageAndTextItem\n        }\n        ... on ComponentMarqueeBanner {\n          ...ComponentMarqueeBannerItem\n        }\n        ... on ComponentThreeCardCollection {\n          ...ComponentThreeCardCollectionItem\n        }\n      }\n    }\n  }\n": types.PageLandingItemFragmentDoc,
     "\n  fragment ProductItem on Product {\n    sys {\n      id\n    }\n    slug\n    title\n    price\n    image {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n": types.ProductItemFragmentDoc,
     "\n  fragment ProductBySlugQuery on Query {\n    productCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n  }\n": types.ProductBySlugQueryFragmentDoc,
+    "\n  fragment AllProductQuery on Query {\n    productCollection(preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n  }\n": types.AllProductQueryFragmentDoc,
 };
 
 /**
@@ -76,6 +78,10 @@ export function graphql(source: "\n  fragment PageBySlugQuery on Query {\n    pa
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  fragment AllPageQuery on Query {\n    pageCollection(preview: false) {\n      items {\n        __typename\n        ...PageItem\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment AllPageQuery on Query {\n    pageCollection(preview: false) {\n      items {\n        __typename\n        ...PageItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  fragment PageLandingItem on PageLanding {\n    sys {\n      id\n    }\n    name\n    sectionsCollection(preview: false) {\n      items {\n        __typename\n        ... on ComponentTextCta {\n          ...ComponentTextCtaItem\n        }\n        ... on ComponentTextSection {\n          ...ComponentTextSectionItem\n        }\n        ... on ComponentImageAndText {\n          ...ComponentImageAndTextItem\n        }\n        ... on ComponentMarqueeBanner {\n          ...ComponentMarqueeBannerItem\n        }\n        ... on ComponentThreeCardCollection {\n          ...ComponentThreeCardCollectionItem\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment PageLandingItem on PageLanding {\n    sys {\n      id\n    }\n    name\n    sectionsCollection(preview: false) {\n      items {\n        __typename\n        ... on ComponentTextCta {\n          ...ComponentTextCtaItem\n        }\n        ... on ComponentTextSection {\n          ...ComponentTextSectionItem\n        }\n        ... on ComponentImageAndText {\n          ...ComponentImageAndTextItem\n        }\n        ... on ComponentMarqueeBanner {\n          ...ComponentMarqueeBannerItem\n        }\n        ... on ComponentThreeCardCollection {\n          ...ComponentThreeCardCollectionItem\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -85,6 +91,10 @@ export function graphql(source: "\n  fragment ProductItem on Product {\n    sys 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  fragment ProductBySlugQuery on Query {\n    productCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment ProductBySlugQuery on Query {\n    productCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment AllProductQuery on Query {\n    productCollection(preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment AllProductQuery on Query {\n    productCollection(preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n  }\n"];
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

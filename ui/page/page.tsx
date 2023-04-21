@@ -17,17 +17,6 @@ const PageFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
-const PageBySlugQuery = graphql(/* GraphQL */ `
-  fragment PageBySlugQuery on Query {
-    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {
-      items {
-        __typename
-        ...PageItem
-      }
-    }
-  }
-`);
-
 type PageProps = {
   page: FragmentType<typeof PageFieldsFragment>;
 };
