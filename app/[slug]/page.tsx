@@ -37,18 +37,6 @@ const EntryBySlug = async ({ params }: Props) => {
       <ProductList query={data} fragment={ProductBySlugQuery} />
     </>
   );
-
-  // const entry =
-  //   result.pageCollection?.items[0] || result.productCollection?.items[0];
-
-  // if (!entry) notFound();
-
-  // switch (entry.__typename) {
-  //   case 'Page':
-  //     return <Page page={entry} />;
-  //   case 'Product':
-  //     return <Product product={entry} />;
-  // }
 };
 
 export default EntryBySlug;
