@@ -1,7 +1,22 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 
-export default function Home() {
+type Time = {
+  unixtime: number;
+};
+
+export default async function Home() {
+  const res = await fetch(
+    'http://worldtimeapi.org/api/timezone/America/Chicago',
+    {
+      next: {
+        revalidate: 5
+      }
+    }
+  );
+  const datetime: Time = await res.json();
+  return <h1>{datetime.unixtime}</h1>;
+
   return (
     <>
       <h1 className={styles.title}>

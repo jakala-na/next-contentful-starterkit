@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query PageBySlug($slug: String!) {\n    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...PageItem\n      }\n    }\n    productCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n  }\n": types.PageBySlugDocument,
+    "\n  query AllSlugs {\n    pageCollection(limit: 1000, preview: false) {\n      items {\n        __typename\n        slug\n      }\n    }\n    productCollection(limit: 1000, preview: false) {\n      items {\n        __typename\n        slug\n      }\n    }\n  }\n": types.AllSlugsDocument,
     "\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkItem\n        }\n      }\n    }\n  ": types.MenuLinksDocument,
     "\n  fragment ComponentArticleCardItem on ComponentArticleCard {\n    sys {\n      id\n    }\n    eyebrow\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n": types.ComponentArticleCardItemFragmentDoc,
     "\n  fragment ComponentImageAndTextItem on ComponentImageAndText {\n    sys {\n      id\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      title\n      description\n      contentType\n      fileName\n      size\n      url\n      width\n      height\n    }\n  }\n": types.ComponentImageAndTextItemFragmentDoc,
@@ -31,6 +32,10 @@ const documents = {
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query PageBySlug($slug: String!) {\n    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...PageItem\n      }\n    }\n    productCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query PageBySlug($slug: String!) {\n    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...PageItem\n      }\n    }\n    productCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query AllSlugs {\n    pageCollection(limit: 1000, preview: false) {\n      items {\n        __typename\n        slug\n      }\n    }\n    productCollection(limit: 1000, preview: false) {\n      items {\n        __typename\n        slug\n      }\n    }\n  }\n"): (typeof documents)["\n  query AllSlugs {\n    pageCollection(limit: 1000, preview: false) {\n      items {\n        __typename\n        slug\n      }\n    }\n    productCollection(limit: 1000, preview: false) {\n      items {\n        __typename\n        slug\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

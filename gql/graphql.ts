@@ -2663,6 +2663,8 @@ export type Query = {
   redirectCollection?: Maybe<RedirectCollection>;
   seo?: Maybe<Seo>;
   seoCollection?: Maybe<SeoCollection>;
+  testComponent?: Maybe<TestComponent>;
+  testComponentCollection?: Maybe<TestComponentCollection>;
   testPage?: Maybe<TestPage>;
   testPageCollection?: Maybe<TestPageCollection>;
 };
@@ -3001,6 +3003,23 @@ export type QuerySeoCollectionArgs = {
 };
 
 
+export type QueryTestComponentArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryTestComponentCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<TestComponentOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TestComponentFilter>;
+};
+
+
 export type QueryTestPageArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -3294,6 +3313,119 @@ export type SysFilter = {
   publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testComponent) */
+export type TestComponent = Entry & {
+  __typename?: 'TestComponent';
+  contentfulMetadata: ContentfulMetadata;
+  label?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<TestComponentLinkingCollections>;
+  sys: Sys;
+  text?: Maybe<TestComponentText>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testComponent) */
+export type TestComponentLabelArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testComponent) */
+export type TestComponentLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testComponent) */
+export type TestComponentTextArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type TestComponentCollection = {
+  __typename?: 'TestComponentCollection';
+  items: Array<Maybe<TestComponent>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type TestComponentFilter = {
+  AND?: InputMaybe<Array<InputMaybe<TestComponentFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<TestComponentFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  label?: InputMaybe<Scalars['String']>;
+  label_contains?: InputMaybe<Scalars['String']>;
+  label_exists?: InputMaybe<Scalars['Boolean']>;
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  label_not?: InputMaybe<Scalars['String']>;
+  label_not_contains?: InputMaybe<Scalars['String']>;
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  text_contains?: InputMaybe<Scalars['String']>;
+  text_exists?: InputMaybe<Scalars['Boolean']>;
+  text_not_contains?: InputMaybe<Scalars['String']>;
+};
+
+export type TestComponentLinkingCollections = {
+  __typename?: 'TestComponentLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  testPageCollection?: Maybe<TestPageCollection>;
+};
+
+
+export type TestComponentLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type TestComponentLinkingCollectionsTestPageCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum TestComponentOrder {
+  LabelAsc = 'label_ASC',
+  LabelDesc = 'label_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export type TestComponentText = {
+  __typename?: 'TestComponentText';
+  json: Scalars['JSON'];
+  links: TestComponentTextLinks;
+};
+
+export type TestComponentTextAssets = {
+  __typename?: 'TestComponentTextAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type TestComponentTextEntries = {
+  __typename?: 'TestComponentTextEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type TestComponentTextLinks = {
+  __typename?: 'TestComponentTextLinks';
+  assets: TestComponentTextAssets;
+  entries: TestComponentTextEntries;
+};
+
 /** Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage) */
 export type TestPage = Entry & {
   __typename?: 'TestPage';
@@ -3303,6 +3435,7 @@ export type TestPage = Entry & {
   referenceCollection?: Maybe<TestPageReferenceCollection>;
   richText?: Maybe<TestPageRichText>;
   sys: Sys;
+  textsCollection?: Maybe<TestPageTextsCollection>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -3335,6 +3468,15 @@ export type TestPageRichTextArgs = {
 
 
 /** Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage) */
+export type TestPageTextsCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+/** Test page content type [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/testPage) */
 export type TestPageTitleArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
@@ -3363,6 +3505,8 @@ export type TestPageFilter = {
   richText_exists?: InputMaybe<Scalars['Boolean']>;
   richText_not_contains?: InputMaybe<Scalars['String']>;
   sys?: InputMaybe<SysFilter>;
+  texts?: InputMaybe<CfTestComponentNestedFilter>;
+  textsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   title?: InputMaybe<Scalars['String']>;
   title_contains?: InputMaybe<Scalars['String']>;
   title_exists?: InputMaybe<Scalars['Boolean']>;
@@ -3429,6 +3573,14 @@ export type TestPageRichTextLinks = {
   __typename?: 'TestPageRichTextLinks';
   assets: TestPageRichTextAssets;
   entries: TestPageRichTextEntries;
+};
+
+export type TestPageTextsCollection = {
+  __typename?: 'TestPageTextsCollection';
+  items: Array<Maybe<TestComponent>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
 };
 
 export type CfComponentArticleCardNestedFilter = {
@@ -3642,6 +3794,23 @@ export type CfSeoNestedFilter = {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+export type CfTestComponentNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfTestComponentNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfTestComponentNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  label?: InputMaybe<Scalars['String']>;
+  label_contains?: InputMaybe<Scalars['String']>;
+  label_exists?: InputMaybe<Scalars['Boolean']>;
+  label_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  label_not?: InputMaybe<Scalars['String']>;
+  label_not_contains?: InputMaybe<Scalars['String']>;
+  label_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  text_contains?: InputMaybe<Scalars['String']>;
+  text_exists?: InputMaybe<Scalars['Boolean']>;
+  text_not_contains?: InputMaybe<Scalars['String']>;
+};
+
 export type PageBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
@@ -3654,6 +3823,11 @@ export type PageBySlugQuery = { __typename?: 'Query', pageCollection?: { __typen
       { __typename: 'Product' }
       & { ' $fragmentRefs'?: { 'ProductItemFragment': ProductItemFragment } }
     ) | null> } | null };
+
+export type AllSlugsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllSlugsQuery = { __typename?: 'Query', pageCollection?: { __typename?: 'PageCollection', items: Array<{ __typename: 'Page', slug?: string | null } | null> } | null, productCollection?: { __typename?: 'ProductCollection', items: Array<{ __typename: 'Product', slug?: string | null } | null> } | null };
 
 export type MenuLinksQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3715,4 +3889,5 @@ export const PageLandingItemFragmentDoc = {"kind":"Document","definitions":[{"ki
 export const PageItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Page"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"PageLanding"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageLandingItem"}}]}}]}}]}},...PageLandingItemFragmentDoc.definitions]} as unknown as DocumentNode<PageItemFragment, unknown>;
 export const ProductItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProductItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Product"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"contentType"}},{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}}]}}]}}]} as unknown as DocumentNode<ProductItemFragment, unknown>;
 export const PageBySlugDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageBySlug"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"preview"},"value":{"kind":"BooleanValue","value":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageItem"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"productCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"preview"},"value":{"kind":"BooleanValue","value":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ProductItem"}}]}}]}}]}},...PageItemFragmentDoc.definitions,...ProductItemFragmentDoc.definitions]} as unknown as DocumentNode<PageBySlugQuery, PageBySlugQueryVariables>;
+export const AllSlugsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllSlugs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"Argument","name":{"kind":"Name","value":"preview"},"value":{"kind":"BooleanValue","value":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"productCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"Argument","name":{"kind":"Name","value":"preview"},"value":{"kind":"BooleanValue","value":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]} as unknown as DocumentNode<AllSlugsQuery, AllSlugsQueryVariables>;
 export const MenuLinksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MenuLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"menuLinkCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkItem"}}]}}]}}]}},...LinkItemFragmentDoc.definitions]} as unknown as DocumentNode<MenuLinksQuery, MenuLinksQueryVariables>;

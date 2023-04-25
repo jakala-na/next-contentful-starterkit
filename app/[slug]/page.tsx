@@ -28,8 +28,56 @@ const EntryBySlugQuery = graphql(/* GraphQL */ `
   }
 `);
 
+const AllSlugsQuery = graphql(/* GraphQL */ `
+  query AllSlugs {
+    pageCollection(limit: 1000, preview: false) {
+      items {
+        __typename
+        slug
+      }
+    }
+    productCollection(limit: 1000, preview: false) {
+      items {
+        __typename
+        slug
+      }
+    }
+  }
+`);
+
+type Time = {
+  unixtime: number;
+};
+
+// export const revalidate = 3;
+
+export const dynamicParams = false;
+
+export const generateStaticParams = async () => {
+  const result = await graphqlClient.request(AllSlugsQuery);
+  let slugs: string[] = [];
+  result.pageCollection?.items.forEach((item) => {
+    if (!item?.slug) return;
+    slugs.push(item.slug);
+  });
+  result.productCollection?.items.forEach((item) => {
+    if (!item?.slug) return;
+    slugs.push(item.slug);
+  });
+  return slugs.map((slug) => ({ slug }));
+};
+
 const EntryBySlug = async ({ params }: Props) => {
   const { slug } = params;
+  const res = await fetch(
+    'http://worldtimeapi.org/api/timezone/America/Chicago',
+    {
+      next: {
+        revalidate: 3
+      }
+    }
+  );
+  const datetime: Time = await res.json();
 
   // Get a Page entry by slug
   const result = await graphqlClient.request(EntryBySlugQuery, { slug });
@@ -40,11 +88,15 @@ const EntryBySlug = async ({ params }: Props) => {
 
   switch (entry.__typename) {
     case 'Page':
-      return <Page page={entry} />;
-    case 'Product':
       return (
-        <Product product={entry} />
+        <>
+          <p>EntryBySlug time: {datetime.unixtime}</p>
+          {/* @ts-expect-error Async Server Component */}
+          <Page page={entry} />;
+        </>
       );
+    case 'Product':
+      return <Product product={entry} />;
   }
 };
 
