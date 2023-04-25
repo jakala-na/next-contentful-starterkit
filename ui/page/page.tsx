@@ -10,7 +10,6 @@ const PageFieldsFragment = graphql(/* GraphQL */ `
     slug
     title
     content {
-      __typename
       ... on PageLanding {
         ...PageLandingItem
       }

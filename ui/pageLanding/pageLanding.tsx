@@ -21,7 +21,6 @@ const PageLandingFieldsFragment = graphql(/* GraphQL */ `
     name
     sectionsCollection(preview: false) {
       items {
-        __typename
         ... on ComponentTextCta {
           ...ComponentTextCtaItem
         }

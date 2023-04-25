@@ -16,7 +16,6 @@ const ComponentThreeCardCollectionFieldsFragment = graphql(/* GraphQL */ `
     buttonExternalUrl
     cardsCollection(limit: 3, preview: false) {
       items {
-        __typename
         ...ComponentArticleCardItem
       }
     }
