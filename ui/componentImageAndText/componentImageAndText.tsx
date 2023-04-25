@@ -1,6 +1,6 @@
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { FragmentType, graphql, useFragment } from '#/gql';
-import Image from 'next/image';
+import { ImageAsset } from '../asset';
+import { RichText } from '../rich-text';
 
 const ComponentImageAndTextFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentImageAndTextItem on ComponentImageAndText {
@@ -14,14 +14,7 @@ const ComponentImageAndTextFieldsFragment = graphql(/* GraphQL */ `
     buttonLabel
     buttonExternalUrl
     image {
-      title
-      description
-      contentType
-      fileName
-      size
-      url
-      width
-      height
+      ...AssetItem
     }
   }
 `);
@@ -47,22 +40,11 @@ const ComponentImageAndText = (props: ComponentImageAndTextProps) => {
       <h2>ComponentImageAndText</h2>
       <div>Id: {sys.id}</div>
       <h3>{title}</h3>
-      {subtext && (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: documentToHtmlString(subtext.json)
-          }}
-        />
-      )}
+      {subtext && <RichText json={subtext.json} />}
       {buttonLabel && buttonExternalUrl && <button>{buttonLabel}</button>}
-      {image && image.url && image.width && image.height && (
+      {image && (
         <div>
-          <Image
-            src={image.url}
-            width={image.width / 2}
-            height={image.height / 2}
-            alt={image.description || image.title || 'Untitled'}
-          />
+          <ImageAsset asset={image} />
         </div>
       )}
     </>

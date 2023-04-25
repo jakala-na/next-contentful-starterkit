@@ -1,5 +1,5 @@
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { FragmentType, graphql, useFragment } from '#/gql';
+import { RichText } from '../rich-text';
 
 const ComponentTextCtaFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentTextCtaItem on ComponentTextCta {
@@ -35,13 +35,7 @@ const ComponentTextCta = (props: ComponentTextCtaProps) => {
       <h2>ComponentTextCta</h2>
       <div>Id: {sys.id}</div>
       <h3>{title}</h3>
-      {subtext && (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: documentToHtmlString(subtext.json)
-          }}
-        />
-      )}
+      {subtext && <RichText json={subtext.json} />}
       {buttonLabel && buttonExternalUrl && <button>{buttonLabel}</button>}
     </>
   );

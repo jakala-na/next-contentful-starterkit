@@ -1,6 +1,6 @@
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { FragmentType, graphql, useFragment } from '#/gql';
 import { ComponentArticleCard } from '../componentArticleCard';
+import { RichText } from '../rich-text';
 
 const ComponentThreeCardCollectionFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentThreeCardCollectionItem on ComponentThreeCardCollection {
@@ -51,13 +51,7 @@ const ComponentThreeCardCollection = (
       <h2>ComponentThreeCardCollection</h2>
       <div>Id: {sys.id}</div>
       <h3>{title}</h3>
-      {subtext && (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: documentToHtmlString(subtext.json)
-          }}
-        />
-      )}
+      {subtext && <RichText json={subtext.json} />}
       {buttonLabel && buttonExternalUrl && <button>{buttonLabel}</button>}
       {cardsCollection?.items.map((item, idx) => {
         if (!item) return null;

@@ -29,8 +29,6 @@ const wait = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-// export const revalidate = 5;
-
 const Page = async (props: PageProps) => {
   const page = useFragment(PageFieldsFragment, props.page);
   const { sys, title, content } = page;
