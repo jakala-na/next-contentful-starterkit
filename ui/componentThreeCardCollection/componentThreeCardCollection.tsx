@@ -1,11 +1,12 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
+import { SysFieldsFragment } from '../sys';
 import { ComponentArticleCard } from '../componentArticleCard';
 import { RichText } from '../richText';
 
 const ComponentThreeCardCollectionFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentThreeCardCollectionItem on ComponentThreeCardCollection {
     sys {
-      id
+      ...SysItem
     }
     title
     subtext {
@@ -35,16 +36,9 @@ const ComponentThreeCardCollection = (
     ComponentThreeCardCollectionFieldsFragment,
     props.componentThreeCardCollection
   );
-  const {
-    sys,
-    title,
-    subtext,
-    buttonLabel,
-    buttonExternalUrl,
-    cardsCollection
-  } = componentThreeCardCollection;
-
-  if (!sys?.id) return null;
+  const sys = useFragment(SysFieldsFragment, componentThreeCardCollection.sys);
+  const { title, subtext, buttonLabel, buttonExternalUrl, cardsCollection } =
+    componentThreeCardCollection;
 
   return (
     <>

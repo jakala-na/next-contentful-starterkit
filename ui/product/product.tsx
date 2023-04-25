@@ -1,10 +1,11 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
+import { SysFieldsFragment } from '../sys';
 import Image from 'next/image';
 
 const ProductFieldsFragment = graphql(/* GraphQL */ `
   fragment ProductItem on Product {
     sys {
-      id
+      ...SysItem
     }
     slug
     title
@@ -28,7 +29,8 @@ type ProductProps = {
 
 const Product = (props: ProductProps) => {
   const product = useFragment(ProductFieldsFragment, props.product);
-  const { sys, title, price, image } = product;
+  const sys = useFragment(SysFieldsFragment, product.sys);
+  const { title, price, image } = product;
 
   return (
     <>

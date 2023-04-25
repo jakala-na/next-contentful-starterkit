@@ -1,10 +1,11 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
+import { SysFieldsFragment } from '../sys';
 import { RichText } from '../richText';
 
 const ComponentTextCtaFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentTextCtaItem on ComponentTextCta {
     sys {
-      id
+      ...SysItem
     }
     title
     subtext {
@@ -25,10 +26,8 @@ const ComponentTextCta = (props: ComponentTextCtaProps) => {
     ComponentTextCtaFieldsFragment,
     props.componentTextCta
   );
-  const { sys, title, subtext, buttonLabel, buttonExternalUrl } =
-    componentTextCta;
-
-  if (!sys?.id) return null;
+  const sys = useFragment(SysFieldsFragment, componentTextCta.sys);
+  const { title, subtext, buttonLabel, buttonExternalUrl } = componentTextCta;
 
   return (
     <>

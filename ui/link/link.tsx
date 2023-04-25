@@ -6,6 +6,7 @@ const LinkFieldsFragment = graphql(/* GraphQL */ `
   fragment LinkItem on MenuLink {
     sys {
       id
+      ...SysItem
     }
     linkUrl
     linkText

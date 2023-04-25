@@ -1,11 +1,12 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
+import { SysFieldsFragment } from '../sys';
 import { ImageAsset } from '../asset';
 import { RichText } from '../richText';
 
 const ComponentImageAndTextFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentImageAndTextItem on ComponentImageAndText {
     sys {
-      id
+      ...SysItem
     }
     title
     subtext {
@@ -30,10 +31,9 @@ const ComponentImageAndText = (props: ComponentImageAndTextProps) => {
     ComponentImageAndTextFieldsFragment,
     props.componentImageAndText
   );
-  const { sys, title, subtext, buttonLabel, buttonExternalUrl, image } =
+  const sys = useFragment(SysFieldsFragment, componentImageAndText.sys);
+  const { title, subtext, buttonLabel, buttonExternalUrl, image } =
     componentImageAndText;
-
-  if (!sys?.id) return null;
 
   return (
     <>

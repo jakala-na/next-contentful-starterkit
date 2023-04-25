@@ -3,7 +3,7 @@ import { graphql } from '#/gql';
 export const AssetFieldsFragment = graphql(/* GraphQL */ `
   fragment AssetItem on Asset {
     sys {
-      id
+      ...SysItem
     }
     title
     description

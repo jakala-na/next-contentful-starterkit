@@ -1,10 +1,11 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
+import { SysFieldsFragment } from '../sys';
 import { ImageAsset } from '../asset';
 
 const ComponentMarqueeBannerFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentMarqueeBannerItem on ComponentMarqueeBanner {
     sys {
-      id
+      ...SysItem
     }
     title
     subtextString: subtext
@@ -25,9 +26,8 @@ const ComponentMarqueeBanner = (props: ComponentMarqueeBannerProps) => {
     ComponentMarqueeBannerFieldsFragment,
     props.componentMarqueeBanner
   );
-  const { sys, title, subtextString, backgroundImage } = componentMarqueeBanner;
-
-  if (!sys?.id) return null;
+  const sys = useFragment(SysFieldsFragment, componentMarqueeBanner.sys);
+  const { title, subtextString, backgroundImage } = componentMarqueeBanner;
 
   return (
     <>

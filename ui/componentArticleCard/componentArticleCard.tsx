@@ -1,11 +1,12 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
+import { SysFieldsFragment } from '../sys';
 import { ImageAsset } from '../asset';
 import { RichText } from '../richText';
 
 const ComponentArticleCardFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentArticleCardItem on ComponentArticleCard {
     sys {
-      id
+      ...SysItem
     }
     eyebrow
     title
@@ -29,17 +30,9 @@ const ComponentArticleCard = (props: ComponentArticleCardProps) => {
     ComponentArticleCardFieldsFragment,
     props.componentArticleCard
   );
-  const {
-    sys,
-    eyebrow,
-    title,
-    subtext,
-    buttonLabel,
-    buttonExternalUrl,
-    image
-  } = componentArticleCard;
-
-  if (!sys?.id) return null;
+  const sys = useFragment(SysFieldsFragment, componentArticleCard.sys);
+  const { eyebrow, title, subtext, buttonLabel, buttonExternalUrl, image } =
+    componentArticleCard;
 
   return (
     <>

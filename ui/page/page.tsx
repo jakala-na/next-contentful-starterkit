@@ -1,10 +1,11 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
 import { PageLanding } from '../pageLanding';
+import { SysFieldsFragment } from '../sys';
 
 const PageFieldsFragment = graphql(/* GraphQL */ `
   fragment PageItem on Page {
     sys {
-      id
+      ...SysItem
     }
     slug
     title
@@ -31,7 +32,9 @@ const wait = (milliseconds: number) => {
 
 const Page = async (props: PageProps) => {
   const page = useFragment(PageFieldsFragment, props.page);
-  const { sys, title, content } = page;
+  const sys = useFragment(SysFieldsFragment, page.sys);
+  const { title, content } = page;
+
   // const delay = await wait(2000);
   const res = await fetch(
     'http://worldtimeapi.org/api/timezone/America/Toronto',

@@ -1,6 +1,6 @@
 import { FragmentType, useFragment } from '#/gql';
-import Image from 'next/image';
 import { AssetFieldsFragment } from './asset';
+import Image from 'next/image';
 
 type ImageAssetProps = {
   asset: FragmentType<typeof AssetFieldsFragment>;
@@ -8,9 +8,7 @@ type ImageAssetProps = {
 
 const ImageAsset = (props: ImageAssetProps) => {
   const asset = useFragment(AssetFieldsFragment, props.asset);
-  const { sys, title, url, width, height, description } = asset;
-
-  if (!sys?.id) return null;
+  const { title, url, width, height, description } = asset;
 
   return (
     <>
