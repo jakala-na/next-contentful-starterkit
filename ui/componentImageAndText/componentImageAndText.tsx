@@ -1,6 +1,6 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
 import { ImageAsset } from '../asset';
-import { RichText } from '../rich-text';
+import { RichText } from '../richText';
 
 const ComponentImageAndTextFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentImageAndTextItem on ComponentImageAndText {

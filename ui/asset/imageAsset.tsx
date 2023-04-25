@@ -1,4 +1,4 @@
-import { FragmentType, graphql, useFragment } from '#/gql';
+import { FragmentType, useFragment } from '#/gql';
 import Image from 'next/image';
 import { AssetFieldsFragment } from './asset';
 

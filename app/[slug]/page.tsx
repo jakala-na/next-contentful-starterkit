@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { graphql } from '#/gql';
-import { PageItemFragment, ProductItemFragment } from '#/gql/graphql';
 import { Page } from '#/ui/page';
 import { Product } from '#/ui/product';
 
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const EntryBySlugQuery = graphql(/* GraphQL */ `
-  query PageBySlug($slug: String!) {
+  query EntryBySlug($slug: String!) {
     pageCollection(limit: 1, where: { slug: $slug }, preview: false) {
       items {
         __typename
@@ -32,13 +31,11 @@ const AllSlugsQuery = graphql(/* GraphQL */ `
   query AllSlugs {
     pageCollection(limit: 1000, preview: false) {
       items {
-        __typename
         slug
       }
     }
     productCollection(limit: 1000, preview: false) {
       items {
-        __typename
         slug
       }
     }
@@ -55,16 +52,15 @@ export const dynamicParams = false;
 
 export const generateStaticParams = async () => {
   const result = await graphqlClient.request(AllSlugsQuery);
-  let slugs: string[] = [];
-  result.pageCollection?.items.forEach((item) => {
-    if (!item?.slug) return;
-    slugs.push(item.slug);
-  });
-  result.productCollection?.items.forEach((item) => {
-    if (!item?.slug) return;
-    slugs.push(item.slug);
-  });
-  return slugs.map((slug) => ({ slug }));
+  const slugs = [
+    result.pageCollection?.items.map((item) => item?.slug),
+    result.productCollection?.items.map((item) => item?.slug)
+  ]
+    .flat()
+    .filter((slug) => slug)
+    .map((slug) => ({ slug }));
+
+  return slugs;
 };
 
 const EntryBySlug = async ({ params }: Props) => {

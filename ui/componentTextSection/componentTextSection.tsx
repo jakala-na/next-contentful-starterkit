@@ -1,6 +1,6 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
 import { ComponentTextSectionItemFragment } from '#/gql/graphql';
-import { RichText } from '../rich-text';
+import { RichText } from '../richText';
 
 const ComponentTextSectionFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentTextSectionItem on ComponentTextSection {

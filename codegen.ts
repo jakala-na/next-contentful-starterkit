@@ -1,4 +1,3 @@
-
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
@@ -6,27 +5,33 @@ const config: CodegenConfig = {
   overwrite: true,
   schema: [
     {
-        [`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}`]: {
+      [`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}`]:
+        {
           headers: {
-            Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_API}`,
-          },
-        },
-      },
+            Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_API}`
+          }
+        }
+    }
   ],
   ignoreNoDocuments: true,
-  documents: ["app/**/*.{graphql,js,ts,jsx,tsx}", 'ui/**/*.{graphql,js,ts,jsx,tsx}'],
+  documents: [
+    'app/**/*.{graphql,js,ts,jsx,tsx}',
+    'ui/**/*.{graphql,js,ts,jsx,tsx}'
+  ],
   generates: {
-    "./gql/": {
-      preset: "client",
-      plugins: []
+    './gql/': {
+      preset: 'client',
+      plugins: [],
+      config: {
+        dedupeFragments: true
+      }
     },
-    "./gql/graphql.schema.json": {
-      plugins: ["introspection"]
+    './gql/graphql.schema.json': {
+      plugins: ['introspection']
     },
     './gql/schema.graphql': {
-        plugins: ['schema-ast']
+      plugins: ['schema-ast']
     }
-    
   }
 };
 

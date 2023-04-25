@@ -1,6 +1,6 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
 import { ComponentArticleCard } from '../componentArticleCard';
-import { RichText } from '../rich-text';
+import { RichText } from '../richText';
 
 const ComponentThreeCardCollectionFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentThreeCardCollectionItem on ComponentThreeCardCollection {
