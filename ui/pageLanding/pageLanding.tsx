@@ -1,11 +1,4 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
-import {
-  ComponentImageAndTextItemFragment,
-  ComponentMarqueeBannerItemFragment,
-  ComponentTextCtaItemFragment,
-  ComponentTextSectionItemFragment,
-  ComponentThreeCardCollectionItemFragment
-} from '#/gql/graphql';
 import { SysFieldsFragment } from '../sys';
 import { ComponentImageAndText } from '../componentImageAndText';
 import { ComponentMarqueeBanner } from '../componentMarqueeBanner';
@@ -21,6 +14,7 @@ const PageLandingFieldsFragment = graphql(/* GraphQL */ `
     name
     sectionsCollection(preview: false) {
       items {
+        __typename
         ... on ComponentTextCta {
           ...ComponentTextCtaItem
         }
@@ -54,42 +48,29 @@ const PageLanding = (props: PageLandingProps) => {
     <>
       <h1>{name}</h1>
       <div>Id: {sys.id}</div>
-      {sectionsCollection?.items.map((item) => {
-        if (!item) return null;
+      {sectionsCollection?.items.map((item, index) => {
+        if (!item?.__typename) return null;
+        const key = `${sys.id}-section-${index}`;
 
         switch (item.__typename) {
           case 'ComponentTextSection':
             return (
-              <ComponentTextSection
-                key={sys.id}
-                componentTextSection={item}
-              />
+              <ComponentTextSection key={key} componentTextSection={item} />
             );
           case 'ComponentTextCta':
-            return (
-              <ComponentTextCta
-                key={sys.id}
-                componentTextCta={item}
-              />
-            );
+            return <ComponentTextCta key={key} componentTextCta={item} />;
           case 'ComponentImageAndText':
             return (
-              <ComponentImageAndText
-                key={sys.id}
-                componentImageAndText={item}
-              />
+              <ComponentImageAndText key={key} componentImageAndText={item} />
             );
           case 'ComponentMarqueeBanner':
             return (
-              <ComponentMarqueeBanner
-                key={sys.id}
-                componentMarqueeBanner={item}
-              />
+              <ComponentMarqueeBanner key={key} componentMarqueeBanner={item} />
             );
           case 'ComponentThreeCardCollection':
             return (
               <ComponentThreeCardCollection
-                key={sys.id}
+                key={key}
                 componentThreeCardCollection={item}
               />
             );

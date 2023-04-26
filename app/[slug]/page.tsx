@@ -88,7 +88,7 @@ const EntryBySlug = async ({ params }: Props) => {
         <>
           <p>EntryBySlug time: {datetime.unixtime}</p>
           {/* @ts-expect-error Async Server Component */}
-          <Page page={entry} />;
+          <Page page={entry} />
         </>
       );
     case 'Product':
