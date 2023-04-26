@@ -1,5 +1,6 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
 import { SysFieldsFragment } from '../sys';
+import { AssetFieldsFragment } from '../asset';
 import Image from 'next/image';
 
 const ProductFieldsFragment = graphql(/* GraphQL */ `
@@ -11,14 +12,7 @@ const ProductFieldsFragment = graphql(/* GraphQL */ `
     title
     price
     image {
-      title
-      description
-      contentType
-      fileName
-      size
-      url
-      width
-      height
+      ...AssetItem
     }
   }
 `);
@@ -30,7 +24,8 @@ type ProductProps = {
 const Product = (props: ProductProps) => {
   const product = useFragment(ProductFieldsFragment, props.product);
   const sys = useFragment(SysFieldsFragment, product.sys);
-  const { title, price, image } = product;
+  const image = useFragment(AssetFieldsFragment, product.image);
+  const { title, price } = product;
 
   return (
     <>

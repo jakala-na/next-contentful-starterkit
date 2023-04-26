@@ -1,7 +1,8 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
 import { SysFieldsFragment } from '../sys';
-import { ImageAsset } from '../asset';
+import { AssetFieldsFragment } from '../asset';
 import { RichText } from '../richText';
+import Image from 'next/image';
 
 const ComponentImageAndTextFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentImageAndTextItem on ComponentImageAndText {
@@ -32,7 +33,8 @@ const ComponentImageAndText = (props: ComponentImageAndTextProps) => {
     props.componentImageAndText
   );
   const sys = useFragment(SysFieldsFragment, componentImageAndText.sys);
-  const { title, subtext, buttonLabel, buttonExternalUrl, image } =
+  const image = useFragment(AssetFieldsFragment, componentImageAndText.image);
+  const { title, subtext, buttonLabel, buttonExternalUrl } =
     componentImageAndText;
 
   return (
@@ -42,9 +44,14 @@ const ComponentImageAndText = (props: ComponentImageAndTextProps) => {
       <h3>{title}</h3>
       {subtext && <RichText json={subtext.json} />}
       {buttonLabel && buttonExternalUrl && <button>{buttonLabel}</button>}
-      {image && (
+      {image?.url && image.width && image.height && (
         <div>
-          <ImageAsset asset={image} />
+          <Image
+            src={image.url}
+            width={image.width / 2}
+            height={image.height / 2}
+            alt={image.description || image.title || 'Untitled'}
+          />
         </div>
       )}
     </>

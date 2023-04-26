@@ -1,6 +1,7 @@
 import { FragmentType, graphql, useFragment } from '#/gql';
 import { SysFieldsFragment } from '../sys';
-import { ImageAsset } from '../asset';
+import { AssetFieldsFragment } from '../asset';
+import Image from 'next/image';
 
 const ComponentMarqueeBannerFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentMarqueeBannerItem on ComponentMarqueeBanner {
@@ -27,7 +28,11 @@ const ComponentMarqueeBanner = (props: ComponentMarqueeBannerProps) => {
     props.componentMarqueeBanner
   );
   const sys = useFragment(SysFieldsFragment, componentMarqueeBanner.sys);
-  const { title, subtextString, backgroundImage } = componentMarqueeBanner;
+  const backgroundImage = useFragment(
+    AssetFieldsFragment,
+    componentMarqueeBanner.backgroundImage
+  );
+  const { title, subtextString } = componentMarqueeBanner;
 
   return (
     <>
@@ -35,11 +40,22 @@ const ComponentMarqueeBanner = (props: ComponentMarqueeBannerProps) => {
       <div>Id: {sys.id}</div>
       <h3>{title}</h3>
       {subtextString && <div>{subtextString}</div>}
-      {backgroundImage && (
-        <div>
-          <ImageAsset asset={backgroundImage} />
-        </div>
-      )}
+      {backgroundImage?.url &&
+        backgroundImage.width &&
+        backgroundImage.height && (
+          <div>
+            <Image
+              src={backgroundImage.url}
+              width={backgroundImage.width / 2}
+              height={backgroundImage.height / 2}
+              alt={
+                backgroundImage.description ||
+                backgroundImage.title ||
+                'Untitled'
+              }
+            />
+          </div>
+        )}
     </>
   );
 };
