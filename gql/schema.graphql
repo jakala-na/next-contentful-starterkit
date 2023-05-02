@@ -122,6 +122,109 @@ enum AssetOrder {
 }
 
 """
+[See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/blogPost)
+"""
+type BlogPost implements Entry {
+  body(locale: String): BlogPostBody
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): BlogPostLinkingCollections
+  publishedDate(locale: String): DateTime
+  slug(locale: String): String
+  summary(locale: String): String
+  sys: Sys!
+  title(locale: String): String
+}
+
+type BlogPostBody {
+  json: JSON!
+  links: BlogPostBodyLinks!
+}
+
+type BlogPostBodyAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type BlogPostBodyEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type BlogPostBodyLinks {
+  assets: BlogPostBodyAssets!
+  entries: BlogPostBodyEntries!
+}
+
+type BlogPostCollection {
+  items: [BlogPost]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input BlogPostFilter {
+  AND: [BlogPostFilter]
+  OR: [BlogPostFilter]
+  body_contains: String
+  body_exists: Boolean
+  body_not_contains: String
+  contentfulMetadata: ContentfulMetadataFilter
+  publishedDate: DateTime
+  publishedDate_exists: Boolean
+  publishedDate_gt: DateTime
+  publishedDate_gte: DateTime
+  publishedDate_in: [DateTime]
+  publishedDate_lt: DateTime
+  publishedDate_lte: DateTime
+  publishedDate_not: DateTime
+  publishedDate_not_in: [DateTime]
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  summary: String
+  summary_contains: String
+  summary_exists: Boolean
+  summary_in: [String]
+  summary_not: String
+  summary_not_contains: String
+  summary_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+type BlogPostLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum BlogPostOrder {
+  publishedDate_ASC
+  publishedDate_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+"""
 [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/component_article_card)
 """
 type ComponentArticleCard implements Entry {
@@ -1663,6 +1766,8 @@ scalar Quality
 type Query {
   asset(id: String!, locale: String, preview: Boolean): Asset
   assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
+  blogPost(id: String!, locale: String, preview: Boolean): BlogPost
+  blogPostCollection(limit: Int = 100, locale: String, order: [BlogPostOrder], preview: Boolean, skip: Int = 0, where: BlogPostFilter): BlogPostCollection
   componentArticleCard(id: String!, locale: String, preview: Boolean): ComponentArticleCard
   componentArticleCardCollection(limit: Int = 100, locale: String, order: [ComponentArticleCardOrder], preview: Boolean, skip: Int = 0, where: ComponentArticleCardFilter): ComponentArticleCardCollection
   componentImageAndText(id: String!, locale: String, preview: Boolean): ComponentImageAndText
