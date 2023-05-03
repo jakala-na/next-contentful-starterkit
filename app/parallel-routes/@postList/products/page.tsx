@@ -22,6 +22,7 @@ const Page = async () => {
                   ((product as ProductItemFragment).sys as SysItemFragment).id
                 }
                 product={product}
+                linkPrefix="/parallel-routes"
               />
             )
         )

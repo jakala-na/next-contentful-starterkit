@@ -7,7 +7,7 @@ interface Props {
 const Page = ({ children, postList, currentPost }: Props) => {
   return (
     <>
-      <h1>Dashboard</h1>
+      <h1>Blog</h1>
       <div
         style={{
           minHeight: '1em',

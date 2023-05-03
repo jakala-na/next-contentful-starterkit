@@ -31,6 +31,10 @@ export const ProductListQuery = graphql(/* GraphQL */ `
   }
 `);
 
+export const getPermalink = (slug: string) => {
+  return `/${slug}`;
+};
+
 type ProductProps = {
   product: FragmentType<typeof ProductFieldsFragment>;
 };

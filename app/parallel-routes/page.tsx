@@ -3,7 +3,7 @@ import Link from 'next/link';
 const Page = () => {
   return (
     <>
-      <h1>Blog Children</h1>
+      <h1>Dashboard Children</h1>
       <p>This is the children param.</p>
       <p>
         <Link href="/parallel-routes">Reset</Link>

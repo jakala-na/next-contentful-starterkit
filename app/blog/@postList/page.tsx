@@ -20,7 +20,6 @@ const Page = async () => {
               <BlogPostCard
                 key={((post as BlogPostItemFragment).sys as SysItemFragment).id}
                 blogPost={post}
-                linkPrefix='/parallel-routes'
               />
             )
         )
