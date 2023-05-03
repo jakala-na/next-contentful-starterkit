@@ -29,7 +29,7 @@ interface Props {
   currentPost: React.ReactNode;
 }
 
-const Page = async ({ children, postList, currentPost }: Props) => {
+const Page = ({ children, postList, currentPost }: Props) => {
   // Get the list of Blog Posts
   // const result = await graphqlClient.request(BlogPostsListQuery);
   // const posts = result.blogPostCollection?.items;

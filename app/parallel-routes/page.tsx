@@ -17,7 +17,7 @@ import Link from 'next/link';
 //   }
 // `);
 
-const Page = async () => {
+const Page = () => {
   // Get the latest Blog Post
   // const result = await graphqlClient.request(LatestBlogPostQuery);
   // const post = result.blogPostCollection?.items[0];
