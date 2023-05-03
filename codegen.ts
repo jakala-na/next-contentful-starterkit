@@ -23,7 +23,6 @@ const config: CodegenConfig = {
       preset: 'client',
       plugins: [],
       config: {
-        avoidOptionals: true,
         dedupeFragments: true
       }
     },

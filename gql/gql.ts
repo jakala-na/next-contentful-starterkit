@@ -10,14 +10,14 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * 2. It is not minifiable, so the string of a GraphQL query will be multiple times inside the bundle.
  * 3. It does not support dead code elimination, so it will add unused operations.
  *
- * Therefore it is highly recommended to use the babel-plugin for production.
+ * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
     "\n  query EntryBySlug($slug: String!) {\n    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...PageItem\n      }\n    }\n    productCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n    blogPostCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...BlogPostItem\n      }\n    }\n  }\n": types.EntryBySlugDocument,
     "\n  query AllSlugs {\n    pageCollection(limit: 1000, preview: false) {\n      items {\n        slug\n      }\n    }\n    productCollection(limit: 1000, preview: false) {\n      items {\n        slug\n      }\n    }\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        slug\n      }\n    }\n  }\n": types.AllSlugsDocument,
     "\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkItem\n        }\n      }\n    }\n  ": types.MenuLinksDocument,
     "\n  query LatestBlogPost {\n    blogPostCollection(limit: 1, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n": types.LatestBlogPostDocument,
-    "\n  query BlogPostsList {\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        ...BlogPostItem\n        sys {\n          id\n        }\n      }\n    }\n  }\n": types.BlogPostsListDocument,
+    "\n  query BlogPostsList {\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n": types.BlogPostsListDocument,
     "\n  query ProductList {\n    productCollection(limit: 1000, preview: false) {\n      items {\n        ...ProductItem\n        sys {\n          id\n        }\n      }\n    }\n  }\n": types.ProductListDocument,
     "\n  fragment AssetItem on Asset {\n    sys {\n      ...SysItem\n    }\n    title\n    description\n    contentType\n    fileName\n    size\n    url\n    width\n    height\n  }\n": types.AssetItemFragmentDoc,
     "\n  fragment BlogPostItem on BlogPost {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    publishedDate\n    summary\n    body {\n      json\n    }\n  }\n": types.BlogPostItemFragmentDoc,
@@ -33,6 +33,20 @@ const documents = {
     "\n  fragment ProductItem on Product {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    price\n    image {\n      ...AssetItem\n    }\n  }\n": types.ProductItemFragmentDoc,
     "\n  fragment SysItem on Sys {\n    id\n    spaceId\n    environmentId\n    publishedAt\n    firstPublishedAt\n    publishedVersion\n  }\n": types.SysItemFragmentDoc,
 };
+
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ *
+ *
+ * @example
+ * ```ts
+ * const query = graphql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
+ * ```
+ *
+ * The query argument is unknown!
+ * Please regenerate the types.
+ */
+export function graphql(source: string): unknown;
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -53,7 +67,7 @@ export function graphql(source: "\n  query LatestBlogPost {\n    blogPostCollect
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query BlogPostsList {\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        ...BlogPostItem\n        sys {\n          id\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query BlogPostsList {\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        ...BlogPostItem\n        sys {\n          id\n        }\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query BlogPostsList {\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query BlogPostsList {\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -110,20 +124,6 @@ export function graphql(source: "\n  fragment ProductItem on Product {\n    sys 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  fragment SysItem on Sys {\n    id\n    spaceId\n    environmentId\n    publishedAt\n    firstPublishedAt\n    publishedVersion\n  }\n"): (typeof documents)["\n  fragment SysItem on Sys {\n    id\n    spaceId\n    environmentId\n    publishedAt\n    firstPublishedAt\n    publishedVersion\n  }\n"];
-
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- *
- *
- * @example
- * ```ts
- * const query = gql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
- * ```
- *
- * The query argument is unknown!
- * Please regenerate the types.
-**/
-export function graphql(source: string): unknown;
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
