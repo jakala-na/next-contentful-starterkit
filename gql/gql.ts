@@ -16,11 +16,10 @@ const documents = {
     "\n  query EntryBySlug($slug: String!) {\n    pageCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...PageItem\n      }\n    }\n    productCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...ProductItem\n      }\n    }\n    blogPostCollection(limit: 1, where: { slug: $slug }, preview: false) {\n      items {\n        __typename\n        ...BlogPostItem\n      }\n    }\n  }\n": types.EntryBySlugDocument,
     "\n  query AllSlugs {\n    pageCollection(limit: 1000, preview: false) {\n      items {\n        slug\n      }\n    }\n    productCollection(limit: 1000, preview: false) {\n      items {\n        slug\n      }\n    }\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        slug\n      }\n    }\n  }\n": types.AllSlugsDocument,
     "\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkItem\n        }\n      }\n    }\n  ": types.MenuLinksDocument,
-    "\n  query LatestBlogPost {\n    blogPostCollection(limit: 1, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n": types.LatestBlogPostDocument,
-    "\n  query BlogPostsList {\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n": types.BlogPostsListDocument,
-    "\n  query ProductList {\n    productCollection(limit: 1000, preview: false) {\n      items {\n        ...ProductItem\n        sys {\n          id\n        }\n      }\n    }\n  }\n": types.ProductListDocument,
     "\n  fragment AssetItem on Asset {\n    sys {\n      ...SysItem\n    }\n    title\n    description\n    contentType\n    fileName\n    size\n    url\n    width\n    height\n  }\n": types.AssetItemFragmentDoc,
     "\n  fragment BlogPostItem on BlogPost {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    publishedDate\n    summary\n    body {\n      json\n    }\n  }\n": types.BlogPostItemFragmentDoc,
+    "\n  query BlogPostsList {\n    blogPostCollection(limit: 1000, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n": types.BlogPostsListDocument,
+    "\n  query LatestBlogPost {\n    blogPostCollection(limit: 1, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n": types.LatestBlogPostDocument,
     "\n  fragment ComponentArticleCardItem on ComponentArticleCard {\n    sys {\n      ...SysItem\n    }\n    eyebrow\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      ...AssetItem\n    }\n  }\n": types.ComponentArticleCardItemFragmentDoc,
     "\n  fragment ComponentImageAndTextItem on ComponentImageAndText {\n    sys {\n      ...SysItem\n    }\n    title\n    subtext {\n      json\n    }\n    buttonLabel\n    buttonExternalUrl\n    image {\n      ...AssetItem\n    }\n  }\n": types.ComponentImageAndTextItemFragmentDoc,
     "\n  fragment ComponentMarqueeBannerItem on ComponentMarqueeBanner {\n    sys {\n      ...SysItem\n    }\n    title\n    subtextString: subtext\n    backgroundImage {\n      ...AssetItem\n    }\n  }\n": types.ComponentMarqueeBannerItemFragmentDoc,
@@ -30,7 +29,8 @@ const documents = {
     "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n      ...SysItem\n    }\n    linkUrl\n    linkText\n    linkReference {\n      ... on Page {\n        title\n        slug\n      }\n      ... on Product {\n        title\n        slug\n      }\n    }\n  }\n": types.LinkItemFragmentDoc,
     "\n  fragment PageItem on Page {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    content {\n      ... on PageLanding {\n        ...PageLandingItem\n      }\n    }\n  }\n": types.PageItemFragmentDoc,
     "\n  fragment PageLandingItem on PageLanding {\n    sys {\n      ...SysItem\n    }\n    name\n    sectionsCollection(preview: false) {\n      items {\n        __typename\n        ... on ComponentTextCta {\n          ...ComponentTextCtaItem\n        }\n        ... on ComponentTextSection {\n          ...ComponentTextSectionItem\n        }\n        ... on ComponentImageAndText {\n          ...ComponentImageAndTextItem\n        }\n        ... on ComponentMarqueeBanner {\n          ...ComponentMarqueeBannerItem\n        }\n        ... on ComponentThreeCardCollection {\n          ...ComponentThreeCardCollectionItem\n        }\n      }\n    }\n  }\n": types.PageLandingItemFragmentDoc,
-    "\n  fragment ProductItem on Product {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    price\n    image {\n      ...AssetItem\n    }\n  }\n": types.ProductItemFragmentDoc,
+    "\n  fragment ProductItem on Product {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    description {\n      json\n    }\n    price\n    image {\n      ...AssetItem\n    }\n  }\n": types.ProductItemFragmentDoc,
+    "\n  query ProductList {\n    productCollection(limit: 1000, preview: false) {\n      items {\n        ...ProductItem\n      }\n    }\n  }\n": types.ProductListDocument,
     "\n  fragment SysItem on Sys {\n    id\n    spaceId\n    environmentId\n    publishedAt\n    firstPublishedAt\n    publishedVersion\n  }\n": types.SysItemFragmentDoc,
 };
 
@@ -63,7 +63,11 @@ export function graphql(source: "\n    query MenuLinks {\n      menuLinkCollecti
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query LatestBlogPost {\n    blogPostCollection(limit: 1, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query LatestBlogPost {\n    blogPostCollection(limit: 1, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  fragment AssetItem on Asset {\n    sys {\n      ...SysItem\n    }\n    title\n    description\n    contentType\n    fileName\n    size\n    url\n    width\n    height\n  }\n"): (typeof documents)["\n  fragment AssetItem on Asset {\n    sys {\n      ...SysItem\n    }\n    title\n    description\n    contentType\n    fileName\n    size\n    url\n    width\n    height\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment BlogPostItem on BlogPost {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    publishedDate\n    summary\n    body {\n      json\n    }\n  }\n"): (typeof documents)["\n  fragment BlogPostItem on BlogPost {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    publishedDate\n    summary\n    body {\n      json\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -71,15 +75,7 @@ export function graphql(source: "\n  query BlogPostsList {\n    blogPostCollecti
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query ProductList {\n    productCollection(limit: 1000, preview: false) {\n      items {\n        ...ProductItem\n        sys {\n          id\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query ProductList {\n    productCollection(limit: 1000, preview: false) {\n      items {\n        ...ProductItem\n        sys {\n          id\n        }\n      }\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment AssetItem on Asset {\n    sys {\n      ...SysItem\n    }\n    title\n    description\n    contentType\n    fileName\n    size\n    url\n    width\n    height\n  }\n"): (typeof documents)["\n  fragment AssetItem on Asset {\n    sys {\n      ...SysItem\n    }\n    title\n    description\n    contentType\n    fileName\n    size\n    url\n    width\n    height\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment BlogPostItem on BlogPost {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    publishedDate\n    summary\n    body {\n      json\n    }\n  }\n"): (typeof documents)["\n  fragment BlogPostItem on BlogPost {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    publishedDate\n    summary\n    body {\n      json\n    }\n  }\n"];
+export function graphql(source: "\n  query LatestBlogPost {\n    blogPostCollection(limit: 1, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query LatestBlogPost {\n    blogPostCollection(limit: 1, preview: false) {\n      items {\n        ...BlogPostItem\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -119,7 +115,11 @@ export function graphql(source: "\n  fragment PageLandingItem on PageLanding {\n
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment ProductItem on Product {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    price\n    image {\n      ...AssetItem\n    }\n  }\n"): (typeof documents)["\n  fragment ProductItem on Product {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    price\n    image {\n      ...AssetItem\n    }\n  }\n"];
+export function graphql(source: "\n  fragment ProductItem on Product {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    description {\n      json\n    }\n    price\n    image {\n      ...AssetItem\n    }\n  }\n"): (typeof documents)["\n  fragment ProductItem on Product {\n    sys {\n      ...SysItem\n    }\n    slug\n    title\n    description {\n      json\n    }\n    price\n    image {\n      ...AssetItem\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query ProductList {\n    productCollection(limit: 1000, preview: false) {\n      items {\n        ...ProductItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query ProductList {\n    productCollection(limit: 1000, preview: false) {\n      items {\n        ...ProductItem\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,2 +1,8 @@
-export { default as BlogPost } from './blogPost';
-export { getPermalink } from './blogPost';
+export {
+  default as BlogPost,
+  BlogPostFieldsFragment,
+  BlogPostsListQuery,
+  LatestBlogPostQuery,
+  getPermalink
+} from './blogPost';
+export { default as BlogPostCard } from './blogPostCard';

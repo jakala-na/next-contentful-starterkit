@@ -12,8 +12,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const data = previewData();
-  const isPreviewMode = !!data && data.key === process.env.PREVIEW_SECRET;
+  // const data = previewData();
+  // const isPreviewMode = !!data && data.key === process.env.PREVIEW_SECRET;
+  const isPreviewMode = false;
 
   const layoutQuery = graphql(/* GraphQL */ `
     query MenuLinks {

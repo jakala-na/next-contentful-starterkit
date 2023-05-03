@@ -2,7 +2,7 @@ import { FragmentType, graphql, useFragment } from '#/gql';
 import { SysFieldsFragment } from '../sys';
 import { RichText } from '../richText';
 
-const BlogPostFieldsFragment = graphql(/* GraphQL */ `
+export const BlogPostFieldsFragment = graphql(/* GraphQL */ `
   fragment BlogPostItem on BlogPost {
     sys {
       ...SysItem
@@ -13,6 +13,26 @@ const BlogPostFieldsFragment = graphql(/* GraphQL */ `
     summary
     body {
       json
+    }
+  }
+`);
+
+export const BlogPostsListQuery = graphql(/* GraphQL */ `
+  query BlogPostsList {
+    blogPostCollection(limit: 1000, preview: false) {
+      items {
+        ...BlogPostItem
+      }
+    }
+  }
+`);
+
+export const LatestBlogPostQuery = graphql(/* GraphQL */ `
+  query LatestBlogPost {
+    blogPostCollection(limit: 1, preview: false) {
+      items {
+        ...BlogPostItem
+      }
     }
   }
 `);

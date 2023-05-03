@@ -1,20 +1,21 @@
-import { makeFragmentData } from "../../gql";
-import { Given } from "@badeball/cypress-cucumber-preprocessor";
-import React from "react";
-import Link from "./link";
-import { LinkItemFragmentDoc } from "#/gql/graphql";
+import { makeFragmentData } from '../../gql';
+import { Given } from '@badeball/cypress-cucumber-preprocessor';
+import React from 'react';
+import Link from './link';
+import { LinkItemFragmentDoc } from '#/gql/graphql';
 
 Given(
-  "link with text {string} and url {string}",
+  'link with text {string} and url {string}',
   (text: string, url: string) => {
     const link = {
       sys: {
-        id: Cypress._.uniqueId(),
+        id: Cypress._.uniqueId()
       },
       linkUrl: url,
-      linkText: text,
+      linkText: text
     };
 
+    /* @ts-expect-error Partial object */
     cy.mount(<Link link={makeFragmentData(link, LinkItemFragmentDoc)} />);
   }
 );

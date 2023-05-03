@@ -2,17 +2,31 @@ import { FragmentType, graphql, useFragment } from '#/gql';
 import { SysFieldsFragment } from '../sys';
 import { AssetFieldsFragment } from '../asset';
 import Image from 'next/image';
+import { RichText } from '../richText';
 
-const ProductFieldsFragment = graphql(/* GraphQL */ `
+export const ProductFieldsFragment = graphql(/* GraphQL */ `
   fragment ProductItem on Product {
     sys {
       ...SysItem
     }
     slug
     title
+    description {
+      json
+    }
     price
     image {
       ...AssetItem
+    }
+  }
+`);
+
+export const ProductListQuery = graphql(/* GraphQL */ `
+  query ProductList {
+    productCollection(limit: 1000, preview: false) {
+      items {
+        ...ProductItem
+      }
     }
   }
 `);
@@ -25,7 +39,7 @@ const Product = (props: ProductProps) => {
   const product = useFragment(ProductFieldsFragment, props.product);
   const sys = useFragment(SysFieldsFragment, product.sys);
   const image = useFragment(AssetFieldsFragment, product.image);
-  const { title, price } = product;
+  const { title, price, description } = product;
 
   return (
     <>
@@ -42,6 +56,7 @@ const Product = (props: ProductProps) => {
           />
         </div>
       )}
+      {description && <RichText json={description.json} />}
     </>
   );
 };

@@ -4,14 +4,11 @@ import { BlogPost } from '#/ui/blogPost';
 import { Product } from '#/ui/product';
 import { AllSlugsQuery, EntryBySlugQuery } from '#/app/[slug]/page';
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
+type Time = {
+  unixtime: number;
+};
 
-// export const revalidate = 3;
-
+export const revalidate = 5;
 export const dynamicParams = false;
 
 export const generateStaticParams = async () => {
@@ -28,8 +25,19 @@ export const generateStaticParams = async () => {
   return slugs;
 };
 
+interface Props {
+  params: {
+    slug: string;
+  };
+}
+
 const Page = async ({ params }: Props) => {
   const { slug } = params;
+
+  const res = await fetch(
+    'http://worldtimeapi.org/api/timezone/America/Vancouver'
+  );
+  const datetime: Time = await res.json();
 
   // Get an entry by slug
   const result = await graphqlClient.request(EntryBySlugQuery, { slug });
@@ -40,9 +48,19 @@ const Page = async ({ params }: Props) => {
 
   switch (entry.__typename) {
     case 'BlogPost':
-      return <BlogPost blogPost={entry} />;
+      return (
+        <>
+          Time: {datetime.unixtime}
+          <BlogPost blogPost={entry} />
+        </>
+      );
     case 'Product':
-      return <Product product={entry} />;
+      return (
+        <>
+          Time: {datetime.unixtime}
+          <Product product={entry} />
+        </>
+      );
   }
 };
 
