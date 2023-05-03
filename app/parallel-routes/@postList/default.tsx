@@ -1,44 +1,29 @@
 import { graphqlClient } from '#/lib/graphqlClient';
 import { graphql } from '#/gql';
 import Link from 'next/link';
+import { Converter } from 'showdown';
+import { getPermalink } from '#/ui/blogPost';
 
 // export const revalidate = 3;
 
 // export const dynamicParams = false;
 
-// export const generateStaticParams = async () => {
-//   const result = await graphqlClient.request(AllSlugsQuery);
-//   const slugs = [
-//     result.pageCollection?.items.map((item) => item?.slug),
-//     result.productCollection?.items.map((item) => item?.slug),
-//     result.blogPostCollection?.items.map((item) => item?.slug)
-//   ]
-//     .flat()
-//     .filter((slug) => slug)
-//     .map((slug) => ({ slug }));
-
-//   return slugs;
-// };
+const converter = new Converter();
 
 const BlogPostsListQuery = graphql(/* GraphQL */ `
   query BlogPostsList {
     blogPostCollection(limit: 1000, preview: false) {
       items {
         ...BlogPostItem
+        sys {
+          id
+        }
       }
     }
   }
 `);
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
-
-const Page = async ({ params }: Props) => {
-  const { slug } = params;
-
+const Page = async () => {
   // Get the list of Blog Posts
   const result = await graphqlClient.request(BlogPostsListQuery);
   const posts = result.blogPostCollection?.items;
@@ -50,9 +35,20 @@ const Page = async ({ params }: Props) => {
         ? posts.map((post) => {
             if (!post) return;
             return (
-              <h2 key={post.sys.id}>
-                <Link href={`/${post.slug}`}>{post.title}</Link>
-              </h2>
+              <div key={post.sys.id}>
+                <h2>
+                  <Link href={`/parallel-routes/${post.slug}`}>
+                    {post.title}
+                  </Link>
+                </h2>
+                {post.summary && (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: converter.makeHtml(post.summary)
+                    }}
+                  />
+                )}
+              </div>
             );
           })
         : 'No blog posts yet.'}

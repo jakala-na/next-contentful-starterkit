@@ -11,7 +11,7 @@ interface Props {
   };
 }
 
-const EntryBySlugQuery = graphql(/* GraphQL */ `
+export const EntryBySlugQuery = graphql(/* GraphQL */ `
   query EntryBySlug($slug: String!) {
     pageCollection(limit: 1, where: { slug: $slug }, preview: false) {
       items {
@@ -34,7 +34,7 @@ const EntryBySlugQuery = graphql(/* GraphQL */ `
   }
 `);
 
-const AllSlugsQuery = graphql(/* GraphQL */ `
+export const AllSlugsQuery = graphql(/* GraphQL */ `
   query AllSlugs {
     pageCollection(limit: 1000, preview: false) {
       items {

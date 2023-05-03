@@ -17,6 +17,14 @@ const BlogPostFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
+export const formatDate = (date: string) => {
+  return new Date(date).toUTCString();
+};
+
+export const getPermalink = (slug: string) => {
+  return `/blog/${slug}`;
+};
+
 type BlogPostProps = {
   blogPost: FragmentType<typeof BlogPostFieldsFragment>;
 };
@@ -24,13 +32,13 @@ type BlogPostProps = {
 const BlogPost = (props: BlogPostProps) => {
   const blogPost = useFragment(BlogPostFieldsFragment, props.blogPost);
   const sys = useFragment(SysFieldsFragment, blogPost.sys);
-  const { title, summary, body } = blogPost;
+  const { title, publishedDate, body } = blogPost;
 
   return (
     <>
       <h1>{title}</h1>
       <div>Id: {sys.id}</div>
-      {summary && <p>{summary}</p>}
+      <div>Published: {formatDate(publishedDate)}</div>
       {body && <RichText json={body.json} />}
     </>
   );
