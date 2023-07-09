@@ -29,6 +29,132 @@ export type Scalars = {
   Quality: any;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/article) */
+export type Article = Entry & PageEntry & {
+  __typename?: 'Article';
+  content?: Maybe<ArticleContent>;
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<ArticleLinkingCollections>;
+  slug?: Maybe<Scalars['String']>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/article) */
+export type ArticleContentArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/article) */
+export type ArticleLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/article) */
+export type ArticleSlugArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/article) */
+export type ArticleTitleArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+export type ArticleCollection = {
+  __typename?: 'ArticleCollection';
+  items: Array<Maybe<Article>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type ArticleContent = {
+  __typename?: 'ArticleContent';
+  json: Scalars['JSON'];
+  links: ArticleContentLinks;
+};
+
+export type ArticleContentAssets = {
+  __typename?: 'ArticleContentAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type ArticleContentEntries = {
+  __typename?: 'ArticleContentEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type ArticleContentLinks = {
+  __typename?: 'ArticleContentLinks';
+  assets: ArticleContentAssets;
+  entries: ArticleContentEntries;
+  resources: ArticleContentResources;
+};
+
+export type ArticleContentResources = {
+  __typename?: 'ArticleContentResources';
+  block: Array<ResourceLink>;
+};
+
+export type ArticleFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ArticleFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ArticleFilter>>>;
+  content_contains?: InputMaybe<Scalars['String']>;
+  content_exists?: InputMaybe<Scalars['Boolean']>;
+  content_not_contains?: InputMaybe<Scalars['String']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  slug?: InputMaybe<Scalars['String']>;
+  slug_contains?: InputMaybe<Scalars['String']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  slug_not?: InputMaybe<Scalars['String']>;
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ArticleLinkingCollections = {
+  __typename?: 'ArticleLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type ArticleLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum ArticleOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 /** Represents a binary file in a space. An asset can be any file type. */
 export type Asset = {
   __typename?: 'Asset';
@@ -191,6 +317,7 @@ export type AssetLinkingCollections = {
 export type AssetLinkingCollectionsComponentArticleCardCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<AssetLinkingCollectionsComponentArticleCardCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
@@ -199,6 +326,7 @@ export type AssetLinkingCollectionsComponentArticleCardCollectionArgs = {
 export type AssetLinkingCollectionsComponentImageAndTextCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<AssetLinkingCollectionsComponentImageAndTextCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
@@ -207,6 +335,7 @@ export type AssetLinkingCollectionsComponentImageAndTextCollectionArgs = {
 export type AssetLinkingCollectionsComponentMarqueeBannerCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<AssetLinkingCollectionsComponentMarqueeBannerCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
@@ -223,6 +352,7 @@ export type AssetLinkingCollectionsEntryCollectionArgs = {
 export type AssetLinkingCollectionsMenuPromoCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<AssetLinkingCollectionsMenuPromoCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
@@ -231,9 +361,103 @@ export type AssetLinkingCollectionsMenuPromoCollectionArgs = {
 export type AssetLinkingCollectionsProductCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<AssetLinkingCollectionsProductCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum AssetLinkingCollectionsComponentArticleCardCollectionOrder {
+  ButtonExternalUrlAsc = 'buttonExternalUrl_ASC',
+  ButtonExternalUrlDesc = 'buttonExternalUrl_DESC',
+  ButtonLabelAsc = 'buttonLabel_ASC',
+  ButtonLabelDesc = 'buttonLabel_DESC',
+  EyebrowAsc = 'eyebrow_ASC',
+  EyebrowDesc = 'eyebrow_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum AssetLinkingCollectionsComponentImageAndTextCollectionOrder {
+  ButtonExternalUrlAsc = 'buttonExternalUrl_ASC',
+  ButtonExternalUrlDesc = 'buttonExternalUrl_DESC',
+  ButtonLabelAsc = 'buttonLabel_ASC',
+  ButtonLabelDesc = 'buttonLabel_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  LayoutAsc = 'layout_ASC',
+  LayoutDesc = 'layout_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum AssetLinkingCollectionsComponentMarqueeBannerCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SubtextAsc = 'subtext_ASC',
+  SubtextDesc = 'subtext_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum AssetLinkingCollectionsMenuPromoCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum AssetLinkingCollectionsProductCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PriceAsc = 'price_ASC',
+  PriceDesc = 'price_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export enum AssetOrder {
   ContentTypeAsc = 'contentType_ASC',
@@ -291,6 +515,7 @@ export type ComponentArticleCardButtonLabelArgs = {
 export type ComponentArticleCardButtonReferenceArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<PageFilter>;
 };
 
 
@@ -396,6 +621,7 @@ export type ComponentArticleCardLinkingCollections = {
 export type ComponentArticleCardLinkingCollectionsComponentThreeCardCollectionCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentArticleCardLinkingCollectionsComponentThreeCardCollectionCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
@@ -407,6 +633,25 @@ export type ComponentArticleCardLinkingCollectionsEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum ComponentArticleCardLinkingCollectionsComponentThreeCardCollectionCollectionOrder {
+  ButtonExternalUrlAsc = 'buttonExternalUrl_ASC',
+  ButtonExternalUrlDesc = 'buttonExternalUrl_DESC',
+  ButtonLabelAsc = 'buttonLabel_ASC',
+  ButtonLabelDesc = 'buttonLabel_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export enum ComponentArticleCardOrder {
   ButtonExternalUrlAsc = 'buttonExternalUrl_ASC',
@@ -452,6 +697,12 @@ export type ComponentArticleCardSubtextLinks = {
   __typename?: 'ComponentArticleCardSubtextLinks';
   assets: ComponentArticleCardSubtextAssets;
   entries: ComponentArticleCardSubtextEntries;
+  resources: ComponentArticleCardSubtextResources;
+};
+
+export type ComponentArticleCardSubtextResources = {
+  __typename?: 'ComponentArticleCardSubtextResources';
+  block: Array<ResourceLink>;
 };
 
 /** Banner with half-width image and half-width text area. [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/component_image_and_text) */
@@ -459,11 +710,11 @@ export type ComponentImageAndText = Entry & {
   __typename?: 'ComponentImageAndText';
   buttonExternalUrl?: Maybe<Scalars['String']>;
   buttonLabel?: Maybe<Scalars['String']>;
-  buttonReference?: Maybe<Page>;
   contentfulMetadata: ContentfulMetadata;
   image?: Maybe<Asset>;
   internalName?: Maybe<Scalars['String']>;
   layout?: Maybe<Scalars['String']>;
+  link?: Maybe<Scalars['JSON']>;
   linkedFrom?: Maybe<ComponentImageAndTextLinkingCollections>;
   subtext?: Maybe<ComponentImageAndTextSubtext>;
   sys: Sys;
@@ -484,13 +735,6 @@ export type ComponentImageAndTextButtonLabelArgs = {
 
 
 /** Banner with half-width image and half-width text area. [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/component_image_and_text) */
-export type ComponentImageAndTextButtonReferenceArgs = {
-  locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-};
-
-
-/** Banner with half-width image and half-width text area. [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/component_image_and_text) */
 export type ComponentImageAndTextImageArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -505,6 +749,12 @@ export type ComponentImageAndTextInternalNameArgs = {
 
 /** Banner with half-width image and half-width text area. [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/component_image_and_text) */
 export type ComponentImageAndTextLayoutArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Banner with half-width image and half-width text area. [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/component_image_and_text) */
+export type ComponentImageAndTextLinkArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
@@ -551,8 +801,6 @@ export type ComponentImageAndTextFilter = {
   buttonLabel_not?: InputMaybe<Scalars['String']>;
   buttonLabel_not_contains?: InputMaybe<Scalars['String']>;
   buttonLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  buttonReference?: InputMaybe<CfPageNestedFilter>;
-  buttonReference_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   image_exists?: InputMaybe<Scalars['Boolean']>;
   internalName?: InputMaybe<Scalars['String']>;
@@ -569,6 +817,7 @@ export type ComponentImageAndTextFilter = {
   layout_not?: InputMaybe<Scalars['String']>;
   layout_not_contains?: InputMaybe<Scalars['String']>;
   layout_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  link_exists?: InputMaybe<Scalars['Boolean']>;
   subtext_contains?: InputMaybe<Scalars['String']>;
   subtext_exists?: InputMaybe<Scalars['Boolean']>;
   subtext_not_contains?: InputMaybe<Scalars['String']>;
@@ -598,6 +847,76 @@ export type ComponentImageAndTextLinkingCollectionsEntryCollectionArgs = {
 
 
 export type ComponentImageAndTextLinkingCollectionsPageLandingCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentImageAndTextLinkingCollectionsPageLandingCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+export enum ComponentImageAndTextLinkingCollectionsPageLandingCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/componentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection) */
+export type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection = Entry & {
+  __typename?: 'ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection';
+  contentfulMetadata: ContentfulMetadata;
+  internalName?: Maybe<Scalars['String']>;
+  linkedFrom?: Maybe<ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionLinkingCollections>;
+  sys: Sys;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/componentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection) */
+export type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionInternalNameArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/componentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection) */
+export type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionCollection = {
+  __typename?: 'ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionCollection';
+  items: Array<Maybe<ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionLinkingCollections = {
+  __typename?: 'ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionLinkingCollectionsEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
@@ -648,6 +967,12 @@ export type ComponentImageAndTextSubtextLinks = {
   __typename?: 'ComponentImageAndTextSubtextLinks';
   assets: ComponentImageAndTextSubtextAssets;
   entries: ComponentImageAndTextSubtextEntries;
+  resources: ComponentImageAndTextSubtextResources;
+};
+
+export type ComponentImageAndTextSubtextResources = {
+  __typename?: 'ComponentImageAndTextSubtextResources';
+  block: Array<ResourceLink>;
 };
 
 /** Image and text banner used at the top of pages containing the page title. [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/component_marquee_banner) */
@@ -748,9 +1073,23 @@ export type ComponentMarqueeBannerLinkingCollectionsEntryCollectionArgs = {
 export type ComponentMarqueeBannerLinkingCollectionsPageLandingCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentMarqueeBannerLinkingCollectionsPageLandingCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum ComponentMarqueeBannerLinkingCollectionsPageLandingCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
 
 export enum ComponentMarqueeBannerOrder {
   InternalNameAsc = 'internalName_ASC',
@@ -987,9 +1326,23 @@ export type ComponentTextCtaLinkingCollectionsEntryCollectionArgs = {
 export type ComponentTextCtaLinkingCollectionsPageLandingCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentTextCtaLinkingCollectionsPageLandingCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum ComponentTextCtaLinkingCollectionsPageLandingCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
 
 export enum ComponentTextCtaOrder {
   ButtonExternalUrlAsc = 'buttonExternalUrl_ASC',
@@ -1033,6 +1386,12 @@ export type ComponentTextCtaSubtextLinks = {
   __typename?: 'ComponentTextCtaSubtextLinks';
   assets: ComponentTextCtaSubtextAssets;
   entries: ComponentTextCtaSubtextEntries;
+  resources: ComponentTextCtaSubtextResources;
+};
+
+export type ComponentTextCtaSubtextResources = {
+  __typename?: 'ComponentTextCtaSubtextResources';
+  block: Array<ResourceLink>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/component_text_section) */
@@ -1086,6 +1445,12 @@ export type ComponentTextSectionBodyLinks = {
   __typename?: 'ComponentTextSectionBodyLinks';
   assets: ComponentTextSectionBodyAssets;
   entries: ComponentTextSectionBodyEntries;
+  resources: ComponentTextSectionBodyResources;
+};
+
+export type ComponentTextSectionBodyResources = {
+  __typename?: 'ComponentTextSectionBodyResources';
+  block: Array<ResourceLink>;
 };
 
 export type ComponentTextSectionCollection = {
@@ -1131,9 +1496,23 @@ export type ComponentTextSectionLinkingCollectionsEntryCollectionArgs = {
 export type ComponentTextSectionLinkingCollectionsPageLandingCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentTextSectionLinkingCollectionsPageLandingCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum ComponentTextSectionLinkingCollectionsPageLandingCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
 
 export enum ComponentTextSectionOrder {
   InternalNameAsc = 'internalName_ASC',
@@ -1180,6 +1559,7 @@ export type ComponentThreeCardCollectionButtonLabelArgs = {
 export type ComponentThreeCardCollectionButtonReferenceArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<PageFilter>;
 };
 
 
@@ -1187,8 +1567,10 @@ export type ComponentThreeCardCollectionButtonReferenceArgs = {
 export type ComponentThreeCardCollectionCardsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentThreeCardCollectionCardsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ComponentArticleCardFilter>;
 };
 
 
@@ -1223,6 +1605,27 @@ export type ComponentThreeCardCollectionCardsCollection = {
   total: Scalars['Int'];
 };
 
+export enum ComponentThreeCardCollectionCardsCollectionOrder {
+  ButtonExternalUrlAsc = 'buttonExternalUrl_ASC',
+  ButtonExternalUrlDesc = 'buttonExternalUrl_DESC',
+  ButtonLabelAsc = 'buttonLabel_ASC',
+  ButtonLabelDesc = 'buttonLabel_DESC',
+  EyebrowAsc = 'eyebrow_ASC',
+  EyebrowDesc = 'eyebrow_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export type ComponentThreeCardCollectionCollection = {
   __typename?: 'ComponentThreeCardCollectionCollection';
   items: Array<Maybe<ComponentThreeCardCollection>>;
@@ -1250,6 +1653,7 @@ export type ComponentThreeCardCollectionFilter = {
   buttonLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   buttonReference?: InputMaybe<CfPageNestedFilter>;
   buttonReference_exists?: InputMaybe<Scalars['Boolean']>;
+  cards?: InputMaybe<CfComponentArticleCardNestedFilter>;
   cardsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   internalName?: InputMaybe<Scalars['String']>;
@@ -1290,9 +1694,23 @@ export type ComponentThreeCardCollectionLinkingCollectionsEntryCollectionArgs = 
 export type ComponentThreeCardCollectionLinkingCollectionsPageLandingCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ComponentThreeCardCollectionLinkingCollectionsPageLandingCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum ComponentThreeCardCollectionLinkingCollectionsPageLandingCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
 
 export enum ComponentThreeCardCollectionOrder {
   ButtonExternalUrlAsc = 'buttonExternalUrl_ASC',
@@ -1336,6 +1754,12 @@ export type ComponentThreeCardCollectionSubtextLinks = {
   __typename?: 'ComponentThreeCardCollectionSubtextLinks';
   assets: ComponentThreeCardCollectionSubtextAssets;
   entries: ComponentThreeCardCollectionSubtextEntries;
+  resources: ComponentThreeCardCollectionSubtextResources;
+};
+
+export type ComponentThreeCardCollectionSubtextResources = {
+  __typename?: 'ComponentThreeCardCollectionSubtextResources';
+  block: Array<ResourceLink>;
 };
 
 export type ContentfulMetadata = {
@@ -1511,8 +1935,10 @@ export type MegaMenuInternalNameArgs = {
 export type MegaMenuItemsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<MegaMenuItemsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MegaMenuDropdownFilter>;
 };
 
 
@@ -1547,8 +1973,10 @@ export type MegaMenuDropdown = Entry & {
 export type MegaMenuDropdownColumnOneItemsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<MegaMenuDropdownColumnOneItemsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MenuLinkGroupFilter>;
 };
 
 
@@ -1558,6 +1986,7 @@ export type MegaMenuDropdownColumnThreeItemsCollectionArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MenuLinkGroupOrMenuPromoFilter>;
 };
 
 
@@ -1565,8 +1994,10 @@ export type MegaMenuDropdownColumnThreeItemsCollectionArgs = {
 export type MegaMenuDropdownColumnTwoItemsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<MegaMenuDropdownColumnTwoItemsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MenuLinkGroupFilter>;
 };
 
 
@@ -1574,6 +2005,7 @@ export type MegaMenuDropdownColumnTwoItemsCollectionArgs = {
 export type MegaMenuDropdownLinkReferenceArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<PageFilter>;
 };
 
 
@@ -1604,6 +2036,19 @@ export type MegaMenuDropdownColumnOneItemsCollection = {
   total: Scalars['Int'];
 };
 
+export enum MegaMenuDropdownColumnOneItemsCollectionOrder {
+  GroupTitleAsc = 'groupTitle_ASC',
+  GroupTitleDesc = 'groupTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
 export type MegaMenuDropdownColumnThreeItemsCollection = {
   __typename?: 'MegaMenuDropdownColumnThreeItemsCollection';
   items: Array<Maybe<MegaMenuDropdownColumnThreeItemsItem>>;
@@ -1622,11 +2067,27 @@ export type MegaMenuDropdownColumnTwoItemsCollection = {
   total: Scalars['Int'];
 };
 
+export enum MegaMenuDropdownColumnTwoItemsCollectionOrder {
+  GroupTitleAsc = 'groupTitle_ASC',
+  GroupTitleDesc = 'groupTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
 export type MegaMenuDropdownFilter = {
   AND?: InputMaybe<Array<InputMaybe<MegaMenuDropdownFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<MegaMenuDropdownFilter>>>;
+  columnOneItems?: InputMaybe<CfMenuLinkGroupNestedFilter>;
   columnOneItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  columnThreeItems?: InputMaybe<CfMenuLinkGroupOrMenuPromoNestedFilter>;
   columnThreeItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  columnTwoItems?: InputMaybe<CfMenuLinkGroupNestedFilter>;
   columnTwoItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   linkReference?: InputMaybe<CfPageNestedFilter>;
@@ -1659,9 +2120,23 @@ export type MegaMenuDropdownLinkingCollectionsEntryCollectionArgs = {
 export type MegaMenuDropdownLinkingCollectionsMegaMenuCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<MegaMenuDropdownLinkingCollectionsMegaMenuCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum MegaMenuDropdownLinkingCollectionsMegaMenuCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
 
 export enum MegaMenuDropdownOrder {
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -1687,6 +2162,7 @@ export type MegaMenuFilter = {
   internalName_not?: InputMaybe<Scalars['String']>;
   internalName_not_contains?: InputMaybe<Scalars['String']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  items?: InputMaybe<CfMegaMenuDropdownNestedFilter>;
   itemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
 };
@@ -1698,6 +2174,19 @@ export type MegaMenuItemsCollection = {
   skip: Scalars['Int'];
   total: Scalars['Int'];
 };
+
+export enum MegaMenuItemsCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export type MegaMenuLinkingCollections = {
   __typename?: 'MegaMenuLinkingCollections';
@@ -1741,6 +2230,7 @@ export type MenuLink = Entry & {
 export type MenuLinkLinkReferenceArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<PageFilter>;
 };
 
 
@@ -1819,8 +2309,10 @@ export type MenuLinkGroupLinkedFromArgs = {
 export type MenuLinkGroupLinksCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<MenuLinkGroupLinksCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MenuLinkFilter>;
 };
 
 export type MenuLinkGroupCollection = {
@@ -1842,6 +2334,7 @@ export type MenuLinkGroupFilter = {
   groupTitle_not?: InputMaybe<Scalars['String']>;
   groupTitle_not_contains?: InputMaybe<Scalars['String']>;
   groupTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  links?: InputMaybe<CfMenuLinkNestedFilter>;
   linksCollection_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
 };
@@ -1864,9 +2357,23 @@ export type MenuLinkGroupLinkingCollectionsEntryCollectionArgs = {
 export type MenuLinkGroupLinkingCollectionsMegaMenuDropdownCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<MenuLinkGroupLinkingCollectionsMegaMenuDropdownCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum MenuLinkGroupLinkingCollectionsMegaMenuDropdownCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export type MenuLinkGroupLinksCollection = {
   __typename?: 'MenuLinkGroupLinksCollection';
@@ -1874,6 +2381,63 @@ export type MenuLinkGroupLinksCollection = {
   limit: Scalars['Int'];
   skip: Scalars['Int'];
   total: Scalars['Int'];
+};
+
+export enum MenuLinkGroupLinksCollectionOrder {
+  LinkTextAsc = 'linkText_ASC',
+  LinkTextDesc = 'linkText_DESC',
+  LinkUrlAsc = 'linkUrl_ASC',
+  LinkUrlDesc = 'linkUrl_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/menuLinkGroupOrMenuPromo) */
+export type MenuLinkGroupOrMenuPromo = Entry & {
+  __typename?: 'MenuLinkGroupOrMenuPromo';
+  contentfulMetadata: ContentfulMetadata;
+  linkedFrom?: Maybe<MenuLinkGroupOrMenuPromoLinkingCollections>;
+  sys: Sys;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/menuLinkGroupOrMenuPromo) */
+export type MenuLinkGroupOrMenuPromoLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type MenuLinkGroupOrMenuPromoCollection = {
+  __typename?: 'MenuLinkGroupOrMenuPromoCollection';
+  items: Array<Maybe<MenuLinkGroupOrMenuPromo>>;
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type MenuLinkGroupOrMenuPromoFilter = {
+  AND?: InputMaybe<Array<InputMaybe<MenuLinkGroupOrMenuPromoFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<MenuLinkGroupOrMenuPromoFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type MenuLinkGroupOrMenuPromoLinkingCollections = {
+  __typename?: 'MenuLinkGroupOrMenuPromoLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type MenuLinkGroupOrMenuPromoLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 export enum MenuLinkGroupOrder {
@@ -1907,9 +2471,23 @@ export type MenuLinkLinkingCollectionsEntryCollectionArgs = {
 export type MenuLinkLinkingCollectionsMenuLinkGroupCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<MenuLinkLinkingCollectionsMenuLinkGroupCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum MenuLinkLinkingCollectionsMenuLinkGroupCollectionOrder {
+  GroupTitleAsc = 'groupTitle_ASC',
+  GroupTitleDesc = 'groupTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
 
 export enum MenuLinkOrder {
   LinkTextAsc = 'linkText_ASC',
@@ -2020,9 +2598,23 @@ export type MenuPromoLinkingCollectionsEntryCollectionArgs = {
 export type MenuPromoLinkingCollectionsMegaMenuDropdownCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<MenuPromoLinkingCollectionsMegaMenuDropdownCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum MenuPromoLinkingCollectionsMegaMenuDropdownCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export enum MenuPromoOrder {
   InternalNameAsc = 'internalName_ASC',
@@ -2062,10 +2654,16 @@ export type MenuPromoSubtextLinks = {
   __typename?: 'MenuPromoSubtextLinks';
   assets: MenuPromoSubtextAssets;
   entries: MenuPromoSubtextEntries;
+  resources: MenuPromoSubtextResources;
+};
+
+export type MenuPromoSubtextResources = {
+  __typename?: 'MenuPromoSubtextResources';
+  block: Array<ResourceLink>;
 };
 
 /** Represents a web page in Compose. DO NOT DELETE [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/page) */
-export type Page = Entry & {
+export type Page = Entry & PageEntry & {
   __typename?: 'Page';
   content?: Maybe<PageContent>;
   contentfulMetadata: ContentfulMetadata;
@@ -2101,6 +2699,7 @@ export type PageNameArgs = {
 export type PageSeoArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<SeoFilter>;
 };
 
 
@@ -2124,6 +2723,10 @@ export type PageCollection = {
 };
 
 export type PageContent = PageLanding;
+
+export type PageEntry = {
+  slug?: Maybe<Scalars['String']>;
+};
 
 export type PageFilter = {
   AND?: InputMaybe<Array<InputMaybe<PageFilter>>>;
@@ -2185,6 +2788,7 @@ export type PageLandingSectionsCollectionArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter>;
 };
 
 export type PageLandingCollection = {
@@ -2206,6 +2810,7 @@ export type PageLandingFilter = {
   name_not?: InputMaybe<Scalars['String']>;
   name_not_contains?: InputMaybe<Scalars['String']>;
   name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sections?: InputMaybe<CfComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionNestedFilter>;
   sectionsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
 };
@@ -2228,9 +2833,27 @@ export type PageLandingLinkingCollectionsEntryCollectionArgs = {
 export type PageLandingLinkingCollectionsPageCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageLandingLinkingCollectionsPageCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum PageLandingLinkingCollectionsPageCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export enum PageLandingOrder {
   NameAsc = 'name_ASC',
@@ -2258,7 +2881,6 @@ export type PageLandingSectionsItem = ComponentImageAndText | ComponentMarqueeBa
 export type PageLinkingCollections = {
   __typename?: 'PageLinkingCollections';
   componentArticleCardCollection?: Maybe<ComponentArticleCardCollection>;
-  componentImageAndTextCollection?: Maybe<ComponentImageAndTextCollection>;
   componentThreeCardCollectionCollection?: Maybe<ComponentThreeCardCollectionCollection>;
   entryCollection?: Maybe<EntryCollection>;
   megaMenuDropdownCollection?: Maybe<MegaMenuDropdownCollection>;
@@ -2269,14 +2891,7 @@ export type PageLinkingCollections = {
 export type PageLinkingCollectionsComponentArticleCardCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
-  preview?: InputMaybe<Scalars['Boolean']>;
-  skip?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type PageLinkingCollectionsComponentImageAndTextCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsComponentArticleCardCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
@@ -2285,6 +2900,7 @@ export type PageLinkingCollectionsComponentImageAndTextCollectionArgs = {
 export type PageLinkingCollectionsComponentThreeCardCollectionCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsComponentThreeCardCollectionCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
@@ -2301,6 +2917,7 @@ export type PageLinkingCollectionsEntryCollectionArgs = {
 export type PageLinkingCollectionsMegaMenuDropdownCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsMegaMenuDropdownCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
@@ -2309,9 +2926,78 @@ export type PageLinkingCollectionsMegaMenuDropdownCollectionArgs = {
 export type PageLinkingCollectionsMenuLinkCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<PageLinkingCollectionsMenuLinkCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum PageLinkingCollectionsComponentArticleCardCollectionOrder {
+  ButtonExternalUrlAsc = 'buttonExternalUrl_ASC',
+  ButtonExternalUrlDesc = 'buttonExternalUrl_DESC',
+  ButtonLabelAsc = 'buttonLabel_ASC',
+  ButtonLabelDesc = 'buttonLabel_DESC',
+  EyebrowAsc = 'eyebrow_ASC',
+  EyebrowDesc = 'eyebrow_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum PageLinkingCollectionsComponentThreeCardCollectionCollectionOrder {
+  ButtonExternalUrlAsc = 'buttonExternalUrl_ASC',
+  ButtonExternalUrlDesc = 'buttonExternalUrl_DESC',
+  ButtonLabelAsc = 'buttonLabel_ASC',
+  ButtonLabelDesc = 'buttonLabel_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum PageLinkingCollectionsMegaMenuDropdownCollectionOrder {
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum PageLinkingCollectionsMenuLinkCollectionOrder {
+  LinkTextAsc = 'linkText_ASC',
+  LinkTextDesc = 'linkText_DESC',
+  LinkUrlAsc = 'linkUrl_ASC',
+  LinkUrlDesc = 'linkUrl_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
 
 export enum PageOrder {
   NameAsc = 'name_ASC',
@@ -2331,7 +3017,7 @@ export enum PageOrder {
 }
 
 /** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/product) */
-export type Product = Entry & {
+export type Product = Entry & PageEntry & {
   __typename?: 'Product';
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<ProductDescription>;
@@ -2418,6 +3104,12 @@ export type ProductDescriptionLinks = {
   __typename?: 'ProductDescriptionLinks';
   assets: ProductDescriptionAssets;
   entries: ProductDescriptionEntries;
+  resources: ProductDescriptionResources;
+};
+
+export type ProductDescriptionResources = {
+  __typename?: 'ProductDescriptionResources';
+  block: Array<ResourceLink>;
 };
 
 export type ProductFilter = {
@@ -2479,9 +3171,25 @@ export type ProductLinkingCollectionsEntryCollectionArgs = {
 export type ProductLinkingCollectionsProductSectionCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ProductLinkingCollectionsProductSectionCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum ProductLinkingCollectionsProductSectionCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export enum ProductOrder {
   InternalNameAsc = 'internalName_ASC',
@@ -2530,8 +3238,10 @@ export type ProductSectionLinkedFromArgs = {
 export type ProductSectionProductsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ProductSectionProductsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ProductFilter>;
 };
 
 
@@ -2559,6 +3269,7 @@ export type ProductSectionFilter = {
   internalName_not?: InputMaybe<Scalars['String']>;
   internalName_not_contains?: InputMaybe<Scalars['String']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  products?: InputMaybe<CfProductNestedFilter>;
   productsCollection_exists?: InputMaybe<Scalars['Boolean']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']>;
@@ -2606,14 +3317,37 @@ export type ProductSectionProductsCollection = {
   total: Scalars['Int'];
 };
 
+export enum ProductSectionProductsCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PriceAsc = 'price_ASC',
+  PriceDesc = 'price_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export type Query = {
   __typename?: 'Query';
+  article?: Maybe<Article>;
+  articleCollection?: Maybe<ArticleCollection>;
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
   componentArticleCard?: Maybe<ComponentArticleCard>;
   componentArticleCardCollection?: Maybe<ComponentArticleCardCollection>;
   componentImageAndText?: Maybe<ComponentImageAndText>;
   componentImageAndTextCollection?: Maybe<ComponentImageAndTextCollection>;
+  componentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection?: Maybe<ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection>;
+  componentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionCollection?: Maybe<ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionCollection>;
   componentMarqueeBanner?: Maybe<ComponentMarqueeBanner>;
   componentMarqueeBannerCollection?: Maybe<ComponentMarqueeBannerCollection>;
   componentSection?: Maybe<ComponentSection>;
@@ -2633,9 +3367,12 @@ export type Query = {
   menuLinkCollection?: Maybe<MenuLinkCollection>;
   menuLinkGroup?: Maybe<MenuLinkGroup>;
   menuLinkGroupCollection?: Maybe<MenuLinkGroupCollection>;
+  menuLinkGroupOrMenuPromo?: Maybe<MenuLinkGroupOrMenuPromo>;
+  menuLinkGroupOrMenuPromoCollection?: Maybe<MenuLinkGroupOrMenuPromoCollection>;
   menuPromo?: Maybe<MenuPromo>;
   menuPromoCollection?: Maybe<MenuPromoCollection>;
   page?: Maybe<Page>;
+  pageBySlug?: Maybe<PageEntry>;
   pageCollection?: Maybe<PageCollection>;
   pageLanding?: Maybe<PageLanding>;
   pageLandingCollection?: Maybe<PageLandingCollection>;
@@ -2647,6 +3384,23 @@ export type Query = {
   redirectCollection?: Maybe<RedirectCollection>;
   seo?: Maybe<Seo>;
   seoCollection?: Maybe<SeoCollection>;
+};
+
+
+export type QueryArticleArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryArticleCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<ArticleOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ArticleFilter>;
 };
 
 
@@ -2698,6 +3452,22 @@ export type QueryComponentImageAndTextCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<ComponentImageAndTextFilter>;
+};
+
+
+export type QueryComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter>;
 };
 
 
@@ -2864,6 +3634,22 @@ export type QueryMenuLinkGroupCollectionArgs = {
 };
 
 
+export type QueryMenuLinkGroupOrMenuPromoArgs = {
+  id: Scalars['String'];
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryMenuLinkGroupOrMenuPromoCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  preview?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<MenuLinkGroupOrMenuPromoFilter>;
+};
+
+
 export type QueryMenuPromoArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
@@ -2885,6 +3671,11 @@ export type QueryPageArgs = {
   id: Scalars['String'];
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryPageBySlugArgs = {
+  slug: Scalars['String'];
 };
 
 
@@ -2988,7 +3779,6 @@ export type Redirect = Entry & {
   contentfulMetadata: ContentfulMetadata;
   from?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<RedirectLinkingCollections>;
-  statusCode?: Maybe<Scalars['String']>;
   sys: Sys;
   to?: Maybe<Scalars['String']>;
 };
@@ -3003,12 +3793,6 @@ export type RedirectFromArgs = {
 /** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/redirect) */
 export type RedirectLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/redirect) */
-export type RedirectStatusCodeArgs = {
-  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -3036,13 +3820,6 @@ export type RedirectFilter = {
   from_not?: InputMaybe<Scalars['String']>;
   from_not_contains?: InputMaybe<Scalars['String']>;
   from_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  statusCode?: InputMaybe<Scalars['String']>;
-  statusCode_contains?: InputMaybe<Scalars['String']>;
-  statusCode_exists?: InputMaybe<Scalars['Boolean']>;
-  statusCode_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  statusCode_not?: InputMaybe<Scalars['String']>;
-  statusCode_not_contains?: InputMaybe<Scalars['String']>;
-  statusCode_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   sys?: InputMaybe<SysFilter>;
   to?: InputMaybe<Scalars['String']>;
   to_contains?: InputMaybe<Scalars['String']>;
@@ -3069,8 +3846,6 @@ export type RedirectLinkingCollectionsEntryCollectionArgs = {
 export enum RedirectOrder {
   FromAsc = 'from_ASC',
   FromDesc = 'from_DESC',
-  StatusCodeAsc = 'statusCode_ASC',
-  StatusCodeDesc = 'statusCode_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -3082,6 +3857,18 @@ export enum RedirectOrder {
   ToAsc = 'to_ASC',
   ToDesc = 'to_DESC'
 }
+
+export type ResourceLink = {
+  __typename?: 'ResourceLink';
+  sys: ResourceSys;
+};
+
+export type ResourceSys = {
+  __typename?: 'ResourceSys';
+  linkType: Scalars['String'];
+  type: Scalars['String'];
+  urn: Scalars['String'];
+};
 
 /** SEO Metadata for web pages in Compose. DO NOT DELETE [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/seo) */
 export type Seo = Entry & {
@@ -3203,9 +3990,27 @@ export type SeoLinkingCollectionsEntryCollectionArgs = {
 export type SeoLinkingCollectionsPageCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
+  order?: InputMaybe<Array<InputMaybe<SeoLinkingCollectionsPageCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']>;
   skip?: InputMaybe<Scalars['Int']>;
 };
+
+export enum SeoLinkingCollectionsPageCollectionOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
 
 export enum SeoOrder {
   DescriptionAsc = 'description_ASC',
@@ -3275,6 +4080,129 @@ export type SysFilter = {
   publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
+export type CfComponentArticleCardNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfComponentArticleCardNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfComponentArticleCardNestedFilter>>>;
+  buttonExternalUrl?: InputMaybe<Scalars['String']>;
+  buttonExternalUrl_contains?: InputMaybe<Scalars['String']>;
+  buttonExternalUrl_exists?: InputMaybe<Scalars['Boolean']>;
+  buttonExternalUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  buttonExternalUrl_not?: InputMaybe<Scalars['String']>;
+  buttonExternalUrl_not_contains?: InputMaybe<Scalars['String']>;
+  buttonExternalUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  buttonLabel?: InputMaybe<Scalars['String']>;
+  buttonLabel_contains?: InputMaybe<Scalars['String']>;
+  buttonLabel_exists?: InputMaybe<Scalars['Boolean']>;
+  buttonLabel_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  buttonLabel_not?: InputMaybe<Scalars['String']>;
+  buttonLabel_not_contains?: InputMaybe<Scalars['String']>;
+  buttonLabel_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  buttonReference_exists?: InputMaybe<Scalars['Boolean']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  eyebrow?: InputMaybe<Scalars['String']>;
+  eyebrow_contains?: InputMaybe<Scalars['String']>;
+  eyebrow_exists?: InputMaybe<Scalars['Boolean']>;
+  eyebrow_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  eyebrow_not?: InputMaybe<Scalars['String']>;
+  eyebrow_not_contains?: InputMaybe<Scalars['String']>;
+  eyebrow_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  image_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  subtext_contains?: InputMaybe<Scalars['String']>;
+  subtext_exists?: InputMaybe<Scalars['Boolean']>;
+  subtext_not_contains?: InputMaybe<Scalars['String']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type CfComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type CfMegaMenuDropdownNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfMegaMenuDropdownNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfMegaMenuDropdownNestedFilter>>>;
+  columnOneItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  columnThreeItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  columnTwoItemsCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  linkReference_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type CfMenuLinkGroupNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfMenuLinkGroupNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfMenuLinkGroupNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  groupTitle?: InputMaybe<Scalars['String']>;
+  groupTitle_contains?: InputMaybe<Scalars['String']>;
+  groupTitle_exists?: InputMaybe<Scalars['Boolean']>;
+  groupTitle_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  groupTitle_not?: InputMaybe<Scalars['String']>;
+  groupTitle_not_contains?: InputMaybe<Scalars['String']>;
+  groupTitle_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linksCollection_exists?: InputMaybe<Scalars['Boolean']>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type CfMenuLinkGroupOrMenuPromoNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfMenuLinkGroupOrMenuPromoNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfMenuLinkGroupOrMenuPromoNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type CfMenuLinkNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfMenuLinkNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfMenuLinkNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  linkReference_exists?: InputMaybe<Scalars['Boolean']>;
+  linkText?: InputMaybe<Scalars['String']>;
+  linkText_contains?: InputMaybe<Scalars['String']>;
+  linkText_exists?: InputMaybe<Scalars['Boolean']>;
+  linkText_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linkText_not?: InputMaybe<Scalars['String']>;
+  linkText_not_contains?: InputMaybe<Scalars['String']>;
+  linkText_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linkUrl?: InputMaybe<Scalars['String']>;
+  linkUrl_contains?: InputMaybe<Scalars['String']>;
+  linkUrl_exists?: InputMaybe<Scalars['Boolean']>;
+  linkUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  linkUrl_not?: InputMaybe<Scalars['String']>;
+  linkUrl_not_contains?: InputMaybe<Scalars['String']>;
+  linkUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
 export type CfPageNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfPageNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfPageNestedFilter>>>;
@@ -3288,6 +4216,47 @@ export type CfPageNestedFilter = {
   name_not_contains?: InputMaybe<Scalars['String']>;
   name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   seo_exists?: InputMaybe<Scalars['Boolean']>;
+  slug?: InputMaybe<Scalars['String']>;
+  slug_contains?: InputMaybe<Scalars['String']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  slug_not?: InputMaybe<Scalars['String']>;
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']>;
+  title_contains?: InputMaybe<Scalars['String']>;
+  title_exists?: InputMaybe<Scalars['Boolean']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  title_not?: InputMaybe<Scalars['String']>;
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type CfProductNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfProductNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfProductNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description_contains?: InputMaybe<Scalars['String']>;
+  description_exists?: InputMaybe<Scalars['Boolean']>;
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  image_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName?: InputMaybe<Scalars['String']>;
+  internalName_contains?: InputMaybe<Scalars['String']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  internalName_not?: InputMaybe<Scalars['String']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  price?: InputMaybe<Scalars['Float']>;
+  price_exists?: InputMaybe<Scalars['Boolean']>;
+  price_gt?: InputMaybe<Scalars['Float']>;
+  price_gte?: InputMaybe<Scalars['Float']>;
+  price_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  price_lt?: InputMaybe<Scalars['Float']>;
+  price_lte?: InputMaybe<Scalars['Float']>;
+  price_not?: InputMaybe<Scalars['Float']>;
+  price_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
   slug?: InputMaybe<Scalars['String']>;
   slug_contains?: InputMaybe<Scalars['String']>;
   slug_exists?: InputMaybe<Scalars['Boolean']>;

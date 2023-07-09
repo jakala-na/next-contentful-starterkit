@@ -1,33 +1,26 @@
-
-import type { CodegenConfig } from '@graphql-codegen/cli';
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   watch: true,
   overwrite: true,
-  schema: [
-    {
-        [`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}`]: {
-          headers: {
-            Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_API}`,
-          },
-        },
-      },
-  ],
+  schema: "http://localhost:3000/api/graphql",
   ignoreNoDocuments: true,
-  documents: ["app/**/*.{graphql,js,ts,jsx,tsx}", 'ui/**/*.{graphql,js,ts,jsx,tsx}'],
+  documents: [
+    "app/**/*.{graphql,js,ts,jsx,tsx}",
+    "ui/**/*.{graphql,js,ts,jsx,tsx}",
+  ],
   generates: {
     "./gql/": {
       preset: "client",
-      plugins: []
+      plugins: [],
     },
     "./gql/graphql.schema.json": {
-      plugins: ["introspection"]
+      plugins: ["introspection"],
     },
-    './gql/schema.graphql': {
-        plugins: ['schema-ast']
-    }
-    
-  }
+    "./gql/schema.graphql": {
+      plugins: ["schema-ast"],
+    },
+  },
 };
 
 export default config;

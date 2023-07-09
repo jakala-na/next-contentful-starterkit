@@ -1,10 +1,5 @@
 import { GraphQLClient } from "graphql-request";
 
-export const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}`;
-export const graphqlToken = `${process.env.CONTENTFUL_DELIVERY_API}`;
+export const graphqlEndpoint = `http://localhost:3000/api/graphql`;
 
-export const graphqlClient = new GraphQLClient(graphqlEndpoint, {
-    headers: {
-        authorization: `Bearer ${graphqlToken}`,
-    }
-})
+export const graphqlClient = new GraphQLClient(graphqlEndpoint);

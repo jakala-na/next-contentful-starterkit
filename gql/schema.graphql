@@ -1,3 +1,91 @@
+"""
+[See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/article)
+"""
+type Article implements Entry & PageEntry {
+  content(locale: String): ArticleContent
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): ArticleLinkingCollections
+  slug(locale: String): String
+  sys: Sys!
+  title(locale: String): String
+}
+
+type ArticleCollection {
+  items: [Article]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+type ArticleContent {
+  json: JSON!
+  links: ArticleContentLinks!
+}
+
+type ArticleContentAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type ArticleContentEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type ArticleContentLinks {
+  assets: ArticleContentAssets!
+  entries: ArticleContentEntries!
+  resources: ArticleContentResources!
+}
+
+type ArticleContentResources {
+  block: [ResourceLink!]!
+}
+
+input ArticleFilter {
+  AND: [ArticleFilter]
+  OR: [ArticleFilter]
+  content_contains: String
+  content_exists: Boolean
+  content_not_contains: String
+  contentfulMetadata: ContentfulMetadataFilter
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+type ArticleLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum ArticleOrder {
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
 """Represents a binary file in a space. An asset can be any file type."""
 type Asset {
   contentType(locale: String): String
@@ -90,12 +178,105 @@ input AssetFilter {
 }
 
 type AssetLinkingCollections {
-  componentArticleCardCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentArticleCardCollection
-  componentImageAndTextCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentImageAndTextCollection
-  componentMarqueeBannerCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentMarqueeBannerCollection
+  componentArticleCardCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsComponentArticleCardCollectionOrder], preview: Boolean, skip: Int = 0): ComponentArticleCardCollection
+  componentImageAndTextCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsComponentImageAndTextCollectionOrder], preview: Boolean, skip: Int = 0): ComponentImageAndTextCollection
+  componentMarqueeBannerCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsComponentMarqueeBannerCollectionOrder], preview: Boolean, skip: Int = 0): ComponentMarqueeBannerCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  menuPromoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MenuPromoCollection
-  productCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ProductCollection
+  menuPromoCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsMenuPromoCollectionOrder], preview: Boolean, skip: Int = 0): MenuPromoCollection
+  productCollection(limit: Int = 100, locale: String, order: [AssetLinkingCollectionsProductCollectionOrder], preview: Boolean, skip: Int = 0): ProductCollection
+}
+
+enum AssetLinkingCollectionsComponentArticleCardCollectionOrder {
+  buttonExternalUrl_ASC
+  buttonExternalUrl_DESC
+  buttonLabel_ASC
+  buttonLabel_DESC
+  eyebrow_ASC
+  eyebrow_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum AssetLinkingCollectionsComponentImageAndTextCollectionOrder {
+  buttonExternalUrl_ASC
+  buttonExternalUrl_DESC
+  buttonLabel_ASC
+  buttonLabel_DESC
+  internalName_ASC
+  internalName_DESC
+  layout_ASC
+  layout_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum AssetLinkingCollectionsComponentMarqueeBannerCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  subtext_ASC
+  subtext_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum AssetLinkingCollectionsMenuPromoCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum AssetLinkingCollectionsProductCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  price_ASC
+  price_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum AssetOrder {
@@ -127,7 +308,7 @@ enum AssetOrder {
 type ComponentArticleCard implements Entry {
   buttonExternalUrl(locale: String): String
   buttonLabel(locale: String): String
-  buttonReference(locale: String, preview: Boolean): Page
+  buttonReference(locale: String, preview: Boolean, where: PageFilter): Page
   contentfulMetadata: ContentfulMetadata!
   eyebrow(locale: String): String
   image(locale: String, preview: Boolean): Asset
@@ -194,8 +375,27 @@ input ComponentArticleCardFilter {
 }
 
 type ComponentArticleCardLinkingCollections {
-  componentThreeCardCollectionCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentThreeCardCollectionCollection
+  componentThreeCardCollectionCollection(limit: Int = 100, locale: String, order: [ComponentArticleCardLinkingCollectionsComponentThreeCardCollectionCollectionOrder], preview: Boolean, skip: Int = 0): ComponentThreeCardCollectionCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum ComponentArticleCardLinkingCollectionsComponentThreeCardCollectionCollectionOrder {
+  buttonExternalUrl_ASC
+  buttonExternalUrl_DESC
+  buttonLabel_ASC
+  buttonLabel_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum ComponentArticleCardOrder {
@@ -238,6 +438,11 @@ type ComponentArticleCardSubtextEntries {
 type ComponentArticleCardSubtextLinks {
   assets: ComponentArticleCardSubtextAssets!
   entries: ComponentArticleCardSubtextEntries!
+  resources: ComponentArticleCardSubtextResources!
+}
+
+type ComponentArticleCardSubtextResources {
+  block: [ResourceLink!]!
 }
 
 """
@@ -246,11 +451,11 @@ Banner with half-width image and half-width text area. [See type definition](htt
 type ComponentImageAndText implements Entry {
   buttonExternalUrl(locale: String): String
   buttonLabel(locale: String): String
-  buttonReference(locale: String, preview: Boolean): Page
   contentfulMetadata: ContentfulMetadata!
   image(locale: String, preview: Boolean): Asset
   internalName(locale: String): String
   layout(locale: String): String
+  link(locale: String): JSON
   linkedFrom(allowedLocales: [String]): ComponentImageAndTextLinkingCollections
   subtext(locale: String): ComponentImageAndTextSubtext
   sys: Sys!
@@ -281,8 +486,6 @@ input ComponentImageAndTextFilter {
   buttonLabel_not: String
   buttonLabel_not_contains: String
   buttonLabel_not_in: [String]
-  buttonReference: cfPageNestedFilter
-  buttonReference_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
   image_exists: Boolean
   internalName: String
@@ -299,6 +502,7 @@ input ComponentImageAndTextFilter {
   layout_not: String
   layout_not_contains: String
   layout_not_in: [String]
+  link_exists: Boolean
   subtext_contains: String
   subtext_exists: Boolean
   subtext_not_contains: String
@@ -314,7 +518,55 @@ input ComponentImageAndTextFilter {
 
 type ComponentImageAndTextLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentImageAndTextLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+}
+
+enum ComponentImageAndTextLinkingCollectionsPageLandingCollectionOrder {
+  name_ASC
+  name_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/componentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection)
+"""
+type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection implements Entry {
+  contentfulMetadata: ContentfulMetadata!
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionLinkingCollections
+  sys: Sys!
+}
+
+type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionCollection {
+  items: [ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter {
+  AND: [ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter]
+  OR: [ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+}
+
+type ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
 }
 
 enum ComponentImageAndTextOrder {
@@ -357,6 +609,11 @@ type ComponentImageAndTextSubtextEntries {
 type ComponentImageAndTextSubtextLinks {
   assets: ComponentImageAndTextSubtextAssets!
   entries: ComponentImageAndTextSubtextEntries!
+  resources: ComponentImageAndTextSubtextResources!
+}
+
+type ComponentImageAndTextSubtextResources {
+  block: [ResourceLink!]!
 }
 
 """
@@ -410,7 +667,20 @@ input ComponentMarqueeBannerFilter {
 
 type ComponentMarqueeBannerLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentMarqueeBannerLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+}
+
+enum ComponentMarqueeBannerLinkingCollectionsPageLandingCollectionOrder {
+  name_ASC
+  name_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum ComponentMarqueeBannerOrder {
@@ -552,7 +822,20 @@ input ComponentTextCtaFilter {
 
 type ComponentTextCtaLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentTextCtaLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+}
+
+enum ComponentTextCtaLinkingCollectionsPageLandingCollectionOrder {
+  name_ASC
+  name_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum ComponentTextCtaOrder {
@@ -593,6 +876,11 @@ type ComponentTextCtaSubtextEntries {
 type ComponentTextCtaSubtextLinks {
   assets: ComponentTextCtaSubtextAssets!
   entries: ComponentTextCtaSubtextEntries!
+  resources: ComponentTextCtaSubtextResources!
+}
+
+type ComponentTextCtaSubtextResources {
+  block: [ResourceLink!]!
 }
 
 """
@@ -625,6 +913,11 @@ type ComponentTextSectionBodyEntries {
 type ComponentTextSectionBodyLinks {
   assets: ComponentTextSectionBodyAssets!
   entries: ComponentTextSectionBodyEntries!
+  resources: ComponentTextSectionBodyResources!
+}
+
+type ComponentTextSectionBodyResources {
+  block: [ResourceLink!]!
 }
 
 type ComponentTextSectionCollection {
@@ -653,7 +946,20 @@ input ComponentTextSectionFilter {
 
 type ComponentTextSectionLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentTextSectionLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+}
+
+enum ComponentTextSectionLinkingCollectionsPageLandingCollectionOrder {
+  name_ASC
+  name_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum ComponentTextSectionOrder {
@@ -675,8 +981,8 @@ enum ComponentTextSectionOrder {
 type ComponentThreeCardCollection implements Entry {
   buttonExternalUrl(locale: String): String
   buttonLabel(locale: String): String
-  buttonReference(locale: String, preview: Boolean): Page
-  cardsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentThreeCardCollectionCardsCollection
+  buttonReference(locale: String, preview: Boolean, where: PageFilter): Page
+  cardsCollection(limit: Int = 100, locale: String, order: [ComponentThreeCardCollectionCardsCollectionOrder], preview: Boolean, skip: Int = 0, where: ComponentArticleCardFilter): ComponentThreeCardCollectionCardsCollection
   contentfulMetadata: ContentfulMetadata!
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): ComponentThreeCardCollectionLinkingCollections
@@ -690,6 +996,27 @@ type ComponentThreeCardCollectionCardsCollection {
   limit: Int!
   skip: Int!
   total: Int!
+}
+
+enum ComponentThreeCardCollectionCardsCollectionOrder {
+  buttonExternalUrl_ASC
+  buttonExternalUrl_DESC
+  buttonLabel_ASC
+  buttonLabel_DESC
+  eyebrow_ASC
+  eyebrow_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 type ComponentThreeCardCollectionCollection {
@@ -718,6 +1045,7 @@ input ComponentThreeCardCollectionFilter {
   buttonLabel_not_in: [String]
   buttonReference: cfPageNestedFilter
   buttonReference_exists: Boolean
+  cards: cfComponentArticleCardNestedFilter
   cardsCollection_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
   internalName: String
@@ -742,7 +1070,20 @@ input ComponentThreeCardCollectionFilter {
 
 type ComponentThreeCardCollectionLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentThreeCardCollectionLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+}
+
+enum ComponentThreeCardCollectionLinkingCollectionsPageLandingCollectionOrder {
+  name_ASC
+  name_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum ComponentThreeCardCollectionOrder {
@@ -783,6 +1124,11 @@ type ComponentThreeCardCollectionSubtextEntries {
 type ComponentThreeCardCollectionSubtextLinks {
   assets: ComponentThreeCardCollectionSubtextAssets!
   entries: ComponentThreeCardCollectionSubtextEntries!
+  resources: ComponentThreeCardCollectionSubtextResources!
+}
+
+type ComponentThreeCardCollectionSubtextResources {
+  block: [ResourceLink!]!
 }
 
 type ContentfulMetadata {
@@ -994,7 +1340,7 @@ scalar JSON
 type MegaMenu implements Entry {
   contentfulMetadata: ContentfulMetadata!
   internalName(locale: String): String
-  itemsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MegaMenuItemsCollection
+  itemsCollection(limit: Int = 100, locale: String, order: [MegaMenuItemsCollectionOrder], preview: Boolean, skip: Int = 0, where: MegaMenuDropdownFilter): MegaMenuItemsCollection
   linkedFrom(allowedLocales: [String]): MegaMenuLinkingCollections
   sys: Sys!
 }
@@ -1010,11 +1356,11 @@ type MegaMenuCollection {
 [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/megaMenuDropdown)
 """
 type MegaMenuDropdown implements Entry {
-  columnOneItemsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MegaMenuDropdownColumnOneItemsCollection
-  columnThreeItemsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MegaMenuDropdownColumnThreeItemsCollection
-  columnTwoItemsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MegaMenuDropdownColumnTwoItemsCollection
+  columnOneItemsCollection(limit: Int = 100, locale: String, order: [MegaMenuDropdownColumnOneItemsCollectionOrder], preview: Boolean, skip: Int = 0, where: MenuLinkGroupFilter): MegaMenuDropdownColumnOneItemsCollection
+  columnThreeItemsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0, where: MenuLinkGroupOrMenuPromoFilter): MegaMenuDropdownColumnThreeItemsCollection
+  columnTwoItemsCollection(limit: Int = 100, locale: String, order: [MegaMenuDropdownColumnTwoItemsCollectionOrder], preview: Boolean, skip: Int = 0, where: MenuLinkGroupFilter): MegaMenuDropdownColumnTwoItemsCollection
   contentfulMetadata: ContentfulMetadata!
-  linkReference(locale: String, preview: Boolean): Page
+  linkReference(locale: String, preview: Boolean, where: PageFilter): Page
   linkedFrom(allowedLocales: [String]): MegaMenuDropdownLinkingCollections
   sys: Sys!
   title(locale: String): String
@@ -1034,6 +1380,19 @@ type MegaMenuDropdownColumnOneItemsCollection {
   total: Int!
 }
 
+enum MegaMenuDropdownColumnOneItemsCollectionOrder {
+  groupTitle_ASC
+  groupTitle_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 type MegaMenuDropdownColumnThreeItemsCollection {
   items: [MegaMenuDropdownColumnThreeItemsItem]!
   limit: Int!
@@ -1050,11 +1409,27 @@ type MegaMenuDropdownColumnTwoItemsCollection {
   total: Int!
 }
 
+enum MegaMenuDropdownColumnTwoItemsCollectionOrder {
+  groupTitle_ASC
+  groupTitle_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 input MegaMenuDropdownFilter {
   AND: [MegaMenuDropdownFilter]
   OR: [MegaMenuDropdownFilter]
+  columnOneItems: cfMenuLinkGroupNestedFilter
   columnOneItemsCollection_exists: Boolean
+  columnThreeItems: cfMenuLinkGroupOrMenuPromoNestedFilter
   columnThreeItemsCollection_exists: Boolean
+  columnTwoItems: cfMenuLinkGroupNestedFilter
   columnTwoItemsCollection_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
   linkReference: cfPageNestedFilter
@@ -1071,7 +1446,20 @@ input MegaMenuDropdownFilter {
 
 type MegaMenuDropdownLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  megaMenuCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MegaMenuCollection
+  megaMenuCollection(limit: Int = 100, locale: String, order: [MegaMenuDropdownLinkingCollectionsMegaMenuCollectionOrder], preview: Boolean, skip: Int = 0): MegaMenuCollection
+}
+
+enum MegaMenuDropdownLinkingCollectionsMegaMenuCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum MegaMenuDropdownOrder {
@@ -1098,6 +1486,7 @@ input MegaMenuFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  items: cfMegaMenuDropdownNestedFilter
   itemsCollection_exists: Boolean
   sys: SysFilter
 }
@@ -1107,6 +1496,19 @@ type MegaMenuItemsCollection {
   limit: Int!
   skip: Int!
   total: Int!
+}
+
+enum MegaMenuItemsCollectionOrder {
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 type MegaMenuLinkingCollections {
@@ -1131,7 +1533,7 @@ enum MegaMenuOrder {
 """
 type MenuLink implements Entry {
   contentfulMetadata: ContentfulMetadata!
-  linkReference(locale: String, preview: Boolean): Page
+  linkReference(locale: String, preview: Boolean, where: PageFilter): Page
   linkText(locale: String): String
   linkUrl(locale: String): String
   linkedFrom(allowedLocales: [String]): MenuLinkLinkingCollections
@@ -1175,7 +1577,7 @@ type MenuLinkGroup implements Entry {
   contentfulMetadata: ContentfulMetadata!
   groupTitle(locale: String): String
   linkedFrom(allowedLocales: [String]): MenuLinkGroupLinkingCollections
-  linksCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MenuLinkGroupLinksCollection
+  linksCollection(limit: Int = 100, locale: String, order: [MenuLinkGroupLinksCollectionOrder], preview: Boolean, skip: Int = 0, where: MenuLinkFilter): MenuLinkGroupLinksCollection
   sys: Sys!
 }
 
@@ -1197,13 +1599,27 @@ input MenuLinkGroupFilter {
   groupTitle_not: String
   groupTitle_not_contains: String
   groupTitle_not_in: [String]
+  links: cfMenuLinkNestedFilter
   linksCollection_exists: Boolean
   sys: SysFilter
 }
 
 type MenuLinkGroupLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  megaMenuDropdownCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MegaMenuDropdownCollection
+  megaMenuDropdownCollection(limit: Int = 100, locale: String, order: [MenuLinkGroupLinkingCollectionsMegaMenuDropdownCollectionOrder], preview: Boolean, skip: Int = 0): MegaMenuDropdownCollection
+}
+
+enum MenuLinkGroupLinkingCollectionsMegaMenuDropdownCollectionOrder {
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 type MenuLinkGroupLinksCollection {
@@ -1211,6 +1627,48 @@ type MenuLinkGroupLinksCollection {
   limit: Int!
   skip: Int!
   total: Int!
+}
+
+enum MenuLinkGroupLinksCollectionOrder {
+  linkText_ASC
+  linkText_DESC
+  linkUrl_ASC
+  linkUrl_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/menuLinkGroupOrMenuPromo)
+"""
+type MenuLinkGroupOrMenuPromo implements Entry {
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): MenuLinkGroupOrMenuPromoLinkingCollections
+  sys: Sys!
+}
+
+type MenuLinkGroupOrMenuPromoCollection {
+  items: [MenuLinkGroupOrMenuPromo]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input MenuLinkGroupOrMenuPromoFilter {
+  AND: [MenuLinkGroupOrMenuPromoFilter]
+  OR: [MenuLinkGroupOrMenuPromoFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  sys: SysFilter
+}
+
+type MenuLinkGroupOrMenuPromoLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
 }
 
 enum MenuLinkGroupOrder {
@@ -1228,7 +1686,20 @@ enum MenuLinkGroupOrder {
 
 type MenuLinkLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  menuLinkGroupCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MenuLinkGroupCollection
+  menuLinkGroupCollection(limit: Int = 100, locale: String, order: [MenuLinkLinkingCollectionsMenuLinkGroupCollectionOrder], preview: Boolean, skip: Int = 0): MenuLinkGroupCollection
+}
+
+enum MenuLinkLinkingCollectionsMenuLinkGroupCollectionOrder {
+  groupTitle_ASC
+  groupTitle_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum MenuLinkOrder {
@@ -1293,7 +1764,20 @@ input MenuPromoFilter {
 
 type MenuPromoLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  megaMenuDropdownCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MegaMenuDropdownCollection
+  megaMenuDropdownCollection(limit: Int = 100, locale: String, order: [MenuPromoLinkingCollectionsMegaMenuDropdownCollectionOrder], preview: Boolean, skip: Int = 0): MegaMenuDropdownCollection
+}
+
+enum MenuPromoLinkingCollectionsMegaMenuDropdownCollectionOrder {
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum MenuPromoOrder {
@@ -1330,17 +1814,22 @@ type MenuPromoSubtextEntries {
 type MenuPromoSubtextLinks {
   assets: MenuPromoSubtextAssets!
   entries: MenuPromoSubtextEntries!
+  resources: MenuPromoSubtextResources!
+}
+
+type MenuPromoSubtextResources {
+  block: [ResourceLink!]!
 }
 
 """
 Represents a web page in Compose. DO NOT DELETE [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/page)
 """
-type Page implements Entry {
+type Page implements Entry & PageEntry {
   content(locale: String, preview: Boolean): PageContent
   contentfulMetadata: ContentfulMetadata!
   linkedFrom(allowedLocales: [String]): PageLinkingCollections
   name(locale: String): String
-  seo(locale: String, preview: Boolean): Seo
+  seo(locale: String, preview: Boolean, where: SeoFilter): Seo
   slug(locale: String): String
   sys: Sys!
   title(locale: String): String
@@ -1354,6 +1843,10 @@ type PageCollection {
 }
 
 union PageContent = PageLanding
+
+interface PageEntry {
+  slug: String
+}
 
 input PageFilter {
   AND: [PageFilter]
@@ -1393,7 +1886,7 @@ type PageLanding implements Entry {
   contentfulMetadata: ContentfulMetadata!
   linkedFrom(allowedLocales: [String]): PageLandingLinkingCollections
   name(locale: String): String
-  sectionsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingSectionsCollection
+  sectionsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0, where: ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter): PageLandingSectionsCollection
   sys: Sys!
 }
 
@@ -1415,13 +1908,31 @@ input PageLandingFilter {
   name_not: String
   name_not_contains: String
   name_not_in: [String]
+  sections: cfComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionNestedFilter
   sectionsCollection_exists: Boolean
   sys: SysFilter
 }
 
 type PageLandingLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageCollection
+  pageCollection(limit: Int = 100, locale: String, order: [PageLandingLinkingCollectionsPageCollectionOrder], preview: Boolean, skip: Int = 0): PageCollection
+}
+
+enum PageLandingLinkingCollectionsPageCollectionOrder {
+  name_ASC
+  name_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum PageLandingOrder {
@@ -1447,12 +1958,79 @@ type PageLandingSectionsCollection {
 union PageLandingSectionsItem = ComponentImageAndText | ComponentMarqueeBanner | ComponentTextCta | ComponentTextSection | ComponentThreeCardCollection
 
 type PageLinkingCollections {
-  componentArticleCardCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentArticleCardCollection
-  componentImageAndTextCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentImageAndTextCollection
-  componentThreeCardCollectionCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentThreeCardCollectionCollection
+  componentArticleCardCollection(limit: Int = 100, locale: String, order: [PageLinkingCollectionsComponentArticleCardCollectionOrder], preview: Boolean, skip: Int = 0): ComponentArticleCardCollection
+  componentThreeCardCollectionCollection(limit: Int = 100, locale: String, order: [PageLinkingCollectionsComponentThreeCardCollectionCollectionOrder], preview: Boolean, skip: Int = 0): ComponentThreeCardCollectionCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  megaMenuDropdownCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MegaMenuDropdownCollection
-  menuLinkCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MenuLinkCollection
+  megaMenuDropdownCollection(limit: Int = 100, locale: String, order: [PageLinkingCollectionsMegaMenuDropdownCollectionOrder], preview: Boolean, skip: Int = 0): MegaMenuDropdownCollection
+  menuLinkCollection(limit: Int = 100, locale: String, order: [PageLinkingCollectionsMenuLinkCollectionOrder], preview: Boolean, skip: Int = 0): MenuLinkCollection
+}
+
+enum PageLinkingCollectionsComponentArticleCardCollectionOrder {
+  buttonExternalUrl_ASC
+  buttonExternalUrl_DESC
+  buttonLabel_ASC
+  buttonLabel_DESC
+  eyebrow_ASC
+  eyebrow_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum PageLinkingCollectionsComponentThreeCardCollectionCollectionOrder {
+  buttonExternalUrl_ASC
+  buttonExternalUrl_DESC
+  buttonLabel_ASC
+  buttonLabel_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum PageLinkingCollectionsMegaMenuDropdownCollectionOrder {
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum PageLinkingCollectionsMenuLinkCollectionOrder {
+  linkText_ASC
+  linkText_DESC
+  linkUrl_ASC
+  linkUrl_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum PageOrder {
@@ -1475,7 +2053,7 @@ enum PageOrder {
 """
 [See type definition](https://app.contentful.com/spaces/1peef7rr1q3c/content_types/product)
 """
-type Product implements Entry {
+type Product implements Entry & PageEntry {
   contentfulMetadata: ContentfulMetadata!
   description(locale: String): ProductDescription
   image(locale: String, preview: Boolean): Asset
@@ -1513,6 +2091,11 @@ type ProductDescriptionEntries {
 type ProductDescriptionLinks {
   assets: ProductDescriptionAssets!
   entries: ProductDescriptionEntries!
+  resources: ProductDescriptionResources!
+}
+
+type ProductDescriptionResources {
+  block: [ResourceLink!]!
 }
 
 input ProductFilter {
@@ -1558,7 +2141,22 @@ input ProductFilter {
 
 type ProductLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  productSectionCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ProductSectionCollection
+  productSectionCollection(limit: Int = 100, locale: String, order: [ProductLinkingCollectionsProductSectionCollectionOrder], preview: Boolean, skip: Int = 0): ProductSectionCollection
+}
+
+enum ProductLinkingCollectionsProductSectionCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum ProductOrder {
@@ -1587,7 +2185,7 @@ type ProductSection implements Entry {
   contentfulMetadata: ContentfulMetadata!
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): ProductSectionLinkingCollections
-  productsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ProductSectionProductsCollection
+  productsCollection(limit: Int = 100, locale: String, order: [ProductSectionProductsCollectionOrder], preview: Boolean, skip: Int = 0, where: ProductFilter): ProductSectionProductsCollection
   sys: Sys!
   title(locale: String): String
 }
@@ -1610,6 +2208,7 @@ input ProductSectionFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  products: cfProductNestedFilter
   productsCollection_exists: Boolean
   sys: SysFilter
   title: String
@@ -1647,18 +2246,41 @@ type ProductSectionProductsCollection {
   total: Int!
 }
 
+enum ProductSectionProductsCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  price_ASC
+  price_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
 """
 The 'Quality' type represents quality as whole numeric values between `1` and `100`.
 """
 scalar Quality
 
 type Query {
+  article(id: String!, locale: String, preview: Boolean): Article
+  articleCollection(limit: Int = 100, locale: String, order: [ArticleOrder], preview: Boolean, skip: Int = 0, where: ArticleFilter): ArticleCollection
   asset(id: String!, locale: String, preview: Boolean): Asset
   assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
   componentArticleCard(id: String!, locale: String, preview: Boolean): ComponentArticleCard
   componentArticleCardCollection(limit: Int = 100, locale: String, order: [ComponentArticleCardOrder], preview: Boolean, skip: Int = 0, where: ComponentArticleCardFilter): ComponentArticleCardCollection
   componentImageAndText(id: String!, locale: String, preview: Boolean): ComponentImageAndText
   componentImageAndTextCollection(limit: Int = 100, locale: String, order: [ComponentImageAndTextOrder], preview: Boolean, skip: Int = 0, where: ComponentImageAndTextFilter): ComponentImageAndTextCollection
+  componentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection(id: String!, locale: String, preview: Boolean): ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollection
+  componentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0, where: ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionFilter): ComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionCollection
   componentMarqueeBanner(id: String!, locale: String, preview: Boolean): ComponentMarqueeBanner
   componentMarqueeBannerCollection(limit: Int = 100, locale: String, order: [ComponentMarqueeBannerOrder], preview: Boolean, skip: Int = 0, where: ComponentMarqueeBannerFilter): ComponentMarqueeBannerCollection
   componentSection(id: String!, locale: String, preview: Boolean): ComponentSection
@@ -1678,9 +2300,12 @@ type Query {
   menuLinkCollection(limit: Int = 100, locale: String, order: [MenuLinkOrder], preview: Boolean, skip: Int = 0, where: MenuLinkFilter): MenuLinkCollection
   menuLinkGroup(id: String!, locale: String, preview: Boolean): MenuLinkGroup
   menuLinkGroupCollection(limit: Int = 100, locale: String, order: [MenuLinkGroupOrder], preview: Boolean, skip: Int = 0, where: MenuLinkGroupFilter): MenuLinkGroupCollection
+  menuLinkGroupOrMenuPromo(id: String!, locale: String, preview: Boolean): MenuLinkGroupOrMenuPromo
+  menuLinkGroupOrMenuPromoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0, where: MenuLinkGroupOrMenuPromoFilter): MenuLinkGroupOrMenuPromoCollection
   menuPromo(id: String!, locale: String, preview: Boolean): MenuPromo
   menuPromoCollection(limit: Int = 100, locale: String, order: [MenuPromoOrder], preview: Boolean, skip: Int = 0, where: MenuPromoFilter): MenuPromoCollection
   page(id: String!, locale: String, preview: Boolean): Page
+  pageBySlug(slug: String!): PageEntry
   pageCollection(limit: Int = 100, locale: String, order: [PageOrder], preview: Boolean, skip: Int = 0, where: PageFilter): PageCollection
   pageLanding(id: String!, locale: String, preview: Boolean): PageLanding
   pageLandingCollection(limit: Int = 100, locale: String, order: [PageLandingOrder], preview: Boolean, skip: Int = 0, where: PageLandingFilter): PageLandingCollection
@@ -1701,7 +2326,6 @@ type Redirect implements Entry {
   contentfulMetadata: ContentfulMetadata!
   from(locale: String): String
   linkedFrom(allowedLocales: [String]): RedirectLinkingCollections
-  statusCode(locale: String): String
   sys: Sys!
   to(locale: String): String
 }
@@ -1724,13 +2348,6 @@ input RedirectFilter {
   from_not: String
   from_not_contains: String
   from_not_in: [String]
-  statusCode: String
-  statusCode_contains: String
-  statusCode_exists: Boolean
-  statusCode_in: [String]
-  statusCode_not: String
-  statusCode_not_contains: String
-  statusCode_not_in: [String]
   sys: SysFilter
   to: String
   to_contains: String
@@ -1748,8 +2365,6 @@ type RedirectLinkingCollections {
 enum RedirectOrder {
   from_ASC
   from_DESC
-  statusCode_ASC
-  statusCode_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1760,6 +2375,16 @@ enum RedirectOrder {
   sys_publishedVersion_DESC
   to_ASC
   to_DESC
+}
+
+type ResourceLink {
+  sys: ResourceSys!
+}
+
+type ResourceSys {
+  linkType: String!
+  type: String!
+  urn: String!
 }
 
 """
@@ -1824,7 +2449,24 @@ input SeoFilter {
 
 type SeoLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageCollection
+  pageCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageCollectionOrder], preview: Boolean, skip: Int = 0): PageCollection
+}
+
+enum SeoLinkingCollectionsPageCollectionOrder {
+  name_ASC
+  name_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum SeoOrder {
@@ -1894,6 +2536,129 @@ input SysFilter {
   publishedVersion_not_in: [Float]
 }
 
+input cfComponentArticleCardNestedFilter {
+  AND: [cfComponentArticleCardNestedFilter]
+  OR: [cfComponentArticleCardNestedFilter]
+  buttonExternalUrl: String
+  buttonExternalUrl_contains: String
+  buttonExternalUrl_exists: Boolean
+  buttonExternalUrl_in: [String]
+  buttonExternalUrl_not: String
+  buttonExternalUrl_not_contains: String
+  buttonExternalUrl_not_in: [String]
+  buttonLabel: String
+  buttonLabel_contains: String
+  buttonLabel_exists: Boolean
+  buttonLabel_in: [String]
+  buttonLabel_not: String
+  buttonLabel_not_contains: String
+  buttonLabel_not_in: [String]
+  buttonReference_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  eyebrow: String
+  eyebrow_contains: String
+  eyebrow_exists: Boolean
+  eyebrow_in: [String]
+  eyebrow_not: String
+  eyebrow_not_contains: String
+  eyebrow_not_in: [String]
+  image_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  subtext_contains: String
+  subtext_exists: Boolean
+  subtext_not_contains: String
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+input cfComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionNestedFilter {
+  AND: [cfComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionNestedFilter]
+  OR: [cfComponentImageAndTextOrComponentMarqueeBannerOrComponentTextCtaOrComponentTextSectionOrComponentThreeCardCollectionNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+}
+
+input cfMegaMenuDropdownNestedFilter {
+  AND: [cfMegaMenuDropdownNestedFilter]
+  OR: [cfMegaMenuDropdownNestedFilter]
+  columnOneItemsCollection_exists: Boolean
+  columnThreeItemsCollection_exists: Boolean
+  columnTwoItemsCollection_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  linkReference_exists: Boolean
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+input cfMenuLinkGroupNestedFilter {
+  AND: [cfMenuLinkGroupNestedFilter]
+  OR: [cfMenuLinkGroupNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  groupTitle: String
+  groupTitle_contains: String
+  groupTitle_exists: Boolean
+  groupTitle_in: [String]
+  groupTitle_not: String
+  groupTitle_not_contains: String
+  groupTitle_not_in: [String]
+  linksCollection_exists: Boolean
+  sys: SysFilter
+}
+
+input cfMenuLinkGroupOrMenuPromoNestedFilter {
+  AND: [cfMenuLinkGroupOrMenuPromoNestedFilter]
+  OR: [cfMenuLinkGroupOrMenuPromoNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  sys: SysFilter
+}
+
+input cfMenuLinkNestedFilter {
+  AND: [cfMenuLinkNestedFilter]
+  OR: [cfMenuLinkNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  linkReference_exists: Boolean
+  linkText: String
+  linkText_contains: String
+  linkText_exists: Boolean
+  linkText_in: [String]
+  linkText_not: String
+  linkText_not_contains: String
+  linkText_not_in: [String]
+  linkUrl: String
+  linkUrl_contains: String
+  linkUrl_exists: Boolean
+  linkUrl_in: [String]
+  linkUrl_not: String
+  linkUrl_not_contains: String
+  linkUrl_not_in: [String]
+  sys: SysFilter
+}
+
 input cfPageNestedFilter {
   AND: [cfPageNestedFilter]
   OR: [cfPageNestedFilter]
@@ -1907,6 +2672,47 @@ input cfPageNestedFilter {
   name_not_contains: String
   name_not_in: [String]
   seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+input cfProductNestedFilter {
+  AND: [cfProductNestedFilter]
+  OR: [cfProductNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  description_contains: String
+  description_exists: Boolean
+  description_not_contains: String
+  image_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  price: Float
+  price_exists: Boolean
+  price_gt: Float
+  price_gte: Float
+  price_in: [Float]
+  price_lt: Float
+  price_lte: Float
+  price_not: Float
+  price_not_in: [Float]
   slug: String
   slug_contains: String
   slug_exists: Boolean
