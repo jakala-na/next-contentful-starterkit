@@ -10,21 +10,14 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * 2. It is not minifiable, so the string of a GraphQL query will be multiple times inside the bundle.
  * 3. It does not support dead code elimination, so it will add unused operations.
  *
- * Therefore it is highly recommended to use the babel-plugin for production.
+ * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkItem\n        }\n      }\n    }\n  ": types.MenuLinksDocument,
-    "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n": types.LinkItemFragmentDoc,
+    "\n    query Layout($locale: String, $preview: Boolean) {\n      navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {\n        ...NavigationFields\n      }\n    }\n  ": types.LayoutDocument,
+    "\n  fragment MenuGroupFields on MenuGroupFeaturedPagesCollection {\n    items {\n      ...PageLinkFields\n    }\n  }\n": types.MenuGroupFieldsFragmentDoc,
+    "\n  fragment NavigationFields on NavigationMenuCollection {\n    items {\n      menuItemsCollection {\n        items {\n          __typename\n          sys {\n            id\n          }\n          groupName\n          link: groupLink {\n            ...PageLinkFields\n          }\n          children: featuredPagesCollection {\n            ...MenuGroupFields\n          }\n        }\n      }\n    }\n  }\n": types.NavigationFieldsFragmentDoc,
+    "\n  fragment PageLinkFields on Page {\n    __typename\n    slug\n    sys {\n      id\n    }\n    pageName\n    pageContent(locale: $locale, preview: $preview) {\n      ... on Entry {\n        __typename\n        sys {\n          id\n        }\n      }\n    }\n  }\n": types.PageLinkFieldsFragmentDoc,
 };
-
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkItem\n        }\n      }\n    }\n  "): (typeof documents)["\n    query MenuLinks {\n      menuLinkCollection(limit: 100) {\n        items {\n          ...LinkItem\n        }\n      }\n    }\n  "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"): (typeof documents)["\n  fragment LinkItem on MenuLink {\n    sys {\n      id\n    }\n    linkUrl\n    linkText\n    linkReference {\n      title\n      slug\n    }\n  }\n"];
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -32,13 +25,30 @@ export function graphql(source: "\n  fragment LinkItem on MenuLink {\n    sys {\
  *
  * @example
  * ```ts
- * const query = gql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
+ * const query = graphql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
  * ```
  *
  * The query argument is unknown!
  * Please regenerate the types.
-**/
+ */
 export function graphql(source: string): unknown;
+
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query Layout($locale: String, $preview: Boolean) {\n      navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {\n        ...NavigationFields\n      }\n    }\n  "): (typeof documents)["\n    query Layout($locale: String, $preview: Boolean) {\n      navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {\n        ...NavigationFields\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment MenuGroupFields on MenuGroupFeaturedPagesCollection {\n    items {\n      ...PageLinkFields\n    }\n  }\n"): (typeof documents)["\n  fragment MenuGroupFields on MenuGroupFeaturedPagesCollection {\n    items {\n      ...PageLinkFields\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment NavigationFields on NavigationMenuCollection {\n    items {\n      menuItemsCollection {\n        items {\n          __typename\n          sys {\n            id\n          }\n          groupName\n          link: groupLink {\n            ...PageLinkFields\n          }\n          children: featuredPagesCollection {\n            ...MenuGroupFields\n          }\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment NavigationFields on NavigationMenuCollection {\n    items {\n      menuItemsCollection {\n        items {\n          __typename\n          sys {\n            id\n          }\n          groupName\n          link: groupLink {\n            ...PageLinkFields\n          }\n          children: featuredPagesCollection {\n            ...MenuGroupFields\n          }\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment PageLinkFields on Page {\n    __typename\n    slug\n    sys {\n      id\n    }\n    pageName\n    pageContent(locale: $locale, preview: $preview) {\n      ... on Entry {\n        __typename\n        sys {\n          id\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment PageLinkFields on Page {\n    __typename\n    slug\n    sys {\n      id\n    }\n    pageName\n    pageContent(locale: $locale, preview: $preview) {\n      ... on Entry {\n        __typename\n        sys {\n          id\n        }\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

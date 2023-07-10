@@ -1,29 +1,31 @@
 import { graphqlClient } from "../lib/graphqlClient";
-import { previewData } from "next/headers";
+import { draftMode } from "next/headers";
 import "./globals.css";
-import { graphql } from "../gql";
-import { Link } from "#/ui/link";
-import { LinkItemFragment } from "#/gql/graphql";
+import { graphql } from "#/gql";
+import { Navigation } from "#/components/navigation";
+
+// import { Link } from "#/ui/link";
+// import { LinkItemFragment } from "#/gql/graphql";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const data = previewData();
-  const isPreviewMode = !!data && data.key === process.env.PREVIEW_SECRET;
+  const { isEnabled: isDraftMode } = draftMode();
 
   const layoutQuery = graphql(/* GraphQL */ `
-    query MenuLinks {
-      menuLinkCollection(limit: 100) {
-        items {
-          ...LinkItem
-        }
+    query Layout($locale: String, $preview: Boolean) {
+      navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+        ...NavigationFields
       }
     }
   `);
 
-  const layoutData = await graphqlClient.request(layoutQuery);
+  const layoutData = await graphqlClient.request(layoutQuery, {
+    locale: "en-US",
+    preview: isDraftMode,
+  });
 
   return (
     <html lang="en">
@@ -33,19 +35,10 @@ export default async function RootLayout({
       */}
       <head />
       <body>
-        {isPreviewMode ? <h1>Preview Mode</h1> : <h1>Not in Preview Mode</h1>}
-        <nav>
-          <ul>
-            {layoutData.menuLinkCollection?.items.map(
-              (item) =>
-                item && (
-                  <li key={(item as LinkItemFragment)?.sys.id}>
-                    <Link link={item} />
-                  </li>
-                )
-            )}
-          </ul>
-        </nav>
+        {isDraftMode ? <h1>Draft Mode</h1> : <h1>Not in Draft Mode</h1>}
+        {layoutData.navigationMenuCollection && (
+          <Navigation data={layoutData.navigationMenuCollection} />
+        )}
         {children}
       </body>
     </html>

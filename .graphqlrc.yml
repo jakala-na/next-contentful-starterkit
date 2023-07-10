@@ -1,2 +1,6 @@
-schema: 'gql/schema.graphql'
-documents: ["app/**/*.{graphql,js,ts,jsx,tsx}", 'ui/**/*.{graphql,js,ts,jsx,tsx}']
+schema: "gql/schema.graphql"
+documents:
+  [
+    "app/**/*.{graphql,js,ts,jsx,tsx}",
+    "components/**/*.{graphql,js,ts,jsx,tsx}",
+  ]

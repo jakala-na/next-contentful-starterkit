@@ -1,4 +1,4 @@
-import { FragmentType, graphql, useFragment } from "#/gql";
+import { FragmentType, graphql, getFragmentData } from "#/gql";
 import { LinkItemFragment } from "#/gql/graphql";
 import { default as NextLink } from "next/link";
 
@@ -31,7 +31,7 @@ export type LinkProps = {
 };
 
 const Link = (props: LinkProps) => {
-  const link = useFragment(LinkFieldsFragment, props.link);
+  const link = getFragmentData(LinkFieldsFragment, props.link);
   const { linkUrl, linkText } = getLinkProps(link);
   if (!linkUrl) return null;
   return <NextLink href={linkUrl}>{linkText}</NextLink>;
