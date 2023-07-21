@@ -1718,7 +1718,7 @@ A group of items making up a section in the navigation menu [See type definition
 type MenuGroup implements Entry {
   contentfulMetadata: ContentfulMetadata!
   featuredPagesCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0, where: CategoryOrPageOrPostFilter): MenuGroupFeaturedPagesCollection
-  groupLink(locale: String, preview: Boolean): MenuGroupGroupLink
+  groupLink(locale: String, preview: Boolean, where: CategoryOrPageOrPostFilter): MenuGroupGroupLink
   groupName(locale: String): String
   internalTitle(locale: String): String
   linkedFrom(allowedLocales: [String]): MenuGroupLinkingCollections

@@ -25,6 +25,7 @@ const config: CodegenConfig = {
       presetConfig: {
         fragmentMasking: { unmaskFunctionName: "getFragmentData" },
         dedupeFragments: true,
+        skipTypename: true, // graphql-request does not add __typename to queries automatically.
       },
     },
     "./gql/graphql.schema.json": {
