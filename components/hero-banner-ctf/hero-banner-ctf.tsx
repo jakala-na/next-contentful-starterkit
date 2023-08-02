@@ -1,5 +1,8 @@
 import { FragmentType, getFragmentData, graphql } from "#/gql";
 
+import { getPageLinkProps } from "../page";
+import { HeroBanner } from "../ui/hero-banner";
+
 export const ComponentHeroBannerFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentHeroBannerFields on ComponentHeroBanner {
     __typename
@@ -27,9 +30,13 @@ export type HeroBannerProps = {
   data: FragmentType<typeof ComponentHeroBannerFieldsFragment>;
 };
 
-const HeroBanner: React.FC<HeroBannerProps> = (props) => {
+const HeroBannerCtf: React.FC<HeroBannerProps> = (props) => {
   const data = getFragmentData(ComponentHeroBannerFieldsFragment, props.data);
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  return (
+    <div>
+      <HeroBanner {...data} />
+    </div>
+  );
 };
 
-export default HeroBanner;
+export default HeroBannerCtf;

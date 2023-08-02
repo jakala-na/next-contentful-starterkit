@@ -17,6 +17,7 @@ const config: CodegenConfig = {
   documents: [
     "app/**/*.{graphql,js,ts,jsx,tsx}",
     "components/**/*.{graphql,js,ts,jsx,tsx}",
+    "lib/**/*.{graphql,js,ts,jsx,tsx}",
   ],
   generates: {
     "./gql/": {

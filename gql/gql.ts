@@ -20,6 +20,7 @@ const documents = {
     "\n  fragment MenuGroupFields on MenuGroupFeaturedPagesCollection {\n    items {\n      ...PageLinkFields\n    }\n  }\n": types.MenuGroupFieldsFragmentDoc,
     "\n  fragment NavigationFields on NavigationMenuCollection {\n    items {\n      menuItemsCollection {\n        items {\n          __typename\n          sys {\n            id\n          }\n          groupName\n          link: groupLink {\n            ...PageLinkFields\n          }\n          children: featuredPagesCollection {\n            ...MenuGroupFields\n          }\n        }\n      }\n    }\n  }\n": types.NavigationFieldsFragmentDoc,
     "\n  fragment PageLinkFields on Page {\n    __typename\n    slug\n    sys {\n      id\n    }\n    pageName\n    pageContent(locale: $locale, preview: $preview) {\n      ... on Entry {\n        __typename\n        sys {\n          id\n        }\n      }\n    }\n  }\n": types.PageLinkFieldsFragmentDoc,
+    "\n    query PageSlugQuery($slug: String, $locale: String, $preview: Boolean) {\n      pageCollection(\n        locale: $locale\n        preview: $preview\n        limit: 1\n        where: { slug: $slug }\n      ) {\n        items {\n          slug\n        }\n      }\n    }\n  ": types.PageSlugQueryDocument,
 };
 
 /**
@@ -64,6 +65,10 @@ export function graphql(source: "\n  fragment NavigationFields on NavigationMenu
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  fragment PageLinkFields on Page {\n    __typename\n    slug\n    sys {\n      id\n    }\n    pageName\n    pageContent(locale: $locale, preview: $preview) {\n      ... on Entry {\n        __typename\n        sys {\n          id\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment PageLinkFields on Page {\n    __typename\n    slug\n    sys {\n      id\n    }\n    pageName\n    pageContent(locale: $locale, preview: $preview) {\n      ... on Entry {\n        __typename\n        sys {\n          id\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    query PageSlugQuery($slug: String, $locale: String, $preview: Boolean) {\n      pageCollection(\n        locale: $locale\n        preview: $preview\n        limit: 1\n        where: { slug: $slug }\n      ) {\n        items {\n          slug\n        }\n      }\n    }\n  "): (typeof documents)["\n    query PageSlugQuery($slug: String, $locale: String, $preview: Boolean) {\n      pageCollection(\n        locale: $locale\n        preview: $preview\n        limit: 1\n        where: { slug: $slug }\n      ) {\n        items {\n          slug\n        }\n      }\n    }\n  "];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

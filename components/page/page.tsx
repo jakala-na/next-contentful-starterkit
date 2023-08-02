@@ -1,4 +1,4 @@
-import { graphql } from "#/gql";
+import { FragmentType, getFragmentData, graphql } from "#/gql";
 
 export const PageLinkFieldsFragment = graphql(/* GraphQL */ `
   fragment PageLinkFields on Page {
@@ -18,6 +18,18 @@ export const PageLinkFieldsFragment = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const getPageLinkProps = (
+  data: FragmentType<typeof PageLinkFieldsFragment>
+) => {
+  const fragment = getFragmentData(PageLinkFieldsFragment, data);
+
+  return {
+    href: `/${fragment.slug}`,
+    as: `/${fragment.slug}`,
+    children: fragment.pageName,
+  };
+};
 
 const Page = () => <>{"Page"}</>;
 

@@ -1,10 +1,14 @@
 import { GraphQLClient } from "graphql-request";
 
-export const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}`;
-export const graphqlToken = `${process.env.CONTENTFUL_DELIVERY_API}`;
+const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}`;
 
-export const graphqlClient = new GraphQLClient(graphqlEndpoint, {
+export const graphqlClient = (preview: boolean) =>
+  new GraphQLClient(graphqlEndpoint, {
     headers: {
-        authorization: `Bearer ${graphqlToken}`,
-    }
-})
+      authorization: `Bearer ${
+        preview
+          ? process.env.CONTENTFUL_PREVIEW_API
+          : process.env.CONTENTFUL_DELIVERY_API
+      }`,
+    },
+  });
