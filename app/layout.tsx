@@ -5,6 +5,9 @@ import { graphql } from "#/gql";
 import { Navigation } from "#/components/navigation";
 import "@contentful/live-preview/style.css";
 import { ContentfulPreviewProvider } from "#/components/contentful-preview-provider";
+import cn from "#/lib/cn";
+import { fontSans } from "#/lib/fonts";
+import { SiteHeader } from "#/components/site-header";
 
 export default async function RootLayout({
   children,
@@ -33,13 +36,17 @@ export default async function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
+      <body
+        className={cn(
+          "min-h-screen bg-white font-sans antialiased",
+          fontSans.variable
+        )}
+      >
         <ContentfulPreviewProvider isDraftMode={isDraftMode}>
-          {isDraftMode ? <h1>Draft Mode</h1> : <h1>Not in Draft Mode</h1>}
-          {layoutData.navigationMenuCollection && (
-            <Navigation data={layoutData.navigationMenuCollection} />
-          )}
-          {children}
+          <div className="relative flex min-h-screen flex-col">
+            <SiteHeader navigationData={layoutData.navigationMenuCollection} />
+            <div className="flex-1">{children}</div>
+          </div>
         </ContentfulPreviewProvider>
       </body>
     </html>

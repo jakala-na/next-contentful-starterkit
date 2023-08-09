@@ -19,6 +19,8 @@ export const ComponentHeroBannerFieldsFragment = graphql(/* GraphQL */ `
     }
     image {
       url
+      width
+      height
     }
     imageStyle
     heroSize

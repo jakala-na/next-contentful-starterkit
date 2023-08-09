@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "@contentful/live-preview": "^2.6.2",
+    "@radix-ui/react-slot": "^1.0.2",
     "@types/node": "18.11.11",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "encoding": "^0.1.13",
     "eslint": "8.29.0",
     "eslint-config-next": "^13.4.9",
@@ -22,6 +25,7 @@
     "next": "^13.4.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "tailwind-merge": "^1.14.0",
     "typescript": "4.9.3"
   },
   "devDependencies": {
@@ -33,10 +37,13 @@
     "@graphql-codegen/introspection": "^4.0.0",
     "@graphql-codegen/schema-ast": "^4.0.0",
     "@types/cypress-image-snapshot": "^3.1.6",
+    "autoprefixer": "^10.4.14",
     "axe-core": "^4.6.1",
     "cypress": "^12.2.0",
     "cypress-axe": "^1.2.0",
     "cypress-image-snapshot": "^4.0.1",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3",
     "ts-loader": "^9.4.2",
     "webpack": "^5.75.0"
   },

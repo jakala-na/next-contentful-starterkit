@@ -1,6 +1,8 @@
 import { FragmentType, graphql, getFragmentData } from "#/gql";
 import Link from "next/link";
 import { PageLinkFieldsFragment } from "../page";
+import cn from "#/lib/cn";
+import { Icons } from "../icons";
 
 const MenuGroupFeaturedPagesFragment = graphql(/* GraphQL */ `
   fragment MenuGroupFields on MenuGroupFeaturedPagesCollection {
@@ -36,7 +38,7 @@ export type NavigationProps = {
   data: FragmentType<typeof NavigationFieldsFragment>;
 };
 
-const Navigation = (props: NavigationProps) => {
+export const Navigation = (props: NavigationProps) => {
   const data = getFragmentData(NavigationFieldsFragment, props.data);
   const items = data.items[0]?.menuItemsCollection?.items;
 
@@ -62,37 +64,44 @@ const Navigation = (props: NavigationProps) => {
   };
 
   return (
-    <>
-      {items?.length && (
-        <nav>
-          <ul>
-            {items.map(
-              (menuItem) =>
-                menuItem && (
-                  <li key={menuItem.sys.id}>
-                    {!menuItem.link ? (
-                      menuItem.groupName
-                    ) : (
-                      <Link
-                        href={`/${
-                          getFragmentData(PageLinkFieldsFragment, menuItem.link)
-                            .slug
-                        }`}
-                      >
-                        {menuItem.groupName}
-                      </Link>
-                    )}
-                    {!menuItem.link && menuItem?.children && (
-                      <ul>{renderGroupLinks(menuItem.children)}</ul>
-                    )}
-                  </li>
-                )
-            )}
-          </ul>
+    <div className="flex gap-6 md:gap-10">
+      <Link href="/" className="flex items-center space-x-2">
+        <Icons.logo className="w-8 h-8" />
+        <span className="inline-block font-bold">
+          {"Next 13 Contentful Starter"}
+        </span>
+      </Link>
+      {items?.length ? (
+        <nav className="flex gap-6">
+          {items?.map(
+            (menuItem) =>
+              menuItem &&
+              menuItem.groupName && (
+                <>
+                  {menuItem.link ? (
+                    <Link
+                      key={menuItem.sys.id}
+                      href={`/${
+                        getFragmentData(PageLinkFieldsFragment, menuItem.link)
+                          .slug
+                      }`}
+                      className={cn("flex items-center text-sm font-medium")}
+                    >
+                      {menuItem.groupName}
+                    </Link>
+                  ) : (
+                    <span className="flex items-center text-sm font-medium">
+                      {menuItem.groupName}
+                    </span>
+                  )}
+                  {!menuItem.link && menuItem?.children && (
+                    <ul>{renderGroupLinks(menuItem.children)}</ul>
+                  )}
+                </>
+              )
+          )}
         </nav>
-      )}
-    </>
+      ) : null}
+    </div>
   );
 };
-
-export default Navigation;
