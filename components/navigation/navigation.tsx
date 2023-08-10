@@ -1,7 +1,7 @@
 import { FragmentType, graphql, getFragmentData } from "#/gql";
 import Link from "next/link";
 import { PageLinkFieldsFragment } from "../page";
-import cn from "#/lib/cn";
+import { cn } from "#/lib/utils";
 import { Icons } from "../icons";
 
 const MenuGroupFeaturedPagesFragment = graphql(/* GraphQL */ `

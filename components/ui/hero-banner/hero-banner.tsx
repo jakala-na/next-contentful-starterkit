@@ -65,10 +65,10 @@ export default function HeroBanner(
           </h1>
         )}
         {bodyText && <CtfRichtext {...bodyText} className={""} />}
-        {targetPage && (
+        {targetPage && ctaText && (
           <div className="mt-6">
-            <Button asChild>
-              <Link {...getPageLinkProps(targetPage)} />
+            <Button {...inspectorProps({ fieldId: "ctaText" })} asChild>
+              <Link {...getPageLinkProps(targetPage)}>{ctaText}</Link>
             </Button>
           </div>
         )}

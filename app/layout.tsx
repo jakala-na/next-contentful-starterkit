@@ -5,7 +5,7 @@ import { graphql } from "#/gql";
 import { Navigation } from "#/components/navigation";
 import "@contentful/live-preview/style.css";
 import { ContentfulPreviewProvider } from "#/components/contentful-preview-provider";
-import cn from "#/lib/cn";
+import { cn } from "#/lib/utils";
 import { fontSans } from "#/lib/fonts";
 import { SiteHeader } from "#/components/site-header";
 
@@ -38,7 +38,7 @@ export default async function RootLayout({
       <head />
       <body
         className={cn(
-          "min-h-screen bg-white font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
