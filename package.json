@@ -34,8 +34,8 @@
     "typescript": "4.9.3"
   },
   "devDependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "^15.0.0",
-    "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
+    "@badeball/cypress-cucumber-preprocessor": "^18.0.4",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "@cypress/webpack-dev-server": "^3.2.1",
     "@graphql-codegen/cli": "^4.0.1",
     "@graphql-codegen/client-preset": "^4.0.1",
@@ -62,7 +62,8 @@
     "storybook": "^7.2.3",
     "tailwindcss": "^3.3.3",
     "ts-loader": "^9.4.2",
-    "webpack": "^5.75.0"
+    "webpack": "^5.75.0",
+    "esbuild": "0.19.1"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [
@@ -74,7 +75,5 @@
     "html": {
       "enabled": true
     }
-  },
-  "readme": "ERROR: No README data found!",
-  "_id": "next13@0.1.0"
+  }
 }
