@@ -1,1 +1,1 @@
-export { default as HeroBanner } from "./hero-banner-ctf";
+export { HeroBannerCtf } from "./hero-banner-ctf";
