@@ -1,3 +1,3 @@
-export const CtfRichtext = (props: any) => {
+export const RichTextCtf = (props: any) => {
   return <>{"TODO: Implement CtfRichtext"}</>;
 };

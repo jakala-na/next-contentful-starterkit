@@ -26,9 +26,7 @@ export type DuplexProps = {
   data: FragmentType<typeof ComponentDuplexFieldsFragment>;
 };
 
-const HeroBanner: React.FC<DuplexProps> = (props) => {
+export const DuplexCtf: React.FC<DuplexProps> = (props) => {
   const data = getFragmentData(ComponentDuplexFieldsFragment, props.data);
   return <pre>{JSON.stringify(data, null, 2)}</pre>;
 };
-
-export default HeroBanner;

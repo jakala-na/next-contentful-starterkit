@@ -1,1 +1,1 @@
-export * from "./rich-text-ctf";
+export { RichTextCtf } from "./rich-text-ctf";
