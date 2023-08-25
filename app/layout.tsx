@@ -2,7 +2,6 @@ import { graphqlClient } from "../lib/graphqlClient";
 import { draftMode } from "next/headers";
 import "./globals.css";
 import { graphql } from "#/gql";
-import { Navigation } from "#/components/navigation";
 import "@contentful/live-preview/style.css";
 import { ContentfulPreviewProvider } from "#/components/contentful-preview-provider";
 import { cn } from "#/lib/utils";
