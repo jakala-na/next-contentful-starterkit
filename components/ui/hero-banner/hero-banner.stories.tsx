@@ -1,6 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "../button";
-
 import { HeroBanner } from "./hero-banner";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -16,8 +14,8 @@ const meta = {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     headline: { control: "text" },
-    imageUrl: { control: "text" },
     bodyText: { control: "text" },
+    image: { control: "object" },
   },
 } satisfies Meta<typeof HeroBanner>;
 
@@ -26,7 +24,10 @@ type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
   headline: "With great power comes great responsibility",
-  imageUrl: "https://picsum.photos/seed/picsum/1920/1080",
+  image: {
+    src: "https://picsum.photos/seed/picsum/1920/1080",
+    alt: "Placeholder image",
+  },
 };
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Default: Story = {
@@ -51,7 +52,6 @@ export const WithReactComponent: Story = {
 export const WithCta: Story = {
   args: {
     ...defaultArgs,
-    ctaText: "Learn more",
-    ctaLink: "https://google.com",
+    cta: { children: "Learn more", href: "https://google.com" },
   },
 };

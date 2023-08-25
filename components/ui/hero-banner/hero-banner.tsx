@@ -1,39 +1,33 @@
 import { ReactNode } from "react";
 import { Button } from "../button/button";
+import { Link, LinkProps } from "../link";
+import { Image, ImageProps } from "../image";
 
 interface HeroBannerProps {
   headline?: string | null;
   bodyText?: ReactNode;
-  imageUrl?: string | null;
-  imageAlt?: string | null;
-  ctaText?: string | null;
-  ctaLink?: string | null;
+  image?: ImageProps | null;
+  cta?: LinkProps | null;
   addAttributes?: (name: string) => object | null;
 }
 
 export function HeroBanner(props: HeroBannerProps) {
   const {
-    imageUrl,
-    imageAlt = "",
+    image,
     headline,
     bodyText,
-    ctaText,
-    ctaLink,
+    cta,
     addAttributes = () => ({}), // Default to no-op.
   } = props;
 
   return (
     <div className="relative min-h-[calc(100vh-9rem)] flex items-center">
-      {imageUrl && (
-        <img
+      {image && (
+        <Image
           {...addAttributes("image")}
+          {...image}
           className="-z-10 w-full h-[calc(100vh-9rem)] absolute object-cover object-center"
-          src={imageUrl}
-          // TODO: Add props back when we'll use next/image
-          // sizes={"100vw"}
-          // width={image?.width ?? 1200}
-          // height={image?.height ?? 800}
-          alt={imageAlt || ""}
+          alt={image.alt}
         />
       )}
       <div className="mx-auto pt-10 w-full max-w-[80rem] pl-5">
@@ -47,12 +41,11 @@ export function HeroBanner(props: HeroBannerProps) {
             {headline}
           </h1>
         )}
-        {bodyText}
-        {ctaLink && ctaText && (
+        {bodyText && <div {...addAttributes("bodyText")}>{bodyText}</div>}
+        {cta?.href && cta?.children && (
           <div className="mt-6">
             <Button {...addAttributes("ctaText")} asChild>
-              {/* TODO: Use next/link */}
-              <a href={ctaLink}>{ctaText}</a>
+              <Link {...cta} />
             </Button>
           </div>
         )}

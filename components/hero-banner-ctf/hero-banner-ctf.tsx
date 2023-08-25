@@ -10,15 +10,20 @@ export const ComponentHeroBannerFieldsFragment = graphql(/* GraphQL */ `
     headline
     bodyText {
       json
+      links {
+        assets {
+          block {
+            ...AssetFields
+          }
+        }
+      }
     }
     ctaText
     targetPage {
       ...PageLinkFields
     }
     image {
-      url
-      width
-      height
+      ...AssetFields
     }
     imageStyle
     heroSize

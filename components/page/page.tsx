@@ -1,4 +1,5 @@
 import { FragmentType, getFragmentData, graphql } from "#/gql";
+import { default as NextLink } from "next/link";
 
 export const PageLinkFieldsFragment = graphql(/* GraphQL */ `
   fragment PageLinkFields on Page {
@@ -19,15 +20,34 @@ export const PageLinkFieldsFragment = graphql(/* GraphQL */ `
   }
 `);
 
-export const getPageLinkProps = (
-  data: FragmentType<typeof PageLinkFieldsFragment>
-) => {
-  const fragment = getFragmentData(PageLinkFieldsFragment, data);
+export interface PageLinkProps {
+  data: FragmentType<typeof PageLinkFieldsFragment>;
+  children?: React.ReactNode;
+  [key: string]: any;
+}
+
+export const getPageLinkProps = ({
+  data: fragmentData,
+  children,
+  ...props
+}: PageLinkProps) => {
+  const data = getFragmentData(PageLinkFieldsFragment, fragmentData);
 
   return {
-    href: `/${fragment.slug}`,
-    as: `/${fragment.slug}`,
-    children: fragment.pageName,
+    href: `/${data.slug}`,
+    as: `/${data.slug}`,
+    children: children ?? data.pageName,
+    ...props,
+  };
+};
+
+export const getPageLinkChildProps = (props: PageLinkProps) => {
+  const linkProps = getPageLinkProps(props);
+
+  return {
+    ...linkProps,
+    children: <NextLink {...linkProps} />,
+    asChild: true,
   };
 };
 
