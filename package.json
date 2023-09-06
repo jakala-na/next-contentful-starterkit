@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
+    "postinstall": "husky install",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -27,8 +29,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "encoding": "^0.1.13",
-    "eslint": "8.29.0",
-    "eslint-config-next": "^14.1.0",
     "gql.tada": "^1.5.1",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
@@ -56,6 +56,7 @@
     "@storybook/nextjs": "^8.0.4",
     "@storybook/react": "^8.0.4",
     "@types/cypress-image-snapshot": "^3.1.6",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
     "autoprefixer": "^10.4.14",
     "axe-core": "^4.6.1",
     "chromatic": "^6.21.0",
@@ -63,12 +64,22 @@
     "cypress-axe": "^1.2.0",
     "cypress-image-snapshot": "^4.0.1",
     "esbuild": "0.20.1",
+    "eslint": "^8.48.0",
+    "eslint-config-next": "^14.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-storybook": "^0.8.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "postcss": "^8.4.27",
     "storybook": "^8.0.4",
+    "prettier": "^3.0.3",
     "tailwindcss": "^3.3.3",
     "ts-loader": "^9.4.2",
     "webpack": "^5.75.0"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [
