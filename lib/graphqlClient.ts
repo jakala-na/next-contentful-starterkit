@@ -1,6 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 
-const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}`;
+const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENVIRONMENT}`;
 
 export const graphqlClient = (preview: boolean) =>
   new GraphQLClient(graphqlEndpoint, {

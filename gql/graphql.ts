@@ -453,7 +453,7 @@ export enum AssetOrder {
   WidthDesc = 'width_DESC'
 }
 
-/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentCta) */
+/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentCta) */
 export type ComponentCta = Entry & {
   __typename?: 'ComponentCta';
   colorPalette?: Maybe<Scalars['String']['output']>;
@@ -469,50 +469,50 @@ export type ComponentCta = Entry & {
 };
 
 
-/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentCta) */
+/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentCta) */
 export type ComponentCtaColorPaletteArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentCta) */
+/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentCta) */
 export type ComponentCtaCtaTextArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentCta) */
+/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentCta) */
 export type ComponentCtaHeadlineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentCta) */
+/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentCta) */
 export type ComponentCtaInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentCta) */
+/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentCta) */
 export type ComponentCtaLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentCta) */
+/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentCta) */
 export type ComponentCtaSublineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentCta) */
+/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentCta) */
 export type ComponentCtaTargetPageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentCta) */
+/** Full-width container for creating visually distinct Calls-to-Action (CTAs) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentCta) */
 export type ComponentCtaUrlParametersArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -665,7 +665,7 @@ export type ComponentCtaSublineResources = {
 
 export type ComponentCtaTargetPage = Page;
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplex = Entry & {
   __typename?: 'ComponentDuplex';
   bodyText?: Maybe<ComponentDuplexBodyText>;
@@ -683,62 +683,62 @@ export type ComponentDuplex = Entry & {
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexBodyTextArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexColorPaletteArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexContainerLayoutArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexCtaTextArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexHeadlineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexImageStyleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentDuplex) */
+/** Full-width container for displaying side-by-side image and copy, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentDuplex) */
 export type ComponentDuplexTargetPageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -894,7 +894,7 @@ export enum ComponentDuplexOrder {
 
 export type ComponentDuplexTargetPage = Page;
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBanner = Entry & {
   __typename?: 'ComponentHeroBanner';
   bodyText?: Maybe<ComponentHeroBannerBodyText>;
@@ -912,62 +912,62 @@ export type ComponentHeroBanner = Entry & {
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerBodyTextArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerColorPaletteArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerCtaTextArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerHeadlineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerHeroSizeArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerImageStyleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentHeroBanner) */
+/** Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner) */
 export type ComponentHeroBannerTargetPageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1123,7 +1123,7 @@ export enum ComponentHeroBannerOrder {
 
 export type ComponentHeroBannerTargetPage = Page;
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlock = Entry & {
   __typename?: 'ComponentInfoBlock';
   block1Body?: Maybe<ComponentInfoBlockBlock1Body>;
@@ -1142,70 +1142,70 @@ export type ComponentInfoBlock = Entry & {
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockBlock1BodyArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockBlock1ImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockBlock2BodyArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockBlock2ImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockBlock3BodyArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockBlock3ImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockColorPaletteArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockHeadlineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentInfoBlock) */
+/** Full-width container for displaying short bits of generic information with optional icons/visuals [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentInfoBlock) */
 export type ComponentInfoBlockSublineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1417,7 +1417,7 @@ export enum ComponentInfoBlockOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentProductTable) */
+/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentProductTable) */
 export type ComponentProductTable = Entry & {
   __typename?: 'ComponentProductTable';
   contentfulMetadata: ContentfulMetadata;
@@ -1430,25 +1430,25 @@ export type ComponentProductTable = Entry & {
 };
 
 
-/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentProductTable) */
+/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentProductTable) */
 export type ComponentProductTableHeadlineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentProductTable) */
+/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentProductTable) */
 export type ComponentProductTableInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentProductTable) */
+/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentProductTable) */
 export type ComponentProductTableLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentProductTable) */
+/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentProductTable) */
 export type ComponentProductTableProductsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1459,7 +1459,7 @@ export type ComponentProductTableProductsCollectionArgs = {
 };
 
 
-/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentProductTable) */
+/** Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentProductTable) */
 export type ComponentProductTableSublineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1584,7 +1584,7 @@ export enum ComponentProductTableProductsCollectionOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentQuote) */
+/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentQuote) */
 export type ComponentQuote = Entry & {
   __typename?: 'ComponentQuote';
   colorPalette?: Maybe<Scalars['String']['output']>;
@@ -1599,44 +1599,44 @@ export type ComponentQuote = Entry & {
 };
 
 
-/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentQuote) */
+/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentQuote) */
 export type ComponentQuoteColorPaletteArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentQuote) */
+/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentQuote) */
 export type ComponentQuoteImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentQuote) */
+/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentQuote) */
 export type ComponentQuoteImagePositionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentQuote) */
+/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentQuote) */
 export type ComponentQuoteInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentQuote) */
+/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentQuote) */
 export type ComponentQuoteLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentQuote) */
+/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentQuote) */
 export type ComponentQuoteQuoteArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentQuote) */
+/** Full-width component for quotes, reviews and testimonials, includes multiple layout options [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentQuote) */
 export type ComponentQuoteQuoteAlignmentArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1770,7 +1770,7 @@ export type ComponentQuoteQuoteResources = {
   block: Array<ResourceLink>;
 };
 
-/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentTextBlock) */
+/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentTextBlock) */
 export type ComponentTextBlock = Entry & {
   __typename?: 'ComponentTextBlock';
   body?: Maybe<ComponentTextBlockBody>;
@@ -1784,37 +1784,37 @@ export type ComponentTextBlock = Entry & {
 };
 
 
-/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentTextBlock) */
+/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentTextBlock) */
 export type ComponentTextBlockBodyArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentTextBlock) */
+/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentTextBlock) */
 export type ComponentTextBlockColorPaletteArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentTextBlock) */
+/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentTextBlock) */
 export type ComponentTextBlockHeadlineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentTextBlock) */
+/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentTextBlock) */
 export type ComponentTextBlockInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentTextBlock) */
+/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentTextBlock) */
 export type ComponentTextBlockLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/componentTextBlock) */
+/** Constrained-width component for displaying ad-hoc paragraphs of text (FAQs, intros, descriptions) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentTextBlock) */
 export type ComponentTextBlockSublineArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -2012,7 +2012,7 @@ export enum EntryOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/footerMenu) */
+/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/footerMenu) */
 export type FooterMenu = Entry & {
   __typename?: 'FooterMenu';
   contentfulMetadata: ContentfulMetadata;
@@ -2028,25 +2028,25 @@ export type FooterMenu = Entry & {
 };
 
 
-/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/footerMenu) */
+/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/footerMenu) */
 export type FooterMenuFacebookLinkArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/footerMenu) */
+/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/footerMenu) */
 export type FooterMenuInstagramLinkArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/footerMenu) */
+/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/footerMenu) */
 export type FooterMenuInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/footerMenu) */
+/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/footerMenu) */
 export type FooterMenuLegalLinksArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -2054,19 +2054,19 @@ export type FooterMenuLegalLinksArgs = {
 };
 
 
-/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/footerMenu) */
+/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/footerMenu) */
 export type FooterMenuLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/footerMenu) */
+/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/footerMenu) */
 export type FooterMenuLinkedinLinkArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/footerMenu) */
+/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/footerMenu) */
 export type FooterMenuMenuItemsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -2077,7 +2077,7 @@ export type FooterMenuMenuItemsCollectionArgs = {
 };
 
 
-/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/footerMenu) */
+/** Navigation content type used for powering the Footer menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/footerMenu) */
 export type FooterMenuTwitterLinkArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -2288,7 +2288,7 @@ export type ImageTransformOptions = {
   width?: InputMaybe<Scalars['Dimension']['input']>;
 };
 
-/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/menuGroup) */
+/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/menuGroup) */
 export type MenuGroup = Entry & {
   __typename?: 'MenuGroup';
   contentfulMetadata: ContentfulMetadata;
@@ -2301,7 +2301,7 @@ export type MenuGroup = Entry & {
 };
 
 
-/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/menuGroup) */
+/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/menuGroup) */
 export type MenuGroupFeaturedPagesCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -2311,7 +2311,7 @@ export type MenuGroupFeaturedPagesCollectionArgs = {
 };
 
 
-/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/menuGroup) */
+/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/menuGroup) */
 export type MenuGroupGroupLinkArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -2319,19 +2319,19 @@ export type MenuGroupGroupLinkArgs = {
 };
 
 
-/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/menuGroup) */
+/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/menuGroup) */
 export type MenuGroupGroupNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/menuGroup) */
+/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/menuGroup) */
 export type MenuGroupInternalTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/menuGroup) */
+/** A group of items making up a section in the navigation menu [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/menuGroup) */
 export type MenuGroupLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
@@ -2531,7 +2531,7 @@ export enum MenuGroupOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** Navigation menu in the header [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/navigationMenu) */
+/** Navigation menu in the header [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/navigationMenu) */
 export type NavigationMenu = Entry & {
   __typename?: 'NavigationMenu';
   contentfulMetadata: ContentfulMetadata;
@@ -2542,19 +2542,19 @@ export type NavigationMenu = Entry & {
 };
 
 
-/** Navigation menu in the header [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/navigationMenu) */
+/** Navigation menu in the header [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/navigationMenu) */
 export type NavigationMenuInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Navigation menu in the header [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/navigationMenu) */
+/** Navigation menu in the header [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/navigationMenu) */
 export type NavigationMenuLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Navigation menu in the header [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/navigationMenu) */
+/** Navigation menu in the header [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/navigationMenu) */
 export type NavigationMenuMenuItemsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -2637,7 +2637,7 @@ export enum NavigationMenuOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/page) */
+/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/page) */
 export type Page = Entry & {
   __typename?: 'Page';
   contentfulMetadata: ContentfulMetadata;
@@ -2653,7 +2653,7 @@ export type Page = Entry & {
 };
 
 
-/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/page) */
+/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/page) */
 export type PageExtraSectionCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -2663,32 +2663,32 @@ export type PageExtraSectionCollectionArgs = {
 };
 
 
-/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/page) */
+/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/page) */
 export type PageInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/page) */
+/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/page) */
 export type PageLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/page) */
+/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/page) */
 export type PagePageContentArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/page) */
+/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/page) */
 export type PagePageNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/page) */
+/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/page) */
 export type PageSeoArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -2696,13 +2696,13 @@ export type PageSeoArgs = {
 };
 
 
-/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/page) */
+/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/page) */
 export type PageSlugArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/page) */
+/** Container that enables editors to publish a page, define its slug, select & arrange its content [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/page) */
 export type PageTopSectionCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -3320,7 +3320,7 @@ export type ResourceSys = {
   urn: Scalars['String']['output'];
 };
 
-/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/seo) */
+/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/seo) */
 export type Seo = Entry & {
   __typename?: 'Seo';
   contentfulMetadata: ContentfulMetadata;
@@ -3335,44 +3335,44 @@ export type Seo = Entry & {
 };
 
 
-/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/seo) */
+/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/seo) */
 export type SeoDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/seo) */
+/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/seo) */
 export type SeoImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/seo) */
+/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/seo) */
 export type SeoLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/seo) */
+/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/seo) */
 export type SeoNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/seo) */
+/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/seo) */
 export type SeoNoFollowArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/seo) */
+/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/seo) */
 export type SeoNoIndexArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/seo) */
+/** Open Graph (OG) meta tags for optimizing SEO visibility [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/seo) */
 export type SeoTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -3528,7 +3528,7 @@ export type SysFilter = {
   publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
-/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicBusinessInfo) */
+/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicBusinessInfo) */
 export type TopicBusinessInfo = Entry & {
   __typename?: 'TopicBusinessInfo';
   body?: Maybe<TopicBusinessInfoBody>;
@@ -3542,38 +3542,38 @@ export type TopicBusinessInfo = Entry & {
 };
 
 
-/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicBusinessInfo) */
+/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicBusinessInfo) */
 export type TopicBusinessInfoBodyArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicBusinessInfo) */
+/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicBusinessInfo) */
 export type TopicBusinessInfoFeaturedImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicBusinessInfo) */
+/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicBusinessInfo) */
 export type TopicBusinessInfoInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicBusinessInfo) */
+/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicBusinessInfo) */
 export type TopicBusinessInfoLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicBusinessInfo) */
+/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicBusinessInfo) */
 export type TopicBusinessInfoNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicBusinessInfo) */
+/** Container for ever-green content like About us, Career pages, FAQ, Knowledge base & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicBusinessInfo) */
 export type TopicBusinessInfoShortDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -3704,7 +3704,7 @@ export enum TopicBusinessInfoOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicPerson) */
+/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicPerson) */
 export type TopicPerson = Entry & {
   __typename?: 'TopicPerson';
   avatar?: Maybe<Asset>;
@@ -3720,50 +3720,50 @@ export type TopicPerson = Entry & {
 };
 
 
-/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicPerson) */
+/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicPerson) */
 export type TopicPersonAvatarArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicPerson) */
+/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicPerson) */
 export type TopicPersonBioArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicPerson) */
+/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicPerson) */
 export type TopicPersonCardStyleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicPerson) */
+/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicPerson) */
 export type TopicPersonInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicPerson) */
+/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicPerson) */
 export type TopicPersonLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicPerson) */
+/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicPerson) */
 export type TopicPersonLocationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicPerson) */
+/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicPerson) */
 export type TopicPersonNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicPerson) */
+/** Container for holding info about people (article authors, company leadership, quoted customers, etc.) [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicPerson) */
 export type TopicPersonWebsiteArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -3883,7 +3883,7 @@ export enum TopicPersonOrder {
   WebsiteDesc = 'website_DESC'
 }
 
-/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProduct) */
+/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProduct) */
 export type TopicProduct = Entry & {
   __typename?: 'TopicProduct';
   contentfulMetadata: ContentfulMetadata;
@@ -3898,20 +3898,20 @@ export type TopicProduct = Entry & {
 };
 
 
-/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProduct) */
+/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProduct) */
 export type TopicProductDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProduct) */
+/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProduct) */
 export type TopicProductFeaturedImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProduct) */
+/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProduct) */
 export type TopicProductFeaturesCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -3922,25 +3922,25 @@ export type TopicProductFeaturesCollectionArgs = {
 };
 
 
-/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProduct) */
+/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProduct) */
 export type TopicProductInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProduct) */
+/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProduct) */
 export type TopicProductLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProduct) */
+/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProduct) */
 export type TopicProductNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProduct) */
+/** Container for product-specific information like card definitions, features, benefits, prices & more [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProduct) */
 export type TopicProductPriceArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -3984,7 +3984,7 @@ export type TopicProductDescriptionResources = {
   block: Array<ResourceLink>;
 };
 
-/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProductFeature) */
+/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProductFeature) */
 export type TopicProductFeature = Entry & {
   __typename?: 'TopicProductFeature';
   contentfulMetadata: ContentfulMetadata;
@@ -3997,31 +3997,31 @@ export type TopicProductFeature = Entry & {
 };
 
 
-/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProductFeature) */
+/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProductFeature) */
 export type TopicProductFeatureInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProductFeature) */
+/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProductFeature) */
 export type TopicProductFeatureLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProductFeature) */
+/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProductFeature) */
 export type TopicProductFeatureLongDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProductFeature) */
+/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProductFeature) */
 export type TopicProductFeatureNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/ze3gapa2wwaz/content_types/topicProductFeature) */
+/** Sub-container for product features enabling re-use of generic features across different products [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/topicProductFeature) */
 export type TopicProductFeatureShortDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
