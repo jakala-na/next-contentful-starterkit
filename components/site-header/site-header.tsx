@@ -19,11 +19,7 @@ export function SiteHeader(props: { navigationData: any }) {
           .
         </div>
       )}
-      <header className="bg-background sticky top-0 z-40 w-full border-b">
-        <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-          <Navigation data={props.navigationData} />
-        </div>
-      </header>
+      <Navigation data={props.navigationData} />
     </>
   );
 }
