@@ -1,4 +1,4 @@
-# Next 13 Contentful Starterkit
+# Next Contentful Starterkit
 
 This starterkit is meant to provide a good mix of best practices for working with Contentful in NextJS. It doesn't pretend to be the only way, but it is meant to address the main painpoints concerning data-fetching, component resolution, live previews, configuration management and App development. We believe a good starterkit is use-case based, but there is no good way to model all use-cases in same starter, so our use-case is a marketing or corporate site, it fact, it is modeled around Contentful's own [Marketing Template](https://www.contentful.com/starter-templates/marketing-website/) content model.
 
