@@ -1,4 +1,5 @@
-import { FragmentType, getFragmentData, graphql } from "#/gql";
+import { FragmentType, getFragmentData, graphql } from '#/gql';
+import { DuplexCtfClient } from './duplex-ctf-client';
 
 export const ComponentDuplexFieldsFragment = graphql(/* GraphQL */ `
   fragment ComponentDuplexFields on ComponentDuplex {
@@ -15,10 +16,11 @@ export const ComponentDuplexFieldsFragment = graphql(/* GraphQL */ `
       ...PageLinkFields
     }
     image {
-      url
+      ...AssetFields
     }
     imageStyle
     colorPalette
+    containerLayout
   }
 `);
 
@@ -28,5 +30,5 @@ export type DuplexProps = {
 
 export const DuplexCtf: React.FC<DuplexProps> = (props) => {
   const data = getFragmentData(ComponentDuplexFieldsFragment, props.data);
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  return <DuplexCtfClient data={data} />;
 };
