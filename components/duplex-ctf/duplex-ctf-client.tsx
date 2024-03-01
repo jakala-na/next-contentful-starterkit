@@ -28,6 +28,13 @@ export const DuplexCtfClient: React.FC<{
       }
       imageAlignment={data.containerLayout ? 'left' : 'right'}
       addAttributes={addAttributes}
+      cta={
+        data.targetPage &&
+        getPageLinkChildProps({
+          data: data.targetPage,
+          children: data.ctaText,
+        })
+      }
     />
   );
 };
