@@ -1,31 +1,58 @@
 import { cn } from '#/lib/utils';
+import { getColorConfigFromPalette } from '#/theme';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ReactNode } from 'react';
 import { Button } from '../button';
 import { Image, ImageProps } from '../image';
 import { Link, LinkProps } from '../link';
 
-const duplexVariants = cva('', {
+const layoutVariants = cva('flex w-11/12 max-w-6xl', {
   variants: {
-    variant: {
-      default: 'bg-white',
-    },
     imageAlignment: {
       left: 'flex-row',
       right: 'flex-row-reverse',
     },
   },
   defaultVariants: {
-    variant: 'default',
     imageAlignment: 'left',
   },
 });
 
-interface DuplexProps extends VariantProps<typeof duplexVariants> {
+const imageStyleVariants = cva('w-full', {
+  variants: {
+    imageHeight: {
+      full: 'h-full object-cover object-center',
+      fixed: '',
+    },
+  },
+  defaultVariants: {
+    imageHeight: 'full',
+  },
+});
+
+const imageContainerVariants = cva(
+  ['w-1/2', 'rounded-lg', 'overflow-hidden', 'shadow-lg'],
+  {
+    variants: {
+      imageHeight: {
+        full: '',
+        fixed: 'flex self-center',
+      },
+    },
+    defaultVariants: {
+      imageHeight: 'full',
+    },
+  }
+);
+
+interface DuplexProps
+  extends VariantProps<typeof layoutVariants>,
+    VariantProps<typeof imageStyleVariants> {
   headline?: string | null;
   bodyText?: ReactNode;
   image?: ImageProps | null;
   cta?: LinkProps | null;
+  colorPalette?: string | null;
   addAttributes?: (name: string) => object | null;
 }
 
@@ -35,30 +62,52 @@ export function Duplex(props: DuplexProps) {
     headline,
     bodyText,
     cta,
-    variant,
     imageAlignment,
+    imageHeight,
+    colorPalette,
     addAttributes = () => ({}), // Default to no-op.
   } = props;
+  const colorConfig = getColorConfigFromPalette(colorPalette || '');
 
   return (
-    <div className='flex justify-center py-12 bg-gray-100'>
-      <div className={cn(duplexVariants({ imageAlignment }), 'flex w-11/12 max-w-6xl rounded-lg overflow-hidden shadow-lg')}>
+    <div
+      className='flex justify-center py-12'
+      style={{ backgroundColor: colorConfig.backgroundColor }}
+    >
+      <div className={cn(layoutVariants({ imageAlignment }))}>
         {image && (
-          <div className='w-1/2'>
+          <div
+            className={cn(imageContainerVariants({ imageHeight }))}
+          >
             <Image
               {...addAttributes('image')}
               {...image}
-              className='w-full h-full object-cover object-center'
+              className={cn(imageStyleVariants({ imageHeight }))}
               alt={image.alt}
             />
           </div>
         )}
-        <div className={cn(duplexVariants({ variant }), 'w-1/2 p-12')}>
-          {headline && <h2 className='text-4xl font-bold mb-4'>{headline}</h2>}
-          {bodyText && <div className='text-lg'>{bodyText}</div>}
+        <div className='w-1/2 p-12'>
+          {headline && (
+            <h2
+              className='text-4xl font-bold mb-4'
+              style={{ color: colorConfig.headlineColor }}
+            >
+              {headline}
+            </h2>
+          )}
+          {bodyText && (
+            <div className='text-lg' style={{ color: colorConfig.textColor }}>
+              {bodyText}
+            </div>
+          )}
           {cta?.href && cta?.children && (
-          <div className="mt-6">
-              <Button {...addAttributes("ctaText")} asChild>
+            <div className='mt-6'>
+              <Button
+                variant={colorConfig.buttonColor}
+                {...addAttributes('ctaText')}
+                asChild
+              >
                 <Link {...cta} />
               </Button>
             </div>

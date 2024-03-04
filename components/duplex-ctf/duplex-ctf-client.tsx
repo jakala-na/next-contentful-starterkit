@@ -27,6 +27,7 @@ export const DuplexCtfClient: React.FC<{
         })
       }
       imageAlignment={data.containerLayout ? 'left' : 'right'}
+      imageHeight={data.imageStyle ? 'fixed' : 'full'}
       addAttributes={addAttributes}
       cta={
         data.targetPage &&
@@ -35,6 +36,7 @@ export const DuplexCtfClient: React.FC<{
           children: data.ctaText,
         })
       }
+      colorPalette={data.colorPalette}
     />
   );
 };

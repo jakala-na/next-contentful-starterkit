@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Duplex } from './duplex';
 
+import { colorConfigs } from '#/theme';
+
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
   title: 'Components/Duplex',
@@ -17,6 +19,18 @@ const meta = {
     headline: { control: 'text' },
     bodyText: { control: 'text' },
     image: { control: 'object' },
+    colorPalette: {
+      control: 'select',
+      options: Object.keys(colorConfigs).map((p) => p.replace('palette-', '')),
+    },
+    imageHeight: {
+      control: {type: 'radio'},
+      options: ['full', 'fixed'],
+    },
+    imageAlignment: {
+      control: {type: 'radio'},
+      options: ['left', 'right'],
+    }
   },
 } satisfies Meta<typeof Duplex>;
 
