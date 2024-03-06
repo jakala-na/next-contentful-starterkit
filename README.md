@@ -9,7 +9,7 @@ The starterkit's cornerstone is our data-fetching solution and it's typesafety. 
 * **NextJS App Router** usage for modern **React Server Components** approach - we think this is the way the industry will move and it is a huge benefit for traditional websites to do data fetching only on the server and keep client-bundle lean
 * **GraphQL** + **GraphQL Codegen** with **client-preset** plugin + Typescript for data fetching - we believe the best way to benefit from a GraphQL backend on the frontend is to use Typescript and be informed of what is available to you when you do data fetching, and GraphQL Codegen ensures you are not “lying to yourself” in your types by generating them from the API.
 * **Cypress testing** - we include a configured Cypress.io testing suite with ability to do both Component and E2E testing using Cucumber/BDD style syntax (optionally you can use traditional spec files too)
-Component Renderer - example of how to take a full tree of components and render them using a mapping of contentTypes to React components
+* **Component Renderer** - example of how to take a full tree of components and render them using a mapping of contentTypes to React components
 * **Draft Mode** - preview mode for your application for Contentful Preview API usage
 * Use of **Contentful Live Preview** - contentful live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in Contentful
 
