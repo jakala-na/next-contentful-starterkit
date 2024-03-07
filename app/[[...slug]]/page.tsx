@@ -1,4 +1,6 @@
 import { ComponentRenderer } from "#/components/component-renderer";
+import onSubscribeFormAction from "#/components/forms/server-actions/subscription.action";
+import { SubscriptionForm } from "#/components/forms/SubscriptionForm";
 import { graphql } from "#/gql";
 import { graphqlClient } from "#/lib/graphqlClient";
 import { draftMode } from "next/headers";
@@ -49,6 +51,9 @@ export default async function LandingPage({
     <div>
       <>Page slug: {slug}</>
       {topComponents ? <ComponentRenderer data={topComponents} /> : null}
+      <div className="mx-auto max-w-xl py-4">
+        <SubscriptionForm onFormAction={onSubscribeFormAction} />
+      </div>
     </div>
   );
 }
