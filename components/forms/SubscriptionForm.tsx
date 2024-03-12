@@ -17,20 +17,14 @@ import {
 } from '../ui/form';
 import { useFormState } from 'react-dom';
 import { useRef } from 'react';
-export const SubscriptionForm = ({ onFormAction }: {
-  onFormAction: (prevState: {
-    message: string;
-    user?: z.infer<typeof subscriptionSchema>;
-    issues?: string[];
-  }, data: FormData) => Promise<{
-    message: string;
-    user?: z.infer<typeof subscriptionSchema>;
-    issues?: string[];
-  }>;
-}) => {
-  const [state, formAction] = useFormState(onFormAction, {
-    message: '',
-  })
+import onSubscribeFormAction from './server-actions/subscription.action';
+
+const initialState = {
+  message: '',
+};
+
+export const SubscriptionForm = () => {
+  const [state, formAction] = useFormState(onSubscribeFormAction, initialState)
   const form = useForm<z.infer<typeof subscriptionSchema>>({
     resolver: zodResolver(subscriptionSchema),
     defaultValues: {
@@ -41,24 +35,27 @@ export const SubscriptionForm = ({ onFormAction }: {
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
-    <Form {...form}>
-      <form
-        ref={formRef}
-        action={formAction}
-        onSubmit={form.handleSubmit(() => formRef?.current?.submit())}
-      >
-        <FormField control={form.control} name="email" render={({ field }) => (
-          <FormItem>
-            <FormLabel>Email</FormLabel>
-            <FormControl>
-              <Input placeholder='' {...field} />
-            </FormControl>
-            <FormDescription />
-            <FormMessage />
-          </FormItem>
-        )} />
-        <Button type='submit'>Subscribe</Button>
-      </form>
-    </Form>
+    <>
+      {state?.message && <p>{state.message}</p>}
+      <Form {...form}>
+        <form
+          ref={formRef}
+          action={formAction}
+          onSubmit={form.handleSubmit(() => formRef?.current?.submit())}
+        >
+          <FormField control={form.control} name="email" render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder='' {...field} />
+              </FormControl>
+              <FormDescription />
+              <FormMessage />
+            </FormItem>
+          )} />
+          <Button type='submit'>Subscribe</Button>
+        </form>
+      </Form>
+    </>
   );
 };
