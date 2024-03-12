@@ -11,7 +11,6 @@ const onSubscribeFormAction = async (prevState: {
   const data = Object.fromEntries(formData);
   const parsed = subscriptionSchema.safeParse(data);
   if (parsed.success) {
-    console.log(data);
     return { message: "Subscribed successfully!", user: parsed.data }
   } else {
     return {
