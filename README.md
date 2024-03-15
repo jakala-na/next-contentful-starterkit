@@ -31,6 +31,9 @@ CONTENTFUL_DELIVERY_API=<delivery api key>
 CONTENTFUL_PREVIEW_API=<preview api key>****
 CONTENTFUL_ENVIRONMENT=master
 CONTENTFUL_PREVIEW_SECRET=secret
+NEXT_PUBLIC_ALGOLIA_APP_ID=algolia app idd
+NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY=algolia search api key
+ALGOLIA_SEARCH_ADMIN_KEY=algolia admin key
 ```
 
 ### Dev Server
