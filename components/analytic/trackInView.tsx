@@ -2,11 +2,11 @@
 
 import { useAnalytics } from 'use-analytics';
 import { InView } from 'react-intersection-observer';
-import { EventsMap } from './tracking-events';
+import { EventData, EventName } from './tracking-events';
 
 interface TrackInViewProps {
-  eventName:  keyof EventsMap;
-  eventData: Record<keyof EventsMap[keyof EventsMap], any>;
+  eventName: EventName;
+  eventData: EventData<EventName>;
   children: React.ReactNode;
 }
 

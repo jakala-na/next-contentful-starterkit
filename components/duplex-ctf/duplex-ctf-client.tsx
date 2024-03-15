@@ -7,9 +7,17 @@ import { RichTextCtf } from '#/components/rich-text-ctf';
 import { useComponentPreview } from '../hooks/use-component-preview';
 import { getImageChildProps } from '../image-ctf';
 import { TrackInView } from '../analytic/trackInView';
+import { createAnalyticEvent } from '../analytic/tracking-events';
 import { getPageLinkChildProps } from '../page';
 import { Duplex } from '../ui/duplex';
 import { ComponentDuplexFieldsFragment } from './duplex-ctf';
+
+// We can create analytic event typed data on top level
+// using createAnalyticEvent helper.
+const analyticInViewEvent = createAnalyticEvent('duplexViewed', {
+  category: 'duplexViewed',
+  type: 'ctf',
+});
 
 export const DuplexCtfClient: React.FC<{
   data: ResultOf<typeof ComponentDuplexFieldsFragment>;
@@ -17,11 +25,8 @@ export const DuplexCtfClient: React.FC<{
   const { data: originalData } = props;
   const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
 
-  return (
-    <TrackInView
-      eventName='duplexViewed'
-      eventData={{ category: 'duplexViewed' }}
-    >
+    return (
+    <TrackInView {...analyticInViewEvent}>
       <Duplex
         headline={data.headline}
         bodyText={
