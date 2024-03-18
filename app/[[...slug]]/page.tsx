@@ -37,6 +37,7 @@ export default async function LandingPage({
 }: {
   params: { slug: string[] };
 }) {
+  console.log(params, 'params');
   const slug = params.slug?.join("/") ?? "home";
 
   const { isEnabled: isDraftMode } = draftMode();
