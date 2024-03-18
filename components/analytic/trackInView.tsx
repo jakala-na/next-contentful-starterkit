@@ -17,13 +17,16 @@ export const TrackInView = ({
 }: TrackInViewProps) => {
   const { track } = useAnalytics();
   const onComponentIntersection = (inView: boolean) => {
-    console.log(inView);
     if (inView) {
       track(eventName, eventData);
     }
   };
   return (
-    <InView triggerOnce onChange={(inView) => onComponentIntersection(inView)}>
+    <InView
+      triggerOnce
+      threshold={1}
+      onChange={(inView) => onComponentIntersection(inView)}
+    >
       {children}
     </InView>
   );
