@@ -54,6 +54,7 @@ interface DuplexProps extends VariantProps<typeof layoutVariants>, VariantProps<
   cta?: LinkProps | null;
   colorPalette?: string | null;
   addAttributes?: (name: string) => object | null;
+  onClickAnalyticEvent?: () => void,
 }
 
 export function Duplex(props: DuplexProps) {
@@ -66,6 +67,7 @@ export function Duplex(props: DuplexProps) {
     imageHeight,
     colorPalette,
     addAttributes = () => ({}), // Default to no-op.
+    onClickAnalyticEvent,
   } = props;
   const colorConfig = getColorConfigFromPalette(colorPalette || '');
 
@@ -94,8 +96,13 @@ export function Duplex(props: DuplexProps) {
             </div>
           )}
           {cta?.href && cta?.children && (
-            <div className="mt-6">
-              <Button variant={colorConfig.buttonColor} {...addAttributes('ctaText')} asChild>
+            <div className='mt-6'>
+              <Button
+                variant={colorConfig.buttonColor}
+                {...addAttributes('ctaText')}
+                asChild
+                onClick={() => {onClickAnalyticEvent?.()}}
+              >
                 <Link {...cta} />
               </Button>
             </div>

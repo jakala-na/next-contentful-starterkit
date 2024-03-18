@@ -11,21 +11,32 @@ import { createAnalyticEvent } from '../analytic/tracking-events';
 import { getPageLinkChildProps } from '../page';
 import { Duplex } from '../ui/duplex';
 import { ComponentDuplexFieldsFragment } from './duplex-ctf';
+import { useAnalytics } from 'use-analytics';
 
 // We can create analytic event typed data on top level
 // using createAnalyticEvent helper.
+// It will us type-safely create event name and event data.
 const analyticInViewEvent = createAnalyticEvent('duplexViewed', {
   category: 'duplexViewed',
   type: 'ctf',
 });
 
+// For the direct track() usage from hook we can destructure the object
+// returned from createAnalyticEvent helper to have separate values as props.
+const { eventName: analyticClickEventName, eventData: analyticClickEventData } =
+  createAnalyticEvent('duplexClicked', {
+    category: 'duplexClicked',
+    type: 'ctf',
+  });
+
 export const DuplexCtfClient: React.FC<{
   data: ResultOf<typeof ComponentDuplexFieldsFragment>;
 }> = (props) => {
   const { data: originalData } = props;
-  const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
-
-    return (
+  const { data, addAttributes } =
+    useComponentPreview<ComponentDuplexFieldsFragment>(originalData);
+  const { track } = useAnalytics();
+  return (
     <TrackInView {...analyticInViewEvent}>
       <Duplex
         headline={data.headline}
@@ -55,6 +66,9 @@ export const DuplexCtfClient: React.FC<{
           })
         }
         colorPalette={data.colorPalette}
+        onClickAnalyticEvent={() =>
+          track(analyticClickEventName, analyticClickEventData)
+        }
       />
     </TrackInView>
   );
