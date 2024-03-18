@@ -11,11 +11,10 @@ const analyticsInstance = Analytics({
 
 export function AnalyticsComponent({ children }: PropsWithChildren) {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     analyticsInstance.page();
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return (
     <AnalyticsProvider instance={analyticsInstance}>

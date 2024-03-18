@@ -17,7 +17,7 @@ inside the analytics context.
 ### Page view tracking
 
 Page view will automatically triggered after the page will be loaded depending
-on the NextJS router `pathname` or `searchParams` changes.
+on the NextJS router `pathname` changes.
 
 ### Component InView tracking
 
