@@ -17,7 +17,7 @@ export const DuplexCtfClient: React.FC<{
     return (
     <Duplex
       headline={data.headline}
-      bodyText={data.bodyText && <RichTextCtf {...data.bodyText} />}
+      bodyText={data.bodyText && <div {...addAttributes("bodyText")}><RichTextCtf {...data.bodyText} /></div>}
       image={
         data.image &&
         getImageChildProps({
