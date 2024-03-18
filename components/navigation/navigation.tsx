@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageLinkFieldsFragment } from "../page";
 import { cn } from "#/lib/utils";
 import { Icons } from "../icons";
+import HeaderSearch from "#/components/header-search/header-search";
 
 const MenuGroupFeaturedPagesFragment = graphql(/* GraphQL */ `
   fragment MenuGroupFields on MenuGroupFeaturedPagesCollection {
@@ -126,7 +127,7 @@ export const Navigation = (props: NavigationProps) => {
           )}
         </div>
         <div className="flex items-center justify-center sm:justify-end">
-          <div className="flex items-center bg-gray-100 dark:bg-zinc-700 rounded-md p-2">
+          <div className="flex items-center bg-gray-100 dark:bg-zinc-700 rounded-md p-2 relative">
             <svg
               className="h-5 w-5 text-gray-400"
               fill="none"
@@ -142,11 +143,7 @@ export const Navigation = (props: NavigationProps) => {
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.3-4.3" />
             </svg>
-            <input
-              className="ml-2 bg-transparent text-sm text-gray-600 dark:text-gray-300"
-              placeholder="Search"
-              type="search"
-            />
+            <HeaderSearch/>
           </div>
           <svg
             className=" h-6 w-6 ml-6 text-gray-500 dark:text-gray-200"
