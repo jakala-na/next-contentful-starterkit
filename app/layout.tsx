@@ -15,18 +15,18 @@ export default async function RootLayout({
 }) {
   const { isEnabled: isDraftMode } = draftMode();
 
-  const layoutQuery = graphql(/* GraphQL */ `
-    query Layout($locale: String, $preview: Boolean) {
-      navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
-        ...NavigationFields
-      }
-    }
-  `);
-
-  const layoutData = await graphqlClient(isDraftMode).request(layoutQuery, {
-    locale: "en-US",
-    preview: isDraftMode,
-  });
+  // const layoutQuery = graphql(/* GraphQL */ `
+  //   query Layout($locale: String, $preview: Boolean) {
+  //     navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+  //       ...NavigationFields
+  //     }
+  //   }
+  // `);
+  //
+  // const layoutData = await graphqlClient(isDraftMode).request(layoutQuery, {
+  //   locale: "en-US",
+  //   preview: isDraftMode,
+  // });
 
   return (
     <html lang="en">
@@ -43,7 +43,7 @@ export default async function RootLayout({
       >
         <ContentfulPreviewProvider isDraftMode={isDraftMode}>
           <div className="relative flex min-h-screen flex-col">
-            <SiteHeader navigationData={layoutData.navigationMenuCollection} />
+            {/*<SiteHeader navigationData={layoutData.navigationMenuCollection} />*/}
             <div className="flex-1">{children}</div>
           </div>
         </ContentfulPreviewProvider>
