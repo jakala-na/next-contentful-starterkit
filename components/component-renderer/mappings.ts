@@ -7,4 +7,7 @@ export const componentMap = {
   ComponentDuplex: dynamic(() =>
     import("#/components/duplex-ctf").then((mod) => mod.DuplexCtf)
   ),
+  Accordion: dynamic(() =>
+      import("#/components/accordion").then((mod) => mod.AccordionCtf)
+  ),
 };
