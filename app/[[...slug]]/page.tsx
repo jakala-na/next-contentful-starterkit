@@ -17,6 +17,7 @@ const getPage = async (slug: string, locale: string, preview = false) => {
             items {
               ...ComponentHeroBannerFields
               ...ComponentDuplexFields
+              ...ComponentAccordionFields
             }
           }
         }
