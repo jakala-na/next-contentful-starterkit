@@ -1,12 +1,13 @@
-import { graphqlClient } from "../lib/graphqlClient";
+import { graphqlClient } from "#/lib/graphqlClient";
 import { draftMode } from "next/headers";
 import "./globals.css";
-import { graphql } from "#/gql";
+import { graphql } from "gql.tada";
 import "@contentful/live-preview/style.css";
 import { ContentfulPreviewProvider } from "#/components/contentful-preview-provider";
 import { cn } from "#/lib/utils";
 import { fontSans } from "#/lib/fonts";
 import { SiteHeader } from "#/components/site-header";
+import { NavigationFieldsFragment } from "#/components/navigation";
 
 export default async function RootLayout({
   children,
@@ -15,13 +16,16 @@ export default async function RootLayout({
 }) {
   const { isEnabled: isDraftMode } = draftMode();
 
-  const layoutQuery = graphql(/* GraphQL */ `
-    query Layout($locale: String, $preview: Boolean) {
-      navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
-        ...NavigationFields
+  const layoutQuery = graphql(
+    `
+      query Layout($locale: String, $preview: Boolean) {
+        navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+          ...NavigationFields
+        }
       }
-    }
-  `);
+    `,
+    [NavigationFieldsFragment]
+  );
 
   const layoutData = await graphqlClient(isDraftMode).request(layoutQuery, {
     locale: "en-US",
