@@ -1,7 +1,7 @@
 import { ImageCtf } from "#/components/image-ctf";
-import { FragmentType, getFragmentData, graphql } from "#/gql";
+import { FragmentOf, readFragment, graphql } from "gql.tada";
 
-export const AssetFieldsFragment = graphql(/* GraphQL */ `
+export const AssetFieldsFragment = graphql(`
   fragment AssetFields on Asset {
     __typename
     sys {
@@ -17,11 +17,11 @@ export const AssetFieldsFragment = graphql(/* GraphQL */ `
 `);
 
 export type AssetCtfProps = {
-  data: FragmentType<typeof AssetFieldsFragment>;
+  data: FragmentOf<typeof AssetFieldsFragment>;
 };
 
 export const AssetCtf = (props: AssetCtfProps) => {
-  const data = getFragmentData(AssetFieldsFragment, props.data);
+  const data = readFragment(AssetFieldsFragment, props.data);
 
   const { url, contentType } = data;
 
