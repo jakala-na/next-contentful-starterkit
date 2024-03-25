@@ -5,10 +5,10 @@ const config: CodegenConfig = {
   overwrite: true,
   schema: [
     {
-      [`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}`]:
+      [`https://graphql.contentstack.com/stacks/${process.env.CONTENTSTACK_API_KEY}\?environment=${process.env.CONTENTSTACK_ENVIRONMENT}`]:
         {
           headers: {
-            Authorization: `Bearer ${process.env.CONTENTFUL_DELIVERY_API}`,
+            access_token: `${process.env.CONTENTSTACK_DELIVERY_TOKEN}`,
           },
         },
     },

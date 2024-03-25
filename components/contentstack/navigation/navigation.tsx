@@ -1,8 +1,8 @@
 import { FragmentOf, graphql, readFragment } from "gql.tada";
 import Link from "next/link";
-import { PageLinkFieldsFragment } from "../page";
+import { PageLinkFieldsFragment } from "#/components/contentstack/page";
 import { cn } from "#/lib/utils";
-import { Icons } from "../icons";
+import { Icons } from "#/components/contentstack/icons";
 
 const MenuGroupFeaturedPagesFragment = graphql(
   `
@@ -46,7 +46,7 @@ export type NavigationProps = {
 
 export const Navigation = (props: NavigationProps) => {
   const data = readFragment(NavigationFieldsFragment, props.data);
-  const items = data.items[0]?.menuItemsCollection?.items;
+  const items : any[] = [];//data.items[0]?.menuItemsCollection?.items;@TODO
 
   // Fragment Masking is forcing us to split fragments to match our components or our helper functions.
   // https://github.com/dotansimha/graphql-code-generator/discussions/8554#discussioncomment-4131776
@@ -54,24 +54,24 @@ export const Navigation = (props: NavigationProps) => {
     group: FragmentOf<typeof MenuGroupFeaturedPagesFragment>
   ) => {
     const collection = readFragment(MenuGroupFeaturedPagesFragment, group);
-    return collection?.items?.map((menuItem) => {
-      // const page = getFragmentData(PageLinkFieldsFragment, menuItem);
-      if (!menuItem) return null;
-
-      const page = readFragment(PageLinkFieldsFragment, menuItem);
-
-      if (!page.slug) return null;
-      return (
-        <li
-          key={page.sys.id}
-          className={cn(
-            "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
-          )}
-        >
-          <Link href={page.slug}>{page.pageName}</Link>
-        </li>
-      );
-    });
+    // return collection?.items?.map((menuItem) => {@TODO
+    //   // const page = getFragmentData(PageLinkFieldsFragment, menuItem);
+    //   if (!menuItem) return null;
+    //
+    //   const page = readFragment(PageLinkFieldsFragment, menuItem);
+    //
+    //   if (!page.slug) return null;
+    //   return (
+    //     <li
+    //       key={page.sys.id}
+    //       className={cn(
+    //         "block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+    //       )}
+    //     >
+    //       <Link href={page.slug}>{page.pageName}</Link>
+    //     </li>
+    //   );
+    // });
   };
 
   return (
@@ -121,7 +121,7 @@ export const Navigation = (props: NavigationProps) => {
                               "absolute left-0 mt-0 w-48 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-md shadow-lg py-2 invisible group-hover:visible"
                             )}
                           >
-                            {renderGroupLinks(menuItem.children)}
+                            {/*{renderGroupLinks(menuItem.children)}@TODO*/}
                           </ul>
                         )}
                       </li>

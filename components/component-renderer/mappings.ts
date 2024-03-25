@@ -2,9 +2,9 @@ import dynamic from "next/dynamic";
 
 export const componentMap = {
   ComponentHeroBanner: dynamic(() =>
-    import("#/components/hero-banner-ctf").then((mod) => mod.HeroBannerCtf)
+    import("#/components/contentstack/hero-banner").then((mod) => mod.HeroBanner)
   ),
   ComponentDuplex: dynamic(() =>
-    import("#/components/duplex-ctf").then((mod) => mod.DuplexCtf)
+    import("#/components/contentstack/duplex").then((mod) => mod.Duplex)
   ),
 };

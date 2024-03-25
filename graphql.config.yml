@@ -1,7 +1,0 @@
-schema: "gql/graphql.schema.json"
-documents:
-  [
-    "app/**/*.{graphql,js,ts,jsx,tsx}",
-    "components/**/*.{graphql,js,ts,jsx,tsx}",
-    "lib/**/*.{graphql,js,ts,jsx,tsx}",
-  ]

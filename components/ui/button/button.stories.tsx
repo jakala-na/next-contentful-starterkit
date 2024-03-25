@@ -1,4 +1,4 @@
-import { Icons } from "#/components/icons";
+import { Icons } from "#/components/contentstack/icons";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from "./button";

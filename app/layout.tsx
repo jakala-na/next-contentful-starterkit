@@ -1,12 +1,9 @@
-import { graphqlClient } from "../lib/graphqlClient";
 import { draftMode } from "next/headers";
 import "./globals.css";
-import { graphql } from "#/gql";
-import "@contentful/live-preview/style.css";
-import { ContentfulPreviewProvider } from "#/components/contentful-preview-provider";
+
 import { cn } from "#/lib/utils";
 import { fontSans } from "#/lib/fonts";
-import { SiteHeader } from "#/components/site-header";
+import { SiteHeader } from "#/components/contentstack/site-header";
 
 export default async function RootLayout({
   children,
@@ -41,12 +38,12 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <ContentfulPreviewProvider isDraftMode={isDraftMode}>
+        {/*<ContentfulPreviewProvider isDraftMode={isDraftMode}>*/}
           <div className="relative flex min-h-screen flex-col">
             {/*<SiteHeader navigationData={layoutData.navigationMenuCollection} />*/}
             <div className="flex-1">{children}</div>
           </div>
-        </ContentfulPreviewProvider>
+        {/*</ContentfulPreviewProvider>*/}
       </body>
     </html>
   );

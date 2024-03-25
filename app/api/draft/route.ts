@@ -19,14 +19,14 @@ export async function GET(request: Request) {
   const page = await getPageSlug(slug, locale, true);
 
   // If the slug doesn't exist prevent draft mode from being enabled
-  if (!page || !page.slug) {
-    return new Response("Invalid slug", { status: 401 });
-  }
+  // if (!page || !page.slug) {
+  //   return new Response("Invalid slug", { status: 401 });
+  // }@TODO
 
   // Enable Draft Mode by setting the cookie
   draftMode().enable();
 
   // Redirect to the path from the fetched post
   // We don't redirect to searchParams.slug as that might lead to open redirect vulnerabilities
-  redirect("/" + page.slug);
+  //redirect("/" + page.slug);@TODO
 }

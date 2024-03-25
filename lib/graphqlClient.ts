@@ -1,12 +1,15 @@
-const port = process.env.PORT || 8000;
+import { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { DocumentNode, print } from 'graphql';
 
-const constructGraphQLEndpoint = (query: string, variables: Record<string, any> = {}, operationName?: string): string => {
+
+
+const constructGraphQLEndpoint = (query: DocumentNode, variables: any, operationName?: string): string => {
   const baseUrl = `https://graphql.contentstack.com/stacks/${process.env.CONTENTSTACK_API_KEY}`;
   const environment = process.env.CONTENTSTACK_ENVIRONMENT || 'production';
 
   const params = new URLSearchParams({
     environment: environment,
-    query: encodeURIComponent(query),
+    query: encodeURIComponent(print(query)),
     variables: encodeURIComponent(JSON.stringify(variables)),
   });
 
@@ -19,7 +22,11 @@ const constructGraphQLEndpoint = (query: string, variables: Record<string, any> 
 
 export const graphqlClient = (preview: boolean = false) => {
   return {
-    request: async (query: string, variables: Record<string, any> = {}, operationName?: string) => {
+    request: async function execute<Result = any, Variables = any>(
+      query: TypedDocumentNode<Result, Variables>,
+      variables: Variables,
+      operationName?: string
+    ): Promise<Result> {
       console.log('QUERY', query, variables);
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -42,8 +49,8 @@ export const graphqlClient = (preview: boolean = false) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const json = await response.json();
-      console.log('RESPONSE', json);
-      return json;
+      console.log('RESPONSE', JSON.stringify(json, null, 2));
+      return json.data;
     }
   };
 };

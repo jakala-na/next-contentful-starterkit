@@ -1,10 +1,10 @@
 import { ComponentRenderer } from "#/components/component-renderer";
-import { graphql } from "#/gql";
+import { graphql } from "#/lib/graphql";
 import { graphqlClient } from "#/lib/graphqlClient";
 import { draftMode } from "next/headers";
 
 const getPage = async (slug: string, locale: string, preview = false) => {
-  console.log('URA!');
+
   // const pageQuery = graphql(/* GraphQL */ `
   //   query PageQuery($slug: String, $locale: String, $preview: Boolean) {
   //     pageCollection(
@@ -23,53 +23,90 @@ const getPage = async (slug: string, locale: string, preview = false) => {
   //       }
   //     }
   //   }
-  // `);
+  // `);@TODO
 
-  // const pageQuery = graphql(/* GraphQL */ `query PageQuery {
-  //   all_alex_test(where: {url: "/home"}) {
-  //     total
-  //     items {
-  //       title
-  //       system {
-  //         created_at
-  //         updated_at
-  //       }
-  //       url
-  //       flexible {
-  //         description
-  //         title
-  //       }
-  //       json_rte {
-  //         json
-  //       }
-  //       markdown
-  //       rich_text_editor
-  //     }
-  //   }
-  // }`);
-
-  const pageQuery = /* GraphQL */ `query PageQuery {
-    all_alex_test(where: {url: "/home"}) {
-      total
-      items {
-        title
-        system {
-          created_at
-          updated_at
-        }
-        url
-        flexible {
-          description
-          title
-        }
-        json_rte {
-          json
-        }
-        markdown
-        rich_text_editor
+  const pageQuery = graphql(/* GraphQL */ `query PageQuery {
+      all_page(where: {url: "/"}) {
+          items {
+              page_components {
+                  ... on PagePageComponentsHeroBanner {
+                      __typename
+                      hero_banner {
+                          banner_description
+                          banner_title
+                          bg_color
+                          text_color
+                      }
+                  }
+                  ... on PagePageComponentsContactDetails {
+                      __typename
+                      contact_details {
+                          address
+                          email
+                          phone
+                      }
+                  }
+                  ... on PagePageComponentsSectionWithBuckets {
+                      __typename
+                      section_with_buckets {
+                          bucket_tabular
+                          description
+                          title_h2
+                      }
+                  }
+                  ... on PagePageComponentsSection {
+                      __typename
+                      section {
+                          title_h2
+                          image_alignment
+                          description
+                      }
+                  }
+                  ... on PagePageComponentsSectionWithHtmlCode {
+                      __typename
+                      section_with_html_code {
+                          title
+                          html_code_alignment
+                          html_code
+                      }
+                  }
+                  ... on PagePageComponentsSectionWithCards {
+                      __typename
+                      section_with_cards {
+                          cards {
+                              title_h3
+                          }
+                      }
+                  }
+                  ... on PagePageComponentsFromBlog {
+                      __typename
+                  }
+                  ... on PagePageComponentsOurTeam {
+                      __typename
+                  }
+                  ... on PagePageComponentsWidget {
+                      __typename
+                  }
+              }
+              seo {
+                  canonical_url
+                  description
+                  no_follow
+                  title
+                  no_index
+              }
+              title
+              url
+              system {
+                  updated_at
+                  created_at
+              }
+          }
       }
-    }
-  }`;
+  }
+  `);
+
+
 
   return (
     await graphqlClient(preview).request(pageQuery, {
@@ -77,7 +114,8 @@ const getPage = async (slug: string, locale: string, preview = false) => {
       preview,
       slug,
     })
-  ).pageCollection?.items?.[0];
+  ).all_page ?? null;
+
 };
 
 export default async function LandingPage({
@@ -90,13 +128,13 @@ export default async function LandingPage({
   const { isEnabled: isDraftMode } = draftMode();
 
   const pageData = await getPage(slug, "en-US", isDraftMode);
-  console.log('PAGE DATA', pageData);
+  console.log('PAGE DATA', JSON.stringify(pageData, null, 2));
 
-  const topComponents = pageData?.topSectionCollection?.items;
+  const topComponents = pageData?.items;
 
   return (
     <div>
-      <>Page slug: {slug}</>
+      <>Page slug: {slug} - {pageData?.items?.[0]?.title}</>
       {topComponents ? <ComponentRenderer data={topComponents} /> : null}
     </div>
   );

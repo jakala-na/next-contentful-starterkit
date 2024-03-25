@@ -3,7 +3,7 @@ import { getColorConfigFromPalette } from '#/theme';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ReactNode } from 'react';
 import { Button } from '../button';
-import { Image, ImageProps } from '../image';
+import { Image, ImageProps } from '..//image';
 import { Link, LinkProps } from '../link';
 
 const layoutVariants = cva('flex w-11/12 max-w-6xl', {

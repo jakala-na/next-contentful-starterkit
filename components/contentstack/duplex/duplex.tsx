@@ -1,7 +1,7 @@
 import { FragmentOf, readFragment, graphql } from "gql.tada";
-import { DuplexCtfClient } from "./duplex-ctf-client";
-import { AssetFieldsFragment } from "../asset-ctf";
-import { PageLinkFieldsFragment } from "../page";
+import { DuplexClient } from "./duplex-client";
+import { AssetFieldsFragment } from "#/components/contentstack/asset";
+import { PageLinkFieldsFragment } from "#/components/contentstack/page";
 
 export const ComponentDuplexFieldsFragment = graphql(
   `
@@ -33,7 +33,7 @@ export type DuplexProps = {
   data: FragmentOf<typeof ComponentDuplexFieldsFragment>;
 };
 
-export const DuplexCtf: React.FC<DuplexProps> = (props) => {
+export const Duplex: React.FC<DuplexProps> = (props) => {
   const data = readFragment(ComponentDuplexFieldsFragment, props.data);
-  return <DuplexCtfClient data={data} />;
+  return <DuplexClient data={data} />;
 };

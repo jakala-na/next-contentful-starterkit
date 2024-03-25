@@ -1,4 +1,4 @@
-import { Navigation } from "#/components/navigation";
+import { Navigation } from "#/components/contentstack/navigation";
 import { draftMode } from "next/headers";
 
 // TODO: Fix fragment unmasking to type navigationData, if possible.
@@ -19,7 +19,7 @@ export function SiteHeader(props: { navigationData: any }) {
           .
         </div>
       )}
-      <Navigation data={props.navigationData} />
+      {/*<Navigation data={props.navigationData} /> @TODO */}
     </>
   );
 }

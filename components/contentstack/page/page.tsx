@@ -46,7 +46,7 @@ export const getPageLinkChildProps = (props: PageLinkProps) => {
 
   return {
     ...linkProps,
-    children: <NextLink {...linkProps} />,
+    // children: <NextLink {...linkProps} />,@TODO
     asChild: true,
   };
 };

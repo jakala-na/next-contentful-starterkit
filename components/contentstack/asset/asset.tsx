@@ -1,40 +1,37 @@
-import { ImageCtf } from "#/components/image-ctf";
+import { Image } from "#/components/contentstack/image";
 import { FragmentOf, readFragment, graphql } from "gql.tada";
 
 export const AssetFieldsFragment = graphql(`
-  fragment AssetFields on Asset {
+  fragment AssetFields on SysAsset {
     __typename
-    sys {
-      id
-    }
-    contentType
+    unique_identifier
+    content_type
     title
     url
-    width
-    height
     description
   }
 `);
 
-export type AssetCtfProps = {
+export type AssetProps = {
   data: FragmentOf<typeof AssetFieldsFragment>;
 };
 
-export const AssetCtf = (props: AssetCtfProps) => {
+export const Asset = (props: AssetProps) => {
   const data = readFragment(AssetFieldsFragment, props.data);
 
-  const { url, contentType } = data;
+  const { url, content_type, title } = data;
 
   if (!url) {
     return null;
   }
 
-  if (!contentType || !url) {
+  if (!content_type || !url) {
     return null;
   }
 
-  if (contentType.startsWith("image")) {
-    return <ImageCtf {...props} />;
+  if (content_type.startsWith("image")) {
+
+    return <Image {...props} />;//@TODO Pass proper alt
   }
 
   // TODO: Handle other file types.
