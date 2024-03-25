@@ -20,18 +20,6 @@ const config: CodegenConfig = {
     "lib/**/*.{graphql,js,ts,jsx,tsx}",
   ],
   generates: {
-    "./gql/": {
-      preset: "client",
-      plugins: [],
-      presetConfig: {
-        fragmentMasking: { unmaskFunctionName: "getFragmentData" },
-        dedupeFragments: true,
-        skipTypename: true, // graphql-request does not add __typename to queries automatically.
-      },
-    },
-    "./gql/graphql.schema.json": {
-      plugins: ["introspection"],
-    },
     "./gql/schema.graphql": {
       plugins: ["schema-ast"],
     },
