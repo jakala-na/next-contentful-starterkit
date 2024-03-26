@@ -20,6 +20,7 @@
     "@types/react-dom": "^18.2.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "date-fns": "^3.6.0",
     "encoding": "^0.1.13",
     "eslint": "8.29.0",
     "eslint-config-next": "^14.1.0",
