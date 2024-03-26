@@ -1,10 +1,9 @@
-
-import { theme } from './tailwind.config';
+import { theme } from './tailwind.config'
 interface ColorConfigInterface {
-  headlineColor: string;
-  textColor: string;
-  backgroundColor: string;
-  buttonColor: 'default' | 'secondary';
+  headlineColor: string
+  textColor: string
+  backgroundColor: string
+  buttonColor: 'default' | 'secondary'
 }
 
 export const colorConfigs: { [key: string]: ColorConfigInterface } = {
@@ -50,12 +49,14 @@ export const colorConfigs: { [key: string]: ColorConfigInterface } = {
     backgroundColor: theme.colors.black,
     buttonColor: 'secondary',
   },
-};
+}
 
-export const getColorConfigFromPalette = (palette: string): ColorConfigInterface => {
+export const getColorConfigFromPalette = (
+  palette: string
+): ColorConfigInterface => {
   if (colorConfigs[`palette-${palette}`] === undefined) {
-    return colorConfigs['palette-1. White (#FFFFFF)'];
+    return colorConfigs['palette-1. White (#FFFFFF)']
   }
 
-  return colorConfigs[`palette-${palette}`];
-};
+  return colorConfigs[`palette-${palette}`]
+}

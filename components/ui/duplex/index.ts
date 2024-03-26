@@ -1,1 +1,1 @@
-export * from './duplex';
+export * from './duplex'

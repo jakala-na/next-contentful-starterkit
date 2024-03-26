@@ -1,32 +1,32 @@
-import { componentMap } from "./mappings";
+import { componentMap } from './mappings'
 
 export default function ComponentRenderer({
   data,
 }: {
-  data: any; // @TODO: Fixme
+  data: any // @TODO: Fixme
 }) {
   if (Array.isArray(data)) {
     return (
       <>
         {data.map((item) => {
           if (!item?.sys?.id) {
-            return null;
+            return null
           }
 
-          return <ComponentRenderer key={item.sys.id} data={item} />;
+          return <ComponentRenderer key={item.sys.id} data={item} />
         })}
       </>
-    );
+    )
   }
 
-  if (!data?.__typename) return null;
+  if (!data?.__typename) return null
 
   // @TODO: Fix typings for componentMap.
   // @ts-ignore
-  const Component = componentMap[data.__typename];
+  const Component = componentMap[data.__typename]
   if (Component) {
-    return <Component data={data} />;
+    return <Component data={data} />
   }
 
-  return null;
+  return null
 }

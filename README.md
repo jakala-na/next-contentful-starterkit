@@ -6,32 +6,35 @@ The starterkit's cornerstone is our data-fetching solution and it's typesafety. 
 
 ## Features
 
-* **NextJS App Router** usage for modern **React Server Components** approach - we think this is the way the industry will move and it is a huge benefit for traditional websites to do data fetching only on the server and keep client-bundle lean
-* **GraphQL** + **GraphQL Codegen** with **client-preset** plugin + Typescript for data fetching - we believe the best way to benefit from a GraphQL backend on the frontend is to use Typescript and be informed of what is available to you when you do data fetching, and GraphQL Codegen ensures you are not “lying to yourself” in your types by generating them from the API.
-* **Cypress testing** - we include a configured Cypress.io testing suite with ability to do both Component and E2E testing using Cucumber/BDD style syntax (optionally you can use traditional spec files too)
-* **Component Renderer** - example of how to take a full tree of components and render them using a mapping of contentTypes to React components
-* **Draft Mode** - preview mode for your application for ContentStack Preview API usage
-* Use of **ContentStack Live Preview** - ContentStack live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in ContentStack
+- **NextJS App Router** usage for modern **React Server Components** approach - we think this is the way the industry will move and it is a huge benefit for traditional websites to do data fetching only on the server and keep client-bundle lean
+- **GraphQL** + **GraphQL Codegen** with **client-preset** plugin + Typescript for data fetching - we believe the best way to benefit from a GraphQL backend on the frontend is to use Typescript and be informed of what is available to you when you do data fetching, and GraphQL Codegen ensures you are not “lying to yourself” in your types by generating them from the API.
+- **Cypress testing** - we include a configured Cypress.io testing suite with ability to do both Component and E2E testing using Cucumber/BDD style syntax (optionally you can use traditional spec files too)
+- **Component Renderer** - example of how to take a full tree of components and render them using a mapping of contentTypes to React components
+- **Draft Mode** - preview mode for your application for ContentStack Preview API usage
+- Use of **ContentStack Live Preview** - ContentStack live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in ContentStack
 
 ## Getting Started
 
 Clone the repo of course ;)
 
 ### ContentStack access
+
 To develop locally, you will want to connect to a ContentStack instance that has the same data model as we use to develop, there are 2 ways to do that:
+
 1. You could get access to an existing space that follows ContentStack Marketing Template content model, for example a collegue could share his space with you
 2. You could create your own space with https://www.contentful.com/starter-templates/marketing-website/. Keep in mind, new templates today can only be deployed on brand new ContentStack accounts, so you might have to create a new account with a new email to do that, but this shouldn't be a problem, as it's free.
 
 ### Configure environment
 
 Create .env.local in root directory of the repo with the following contents:
+
 ```
 CONTENTSTACK_API_KEY = <api_key_of_your_stack>
 CONTENTSTACK_DELIVERY_TOKEN = <delivery_token_of_the_environment>
 CONTENTSTACK_ENVIRONMENT = <environment_name>
 # By default branch=main, if a branch is not provided
 # CONTENTSTACK_BRANCH = <your_branch_name>
-# By default region=us, if a region is not provided 
+# By default region=us, if a region is not provided
 # CONTENTSTACK_REGION = <your_region_name>
 
 
@@ -43,27 +46,29 @@ CONTENTFUL_PREVIEW_SECRET=secret
 
 CONTENTSTACK_PREVIEW_TOKEN = <preview_token_linked_with_delivery_token>
 CONTENTSTACK_PREVIEW_HOST = rest-preview.contentstack.com
-CONTENTSTACK_APP_HOST = app.contentstack.com 
-CONTENTSTACK_API_HOST = api.contentstack.io 
-CONTENTSTACK_LIVE_PREVIEW = true 
+CONTENTSTACK_APP_HOST = app.contentstack.com
+CONTENTSTACK_API_HOST = api.contentstack.io
+CONTENTSTACK_LIVE_PREVIEW = true
 #By default the live preview feature is enabled for this project. To disable it, set "CONTENTSTACK_LIVE_PREVIEW= false".
-CONTENTSTACK_LIVE_EDIT_TAGS = false 
+CONTENTSTACK_LIVE_EDIT_TAGS = false
 #By default live editing tags are disabled for this project. To enable it, set “CONTENTSTACK_LIVE_EDIT_TAGS= true”.
 ```
 
 ### Dev Server
 
-```bash
+````bash
 yarn install
 
 ```bash
 yarn dev
-```
+````
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Caveats
-* Currently the app is unstyled and styling was not priority, but that should not scare you as the data-fetching and rendering should still work
-* There are only 2 components now, so most pages have blank content because they don't have the components implemented, we test things on homepage now
+
+- Currently the app is unstyled and styling was not priority, but that should not scare you as the data-fetching and rendering should still work
+- There are only 2 components now, so most pages have blank content because they don't have the components implemented, we test things on homepage now
 
 ## NextJS Docs
 

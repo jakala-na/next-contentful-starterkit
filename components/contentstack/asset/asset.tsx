@@ -1,5 +1,5 @@
-import { Image } from "#/components/contentstack/image";
-import { FragmentOf, readFragment, graphql } from "gql.tada";
+import { Image } from '#/components/contentstack/image'
+import { FragmentOf, readFragment, graphql } from 'gql.tada'
 
 export const AssetFieldsFragment = graphql(`
   fragment AssetFields on SysAsset {
@@ -10,31 +10,30 @@ export const AssetFieldsFragment = graphql(`
     url
     description
   }
-`);
+`)
 
 export type AssetProps = {
-  data: FragmentOf<typeof AssetFieldsFragment>;
-};
+  data: FragmentOf<typeof AssetFieldsFragment>
+}
 
 export const Asset = (props: AssetProps) => {
-  const data = readFragment(AssetFieldsFragment, props.data);
+  const data = readFragment(AssetFieldsFragment, props.data)
 
-  const { url, content_type, title } = data;
+  const { url, content_type, title } = data
 
   if (!url) {
-    return null;
+    return null
   }
 
   if (!content_type || !url) {
-    return null;
+    return null
   }
 
-  if (content_type.startsWith("image")) {
-
-    return <Image {...props} />;//@TODO Pass proper alt
+  if (content_type.startsWith('image')) {
+    return <Image {...props} /> //@TODO Pass proper alt
   }
 
   // TODO: Handle other file types.
 
-  return null;
-};
+  return null
+}

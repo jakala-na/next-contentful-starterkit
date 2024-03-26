@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { Duplex } from './duplex';
+import { Duplex } from './duplex'
 
-import { colorConfigs } from '#/theme';
+import { colorConfigs } from '#/theme'
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
@@ -24,18 +24,18 @@ const meta = {
       options: Object.keys(colorConfigs).map((p) => p.replace('palette-', '')),
     },
     imageHeight: {
-      control: {type: 'radio'},
+      control: { type: 'radio' },
       options: ['full', 'fixed'],
     },
     imageAlignment: {
-      control: {type: 'radio'},
+      control: { type: 'radio' },
       options: ['left', 'right'],
-    }
+    },
   },
-} satisfies Meta<typeof Duplex>;
+} satisfies Meta<typeof Duplex>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 const defaultArgs = {
   headline: 'With great power comes great responsibility',
@@ -45,32 +45,32 @@ const defaultArgs = {
   },
   bodyText:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, libero eget ultricies aliquam, nisl nunc ultricies nunc, vitae ultricies nisl nunc eget nunc. Donec auctor, libero eget ultricies aliquam, nisl nunc ultricies nunc, vitae ultricies nisl nunc eget nunc.',
-};
+}
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Default: Story = {
   args: {
     ...defaultArgs,
   },
-};
+}
 
 export const WithCta: Story = {
   args: {
     ...defaultArgs,
     cta: { children: 'Learn more', href: 'https://google.com' },
   },
-};
+}
 
 export const WithoutHeadline: Story = {
   args: {
     ...defaultArgs,
     headline: '',
   },
-};
+}
 
 export const ImageRight: Story = {
   args: {
     ...defaultArgs,
     imageAlignment: 'right',
   },
-};
+}

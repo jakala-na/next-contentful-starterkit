@@ -1,1 +1,1 @@
-export { Duplex } from "./duplex";
+export { Duplex } from './duplex'

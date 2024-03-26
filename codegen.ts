@@ -1,4 +1,4 @@
-import type { CodegenConfig } from "@graphql-codegen/cli";
+import type { CodegenConfig } from '@graphql-codegen/cli'
 
 const config: CodegenConfig = {
   watch: true,
@@ -15,15 +15,15 @@ const config: CodegenConfig = {
   ],
   ignoreNoDocuments: true,
   documents: [
-    "app/**/*.{graphql,js,ts,jsx,tsx}",
-    "components/**/*.{graphql,js,ts,jsx,tsx}",
-    "lib/**/*.{graphql,js,ts,jsx,tsx}",
+    'app/**/*.{graphql,js,ts,jsx,tsx}',
+    'components/**/*.{graphql,js,ts,jsx,tsx}',
+    'lib/**/*.{graphql,js,ts,jsx,tsx}',
   ],
   generates: {
-    "./gql/schema.graphql": {
-      plugins: ["schema-ast"],
+    './gql/schema.graphql': {
+      plugins: ['schema-ast'],
     },
   },
-};
+}
 
-export default config;
+export default config

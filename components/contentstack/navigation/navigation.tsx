@@ -1,8 +1,8 @@
-import { FragmentOf, graphql, readFragment } from "gql.tada";
-import Link from "next/link";
-import { PageLinkFieldsFragment } from "#/components/contentstack/page";
-import { cn } from "#/lib/utils";
-import { Icons } from "#/components/contentstack/icons";
+import { FragmentOf, graphql, readFragment } from 'gql.tada'
+import Link from 'next/link'
+import { PageLinkFieldsFragment } from '#/components/contentstack/page'
+import { cn } from '#/lib/utils'
+import { Icons } from '#/components/contentstack/icons'
 
 const MenuGroupFeaturedPagesFragment = graphql(
   `
@@ -13,7 +13,7 @@ const MenuGroupFeaturedPagesFragment = graphql(
     }
   `,
   [PageLinkFieldsFragment]
-);
+)
 
 export const NavigationFieldsFragment = graphql(
   `
@@ -38,22 +38,22 @@ export const NavigationFieldsFragment = graphql(
     }
   `,
   [PageLinkFieldsFragment, MenuGroupFeaturedPagesFragment]
-);
+)
 
 export type NavigationProps = {
-  data: FragmentOf<typeof NavigationFieldsFragment>;
-};
+  data: FragmentOf<typeof NavigationFieldsFragment>
+}
 
 export const Navigation = (props: NavigationProps) => {
-  const data = readFragment(NavigationFieldsFragment, props.data);
-  const items : any[] = [];//data.items[0]?.menuItemsCollection?.items;@TODO
+  const data = readFragment(NavigationFieldsFragment, props.data)
+  const items: any[] = [] //data.items[0]?.menuItemsCollection?.items;@TODO
 
   // Fragment Masking is forcing us to split fragments to match our components or our helper functions.
   // https://github.com/dotansimha/graphql-code-generator/discussions/8554#discussioncomment-4131776
   const renderGroupLinks = (
     group: FragmentOf<typeof MenuGroupFeaturedPagesFragment>
   ) => {
-    const collection = readFragment(MenuGroupFeaturedPagesFragment, group);
+    const collection = readFragment(MenuGroupFeaturedPagesFragment, group)
     // return collection?.items?.map((menuItem) => {@TODO
     //   // const page = getFragmentData(PageLinkFieldsFragment, menuItem);
     //   if (!menuItem) return null;
@@ -72,7 +72,7 @@ export const Navigation = (props: NavigationProps) => {
     //     </li>
     //   );
     // });
-  };
+  }
 
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-white dark:bg-zinc-800">
@@ -101,7 +101,7 @@ export const Navigation = (props: NavigationProps) => {
                               ).slug
                             }`}
                             className={cn(
-                              "block text-sm font-medium text-gray-900 dark:text-gray-100"
+                              'block text-sm font-medium text-gray-900 dark:text-gray-100'
                             )}
                           >
                             {menuItem.groupName}
@@ -109,7 +109,7 @@ export const Navigation = (props: NavigationProps) => {
                         ) : (
                           <span
                             className={cn(
-                              "block text-sm font-medium text-gray-900 dark:text-gray-100"
+                              'block text-sm font-medium text-gray-900 dark:text-gray-100'
                             )}
                           >
                             {menuItem.groupName}
@@ -118,7 +118,7 @@ export const Navigation = (props: NavigationProps) => {
                         {!menuItem.link && menuItem?.children && (
                           <ul
                             className={cn(
-                              "absolute left-0 mt-0 w-48 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-md shadow-lg py-2 invisible group-hover:visible"
+                              'absolute left-0 mt-0 w-48 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-md shadow-lg py-2 invisible group-hover:visible'
                             )}
                           >
                             {/*{renderGroupLinks(menuItem.children)}@TODO*/}
@@ -204,5 +204,5 @@ export const Navigation = (props: NavigationProps) => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}

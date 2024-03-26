@@ -1,21 +1,22 @@
-"use client";
+'use client'
 
-import { Duplex } from "#/components/ui/duplex";
-import { RichText } from "#/components/contentstack/rich-text";
-import { getPageLinkChildProps } from "#/components/contentstack/page";
-import { useComponentPreview } from "#/components/hooks/use-component-preview";
-import { getImageChildProps } from "#/components/contentstack/image";
-import { ComponentDuplexFieldsFragment } from "./duplex";
-import { ResultOf } from "gql.tada";
+import { Duplex } from '#/components/ui/duplex'
+import { RichText } from '#/components/contentstack/rich-text'
+import { getPageLinkChildProps } from '#/components/contentstack/page'
+import { useComponentPreview } from '#/components/hooks/use-component-preview'
+import { getImageChildProps } from '#/components/contentstack/image'
+import { ComponentDuplexFieldsFragment } from './duplex'
+import { ResultOf } from 'gql.tada'
 
 export const DuplexClient: React.FC<{
-  data: ResultOf<typeof ComponentDuplexFieldsFragment>;
+  data: ResultOf<typeof ComponentDuplexFieldsFragment>
 }> = (props) => {
-  const { data: originalData } = props;
+  const { data: originalData } = props
   // const { data, addAttributes } =
   //   useComponentPreview(originalData);//useComponentPreview<typeof originalData>(originalData);@TODO Make ContentStack Preview
 
-  return (<></>
+  return (
+    <></>
     // <Duplex
     //   headline={data.headline}
     //   bodyText={
@@ -45,5 +46,5 @@ export const DuplexClient: React.FC<{
     //   }
     //   colorPalette={data.colorPalette}
     // />
-  );
-};
+  )
+}
