@@ -11,7 +11,8 @@
     "codegen": "DOTENV_CONFIG_PATH='./.env.local' graphql-codegen --require dotenv/config --config codegen.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_6c8f830efe6cc9d"
+    "chromatic": "npx chromatic --project-token=chpt_6c8f830efe6cc9d",
+    "postinstall": "husky"
   },
   "dependencies": {
     "@contentstack/utils": "^1.3.3",
