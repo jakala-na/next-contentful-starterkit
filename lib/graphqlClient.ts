@@ -1,4 +1,4 @@
-import { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { TadaDocumentNode } from 'gql.tada';
 import { DocumentNode, print } from 'graphql';
 
 
@@ -23,7 +23,7 @@ const constructGraphQLEndpoint = (query: DocumentNode, variables: any, operation
 export const graphqlClient = (preview: boolean = false) => {
   return {
     request: async function execute<Result = any, Variables = any>(
-      query: TypedDocumentNode<Result, Variables>,
+      query: TadaDocumentNode,
       variables: Variables,
       operationName?: string
     ): Promise<Result> {
