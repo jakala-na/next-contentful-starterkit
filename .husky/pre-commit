@@ -1,5 +1,2 @@
 echo "Pre-commit hook!"
-yarn format
 yarn lint-staged
-
-exit 1

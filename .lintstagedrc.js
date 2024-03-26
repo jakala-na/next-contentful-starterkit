@@ -1,10 +1,13 @@
 const path = require('path')
 
 const buildEslintCommand = (filenames) =>
-  `next lint --fix --file ${filenames
-    .map((f) => path.relative(process.cwd(), f))
-    .join(' --file ')}`
+  filenames.map(
+    (f) => `next lint --fix --file ${path.relative(process.cwd(), f)}`
+  )
+
+const buildPrettierCommand = (filenames) =>
+  filenames.map((f) => `prettier --write '${f}'`)
 
 module.exports = {
-  '*.{js,jsx,ts,tsx}': [buildEslintCommand],
+  '*.{js,jsx,ts,tsx}': [buildEslintCommand, buildPrettierCommand],
 }
