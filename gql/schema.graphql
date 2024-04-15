@@ -1,3 +1,234 @@
+"""
+[See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/accordion)
+"""
+type Accordion implements Entry {
+  contentfulMetadata: ContentfulMetadata!
+  expandType(locale: String): String
+  heading(locale: String): String
+  internalName(locale: String): String
+  itemsCollection(limit: Int = 100, locale: String, order: [AccordionItemsCollectionOrder], preview: Boolean, skip: Int = 0, where: AccordionItemFilter): AccordionItemsCollection
+  linkedFrom(allowedLocales: [String]): AccordionLinkingCollections
+  sys: Sys!
+}
+
+type AccordionCollection {
+  items: [Accordion]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input AccordionFilter {
+  AND: [AccordionFilter]
+  OR: [AccordionFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  expandType: String
+  expandType_contains: String
+  expandType_exists: Boolean
+  expandType_in: [String]
+  expandType_not: String
+  expandType_not_contains: String
+  expandType_not_in: [String]
+  heading: String
+  heading_contains: String
+  heading_exists: Boolean
+  heading_in: [String]
+  heading_not: String
+  heading_not_contains: String
+  heading_not_in: [String]
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  items: cfAccordionItemNestedFilter
+  itemsCollection_exists: Boolean
+  sys: SysFilter
+}
+
+"""
+Accordion component child item. Designed to be used only as a part of the Accordion component [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/accordionItem)
+"""
+type AccordionItem implements Entry {
+  body(locale: String): AccordionItemBody
+  contentfulMetadata: ContentfulMetadata!
+  heading(locale: String): String
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): AccordionItemLinkingCollections
+  sys: Sys!
+}
+
+type AccordionItemBody {
+  json: JSON!
+  links: AccordionItemBodyLinks!
+}
+
+type AccordionItemBodyAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type AccordionItemBodyEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type AccordionItemBodyLinks {
+  assets: AccordionItemBodyAssets!
+  entries: AccordionItemBodyEntries!
+  resources: AccordionItemBodyResources!
+}
+
+type AccordionItemBodyResources {
+  block: [AccordionItemBodyResourcesBlock!]!
+  hyperlink: [AccordionItemBodyResourcesHyperlink!]!
+  inline: [AccordionItemBodyResourcesInline!]!
+}
+
+type AccordionItemBodyResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type AccordionItemBodyResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type AccordionItemBodyResourcesInline implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type AccordionItemCollection {
+  items: [AccordionItem]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input AccordionItemFilter {
+  AND: [AccordionItemFilter]
+  OR: [AccordionItemFilter]
+  body_contains: String
+  body_exists: Boolean
+  body_not_contains: String
+  contentfulMetadata: ContentfulMetadataFilter
+  heading: String
+  heading_contains: String
+  heading_exists: Boolean
+  heading_in: [String]
+  heading_not: String
+  heading_not_contains: String
+  heading_not_in: [String]
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+}
+
+type AccordionItemLinkingCollections {
+  accordionCollection(limit: Int = 100, locale: String, order: [AccordionItemLinkingCollectionsAccordionCollectionOrder], preview: Boolean, skip: Int = 0): AccordionCollection
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum AccordionItemLinkingCollectionsAccordionCollectionOrder {
+  expandType_ASC
+  expandType_DESC
+  heading_ASC
+  heading_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum AccordionItemOrder {
+  heading_ASC
+  heading_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type AccordionItemsCollection {
+  items: [AccordionItem]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum AccordionItemsCollectionOrder {
+  heading_ASC
+  heading_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type AccordionLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageCollection(limit: Int = 100, locale: String, order: [AccordionLinkingCollectionsPageCollectionOrder], preview: Boolean, skip: Int = 0): PageCollection
+}
+
+enum AccordionLinkingCollectionsPageCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  pageName_ASC
+  pageName_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum AccordionOrder {
+  expandType_ASC
+  expandType_DESC
+  heading_ASC
+  heading_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 """Represents a binary file in a space. An asset can be any file type."""
 type Asset {
   contentType(locale: String): String
@@ -259,9 +490,21 @@ type ComponentCtaSublineLinks {
 }
 
 type ComponentCtaSublineResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [ComponentCtaSublineResourcesBlock!]!
+  hyperlink: [ComponentCtaSublineResourcesHyperlink!]!
+  inline: [ComponentCtaSublineResourcesInline!]!
+}
+
+type ComponentCtaSublineResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentCtaSublineResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentCtaSublineResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 union ComponentCtaTargetPage = Page
@@ -307,9 +550,21 @@ type ComponentDuplexBodyTextLinks {
 }
 
 type ComponentDuplexBodyTextResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [ComponentDuplexBodyTextResourcesBlock!]!
+  hyperlink: [ComponentDuplexBodyTextResourcesHyperlink!]!
+  inline: [ComponentDuplexBodyTextResourcesInline!]!
+}
+
+type ComponentDuplexBodyTextResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentDuplexBodyTextResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentDuplexBodyTextResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type ComponentDuplexCollection {
@@ -413,6 +668,92 @@ enum ComponentDuplexOrder {
 union ComponentDuplexTargetPage = Page
 
 """
+Full-width container that displays a centered form and an optional headline. [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentForm)
+"""
+type ComponentForm implements Entry {
+  contentfulMetadata: ContentfulMetadata!
+  form(locale: String): String
+  headline(locale: String): String
+  internalTitle(locale: String): String
+  linkedFrom(allowedLocales: [String]): ComponentFormLinkingCollections
+  sys: Sys!
+}
+
+type ComponentFormCollection {
+  items: [ComponentForm]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input ComponentFormFilter {
+  AND: [ComponentFormFilter]
+  OR: [ComponentFormFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  form: String
+  form_contains: String
+  form_exists: Boolean
+  form_in: [String]
+  form_not: String
+  form_not_contains: String
+  form_not_in: [String]
+  headline: String
+  headline_contains: String
+  headline_exists: Boolean
+  headline_in: [String]
+  headline_not: String
+  headline_not_contains: String
+  headline_not_in: [String]
+  internalTitle: String
+  internalTitle_contains: String
+  internalTitle_exists: Boolean
+  internalTitle_in: [String]
+  internalTitle_not: String
+  internalTitle_not_contains: String
+  internalTitle_not_in: [String]
+  sys: SysFilter
+}
+
+type ComponentFormLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageCollection(limit: Int = 100, locale: String, order: [ComponentFormLinkingCollectionsPageCollectionOrder], preview: Boolean, skip: Int = 0): PageCollection
+}
+
+enum ComponentFormLinkingCollectionsPageCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  pageName_ASC
+  pageName_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum ComponentFormOrder {
+  form_ASC
+  form_DESC
+  headline_ASC
+  headline_DESC
+  internalTitle_ASC
+  internalTitle_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
 Full-width container for displaying images and snappy copy; can include an optional CTA [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentHeroBanner)
 """
 type ComponentHeroBanner implements Entry {
@@ -453,9 +794,21 @@ type ComponentHeroBannerBodyTextLinks {
 }
 
 type ComponentHeroBannerBodyTextResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [ComponentHeroBannerBodyTextResourcesBlock!]!
+  hyperlink: [ComponentHeroBannerBodyTextResourcesHyperlink!]!
+  inline: [ComponentHeroBannerBodyTextResourcesInline!]!
+}
+
+type ComponentHeroBannerBodyTextResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentHeroBannerBodyTextResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentHeroBannerBodyTextResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type ComponentHeroBannerCollection {
@@ -600,9 +953,21 @@ type ComponentInfoBlockBlock1BodyLinks {
 }
 
 type ComponentInfoBlockBlock1BodyResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [ComponentInfoBlockBlock1BodyResourcesBlock!]!
+  hyperlink: [ComponentInfoBlockBlock1BodyResourcesHyperlink!]!
+  inline: [ComponentInfoBlockBlock1BodyResourcesInline!]!
+}
+
+type ComponentInfoBlockBlock1BodyResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentInfoBlockBlock1BodyResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentInfoBlockBlock1BodyResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type ComponentInfoBlockBlock2Body {
@@ -628,9 +993,21 @@ type ComponentInfoBlockBlock2BodyLinks {
 }
 
 type ComponentInfoBlockBlock2BodyResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [ComponentInfoBlockBlock2BodyResourcesBlock!]!
+  hyperlink: [ComponentInfoBlockBlock2BodyResourcesHyperlink!]!
+  inline: [ComponentInfoBlockBlock2BodyResourcesInline!]!
+}
+
+type ComponentInfoBlockBlock2BodyResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentInfoBlockBlock2BodyResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentInfoBlockBlock2BodyResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type ComponentInfoBlockBlock3Body {
@@ -656,9 +1033,21 @@ type ComponentInfoBlockBlock3BodyLinks {
 }
 
 type ComponentInfoBlockBlock3BodyResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [ComponentInfoBlockBlock3BodyResourcesBlock!]!
+  hyperlink: [ComponentInfoBlockBlock3BodyResourcesHyperlink!]!
+  inline: [ComponentInfoBlockBlock3BodyResourcesInline!]!
+}
+
+type ComponentInfoBlockBlock3BodyResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentInfoBlockBlock3BodyResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentInfoBlockBlock3BodyResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type ComponentInfoBlockCollection {
@@ -986,9 +1375,21 @@ type ComponentQuoteQuoteLinks {
 }
 
 type ComponentQuoteQuoteResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [ComponentQuoteQuoteResourcesBlock!]!
+  hyperlink: [ComponentQuoteQuoteResourcesHyperlink!]!
+  inline: [ComponentQuoteQuoteResourcesInline!]!
+}
+
+type ComponentQuoteQuoteResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentQuoteQuoteResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentQuoteQuoteResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 """
@@ -1028,9 +1429,21 @@ type ComponentTextBlockBodyLinks {
 }
 
 type ComponentTextBlockBodyResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [ComponentTextBlockBodyResourcesBlock!]!
+  hyperlink: [ComponentTextBlockBodyResourcesHyperlink!]!
+  inline: [ComponentTextBlockBodyResourcesInline!]!
+}
+
+type ComponentTextBlockBodyResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentTextBlockBodyResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type ComponentTextBlockBodyResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type ComponentTextBlockCollection {
@@ -1165,6 +1578,7 @@ type EditorTest implements Entry {
   contentfulMetadata: ContentfulMetadata!
   description(locale: String): String
   linkedFrom(allowedLocales: [String]): EditorTestLinkingCollections
+  ntExperiencesCollection(limit: Int = 100, locale: String, order: [EditorTestNt_experiencesCollectionOrder], preview: Boolean, skip: Int = 0, where: NtExperienceFilter): EditorTestNt_experiencesCollection
   sys: Sys!
 }
 
@@ -1200,11 +1614,37 @@ input EditorTestFilter {
   description_not: String
   description_not_contains: String
   description_not_in: [String]
+  nt_experiences: cfNtExperienceNestedFilter
+  nt_experiencesCollection_exists: Boolean
   sys: SysFilter
 }
 
 type EditorTestLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+type EditorTestNt_experiencesCollection {
+  items: [NtExperience]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum EditorTestNt_experiencesCollectionOrder {
+  nt_experience_id_ASC
+  nt_experience_id_DESC
+  nt_name_ASC
+  nt_name_DESC
+  nt_type_ASC
+  nt_type_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum EditorTestOrder {
@@ -1909,7 +2349,23 @@ input NtExperienceFilter {
 }
 
 type NtExperienceLinkingCollections {
+  editorTestCollection(limit: Int = 100, locale: String, order: [NtExperienceLinkingCollectionsEditorTestCollectionOrder], preview: Boolean, skip: Int = 0): EditorTestCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum NtExperienceLinkingCollectionsEditorTestCollectionOrder {
+  adminTitle_ASC
+  adminTitle_DESC
+  description_ASC
+  description_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 type NtExperienceNt_variantsCollection {
@@ -2143,25 +2599,11 @@ type PageTopSectionCollection {
 input PageTopSectionFilter {
   AND: [PageTopSectionFilter]
   OR: [PageTopSectionFilter]
-  colorPalette: String
-  colorPalette_contains: String
-  colorPalette_exists: Boolean
-  colorPalette_in: [String]
-  colorPalette_not: String
-  colorPalette_not_contains: String
-  colorPalette_not_in: [String]
   contentfulMetadata: ContentfulMetadataFilter
-  internalName: String
-  internalName_contains: String
-  internalName_exists: Boolean
-  internalName_in: [String]
-  internalName_not: String
-  internalName_not_contains: String
-  internalName_not_in: [String]
   sys: SysFilter
 }
 
-union PageTopSectionItem = ComponentCta | ComponentDuplex | ComponentHeroBanner | ComponentInfoBlock | ComponentQuote | ComponentTextBlock
+union PageTopSectionItem = Accordion | ComponentCta | ComponentDuplex | ComponentForm | ComponentHeroBanner | ComponentInfoBlock | ComponentQuote | ComponentTextBlock
 
 """
 The 'Quality' type represents quality as whole numeric values between `1` and `100`.
@@ -2170,12 +2612,18 @@ scalar Quality
 
 type Query {
   _node(id: ID!, locale: String, preview: Boolean): _Node
+  accordion(id: String!, locale: String, preview: Boolean): Accordion
+  accordionCollection(limit: Int = 100, locale: String, order: [AccordionOrder], preview: Boolean, skip: Int = 0, where: AccordionFilter): AccordionCollection
+  accordionItem(id: String!, locale: String, preview: Boolean): AccordionItem
+  accordionItemCollection(limit: Int = 100, locale: String, order: [AccordionItemOrder], preview: Boolean, skip: Int = 0, where: AccordionItemFilter): AccordionItemCollection
   asset(id: String!, locale: String, preview: Boolean): Asset
   assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
   componentCta(id: String!, locale: String, preview: Boolean): ComponentCta
   componentCtaCollection(limit: Int = 100, locale: String, order: [ComponentCtaOrder], preview: Boolean, skip: Int = 0, where: ComponentCtaFilter): ComponentCtaCollection
   componentDuplex(id: String!, locale: String, preview: Boolean): ComponentDuplex
   componentDuplexCollection(limit: Int = 100, locale: String, order: [ComponentDuplexOrder], preview: Boolean, skip: Int = 0, where: ComponentDuplexFilter): ComponentDuplexCollection
+  componentForm(id: String!, locale: String, preview: Boolean): ComponentForm
+  componentFormCollection(limit: Int = 100, locale: String, order: [ComponentFormOrder], preview: Boolean, skip: Int = 0, where: ComponentFormFilter): ComponentFormCollection
   componentHeroBanner(id: String!, locale: String, preview: Boolean): ComponentHeroBanner
   componentHeroBannerCollection(limit: Int = 100, locale: String, order: [ComponentHeroBannerOrder], preview: Boolean, skip: Int = 0, where: ComponentHeroBannerFilter): ComponentHeroBannerCollection
   componentInfoBlock(id: String!, locale: String, preview: Boolean): ComponentInfoBlock
@@ -2213,13 +2661,12 @@ type Query {
   topicProductFeatureCollection(limit: Int = 100, locale: String, order: [TopicProductFeatureOrder], preview: Boolean, skip: Int = 0, where: TopicProductFeatureFilter): TopicProductFeatureCollection
 }
 
-type ResourceLink {
+interface ResourceLink {
   sys: ResourceSys!
 }
 
 type ResourceSys {
   linkType: String!
-  type: String!
   urn: String!
 }
 
@@ -2406,9 +2853,21 @@ type TopicBusinessInfoBodyLinks {
 }
 
 type TopicBusinessInfoBodyResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [TopicBusinessInfoBodyResourcesBlock!]!
+  hyperlink: [TopicBusinessInfoBodyResourcesHyperlink!]!
+  inline: [TopicBusinessInfoBodyResourcesInline!]!
+}
+
+type TopicBusinessInfoBodyResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicBusinessInfoBodyResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicBusinessInfoBodyResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type TopicBusinessInfoCollection {
@@ -2526,9 +2985,21 @@ type TopicPersonBioLinks {
 }
 
 type TopicPersonBioResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [TopicPersonBioResourcesBlock!]!
+  hyperlink: [TopicPersonBioResourcesHyperlink!]!
+  inline: [TopicPersonBioResourcesInline!]!
+}
+
+type TopicPersonBioResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicPersonBioResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicPersonBioResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type TopicPersonCollection {
@@ -2650,9 +3121,21 @@ type TopicProductDescriptionLinks {
 }
 
 type TopicProductDescriptionResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [TopicProductDescriptionResourcesBlock!]!
+  hyperlink: [TopicProductDescriptionResourcesHyperlink!]!
+  inline: [TopicProductDescriptionResourcesInline!]!
+}
+
+type TopicProductDescriptionResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicProductDescriptionResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicProductDescriptionResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 """
@@ -2747,9 +3230,21 @@ type TopicProductFeatureLongDescriptionLinks {
 }
 
 type TopicProductFeatureLongDescriptionResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [TopicProductFeatureLongDescriptionResourcesBlock!]!
+  hyperlink: [TopicProductFeatureLongDescriptionResourcesHyperlink!]!
+  inline: [TopicProductFeatureLongDescriptionResourcesInline!]!
+}
+
+type TopicProductFeatureLongDescriptionResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicProductFeatureLongDescriptionResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicProductFeatureLongDescriptionResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 enum TopicProductFeatureOrder {
@@ -2790,9 +3285,21 @@ type TopicProductFeatureShortDescriptionLinks {
 }
 
 type TopicProductFeatureShortDescriptionResources {
-  block: [ResourceLink!]!
-  hyperlink: [ResourceLink!]!
-  inline: [ResourceLink!]!
+  block: [TopicProductFeatureShortDescriptionResourcesBlock!]!
+  hyperlink: [TopicProductFeatureShortDescriptionResourcesHyperlink!]!
+  inline: [TopicProductFeatureShortDescriptionResourcesInline!]!
+}
+
+type TopicProductFeatureShortDescriptionResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicProductFeatureShortDescriptionResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type TopicProductFeatureShortDescriptionResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 type TopicProductFeaturesCollection {
@@ -2914,6 +3421,30 @@ interface _Node {
   _id: ID!
 }
 
+input cfAccordionItemNestedFilter {
+  AND: [cfAccordionItemNestedFilter]
+  OR: [cfAccordionItemNestedFilter]
+  body_contains: String
+  body_exists: Boolean
+  body_not_contains: String
+  contentfulMetadata: ContentfulMetadataFilter
+  heading: String
+  heading_contains: String
+  heading_exists: Boolean
+  heading_in: [String]
+  heading_not: String
+  heading_not_contains: String
+  heading_not_in: [String]
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+}
+
 input cfMenuGroupNestedFilter {
   AND: [cfMenuGroupNestedFilter]
   OR: [cfMenuGroupNestedFilter]
@@ -2964,6 +3495,45 @@ input cfNtAudienceNestedFilter {
   nt_name_not_contains: String
   nt_name_not_in: [String]
   nt_rules_exists: Boolean
+  sys: SysFilter
+}
+
+input cfNtExperienceNestedFilter {
+  AND: [cfNtExperienceNestedFilter]
+  OR: [cfNtExperienceNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  nt_audience_exists: Boolean
+  nt_config_exists: Boolean
+  nt_description: String
+  nt_description_contains: String
+  nt_description_exists: Boolean
+  nt_description_in: [String]
+  nt_description_not: String
+  nt_description_not_contains: String
+  nt_description_not_in: [String]
+  nt_experience_id: String
+  nt_experience_id_contains: String
+  nt_experience_id_exists: Boolean
+  nt_experience_id_in: [String]
+  nt_experience_id_not: String
+  nt_experience_id_not_contains: String
+  nt_experience_id_not_in: [String]
+  nt_metadata_exists: Boolean
+  nt_name: String
+  nt_name_contains: String
+  nt_name_exists: Boolean
+  nt_name_in: [String]
+  nt_name_not: String
+  nt_name_not_contains: String
+  nt_name_not_in: [String]
+  nt_type: String
+  nt_type_contains: String
+  nt_type_exists: Boolean
+  nt_type_in: [String]
+  nt_type_not: String
+  nt_type_not_contains: String
+  nt_type_not_in: [String]
+  nt_variantsCollection_exists: Boolean
   sys: SysFilter
 }
 
@@ -3152,20 +3722,6 @@ input cfgroupLinkMultiTypeNestedFilter {
 input cftopSectionMultiTypeNestedFilter {
   AND: [cftopSectionMultiTypeNestedFilter]
   OR: [cftopSectionMultiTypeNestedFilter]
-  colorPalette: String
-  colorPalette_contains: String
-  colorPalette_exists: Boolean
-  colorPalette_in: [String]
-  colorPalette_not: String
-  colorPalette_not_contains: String
-  colorPalette_not_in: [String]
   contentfulMetadata: ContentfulMetadataFilter
-  internalName: String
-  internalName_contains: String
-  internalName_exists: Boolean
-  internalName_in: [String]
-  internalName_not: String
-  internalName_not_contains: String
-  internalName_not_in: [String]
   sys: SysFilter
 }
