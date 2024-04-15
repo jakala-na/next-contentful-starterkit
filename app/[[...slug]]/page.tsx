@@ -1,5 +1,6 @@
 import { ComponentRenderer } from "#/components/component-renderer";
 import { DebugModeBar } from "#/components/debug-mode/debug-mode-bar";
+import DebugMode from "#/components/debug-mode/debug-mode";
 import { graphql } from "#/gql";
 import { graphqlClient } from "#/lib/graphqlClient";
 import { draftMode } from "next/headers";
@@ -74,7 +75,7 @@ export default async function LandingPage({
 
   return (
     <div>
-      <DebugModeBar isDraftMode={isDraftMode} slug={slug} />
+      <DebugMode slug={slug} />
       {topComponents ? <ComponentRenderer data={topComponents} /> : null}
     </div>
   );
