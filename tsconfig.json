@@ -28,7 +28,8 @@
       {
         "name": "@0no-co/graphqlsp",
         "schema": "./gql/schema.graphql",
-        "tadaOutputLocation": "./gql/graphql-env.d.ts"
+        "tadaOutputLocation": "./gql/graphql-env.d.ts",
+        "tadaTurboLocation": "./gql/graphql-cache.d.ts"
       }
     ]
   },
