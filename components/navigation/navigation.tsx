@@ -1,58 +1,64 @@
-import { FragmentType, graphql, getFragmentData } from "#/gql";
+import { FragmentOf, graphql, readFragment } from "gql.tada";
 import Link from "next/link";
 import { PageLinkFieldsFragment } from "../page";
 import { cn } from "#/lib/utils";
 import { Icons } from "../icons";
 
-const MenuGroupFeaturedPagesFragment = graphql(/* GraphQL */ `
-  fragment MenuGroupFields on MenuGroupFeaturedPagesCollection {
-    items {
-      ...PageLinkFields
+const MenuGroupFeaturedPagesFragment = graphql(
+  `
+    fragment MenuGroupFields on MenuGroupFeaturedPagesCollection {
+      items {
+        ...PageLinkFields
+      }
     }
-  }
-`);
+  `,
+  [PageLinkFieldsFragment]
+);
 
-const NavigationFieldsFragment = graphql(/* GraphQL */ `
-  fragment NavigationFields on NavigationMenuCollection {
-    items {
-      menuItemsCollection {
-        items {
-          __typename
-          sys {
-            id
-          }
-          groupName
-          link: groupLink {
-            ...PageLinkFields
-          }
-          children: featuredPagesCollection {
-            ...MenuGroupFields
+export const NavigationFieldsFragment = graphql(
+  `
+    fragment NavigationFields on NavigationMenuCollection {
+      items {
+        menuItemsCollection {
+          items {
+            __typename
+            sys {
+              id
+            }
+            groupName
+            link: groupLink {
+              ...PageLinkFields
+            }
+            children: featuredPagesCollection {
+              ...MenuGroupFields
+            }
           }
         }
       }
     }
-  }
-`);
+  `,
+  [PageLinkFieldsFragment, MenuGroupFeaturedPagesFragment]
+);
 
 export type NavigationProps = {
-  data: FragmentType<typeof NavigationFieldsFragment>;
+  data: FragmentOf<typeof NavigationFieldsFragment>;
 };
 
 export const Navigation = (props: NavigationProps) => {
-  const data = getFragmentData(NavigationFieldsFragment, props.data);
+  const data = readFragment(NavigationFieldsFragment, props.data);
   const items = data.items[0]?.menuItemsCollection?.items;
 
   // Fragment Masking is forcing us to split fragments to match our components or our helper functions.
   // https://github.com/dotansimha/graphql-code-generator/discussions/8554#discussioncomment-4131776
   const renderGroupLinks = (
-    group: FragmentType<typeof MenuGroupFeaturedPagesFragment>
+    group: FragmentOf<typeof MenuGroupFeaturedPagesFragment>
   ) => {
-    const collection = getFragmentData(MenuGroupFeaturedPagesFragment, group);
+    const collection = readFragment(MenuGroupFeaturedPagesFragment, group);
     return collection?.items?.map((menuItem) => {
       // const page = getFragmentData(PageLinkFieldsFragment, menuItem);
       if (!menuItem) return null;
 
-      const page = getFragmentData(PageLinkFieldsFragment, menuItem);
+      const page = readFragment(PageLinkFieldsFragment, menuItem);
 
       if (!page.slug) return null;
       return (
@@ -89,7 +95,7 @@ export const Navigation = (props: NavigationProps) => {
                         {menuItem.link ? (
                           <Link
                             href={`/${
-                              getFragmentData(
+                              readFragment(
                                 PageLinkFieldsFragment,
                                 menuItem.link
                               ).slug

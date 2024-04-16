@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "codegen": "DOTENV_CONFIG_PATH='./.env.local' graphql-codegen --require dotenv/config --config codegen.ts",
+    "generate:schema": "source .env.local && gql.tada generate-schema --header \"Authorization: Bearer $CONTENTFUL_DELIVERY_API\" \"https://graphql.contentful.com/content/v1/spaces/$CONTENTFUL_SPACE\"",
+    "generate:output": "gql.tada generate-output && gql.tada turbo",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_6c8f830efe6cc9d"
@@ -25,6 +26,7 @@
     "encoding": "^0.1.13",
     "eslint": "8.29.0",
     "eslint-config-next": "^14.1.0",
+    "gql.tada": "^1.5.1",
     "graphql": "^16.7.1",
     "graphql-request": "^6.1.0",
     "lucide-react": "^0.368.0",
@@ -33,16 +35,13 @@
     "react-dom": "^18.2.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",
-    "typescript": "4.9.3"
+    "typescript": "^5.4.3"
   },
   "devDependencies": {
+    "@0no-co/graphqlsp": "^1.7.0",
     "@badeball/cypress-cucumber-preprocessor": "^18.0.4",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "@cypress/webpack-dev-server": "^3.2.1",
-    "@graphql-codegen/cli": "^4.0.1",
-    "@graphql-codegen/client-preset": "^4.0.1",
-    "@graphql-codegen/introspection": "^4.0.0",
-    "@graphql-codegen/schema-ast": "^4.0.0",
     "@storybook/addon-essentials": "^8.0.4",
     "@storybook/addon-interactions": "^8.0.4",
     "@storybook/addon-links": "^8.0.4",

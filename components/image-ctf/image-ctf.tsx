@@ -1,4 +1,4 @@
-import { getFragmentData } from "#/gql";
+import { readFragment } from "gql.tada";
 import { default as NextImage, ImageProps } from "next/image";
 import React from "react";
 import { AssetCtfProps, AssetFieldsFragment } from "../asset-ctf";
@@ -12,7 +12,7 @@ export const getImageProps = ({
   data: fragmentData,
   ...props
 }: ImageCtfProps) => {
-  const data = getFragmentData(AssetFieldsFragment, fragmentData);
+  const data = readFragment(AssetFieldsFragment, fragmentData);
   if (!data.url) {
     return null;
   }
@@ -20,7 +20,7 @@ export const getImageProps = ({
     src: data?.url,
     alt: data?.description || "",
     width: data.width || undefined,
-    height: data.height  || undefined,
+    height: data.height || undefined,
     ...props,
   };
 };

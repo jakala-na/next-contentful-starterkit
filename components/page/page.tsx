@@ -1,7 +1,7 @@
-import { FragmentType, getFragmentData, graphql } from "#/gql";
+import { FragmentOf, readFragment, graphql } from "gql.tada";
 import { default as NextLink } from "next/link";
 
-export const PageLinkFieldsFragment = graphql(/* GraphQL */ `
+export const PageLinkFieldsFragment = graphql(`
   fragment PageLinkFields on Page {
     __typename
     slug
@@ -21,7 +21,7 @@ export const PageLinkFieldsFragment = graphql(/* GraphQL */ `
 `);
 
 export interface PageLinkProps {
-  data: FragmentType<typeof PageLinkFieldsFragment>;
+  data: FragmentOf<typeof PageLinkFieldsFragment>;
   children?: React.ReactNode;
   [key: string]: any;
 }
@@ -31,7 +31,7 @@ export const getPageLinkProps = ({
   children,
   ...props
 }: PageLinkProps) => {
-  const data = getFragmentData(PageLinkFieldsFragment, fragmentData);
+  const data = readFragment(PageLinkFieldsFragment, fragmentData);
 
   return {
     href: `/${data.slug}`,

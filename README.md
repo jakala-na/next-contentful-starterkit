@@ -6,25 +6,28 @@ The starterkit's cornerstone is our data-fetching solution and it's typesafety. 
 
 ## Features
 
-* **NextJS App Router** usage for modern **React Server Components** approach - we think this is the way the industry will move and it is a huge benefit for traditional websites to do data fetching only on the server and keep client-bundle lean
-* **GraphQL** + **GraphQL Codegen** with **client-preset** plugin + Typescript for data fetching - we believe the best way to benefit from a GraphQL backend on the frontend is to use Typescript and be informed of what is available to you when you do data fetching, and GraphQL Codegen ensures you are not “lying to yourself” in your types by generating them from the API.
-* **Cypress testing** - we include a configured Cypress.io testing suite with ability to do both Component and E2E testing using Cucumber/BDD style syntax (optionally you can use traditional spec files too)
-* **Component Renderer** - example of how to take a full tree of components and render them using a mapping of contentTypes to React components
-* **Draft Mode** - preview mode for your application for Contentful Preview API usage
-* Use of **Contentful Live Preview** - contentful live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in Contentful
+- **NextJS App Router** usage for modern **React Server Components** approach - we think this is the way the industry will move and it is a huge benefit for traditional websites to do data fetching only on the server and keep client-bundle lean
+- **GraphQL** + **GraphQL Codegen** with **client-preset** plugin + Typescript for data fetching - we believe the best way to benefit from a GraphQL backend on the frontend is to use Typescript and be informed of what is available to you when you do data fetching, and GraphQL Codegen ensures you are not “lying to yourself” in your types by generating them from the API.
+- **Cypress testing** - we include a configured Cypress.io testing suite with ability to do both Component and E2E testing using Cucumber/BDD style syntax (optionally you can use traditional spec files too)
+- **Component Renderer** - example of how to take a full tree of components and render them using a mapping of contentTypes to React components
+- **Draft Mode** - preview mode for your application for Contentful Preview API usage
+- Use of **Contentful Live Preview** - contentful live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in Contentful
 
 ## Getting Started
 
 Clone the repo of course ;)
 
 ### Contentful access
+
 To develop locally, you will want to connect to a Contentful instance that has the same data model as we use to develop, there are 2 ways to do that:
+
 1. You could get access to an existing space that follows Contentful Marketing Template content model, for example a collegue could share his space with you
 2. You could create your own space with https://www.contentful.com/starter-templates/marketing-website/. Keep in mind, new templates today can only be deployed on brand new Contentful accounts, so you might have to create a new account with a new email to do that, but this shouldn't be a problem, as it's free.
 
 ### Configure environment
 
 Create .env.local in root directory of the repo with the following contents:
+
 ```
 CONTENTFUL_SPACE=<space id>
 CONTENTFUL_DELIVERY_API=<delivery api key>
@@ -38,11 +41,36 @@ CONTENTFUL_PREVIEW_SECRET=secret
 ```bash
 yarn dev
 ```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Caveats
-* Currently the app is unstyled and styling was not priority, but that should not scare you as the data-fetching and rendering should still work
-* There are only 2 components now, so most pages have blank content because they don't have the components implemented, we test things on homepage now
+### GraphQL Docs
+
+#### Regenerate graphql schema
+
+If you're adding new content types or making changes to the content model, you will need to generate a new graphql schema to get type inference in Typescript working and to get autocomplete in IDE. This can be done by running:
+
+```bash
+yarn generate:schema
+```
+
+After new types are generated, you will get changes in `./gql/` folder that you'll have to commit after you are done developing the feature.
+Keep in mind, schema generation will take your `.env.local` and read the CONTENTFUL_ENVIRONMENT you are pointing to, so if you create a new content type on a different environment, it will not be pulled, or the opposite, if you have unwanted content types in your sandbox environment, they will all appear in the schema. Make sure you commit changes you intend to commit!
+
+### Configure editor to use gql.tada
+
+In order for gql.tada's GraphQLSP plugin to work (and infer types), you need to have local Typescript server making the type inference (`node_modules/typescript/lib`)
+
+If you are using VSCode, the .vscode/settings.json in the repo is already configured to use the local Typescript server.
+
+If using Webstorm, make sure you configure the Typescript interpretter from node_modules/typescript/lib as well under Settings -> Language & Frameworks -> Typescript
+
+If you can't use a Typescript server in your IDE, you can optionally generate a gql/graphql-env.d.ts by running this command.
+```bash
+yarn generate:output
+```
+This command will also run `gql.tada turbo` which will generate a cache file that should also be commited. This cache file will speed up inference for new users who just checked out a new branch.
+More info [here](https://gql-tada.0no.co/devlog/2024-04-15)
 
 ## NextJS Docs
 
