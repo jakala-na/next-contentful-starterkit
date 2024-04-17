@@ -1,8 +1,8 @@
-import { graphql } from "#/gql";
+import { graphql } from "gql.tada";
 import { graphqlClient } from "#/lib/graphqlClient";
 
 const getPageSlug = async (slug: string, locale: string, preview = false) => {
-  const pageSlugQuery = graphql(/* GraphQL */ `
+  const pageSlugQuery = graphql(`
     query PageSlugQuery($slug: String, $locale: String, $preview: Boolean) {
       pageCollection(
         locale: $locale

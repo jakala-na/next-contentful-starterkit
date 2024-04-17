@@ -1,29 +1,37 @@
 import { ComponentRenderer } from "#/components/component-renderer";
-import { graphql } from "#/gql";
+import { DebugModeBar } from "#/components/debug-mode/debug-mode-bar";
+import DebugMode from "#/components/debug-mode/debug-mode";
+import { graphql } from "gql.tada";
 import { graphqlClient } from "#/lib/graphqlClient";
 import { draftMode } from "next/headers";
+import { ComponentHeroBannerFieldsFragment } from "#/components/hero-banner-ctf/hero-banner-ctf";
+import { ComponentDuplexFieldsFragment } from "#/components/duplex-ctf/duplex-ctf";
+import { ComponentFormFieldsFragment } from "#/components/form-ctf/form-ctf";
 
 const getPage = async (slug: string, locale: string, preview = false) => {
-  const pageQuery = graphql(/* GraphQL */ `
-    query PageQuery($slug: String, $locale: String, $preview: Boolean) {
-      pageCollection(
-        locale: $locale
-        preview: $preview
-        limit: 1
-        where: { slug: $slug }
-      ) {
-        items {
-          topSectionCollection(limit: 10) {
-            items {
-              ...ComponentHeroBannerFields
-              ...ComponentDuplexFields
-              ...ComponentFormFields
+  const pageQuery = graphql(
+    `
+      query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+        pageCollection(
+          locale: $locale
+          preview: $preview
+          limit: 1
+          where: { slug: $slug }
+        ) {
+          items {
+            topSectionCollection(limit: 10) {
+              items {
+                  ...ComponentHeroBannerFields
+                  ...ComponentDuplexFields
+                  ...ComponentFormFields
+              }
             }
           }
         }
       }
-    }
-  `);
+    `,
+    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment, ComponentFormFieldsFragment]
+  );
   return (
     await graphqlClient(preview).request(pageQuery, {
       locale,
@@ -31,6 +39,32 @@ const getPage = async (slug: string, locale: string, preview = false) => {
       slug,
     })
   ).pageCollection?.items?.[0];
+};
+
+const getPageSlugs = async () => {
+  const pageQuery = graphql(/* GraphQL */ `
+    query PageSlugs($locale: String) {
+      # Fetch 50 pages. Ideally we would fetch a good sample of most popular pages for pre-rendering,
+      # but for the sake of this example we'll just fetch the first 50.
+      pageCollection(locale: $locale, limit: 50) {
+        items {
+          slug
+        }
+      }
+    }
+  `);
+
+  const pages = await graphqlClient(false).request(pageQuery, {
+    locale: "en-US",
+  });
+
+  return (
+    pages?.pageCollection?.items
+      .filter((page) => page?.slug)
+      .map((page) => ({
+        slug: page?.slug === "home" ? "/" : page?.slug,
+      })) || []
+  );
 };
 
 export default async function LandingPage({
@@ -48,8 +82,16 @@ export default async function LandingPage({
 
   return (
     <div>
-      <>Page slug: {slug}</>
+      <DebugMode slug={slug} />
       {topComponents ? <ComponentRenderer data={topComponents} /> : null}
     </div>
   );
+}
+
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return (await getPageSlugs()).map((page) => ({
+    slug: page?.slug?.split("/"),
+  }));
 }

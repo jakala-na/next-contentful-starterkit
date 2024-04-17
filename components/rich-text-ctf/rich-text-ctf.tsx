@@ -9,8 +9,8 @@ import {
   Options,
 } from "@contentful/rich-text-react-renderer";
 import { OmitRecursive, tryget } from "#/lib/utils";
-import { AssetFieldsFragment } from "#/gql/graphql";
-import { AssetCtf } from "../asset-ctf";
+
+import {AssetCtf, AssetFieldsFragment} from "../asset-ctf";
 
 export interface RichTextProps {
   json: any;
@@ -30,7 +30,7 @@ interface Block extends RichtextBlock {
   sys: { id: string };
 }
 
-type Asset = OmitRecursive<AssetFieldsFragment, "__typename">;
+type Asset = OmitRecursive<typeof AssetFieldsFragment, "__typename">;
 
 export const RichTextCtf = (props: RichTextProps) => {
   const { json, links } = props;
