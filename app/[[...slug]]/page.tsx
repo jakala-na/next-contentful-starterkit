@@ -6,6 +6,7 @@ import { graphqlClient } from "#/lib/graphqlClient";
 import { draftMode } from "next/headers";
 import { ComponentHeroBannerFieldsFragment } from "#/components/hero-banner-ctf/hero-banner-ctf";
 import { ComponentDuplexFieldsFragment } from "#/components/duplex-ctf/duplex-ctf";
+import { ComponentFormFieldsFragment } from "#/components/form-ctf/form-ctf";
 
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
@@ -22,13 +23,14 @@ const getPage = async (slug: string, locale: string, preview = false) => {
               items {
                   ...ComponentHeroBannerFields
                   ...ComponentDuplexFields
+                  ...ComponentFormFields
               }
             }
           }
         }
       }
     `,
-    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment]
+    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment, ComponentFormFieldsFragment]
   );
   return (
     await graphqlClient(preview).request(pageQuery, {

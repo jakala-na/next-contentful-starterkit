@@ -16,6 +16,8 @@
   "dependencies": {
     "@contentful/live-preview": "^2.6.2",
     "@contentful/rich-text-react-renderer": "^15.17.1",
+    "@hookform/resolvers": "^3.3.4",
+    "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@storybook/test": "^8.0.4",
     "@types/node": "18.11.11",
@@ -33,9 +35,11 @@
     "next": "^14.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@0no-co/graphqlsp": "^1.7.0",

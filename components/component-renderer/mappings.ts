@@ -7,4 +7,7 @@ export const componentMap = {
   ComponentDuplex: dynamic(() =>
     import("#/components/duplex-ctf").then((mod) => mod.DuplexCtf)
   ),
+  ComponentForm: dynamic(() =>
+    import("#/components/form-ctf").then((mod) => mod.FormCtf)
+  ),
 };
