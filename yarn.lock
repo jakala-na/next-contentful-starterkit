@@ -3465,6 +3465,26 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
+"@urql/core@^5.0.0":
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/@urql/core/-/core-5.0.1.tgz#05c429ad24fda80b5d78ce746dfec407af98306b"
+  integrity sha512-bTtJDbPGF7UNynGt0E0DgokBeGUL9IU33+k7s/c6dvBUjwO2mOxB0GWNe7fhUcqIJAU1sONYkabTep/OGaxhsQ==
+  dependencies:
+    "@0no-co/graphql.web" "^1.0.5"
+    wonka "^6.3.2"
+
+"@urql/devtools@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/@urql/devtools/-/devtools-2.0.3.tgz#780998c37386c72af9402a8f88c1b388e62f28cd"
+  integrity sha512-TktPLiBS9LcBPHD6qcnb8wqOVcg3Bx0iCtvQ80uPpfofwwBGJmqnQTjUdEFU6kwaLOFZULQ9+Uo4831G823mQw==
+  dependencies:
+    wonka ">= 4.0.9"
+
+"@urql/next@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/@urql/next/-/next-1.1.1.tgz#3c20302d4b2707052eea34d27c484502c4b325d9"
+  integrity sha512-dLk4npLZeWDCevua3gM5f8WS1IyyJUsjOvUU9tnFRSjTSn2fQcgYAYZbLfpneLTg+1rYNCLgSMJMuBr95PofTQ==
+
 "@vercel/stega@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@vercel/stega/-/stega-0.1.0.tgz#2eadbbc9eb0eaab26d28b0c443a922d78c23b6e3"
@@ -6999,7 +7019,7 @@ graphql-tag@^2.12.6:
   dependencies:
     tslib "^2.1.0"
 
-graphql@^16.7.1, graphql@^16.8.1:
+graphql@^16.8.1:
   version "16.8.1"
   resolved "https://registry.npmjs.org/graphql/-/graphql-16.8.1.tgz#1930a965bef1170603702acdb68aedd3f3cf6f07"
   integrity sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw==
@@ -11426,6 +11446,14 @@ url@^0.11.0:
     punycode "^1.4.1"
     qs "^6.11.2"
 
+urql@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.npmjs.org/urql/-/urql-4.0.7.tgz#7c2c7eecce3bf0d2bd2d5be372515bf6dd2f13c2"
+  integrity sha512-wnOONtZoYEobmamM5ushUBGil6UCUPd7SH5uEAqsz5Y/qBV88/2QG6jq7v6xP+413x5Lqy0h0hCGRB0KIeG6Kg==
+  dependencies:
+    "@urql/core" "^5.0.0"
+    wonka "^6.3.2"
+
 util-arity@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/util-arity/-/util-arity-1.1.0.tgz#59d01af1fdb3fede0ac4e632b0ab5f6ce97c9330"
@@ -11754,6 +11782,11 @@ wildcard@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/wildcard/-/wildcard-2.0.1.tgz#5ab10d02487198954836b6349f74fff961e10f67"
   integrity sha512-CC1bOL87PIWSBhDcTrdeLo6eGT7mCFtrg0uIJtqJUFyK+eJnzl8A1niH56uu7KMa5XFrtiV+AQuHO3n7DsHnLQ==
+
+"wonka@>= 4.0.9", wonka@^6.3.2:
+  version "6.3.4"
+  resolved "https://registry.npmjs.org/wonka/-/wonka-6.3.4.tgz#76eb9316e3d67d7febf4945202b5bdb2db534594"
+  integrity sha512-CjpbqNtBGNAeyNS/9W6q3kSkKE52+FjIj7AkFlLr11s/VWGUu6a2CdYSdGxocIhIVjaW/zchesBQUKPVU69Cqg==
 
 wordwrap@^1.0.0:
   version "1.0.0"

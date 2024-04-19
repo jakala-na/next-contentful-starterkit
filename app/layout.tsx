@@ -27,10 +27,14 @@ export default async function RootLayout({
     [NavigationFieldsFragment]
   );
 
-  const layoutData = await graphqlClient(isDraftMode).request(layoutQuery, {
-    locale: "en-US",
-    preview: isDraftMode,
-  });
+  const layoutData = await graphqlClient(isDraftMode).query(
+    layoutQuery,
+    {
+      locale: "en-US",
+      preview: isDraftMode,
+    },
+    { fetchOptions: { next: { revalidate: 60 } } }
+  );
 
   return (
     <html lang="en">
@@ -47,7 +51,9 @@ export default async function RootLayout({
       >
         <ContentfulPreviewProvider isDraftMode={isDraftMode}>
           <div className="relative flex min-h-screen flex-col">
-            <SiteHeader navigationData={layoutData.navigationMenuCollection} />
+            <SiteHeader
+              navigationData={layoutData.data?.navigationMenuCollection}
+            />
             <div className="flex-1">{children}</div>
           </div>
         </ContentfulPreviewProvider>
