@@ -6,11 +6,11 @@ import { Button } from '../button';
 import { Image, ImageProps } from '../image';
 import { Link, LinkProps } from '../link';
 
-const layoutVariants = cva('flex w-11/12 max-w-6xl', {
+const layoutVariants = cva('md:flex px-5 max-w-6xl', {
   variants: {
     imageAlignment: {
-      left: 'flex-row',
-      right: 'flex-row-reverse',
+      left: 'md:flex-row',
+      right: 'md:flex-row-reverse',
     },
   },
   defaultVariants: {
@@ -31,7 +31,7 @@ const imageStyleVariants = cva('w-full', {
 });
 
 const imageContainerVariants = cva(
-  ['w-1/2', 'rounded-lg', 'overflow-hidden', 'shadow-lg'],
+  ['md:w-1/2', 'rounded-lg', 'overflow-hidden', 'shadow-lg'],
   {
     variants: {
       imageHeight: {
@@ -87,7 +87,7 @@ export function Duplex(props: DuplexProps) {
             />
           </div>
         )}
-        <div className='w-1/2 p-12'>
+        <div className='md:w-1/2 py-12 md:px-12'>
           {headline && (
             <h2
               className='text-4xl font-bold mb-4'
