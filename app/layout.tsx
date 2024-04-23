@@ -33,7 +33,7 @@ export default async function RootLayout({
       locale: "en-US",
       preview: isDraftMode,
     },
-    { fetchOptions: { next: { revalidate: 60 } } }
+    { fetchOptions: { next: { revalidate: 60, tags: ["menu"] } } }
   );
 
   return (
