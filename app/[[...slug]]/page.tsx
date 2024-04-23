@@ -20,8 +20,8 @@ const getPage = async (slug: string, locale: string, preview = false) => {
           items {
             topSectionCollection(limit: 10) {
               items {
-                  ...ComponentHeroBannerFields
-                  ...ComponentDuplexFields
+                ...ComponentHeroBannerFields
+                ...ComponentDuplexFields
               }
             }
           }
@@ -31,16 +31,16 @@ const getPage = async (slug: string, locale: string, preview = false) => {
     [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment]
   );
   return (
-    await graphqlClient(preview).request(pageQuery, {
+    await graphqlClient(preview).query(pageQuery, {
       locale,
       preview,
       slug,
     })
-  ).pageCollection?.items?.[0];
+  ).data?.pageCollection?.items?.[0];
 };
 
 const getPageSlugs = async () => {
-  const pageQuery = graphql(/* GraphQL */ `
+  const pageQuery = graphql(`
     query PageSlugs($locale: String) {
       # Fetch 50 pages. Ideally we would fetch a good sample of most popular pages for pre-rendering,
       # but for the sake of this example we'll just fetch the first 50.
@@ -52,12 +52,12 @@ const getPageSlugs = async () => {
     }
   `);
 
-  const pages = await graphqlClient(false).request(pageQuery, {
+  const pages = await graphqlClient(false).query(pageQuery, {
     locale: "en-US",
   });
 
   return (
-    pages?.pageCollection?.items
+    pages?.data?.pageCollection?.items
       .filter((page) => page?.slug)
       .map((page) => ({
         slug: page?.slug === "home" ? "/" : page?.slug,
@@ -86,7 +86,7 @@ export default async function LandingPage({
   );
 }
 
-export const revalidate = 60;
+export const revalidate = 120;
 
 export async function generateStaticParams() {
   return (await getPageSlugs()).map((page) => ({

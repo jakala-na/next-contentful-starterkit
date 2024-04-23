@@ -18,12 +18,12 @@ const getPageSlug = async (slug: string, locale: string, preview = false) => {
   `);
 
   return (
-    await graphqlClient(preview).request(pageSlugQuery, {
+    await graphqlClient(preview).query(pageSlugQuery, {
       locale,
       preview,
       slug,
     })
-  ).pageCollection?.items?.[0];
+  ).data?.pageCollection?.items?.[0];
 };
 
 export default getPageSlug;
