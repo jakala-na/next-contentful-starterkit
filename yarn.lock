@@ -3473,13 +3473,6 @@
     "@0no-co/graphql.web" "^1.0.5"
     wonka "^6.3.2"
 
-"@urql/devtools@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/@urql/devtools/-/devtools-2.0.3.tgz#780998c37386c72af9402a8f88c1b388e62f28cd"
-  integrity sha512-TktPLiBS9LcBPHD6qcnb8wqOVcg3Bx0iCtvQ80uPpfofwwBGJmqnQTjUdEFU6kwaLOFZULQ9+Uo4831G823mQw==
-  dependencies:
-    wonka ">= 4.0.9"
-
 "@urql/exchange-persisted@^4.2.0":
   version "4.2.0"
   resolved "https://registry.npmjs.org/@urql/exchange-persisted/-/exchange-persisted-4.2.0.tgz#0587fd3344ec0597f1a2ce6f63e0bf230e68f64f"
@@ -3487,11 +3480,6 @@
   dependencies:
     "@urql/core" ">=4.3.0"
     wonka "^6.3.2"
-
-"@urql/next@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@urql/next/-/next-1.1.1.tgz#3c20302d4b2707052eea34d27c484502c4b325d9"
-  integrity sha512-dLk4npLZeWDCevua3gM5f8WS1IyyJUsjOvUU9tnFRSjTSn2fQcgYAYZbLfpneLTg+1rYNCLgSMJMuBr95PofTQ==
 
 "@vercel/stega@^0.1.0":
   version "0.1.0"
@@ -11796,7 +11784,7 @@ wildcard@^2.0.0:
   resolved "https://registry.yarnpkg.com/wildcard/-/wildcard-2.0.1.tgz#5ab10d02487198954836b6349f74fff961e10f67"
   integrity sha512-CC1bOL87PIWSBhDcTrdeLo6eGT7mCFtrg0uIJtqJUFyK+eJnzl8A1niH56uu7KMa5XFrtiV+AQuHO3n7DsHnLQ==
 
-"wonka@>= 4.0.9", wonka@^6.3.2:
+wonka@^6.3.2:
   version "6.3.4"
   resolved "https://registry.npmjs.org/wonka/-/wonka-6.3.4.tgz#76eb9316e3d67d7febf4945202b5bdb2db534594"
   integrity sha512-CjpbqNtBGNAeyNS/9W6q3kSkKE52+FjIj7AkFlLr11s/VWGUu6a2CdYSdGxocIhIVjaW/zchesBQUKPVU69Cqg==
