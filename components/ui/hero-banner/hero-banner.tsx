@@ -30,12 +30,12 @@ export function HeroBanner(props: HeroBannerProps) {
           alt={image.alt}
         />
       )}
-      <div className="mx-auto pt-10 w-full max-w-[80rem] pl-5">
+      <div className="mx-auto pt-10 w-full max-w-6xl px-5">
         {headline && (
           <h1
             {...addAttributes("headline")}
             className={
-              "w-[40rem] mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl"
+              "mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl"
             }
           >
             {headline}
