@@ -12,7 +12,7 @@
     "generate:schema": "source .env.local && gql.tada generate-schema --header \"Authorization: Bearer $CONTENTFUL_DELIVERY_API\" \"https://graphql.contentful.com/content/v1/spaces/$CONTENTFUL_SPACE\"",
     "generate:output": "gql.tada generate-output && gql.tada turbo",
     "storybook": "storybook dev -p 6006",
-    "builpd-storybook": "storybook build",
+    "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_6c8f830efe6cc9d"
   },
   "dependencies": {
