@@ -1,16 +1,9 @@
-import { useMemo } from "react";
-import {
-  Block as RichtextBlock,
-  BLOCKS,
-  INLINES,
-} from "@contentful/rich-text-types";
-import {
-  documentToReactComponents,
-  Options,
-} from "@contentful/rich-text-react-renderer";
-import { OmitRecursive, tryget } from "#/lib/utils";
+import { useMemo } from 'react';
+import { Block as RichtextBlock, BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
+import { OmitRecursive, tryget } from '#/lib/utils';
 
-import {AssetCtf, AssetFieldsFragment} from "../asset-ctf";
+import { AssetCtf, AssetFieldsFragment } from '../asset-ctf';
 
 export interface RichTextProps {
   json: any;
@@ -30,18 +23,18 @@ interface Block extends RichtextBlock {
   sys: { id: string };
 }
 
-type Asset = OmitRecursive<typeof AssetFieldsFragment, "__typename">;
+type Asset = OmitRecursive<typeof AssetFieldsFragment, '__typename'>;
 
 export const RichTextCtf = (props: RichTextProps) => {
   const { json, links } = props;
 
   const entryBlocks = useMemo(
-    () => tryget(() => links!.entries!.block!.filter((b: any) => !!b), [])!,
+    () => tryget(() => links!.entries!.block!.filter((b: any) => !!b), [] as Block[])!,
     [links]
   );
 
   const assetBlocks = useMemo(
-    () => tryget(() => links!.assets!.block!.filter((b: any) => !!b), [])!,
+    () => tryget(() => links!.assets!.block!.filter((b: any) => !!b), [] as Asset[])!,
     [links]
   );
 

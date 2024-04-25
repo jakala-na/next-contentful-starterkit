@@ -1,5 +1,5 @@
-import { FragmentOf, readFragment, graphql } from "gql.tada";
-import { default as NextLink } from "next/link";
+import { FragmentOf, readFragment, graphql } from 'gql.tada';
+import { default as NextLink } from 'next/link';
 
 export const PageLinkFieldsFragment = graphql(`
   fragment PageLinkFields on Page {
@@ -26,11 +26,7 @@ export interface PageLinkProps {
   [key: string]: any;
 }
 
-export const getPageLinkProps = ({
-  data: fragmentData,
-  children,
-  ...props
-}: PageLinkProps) => {
+export const getPageLinkProps = ({ data: fragmentData, children, ...props }: PageLinkProps) => {
   const data = readFragment(PageLinkFieldsFragment, fragmentData);
 
   return {
@@ -51,6 +47,6 @@ export const getPageLinkChildProps = (props: PageLinkProps) => {
   };
 };
 
-const Page = () => <>{"Page"}</>;
+const Page = () => <>{'Page'}</>;
 
 export default Page;

@@ -1,7 +1,7 @@
-import { FragmentOf, readFragment, graphql } from "gql.tada";
-import { HeroBannerCtfClient } from "./hero-banner-ctf-client";
-import { AssetFieldsFragment } from "../asset-ctf";
-import { PageLinkFieldsFragment } from "../page";
+import { FragmentOf, readFragment, graphql } from 'gql.tada';
+import { HeroBannerCtfClient } from './hero-banner-ctf-client';
+import { AssetFieldsFragment } from '../asset-ctf';
+import { PageLinkFieldsFragment } from '../page';
 
 export const ComponentHeroBannerFieldsFragment = graphql(
   `

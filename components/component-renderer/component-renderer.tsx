@@ -1,4 +1,4 @@
-import { componentMap } from "./mappings";
+import { componentMap } from './mappings';
 
 export default function ComponentRenderer({
   data,

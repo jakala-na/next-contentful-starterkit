@@ -24,13 +24,13 @@ const meta = {
       options: Object.keys(colorConfigs).map((p) => p.replace('palette-', '')),
     },
     imageHeight: {
-      control: {type: 'radio'},
+      control: { type: 'radio' },
       options: ['full', 'fixed'],
     },
     imageAlignment: {
-      control: {type: 'radio'},
+      control: { type: 'radio' },
       options: ['left', 'right'],
-    }
+    },
   },
 } satisfies Meta<typeof Duplex>;
 
