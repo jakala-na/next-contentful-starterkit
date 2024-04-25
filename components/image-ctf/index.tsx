@@ -1,1 +1,1 @@
-export * from "./image-ctf";
+export * from './image-ctf';

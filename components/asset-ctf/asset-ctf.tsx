@@ -1,5 +1,5 @@
-import { ImageCtf } from "#/components/image-ctf";
-import { FragmentOf, readFragment, graphql } from "gql.tada";
+import { ImageCtf } from '#/components/image-ctf';
+import { FragmentOf, readFragment, graphql } from 'gql.tada';
 
 export const AssetFieldsFragment = graphql(`
   fragment AssetFields on Asset {
@@ -33,7 +33,7 @@ export const AssetCtf = (props: AssetCtfProps) => {
     return null;
   }
 
-  if (contentType.startsWith("image")) {
+  if (contentType.startsWith('image')) {
     return <ImageCtf {...props} />;
   }
 

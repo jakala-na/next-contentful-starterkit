@@ -1,1 +1,1 @@
-export { DuplexCtf } from "./duplex-ctf";
+export { DuplexCtf } from './duplex-ctf';

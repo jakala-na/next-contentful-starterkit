@@ -2,13 +2,13 @@
  * This file is a server-only file, meaning it should not be included in the client bundle.
  * @see https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#keeping-server-only-code-out-of-the-client-environment
  */
-import "server-only";
-import memoize from "lodash/memoize";
+import 'server-only';
+import memoize from 'lodash/memoize';
 
 const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENVIRONMENT}`;
 
-import { createClient, fetchExchange } from "@urql/core";
-import { persistedExchange } from "@urql/exchange-persisted";
+import { createClient, fetchExchange } from '@urql/core';
+import { persistedExchange } from '@urql/exchange-persisted';
 
 const makeClient = (preview: boolean) => {
   return createClient({

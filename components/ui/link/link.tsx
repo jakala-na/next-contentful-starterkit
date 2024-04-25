@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { Slot } from "@radix-ui/react-slot";
+import { ReactNode } from 'react';
+import { Slot } from '@radix-ui/react-slot';
 
 export interface LinkProps {
   children: ReactNode;
@@ -8,7 +8,7 @@ export interface LinkProps {
 }
 
 export const Link = ({ asChild = false, ...props }: LinkProps) => {
-  const Component = asChild ? Slot : "a";
+  const Component = asChild ? Slot : 'a';
 
   return <Component {...props} />;
 };

@@ -1,1 +1,1 @@
-export * from "./asset-ctf";
+export * from './asset-ctf';

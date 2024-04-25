@@ -1,1 +1,1 @@
-export { default as ContentfulPreviewProvider } from "./contentful-preview-provider";
+export { default as ContentfulPreviewProvider } from './contentful-preview-provider';

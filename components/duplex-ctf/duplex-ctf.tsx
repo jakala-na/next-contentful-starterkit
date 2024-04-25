@@ -1,7 +1,7 @@
-import { FragmentOf, readFragment, graphql } from "gql.tada";
-import { DuplexCtfClient } from "./duplex-ctf-client";
-import { AssetFieldsFragment } from "../asset-ctf";
-import { PageLinkFieldsFragment } from "../page";
+import { FragmentOf, readFragment, graphql } from 'gql.tada';
+import { DuplexCtfClient } from './duplex-ctf-client';
+import { AssetFieldsFragment } from '../asset-ctf';
+import { PageLinkFieldsFragment } from '../page';
 
 export const ComponentDuplexFieldsFragment = graphql(
   `
