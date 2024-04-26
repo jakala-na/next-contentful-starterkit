@@ -1,10 +1,6 @@
 export const Icons = {
   logo: (props: React.SVGProps<SVGSVGElement>) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 457.82 230.53"
-      {...props}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 457.82 230.53" {...props}>
       <path
         d="M438.33 72.89a15.65 15.65 0 0 0-14.54 10c-.39 1.11-12.67 47.55-17.51 65.85l-21.15-75.9h-32L332 148.66l-20.17-75.77h-188v101.42a15.37 15.37 0 0 0 15.35 15.35h15.34v-43.2h40.26v-28.11h-40.23v-17.43h54.74v88.74H240v-43.2h40.25v-28.11H240v-17.43h48.24l25.86 88.74H349l19.92-68.14 19.92 68.14h34.93l34-116.77Z"
         data-name="Layer 1"

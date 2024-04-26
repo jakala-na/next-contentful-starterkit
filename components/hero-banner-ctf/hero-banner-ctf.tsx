@@ -34,7 +34,7 @@ export const ComponentHeroBannerFieldsFragment = graphql(
       colorPalette
     }
   `,
-  [AssetFieldsFragment, PageLinkFieldsFragment],
+  [AssetFieldsFragment, PageLinkFieldsFragment]
 );
 
 export type HeroBannerProps = {

@@ -1,14 +1,7 @@
 import { useMemo } from 'react';
 
-import {
-  documentToReactComponents,
-  Options,
-} from '@contentful/rich-text-react-renderer';
-import {
-  BLOCKS,
-  INLINES,
-  Block as RichtextBlock,
-} from '@contentful/rich-text-types';
+import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, INLINES, Block as RichtextBlock } from '@contentful/rich-text-types';
 
 import { OmitRecursive, tryget } from '#/lib/utils';
 
@@ -38,21 +31,13 @@ export const RichTextCtf = (props: RichTextProps) => {
   const { json, links } = props;
 
   const entryBlocks = useMemo(
-    () =>
-      tryget(
-        () => links!.entries!.block!.filter((b: any) => !!b),
-        [] as Block[],
-      )!,
-    [links],
+    () => tryget(() => links!.entries!.block!.filter((b: any) => !!b), [] as Block[])!,
+    [links]
   );
 
   const assetBlocks = useMemo(
-    () =>
-      tryget(
-        () => links!.assets!.block!.filter((b: any) => !!b),
-        [] as Asset[],
-      )!,
-    [links],
+    () => tryget(() => links!.assets!.block!.filter((b: any) => !!b), [] as Asset[])!,
+    [links]
   );
 
   const options = useMemo(() => {

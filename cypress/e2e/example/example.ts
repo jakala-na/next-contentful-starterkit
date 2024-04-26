@@ -5,9 +5,5 @@ When('I visit duckduckgo.com', () => {
 });
 
 Then('I should see a search bar', () => {
-  cy.get('input').should(
-    'have.attr',
-    'placeholder',
-    'Search the web without being tracked',
-  );
+  cy.get('input').should('have.attr', 'placeholder', 'Search the web without being tracked');
 });

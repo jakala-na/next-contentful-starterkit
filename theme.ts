@@ -52,9 +52,7 @@ export const colorConfigs: { [key: string]: ColorConfigInterface } = {
   },
 };
 
-export const getColorConfigFromPalette = (
-  palette: string,
-): ColorConfigInterface => {
+export const getColorConfigFromPalette = (palette: string): ColorConfigInterface => {
   if (colorConfigs[`palette-${palette}`] === undefined) {
     return colorConfigs['palette-1. White (#FFFFFF)'];
   }

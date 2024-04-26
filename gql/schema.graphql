@@ -71,11 +71,7 @@ type Query {
     where: ComponentFormFilter
     order: [ComponentFormOrder]
   ): ComponentFormCollection
-  componentDuplex(
-    id: String!
-    preview: Boolean
-    locale: String
-  ): ComponentDuplex
+  componentDuplex(id: String!, preview: Boolean, locale: String): ComponentDuplex
   componentDuplexCollection(
     skip: Int = 0
     limit: Int = 100
@@ -93,11 +89,7 @@ type Query {
     where: NtAudienceFilter
     order: [NtAudienceOrder]
   ): NtAudienceCollection
-  topicBusinessInfo(
-    id: String!
-    preview: Boolean
-    locale: String
-  ): TopicBusinessInfo
+  topicBusinessInfo(id: String!, preview: Boolean, locale: String): TopicBusinessInfo
   topicBusinessInfoCollection(
     skip: Int = 0
     limit: Int = 100
@@ -142,11 +134,7 @@ type Query {
     where: TopicProductFilter
     order: [TopicProductOrder]
   ): TopicProductCollection
-  topicProductFeature(
-    id: String!
-    preview: Boolean
-    locale: String
-  ): TopicProductFeature
+  topicProductFeature(id: String!, preview: Boolean, locale: String): TopicProductFeature
   topicProductFeatureCollection(
     skip: Int = 0
     limit: Int = 100
@@ -173,11 +161,7 @@ type Query {
     where: SeoFilter
     order: [SeoOrder]
   ): SeoCollection
-  componentTextBlock(
-    id: String!
-    preview: Boolean
-    locale: String
-  ): ComponentTextBlock
+  componentTextBlock(id: String!, preview: Boolean, locale: String): ComponentTextBlock
   componentTextBlockCollection(
     skip: Int = 0
     limit: Int = 100
@@ -186,11 +170,7 @@ type Query {
     where: ComponentTextBlockFilter
     order: [ComponentTextBlockOrder]
   ): ComponentTextBlockCollection
-  componentInfoBlock(
-    id: String!
-    preview: Boolean
-    locale: String
-  ): ComponentInfoBlock
+  componentInfoBlock(id: String!, preview: Boolean, locale: String): ComponentInfoBlock
   componentInfoBlockCollection(
     skip: Int = 0
     limit: Int = 100
@@ -199,11 +179,7 @@ type Query {
     where: ComponentInfoBlockFilter
     order: [ComponentInfoBlockOrder]
   ): ComponentInfoBlockCollection
-  componentProductTable(
-    id: String!
-    preview: Boolean
-    locale: String
-  ): ComponentProductTable
+  componentProductTable(id: String!, preview: Boolean, locale: String): ComponentProductTable
   componentProductTableCollection(
     skip: Int = 0
     limit: Int = 100
@@ -221,11 +197,7 @@ type Query {
     where: ComponentCtaFilter
     order: [ComponentCtaOrder]
   ): ComponentCtaCollection
-  componentHeroBanner(
-    id: String!
-    preview: Boolean
-    locale: String
-  ): ComponentHeroBanner
+  componentHeroBanner(id: String!, preview: Boolean, locale: String): ComponentHeroBanner
   componentHeroBannerCollection(
     skip: Int = 0
     limit: Int = 100
@@ -477,18 +449,8 @@ enum ImageFormat {
 }
 
 type AssetLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
-  topicPersonCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): TopicPersonCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
+  topicPersonCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): TopicPersonCollection
   componentDuplexCollection(
     skip: Int = 0
     limit: Int = 100
@@ -501,24 +463,9 @@ type AssetLinkingCollections {
     preview: Boolean
     locale: String
   ): TopicBusinessInfoCollection
-  topicProductCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): TopicProductCollection
-  componentQuoteCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): ComponentQuoteCollection
-  seoCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): SeoCollection
+  topicProductCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): TopicProductCollection
+  componentQuoteCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): ComponentQuoteCollection
+  seoCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): SeoCollection
   componentInfoBlockCollection(
     skip: Int = 0
     limit: Int = 100
@@ -569,12 +516,7 @@ type TopicPerson implements Entry {
 }
 
 type TopicPersonLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
 }
 
 type TopicPersonBio {
@@ -657,12 +599,7 @@ type ComponentDuplex implements Entry {
 }
 
 type ComponentDuplexLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -708,12 +645,7 @@ type Page implements Entry {
 }
 
 type PageLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   componentDuplexCollection(
     skip: Int = 0
     limit: Int = 100
@@ -783,11 +715,7 @@ type MenuGroup implements Entry {
   linkedFrom(allowedLocales: [String]): MenuGroupLinkingCollections
   internalTitle(locale: String): String
   groupName(locale: String): String
-  groupLink(
-    preview: Boolean
-    locale: String
-    where: MenuGroupGroupLinkFilter
-  ): MenuGroupGroupLink
+  groupLink(preview: Boolean, locale: String, where: MenuGroupGroupLinkFilter): MenuGroupGroupLink
   featuredPagesCollection(
     skip: Int = 0
     limit: Int = 100
@@ -798,12 +726,7 @@ type MenuGroup implements Entry {
 }
 
 type MenuGroupLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   footerMenuCollection(
     skip: Int = 0
     limit: Int = 100
@@ -843,11 +766,7 @@ type FooterMenu implements Entry {
     where: MenuGroupFilter
     order: [FooterMenuMenuItemsCollectionOrder]
   ): FooterMenuMenuItemsCollection
-  legalLinks(
-    preview: Boolean
-    locale: String
-    where: MenuGroupFilter
-  ): MenuGroup
+  legalLinks(preview: Boolean, locale: String, where: MenuGroupFilter): MenuGroup
   twitterLink(locale: String): String
   facebookLink(locale: String): String
   linkedinLink(locale: String): String
@@ -855,12 +774,7 @@ type FooterMenu implements Entry {
 }
 
 type FooterMenuLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
 }
 
 type FooterMenuMenuItemsCollection {
@@ -1069,12 +983,7 @@ type NavigationMenu implements Entry {
 }
 
 type NavigationMenuLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
 }
 
 type NavigationMenuMenuItemsCollection {
@@ -1258,12 +1167,7 @@ type ComponentCta implements Entry {
 }
 
 type ComponentCtaLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -1379,12 +1283,7 @@ type ComponentHeroBanner implements Entry {
 }
 
 type ComponentHeroBannerLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -1492,12 +1391,7 @@ type Seo implements Entry {
 }
 
 type SeoLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -1597,12 +1491,7 @@ type Accordion implements Entry {
 }
 
 type AccordionLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -1649,12 +1538,7 @@ type AccordionItem implements Entry {
 }
 
 type AccordionItemLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   accordionCollection(
     skip: Int = 0
     limit: Int = 100
@@ -1780,12 +1664,7 @@ type ComponentForm implements Entry {
 }
 
 type ComponentFormLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -1832,12 +1711,7 @@ type ComponentInfoBlock implements Entry {
 }
 
 type ComponentInfoBlockLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -2000,12 +1874,7 @@ type ComponentQuote implements Entry {
 }
 
 type ComponentQuoteLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -2087,12 +1956,7 @@ type ComponentTextBlock implements Entry {
 }
 
 type ComponentTextBlockLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -2189,12 +2053,7 @@ type ComponentProductTable implements Entry {
 }
 
 type ComponentProductTableLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -2251,12 +2110,7 @@ type TopicProduct implements Entry {
 }
 
 type TopicProductLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -2375,12 +2229,7 @@ type TopicProductFeature implements Entry {
 }
 
 type TopicProductFeatureLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   topicProductCollection(
     skip: Int = 0
     limit: Int = 100
@@ -2631,12 +2480,7 @@ type TopicBusinessInfo implements Entry {
 }
 
 type TopicBusinessInfoLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(
     skip: Int = 0
     limit: Int = 100
@@ -2946,12 +2790,7 @@ type EditorTest implements Entry {
 }
 
 type EditorTestLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
 }
 
 type EditorTestNt_experiencesCollection {
@@ -2972,11 +2811,7 @@ type NtExperience implements Entry {
   ntDescription(locale: String): String
   ntType(locale: String): String
   ntConfig(locale: String): JSON
-  ntAudience(
-    preview: Boolean
-    locale: String
-    where: NtAudienceFilter
-  ): NtAudience
+  ntAudience(preview: Boolean, locale: String, where: NtAudienceFilter): NtAudience
   ntVariantsCollection(
     skip: Int = 0
     limit: Int = 100
@@ -2988,12 +2823,7 @@ type NtExperience implements Entry {
 }
 
 type NtExperienceLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   editorTestCollection(
     skip: Int = 0
     limit: Int = 100
@@ -3040,12 +2870,7 @@ type NtAudience implements Entry {
 }
 
 type NtAudienceLinkingCollections {
-  entryCollection(
-    skip: Int = 0
-    limit: Int = 100
-    preview: Boolean
-    locale: String
-  ): EntryCollection
+  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   ntExperienceCollection(
     skip: Int = 0
     limit: Int = 100
