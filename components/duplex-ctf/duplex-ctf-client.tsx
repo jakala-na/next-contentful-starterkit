@@ -1,12 +1,14 @@
 'use client';
 
-import { Duplex } from '../ui/duplex';
+import { ResultOf } from 'gql.tada';
+
 import { RichTextCtf } from '#/components/rich-text-ctf';
-import { getPageLinkChildProps } from '../page';
+
 import { useComponentPreview } from '../hooks/use-component-preview';
 import { getImageChildProps } from '../image-ctf';
+import { getPageLinkChildProps } from '../page';
+import { Duplex } from '../ui/duplex';
 import { ComponentDuplexFieldsFragment } from './duplex-ctf';
-import { ResultOf } from 'gql.tada';
 
 export const DuplexCtfClient: React.FC<{
   data: ResultOf<typeof ComponentDuplexFieldsFragment>;

@@ -9,6 +9,7 @@ Status: accepted
 As the starterkit is supposed to provide certain best practices, an opportunity showed up to decide what a good testing strategy for typical projects on NextJS can be.
 
 The solution had to cover a few things:
+
 - Have great community support and be popular
 - Have preview abilities or debug mode that can show failed steps
 - Have ability to author tests with BDD-style statements that promote focus on acceptance-criteria rather than pure visual snapshotting
@@ -27,4 +28,3 @@ See [docs](../../cypress/README.md) for more info
 
 - Cypress will be used for Component Testing and it will not require use of React testing library. Since this is an E2E framework running component tests, we're giving up speed, as alternatives like jest or vitest with unit-tests and react teasting library could probably run faster
 - Gherkin format will be more suitable for QA folks to read and potentially re-use steps without dev support (eventually), but more boilerpate code need to be written to wrap the steps in Gherkin primitives.
-

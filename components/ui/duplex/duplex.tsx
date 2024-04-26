@@ -1,7 +1,12 @@
+import { ReactNode } from 'react';
+
+import type { VariantProps } from 'class-variance-authority';
+
+import { cva } from 'class-variance-authority';
+
 import { cn } from '#/lib/utils';
 import { getColorConfigFromPalette } from '#/theme';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { ReactNode } from 'react';
+
 import { Button } from '../button';
 import { Image, ImageProps } from '../image';
 import { Link, LinkProps } from '../link';
@@ -77,9 +82,9 @@ export function Duplex(props: DuplexProps) {
             />
           </div>
         )}
-        <div className="md:w-1/2 py-12 md:px-12">
+        <div className="py-12 md:w-1/2 md:px-12">
           {headline && (
-            <h2 className="text-4xl font-bold mb-4" style={{ color: colorConfig.headlineColor }}>
+            <h2 className="mb-4 text-4xl font-bold" style={{ color: colorConfig.headlineColor }}>
               {headline}
             </h2>
           )}

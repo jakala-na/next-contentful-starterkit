@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
+
 import { Button } from '../button/button';
-import { Link, LinkProps } from '../link';
 import { Image, ImageProps } from '../image';
+import { Link, LinkProps } from '../link';
 
 interface HeroBannerProps {
   headline?: string | null;
@@ -21,20 +22,20 @@ export function HeroBanner(props: HeroBannerProps) {
   } = props;
 
   return (
-    <div className="relative min-h-[calc(100vh-9rem)] flex items-center">
+    <div className="relative flex min-h-[calc(100vh-9rem)] items-center">
       {image && (
         <Image
           {...addAttributes('image')}
           {...image}
-          className="-z-10 w-full h-[calc(100vh-9rem)] absolute object-cover object-center"
+          className="absolute -z-10 h-[calc(100vh-9rem)] w-full object-cover object-center"
           alt={image.alt}
         />
       )}
-      <div className="mx-auto pt-10 w-full max-w-6xl px-5">
+      <div className="mx-auto w-full max-w-6xl px-5 pt-10">
         {headline && (
           <h1
             {...addAttributes('headline')}
-            className={'mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl'}
+            className={'text-gray-900 mb-4 text-3xl font-extrabold leading-none tracking-tight md:text-4xl lg:text-5xl'}
           >
             {headline}
           </h1>

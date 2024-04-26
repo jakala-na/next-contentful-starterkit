@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Duplex } from './duplex';
-
 import { colorConfigs } from '#/theme';
+
+import { Duplex } from './duplex';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {

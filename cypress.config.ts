@@ -1,17 +1,15 @@
-import { defineConfig } from "cypress";
-import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
-import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
-import createEsbuildPlugin from "@badeball/cypress-cucumber-preprocessor/esbuild";
-import { addMatchImageSnapshotPlugin } from "cypress-image-snapshot/plugin";
-import * as Webpack from "webpack";
-import { devServer } from "@cypress/webpack-dev-server";
+import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
+import createEsbuildPlugin from '@badeball/cypress-cucumber-preprocessor/esbuild';
+import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
+import { devServer } from '@cypress/webpack-dev-server';
+import { defineConfig } from 'cypress';
+import { addMatchImageSnapshotPlugin } from 'cypress-image-snapshot/plugin';
+import * as Webpack from 'webpack';
 
-const webpackConfig = (
-  cypressConfig: Cypress.PluginConfigOptions
-): Webpack.Configuration => {
+const webpackConfig = (cypressConfig: Cypress.PluginConfigOptions): Webpack.Configuration => {
   return {
     resolve: {
-      extensions: [".js", ".ts", ".tsx"],
+      extensions: ['.js', '.ts', '.tsx'],
     },
     module: {
       rules: [
@@ -20,7 +18,7 @@ const webpackConfig = (
           exclude: [/node_modules/],
           use: [
             {
-              loader: "ts-loader",
+              loader: 'ts-loader',
               options: { transpileOnly: true },
             },
           ],
@@ -29,7 +27,7 @@ const webpackConfig = (
           test: /\.feature$/,
           use: [
             {
-              loader: "@badeball/cypress-cucumber-preprocessor/webpack",
+              loader: '@badeball/cypress-cucumber-preprocessor/webpack',
               options: cypressConfig,
             },
           ],
@@ -41,7 +39,7 @@ const webpackConfig = (
 
 export default defineConfig({
   e2e: {
-    specPattern: "cypress/e2e/**/*.feature",
+    specPattern: 'cypress/e2e/**/*.feature',
     async setupNodeEvents(
       on: Cypress.PluginEvents,
       config: Cypress.PluginConfigOptions
@@ -52,7 +50,7 @@ export default defineConfig({
       addMatchImageSnapshotPlugin(on, config);
 
       on(
-        "file:preprocessor",
+        'file:preprocessor',
         createBundler({
           plugins: [createEsbuildPlugin(config)],
         })
@@ -67,11 +65,11 @@ export default defineConfig({
     devServer(devServerConfig) {
       return devServer({
         ...devServerConfig,
-        framework: "next",
+        framework: 'next',
         webpackConfig: webpackConfig(devServerConfig.cypressConfig),
       });
     },
-    specPattern: "**/*.feature",
+    specPattern: '**/*.feature',
     async setupNodeEvents(
       on: Cypress.PluginEvents,
       config: Cypress.PluginConfigOptions

@@ -1,5 +1,5 @@
-
 import { theme } from './tailwind.config';
+
 interface ColorConfigInterface {
   headlineColor: string;
   textColor: string;

@@ -1,5 +1,6 @@
-import { Icons } from '#/components/icons';
 import type { Meta, StoryObj } from '@storybook/react';
+
+import { Icons } from '#/components/icons';
 
 import { Button } from './button';
 

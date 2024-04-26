@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+
 import { Table, TableBody, TableCell, TableRow } from '../ui/table';
 import { DebugModeTrigger } from './debug-mode-trigger';
 

@@ -1,11 +1,14 @@
-import React from "react";
-import type { Preview } from "@storybook/react";
-import "../app/globals.css";
-import { fontSans } from "../lib/fonts";
+import React from 'react';
+
+import type { Preview } from '@storybook/react';
+
+import '../app/globals.css';
+
+import { fontSans } from '../lib/fonts';
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,

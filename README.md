@@ -66,9 +66,11 @@ If you are using VSCode, the .vscode/settings.json in the repo is already config
 If using Webstorm, make sure you configure the Typescript interpretter from node_modules/typescript/lib as well under Settings -> Language & Frameworks -> Typescript
 
 If you can't use a Typescript server in your IDE, you can optionally generate a gql/graphql-env.d.ts by running this command.
+
 ```bash
 yarn generate:output
 ```
+
 This command will also run `gql.tada turbo` which will generate a cache file that should also be commited. This cache file will speed up inference for new users who just checked out a new branch.
 More info [here](https://gql-tada.0no.co/devlog/2024-04-15)
 

@@ -1,7 +1,3 @@
-schema: "gql/schema.graphql"
+schema: 'gql/schema.graphql'
 documents:
-  [
-    "app/**/*.{graphql,js,ts,jsx,tsx}",
-    "components/**/*.{graphql,js,ts,jsx,tsx}",
-    "lib/**/*.{graphql,js,ts,jsx,tsx}",
-  ]
+  ['app/**/*.{graphql,js,ts,jsx,tsx}', 'components/**/*.{graphql,js,ts,jsx,tsx}', 'lib/**/*.{graphql,js,ts,jsx,tsx}']

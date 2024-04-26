@@ -10,6 +10,7 @@ There are only a few tools in GraphQL space that can compete with TheGuild's eco
 
 In simple terms the goal is this.
 You write a GrapHQL query in your IDE, you want:
+
 - Autocomplete at the time of writing (provided by IDE plugins that use GraphQL schema introspection)
 - Autocomplete at the time of using response variables in Typescript (provided by codegen solutions)
 

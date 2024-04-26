@@ -1,4 +1,5 @@
 'use client';
+
 import { Argument } from '@contentful/live-preview/dist/types';
 import { useContentfulInspectorMode, useContentfulLiveUpdates } from '@contentful/live-preview/react';
 

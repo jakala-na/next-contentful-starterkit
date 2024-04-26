@@ -1,13 +1,18 @@
-import { graphqlClient } from '#/lib/graphqlClient';
 import { draftMode } from 'next/headers';
+
+import { graphqlClient } from '#/lib/graphqlClient';
+
 import './globals.css';
+
 import { graphql } from 'gql.tada';
+
 import '@contentful/live-preview/style.css';
+
 import { ContentfulPreviewProvider } from '#/components/contentful-preview-provider';
-import { cn } from '#/lib/utils';
-import { fontSans } from '#/lib/fonts';
-import { SiteHeader } from '#/components/site-header';
 import { NavigationFieldsFragment } from '#/components/navigation';
+import { SiteHeader } from '#/components/site-header';
+import { fontSans } from '#/lib/fonts';
+import { cn } from '#/lib/utils';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled: isDraftMode } = draftMode();
