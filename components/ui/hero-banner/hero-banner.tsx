@@ -34,7 +34,9 @@ export function HeroBanner(props: HeroBannerProps) {
         {headline && (
           <h1
             {...addAttributes('headline')}
-            className={'mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl'}
+            className={
+              'mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl'
+            }
           >
             {headline}
           </h1>

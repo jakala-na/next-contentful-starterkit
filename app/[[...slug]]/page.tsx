@@ -11,7 +11,12 @@ const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
     `
       query PageQuery($slug: String, $locale: String, $preview: Boolean) {
-        pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
+        pageCollection(
+          locale: $locale
+          preview: $preview
+          limit: 1
+          where: { slug: $slug }
+        ) {
           items {
             topSectionCollection(limit: 10) {
               items {
@@ -23,7 +28,7 @@ const getPage = async (slug: string, locale: string, preview = false) => {
         }
       }
     `,
-    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment]
+    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment],
   );
   return (
     await graphqlClient(preview).query(pageQuery, {
@@ -60,7 +65,11 @@ const getPageSlugs = async () => {
   );
 };
 
-export default async function LandingPage({ params }: { params: { slug: string[] } }) {
+export default async function LandingPage({
+  params,
+}: {
+  params: { slug: string[] };
+}) {
   const slug = params.slug?.join('/') ?? 'home';
 
   const { isEnabled: isDraftMode } = draftMode();

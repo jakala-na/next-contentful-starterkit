@@ -30,19 +30,24 @@ const imageStyleVariants = cva('w-full', {
   },
 });
 
-const imageContainerVariants = cva(['md:w-1/2', 'rounded-lg', 'overflow-hidden', 'shadow-lg'], {
-  variants: {
-    imageHeight: {
-      full: '',
-      fixed: 'flex self-center',
+const imageContainerVariants = cva(
+  ['md:w-1/2', 'rounded-lg', 'overflow-hidden', 'shadow-lg'],
+  {
+    variants: {
+      imageHeight: {
+        full: '',
+        fixed: 'flex self-center',
+      },
+    },
+    defaultVariants: {
+      imageHeight: 'full',
     },
   },
-  defaultVariants: {
-    imageHeight: 'full',
-  },
-});
+);
 
-interface DuplexProps extends VariantProps<typeof layoutVariants>, VariantProps<typeof imageStyleVariants> {
+interface DuplexProps
+  extends VariantProps<typeof layoutVariants>,
+    VariantProps<typeof imageStyleVariants> {
   headline?: string | null;
   bodyText?: ReactNode;
   image?: ImageProps | null;
@@ -65,7 +70,10 @@ export function Duplex(props: DuplexProps) {
   const colorConfig = getColorConfigFromPalette(colorPalette || '');
 
   return (
-    <div className="flex justify-center py-12" style={{ backgroundColor: colorConfig.backgroundColor }}>
+    <div
+      className="flex justify-center py-12"
+      style={{ backgroundColor: colorConfig.backgroundColor }}
+    >
       <div className={cn(layoutVariants({ imageAlignment }))}>
         {image && (
           <div className={cn(imageContainerVariants({ imageHeight }))}>
@@ -79,7 +87,10 @@ export function Duplex(props: DuplexProps) {
         )}
         <div className="md:w-1/2 py-12 md:px-12">
           {headline && (
-            <h2 className="text-4xl font-bold mb-4" style={{ color: colorConfig.headlineColor }}>
+            <h2
+              className="text-4xl font-bold mb-4"
+              style={{ color: colorConfig.headlineColor }}
+            >
               {headline}
             </h2>
           )}
@@ -90,7 +101,11 @@ export function Duplex(props: DuplexProps) {
           )}
           {cta?.href && cta?.children && (
             <div className="mt-6">
-              <Button variant={colorConfig.buttonColor} {...addAttributes('ctaText')} asChild>
+              <Button
+                variant={colorConfig.buttonColor}
+                {...addAttributes('ctaText')}
+                asChild
+              >
                 <Link {...cta} />
               </Button>
             </div>

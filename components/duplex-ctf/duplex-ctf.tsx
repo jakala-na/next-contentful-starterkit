@@ -26,7 +26,7 @@ export const ComponentDuplexFieldsFragment = graphql(
       containerLayout
     }
   `,
-  [AssetFieldsFragment, PageLinkFieldsFragment]
+  [AssetFieldsFragment, PageLinkFieldsFragment],
 );
 
 export type DuplexProps = {

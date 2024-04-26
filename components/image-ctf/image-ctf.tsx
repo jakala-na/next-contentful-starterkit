@@ -8,7 +8,10 @@ import { AssetCtfProps, AssetFieldsFragment } from '../asset-ctf';
 // it basically thinks we'll always override those props via the spread.
 export type ImageCtfProps = AssetCtfProps & Omit<ImageProps, 'src' | 'alt'>;
 
-export const getImageProps = ({ data: fragmentData, ...props }: ImageCtfProps) => {
+export const getImageProps = ({
+  data: fragmentData,
+  ...props
+}: ImageCtfProps) => {
   const data = readFragment(AssetFieldsFragment, fragmentData);
   if (!data.url) {
     return null;

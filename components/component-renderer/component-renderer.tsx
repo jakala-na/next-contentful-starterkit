@@ -19,7 +19,12 @@ export default function ComponentRenderer({
     );
   }
 
-  if (!data?.__typename) return null;
+  if (!data?.__typename) {
+    return null;
+  }
+
+  // @TODO: Fix typings for componentMap.
+  // @ts-ignore
 
   // @TODO: Fix typings for componentMap.
   // @ts-ignore

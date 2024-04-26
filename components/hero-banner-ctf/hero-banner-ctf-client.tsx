@@ -12,7 +12,8 @@ export const HeroBannerCtfClient: React.FC<{
   data: ResultOf<typeof ComponentHeroBannerFieldsFragment>;
 }> = (props) => {
   const { data: originalData } = props;
-  const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
+  const { data, addAttributes } =
+    useComponentPreview<typeof originalData>(originalData);
 
   return (
     <HeroBanner

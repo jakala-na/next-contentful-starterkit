@@ -1,8 +1,13 @@
 'use client';
 import { Argument } from '@contentful/live-preview/dist/types';
-import { useContentfulInspectorMode, useContentfulLiveUpdates } from '@contentful/live-preview/react';
+import {
+  useContentfulInspectorMode,
+  useContentfulLiveUpdates,
+} from '@contentful/live-preview/react';
 
-export const useComponentPreview = <T extends Argument>(data: (typeof useContentfulLiveUpdates)['arguments'][0]) => {
+export const useComponentPreview = <T extends Argument>(
+  data: (typeof useContentfulLiveUpdates)['arguments'][0],
+) => {
   const previewData = useContentfulLiveUpdates<T>(data);
   const inspectorProps = useContentfulInspectorMode({
     entryId: data.sys.id,

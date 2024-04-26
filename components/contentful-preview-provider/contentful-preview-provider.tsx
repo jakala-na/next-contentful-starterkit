@@ -2,7 +2,13 @@
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 
-const ContentfulPreviewProvider = ({ isDraftMode, children }: { isDraftMode: boolean; children: any }) => {
+const ContentfulPreviewProvider = ({
+  isDraftMode,
+  children,
+}: {
+  isDraftMode: boolean;
+  children: any;
+}) => {
   const previewActive = isDraftMode;
   return (
     <ContentfulLivePreviewProvider
