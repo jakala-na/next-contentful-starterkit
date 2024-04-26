@@ -1,5 +1,6 @@
-import { FragmentOf, graphql, readFragment } from 'gql.tada';
 import Link from 'next/link';
+
+import { Button } from '#/components/ui/button';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,11 +8,19 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '#/components/ui/navigation-menu';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '#/components/ui/sheet';
-import { PageLinkFieldsFragment } from '../page';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '#/components/ui/sheet';
 import { cn } from '#/lib/utils';
+import { FragmentOf, graphql, readFragment } from 'gql.tada';
+
 import { Icons } from '../icons';
-import { Button } from '#/components/ui/button';
+import { PageLinkFieldsFragment } from '../page';
 
 const MenuGroupFeaturedPagesFragment = graphql(
   `
@@ -21,7 +30,7 @@ const MenuGroupFeaturedPagesFragment = graphql(
       }
     }
   `,
-  [PageLinkFieldsFragment]
+  [PageLinkFieldsFragment],
 );
 
 export const NavigationFieldsFragment = graphql(
@@ -46,7 +55,7 @@ export const NavigationFieldsFragment = graphql(
       }
     }
   `,
-  [PageLinkFieldsFragment, MenuGroupFeaturedPagesFragment]
+  [PageLinkFieldsFragment, MenuGroupFeaturedPagesFragment],
 );
 
 export type NavigationProps = {
@@ -59,15 +68,23 @@ export const Navigation = (props: NavigationProps) => {
 
   // Fragment Masking is forcing us to split fragments to match our components or our helper functions.
   // https://github.com/dotansimha/graphql-code-generator/discussions/8554#discussioncomment-4131776
-  const getGroupLinks = (group: FragmentOf<typeof MenuGroupFeaturedPagesFragment>) => {
+  const getGroupLinks = (
+    group: FragmentOf<typeof MenuGroupFeaturedPagesFragment>,
+  ) => {
     const collection = readFragment(MenuGroupFeaturedPagesFragment, group);
     return collection?.items?.map((menuItem) => {
       // const page = getFragmentData(PageLinkFieldsFragment, menuItem);
-      if (!menuItem) return null;
+
+      // const page = getFragmentData(PageLinkFieldsFragment, menuItem);
+      if (!menuItem) {
+        return null;
+      }
 
       const page = readFragment(PageLinkFieldsFragment, menuItem);
 
-      if (!page.slug) return null;
+      if (!page.slug) {
+        return null;
+      }
 
       return {
         id: page.sys.id,
@@ -83,7 +100,10 @@ export const Navigation = (props: NavigationProps) => {
         <NavigationMenu>
           <NavigationMenuList>
             {items?.map((menuItem) => {
-              const groupLinks = !menuItem?.link && menuItem?.children && getGroupLinks(menuItem.children);
+              const groupLinks =
+                !menuItem?.link &&
+                menuItem?.children &&
+                getGroupLinks(menuItem.children);
 
               return (
                 menuItem &&
@@ -97,7 +117,9 @@ export const Navigation = (props: NavigationProps) => {
                         {menuItem.groupName}
                       </Link>
                     ) : (
-                      <NavigationMenuTrigger>{menuItem.groupName}</NavigationMenuTrigger>
+                      <NavigationMenuTrigger>
+                        {menuItem.groupName}
+                      </NavigationMenuTrigger>
                     )}
                     {groupLinks && (
                       <NavigationMenuContent>
@@ -106,7 +128,11 @@ export const Navigation = (props: NavigationProps) => {
                             key={subMenuItem?.id}
                             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
                           >
-                            {subMenuItem?.slug && <Link href={subMenuItem.slug}>{subMenuItem?.name}</Link>}
+                            {subMenuItem?.slug && (
+                              <Link href={subMenuItem.slug}>
+                                {subMenuItem?.name}
+                              </Link>
+                            )}
                           </div>
                         ))}
                       </NavigationMenuContent>
@@ -127,14 +153,19 @@ export const Navigation = (props: NavigationProps) => {
         <nav>
           <ul>
             {items?.map((menuItem) => {
-              const groupLinks = !menuItem?.link && menuItem?.children && getGroupLinks(menuItem.children);
+              const groupLinks =
+                !menuItem?.link &&
+                menuItem?.children &&
+                getGroupLinks(menuItem.children);
 
               return (
                 menuItem &&
                 menuItem.groupName && (
                   <li key={menuItem.sys.id} className="py-1.5">
                     {menuItem.link ? (
-                      <Link href={`/${readFragment(PageLinkFieldsFragment, menuItem.link).slug}`}>
+                      <Link
+                        href={`/${readFragment(PageLinkFieldsFragment, menuItem.link).slug}`}
+                      >
                         {menuItem.groupName}
                       </Link>
                     ) : (
@@ -144,7 +175,11 @@ export const Navigation = (props: NavigationProps) => {
                       <ul className="pl-5">
                         {groupLinks.map((subMenuItem) => (
                           <li key={subMenuItem?.id}>
-                            {subMenuItem?.slug && <Link href={subMenuItem.slug}>{subMenuItem?.name}</Link>}
+                            {subMenuItem?.slug && (
+                              <Link href={subMenuItem.slug}>
+                                {subMenuItem?.name}
+                              </Link>
+                            )}
                           </li>
                         ))}
                       </ul>
@@ -223,7 +258,10 @@ export const Navigation = (props: NavigationProps) => {
               </SheetHeader>
               <SheetDescription className="mt-2">
                 This is an example of the shadcn/ui{' '}
-                <a className="font-bold" href="https://ui.shadcn.com/docs/components/sheet">
+                <a
+                  className="font-bold"
+                  href="https://ui.shadcn.com/docs/components/sheet"
+                >
                   Sheet
                 </a>{' '}
                 component used to display a notification sidebar.

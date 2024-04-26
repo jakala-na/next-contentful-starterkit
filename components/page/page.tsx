@@ -26,7 +26,11 @@ export interface PageLinkProps {
   [key: string]: any;
 }
 
-export const getPageLinkProps = ({ data: fragmentData, children, ...props }: PageLinkProps) => {
+export const getPageLinkProps = ({
+  data: fragmentData,
+  children,
+  ...props
+}: PageLinkProps) => {
   const data = readFragment(PageLinkFieldsFragment, fragmentData);
 
   return {
