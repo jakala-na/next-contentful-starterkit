@@ -1,4 +1,5 @@
 import { Bug, BugOff } from 'lucide-react';
+
 import { Button } from '../ui/button';
 
 export function DebugModeTrigger({

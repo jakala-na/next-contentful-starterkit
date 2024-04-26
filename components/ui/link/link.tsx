@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import { Slot } from '@radix-ui/react-slot';
 
 export interface LinkProps {

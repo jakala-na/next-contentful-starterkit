@@ -14,17 +14,16 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import "./commands";
 
+import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import "cypress-axe";
-
+import 'cypress-axe';
 // Add Next.JS global styles for tests
-import "app/globals.css";
+import 'app/globals.css';
 
-import { mount } from "cypress/react18";
+import { mount } from 'cypress/react18';
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
@@ -38,7 +37,7 @@ declare global {
   }
 }
 
-Cypress.Commands.add("mount", mount);
+Cypress.Commands.add('mount', mount);
 
 // Example use:
 // cy.mount(<MyComponent />)

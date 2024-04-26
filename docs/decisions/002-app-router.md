@@ -9,6 +9,7 @@ Status: accepted
 This starterkit is exclusively using NextJS App Router and was intended as a demonstration of App Router's new abilities with introduction of React Server Components (RSC)
 
 Let's explore some thoughts that went into this decision:
+
 - RSC gives you a way to ship minimal JS bundles but still use React's component system on the server, which has great composability. Great for our data-fetching oriented starterkit.
 - RSC is the future, it's the new default, why fight it?
 - RSC lets you reason about components in isolation, without trying to reason about components and API Routes that fetch their data. Each component can fetch their own data now, which promotes collocation, promotes great security with no API routes, and promotes great composition with no dependencies between component and API Route. Did I mention composability?

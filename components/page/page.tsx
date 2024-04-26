@@ -1,5 +1,6 @@
-import { FragmentOf, readFragment, graphql } from 'gql.tada';
 import { default as NextLink } from 'next/link';
+
+import { FragmentOf, graphql, readFragment } from 'gql.tada';
 
 export const PageLinkFieldsFragment = graphql(`
   fragment PageLinkFields on Page {

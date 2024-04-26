@@ -14,6 +14,7 @@ There are 2 ways to query data from Contentful, you can use Contentful Delivery 
 
 It happens that REST API in Contentful has no good ability to fetch exact data you need when it comes to references. If you're fetching a top level entry, you can fetch extra references only with a catch-all bazooka `?include=[depth]` parameter, where depth of 10 for example will let you fetch 10 levels of deferences deep. What you cannot do, you can't request to fetch one field, but skip the other.
 This results in 3 things:
+
 - Massive payloads that don't fit the body size of the response
 - Massive NextJS page caches as those payloads end up in props (unless you clean them up)
 - Chance of circular references that can't be encoded in a serialized JSON and SDK failing with an error
@@ -29,6 +30,7 @@ Hence, the decision to go with GraphQL as the default, see decision
 Use GraphQL as a standard data-fetching solution!
 
 ### Benefits
+
 - has fine-grained data fetching per field with ability to expand only references you need
 - has no circular-references problems
 - has great autocomplete in IDEs and has great introspective DX which eliminates the need to read documentation
@@ -38,18 +40,20 @@ Use GraphQL as a standard data-fetching solution!
 GraphQL is not perfect either, it has certain limits, but it's more suitable for what we try to do. Let's explore some nuances.
 
 ### Limitations
+
 - has maximum body size for the request, and also response size is limited (mitigations available)
 - has query complexity requirements and prevents queries from fetching more than 11000 entries at once (statically analyzed)
 
-#### Mitigations 
+#### Mitigations
+
 Now, a little about mitigating the downsides:
+
 - Max query body size can be increased if you use [GraphQL APQ](https://www.apollographql.com/docs/apollo-server/performance/apq/). See [limits](https://www.contentful.com/developers/docs/references/graphql/#/introduction/query-size-limits)
 - Query complexity limits can be minimized with a few techniques:
   - limit collection fields via pagination
   - split first pass fetch from "additiona content fetch", for example fetch only first Tab in a tab group when rendering the page on the server, and implemnent additional fetching when tabs are switched
   - you can request a query complexity limit increase
   - you can split and stitch multiple queries to fit the query complexity, luckily you can statically analyze the query and know if it doesn't fit (see https://github.com/ffw-us/next-contentful-starterkit/issues/5)
-  
 
 ## Consequences
 

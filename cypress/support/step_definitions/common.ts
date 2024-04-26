@@ -1,13 +1,13 @@
-import { Then } from "@badeball/cypress-cucumber-preprocessor";
+import { Then } from '@badeball/cypress-cucumber-preprocessor';
 
-Then("I init axe", () => {
+Then('I init axe', () => {
   cy.injectAxe();
 });
 
-Then("I run axe", () => {
+Then('I run axe', () => {
   cy.checkA11y();
 });
 
-Then("display matches snapshot", () => {
+Then('display matches snapshot', () => {
   cy.matchImageSnapshot();
 });

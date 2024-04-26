@@ -1,13 +1,15 @@
 import { useMemo } from 'react';
-import {
-  Block as RichtextBlock,
-  BLOCKS,
-  INLINES,
-} from '@contentful/rich-text-types';
+
 import {
   documentToReactComponents,
   Options,
 } from '@contentful/rich-text-react-renderer';
+import {
+  BLOCKS,
+  INLINES,
+  Block as RichtextBlock,
+} from '@contentful/rich-text-types';
+
 import { OmitRecursive, tryget } from '#/lib/utils';
 
 import { AssetCtf, AssetFieldsFragment } from '../asset-ctf';

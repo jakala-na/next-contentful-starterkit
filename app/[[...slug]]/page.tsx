@@ -1,11 +1,12 @@
-import { ComponentRenderer } from '#/components/component-renderer';
-
-import DebugMode from '#/components/debug-mode/debug-mode';
-import { graphql } from 'gql.tada';
-import { graphqlClient } from '#/lib/graphqlClient';
 import { draftMode } from 'next/headers';
-import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
+
+import { graphql } from 'gql.tada';
+
+import { ComponentRenderer } from '#/components/component-renderer';
+import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
+import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
+import { graphqlClient } from '#/lib/graphqlClient';
 
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(

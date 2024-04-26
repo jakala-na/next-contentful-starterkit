@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { FragmentOf, graphql, readFragment } from 'gql.tada';
+
 import { Button } from '#/components/ui/button';
 import {
   NavigationMenu,
@@ -17,7 +19,6 @@ import {
   SheetTrigger,
 } from '#/components/ui/sheet';
 import { cn } from '#/lib/utils';
-import { FragmentOf, graphql, readFragment } from 'gql.tada';
 
 import { Icons } from '../icons';
 import { PageLinkFieldsFragment } from '../page';
@@ -126,7 +127,7 @@ export const Navigation = (props: NavigationProps) => {
                         {groupLinks.map((subMenuItem) => (
                           <div
                             key={subMenuItem?.id}
-                            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300"
+                            className="text-gray-700 dark:text-gray-300 block px-4 py-2 text-sm"
                           >
                             {subMenuItem?.slug && (
                               <Link href={subMenuItem.slug}>
@@ -195,9 +196,9 @@ export const Navigation = (props: NavigationProps) => {
   );
 
   const Search = () => (
-    <div className="items-center bg-gray-100 dark:bg-zinc-700 rounded-md p-2 flex">
+    <div className="bg-gray-100 dark:bg-zinc-700 flex items-center rounded-md p-2">
       <svg
-        className="h-5 w-5 text-gray-400"
+        className="text-gray-400 h-5 w-5"
         fill="none"
         height="24"
         stroke="currentColor"
@@ -212,7 +213,7 @@ export const Navigation = (props: NavigationProps) => {
         <path d="m21 21-4.3-4.3" />
       </svg>
       <input
-        className="ml-2 bg-transparent text-sm text-gray-600 dark:text-gray-300 p-1.5 w-full"
+        className="bg-transparent text-gray-600 dark:text-gray-300 ml-2 w-full p-1.5 text-sm"
         placeholder="Search"
         type="search"
       />
@@ -220,11 +221,11 @@ export const Navigation = (props: NavigationProps) => {
   );
 
   return (
-    <header className="flex items-center justify-between px-6 py-4 bg-white dark:bg-zinc-800">
-      <div className="w-full max-w-6xl mx-auto flex justify-between items-center">
+    <header className="dark:bg-zinc-800 flex items-center justify-between bg-white px-6 py-4">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
         <div className="flex items-center justify-center sm:justify-start">
           <Link href="/">
-            <Icons.logo className="w-8 h-8 md:mr-10" />
+            <Icons.logo className="h-8 w-8 md:mr-10" />
           </Link>
           <MainMenuDesktop />
         </div>
@@ -236,7 +237,7 @@ export const Navigation = (props: NavigationProps) => {
             <SheetTrigger asChild>
               <Button variant="ghost" size="sm">
                 <svg
-                  className="h-6 w-6 text-gray-500 dark:text-gray-200"
+                  className="text-gray-500 dark:text-gray-200 h-6 w-6"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -273,7 +274,7 @@ export const Navigation = (props: NavigationProps) => {
             <SheetTrigger asChild>
               <Button variant="ghost" size="sm" className="md:hidden">
                 <svg
-                  className="h-6 w-6 text-gray-500 dark:text-gray-200"
+                  className="text-gray-500 dark:text-gray-200 h-6 w-6"
                   fill="none"
                   height="24"
                   stroke="currentColor"

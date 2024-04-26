@@ -1,12 +1,14 @@
 'use client';
 
-import { HeroBanner } from '../ui/hero-banner';
+import { ResultOf } from 'gql.tada';
+
 import { RichTextCtf } from '#/components/rich-text-ctf';
-import { getPageLinkChildProps } from '../page';
+
 import { useComponentPreview } from '../hooks/use-component-preview';
 import { getImageChildProps } from '../image-ctf';
+import { getPageLinkChildProps } from '../page';
+import { HeroBanner } from '../ui/hero-banner';
 import { ComponentHeroBannerFieldsFragment } from './hero-banner-ctf';
-import { ResultOf } from 'gql.tada';
 
 export const HeroBannerCtfClient: React.FC<{
   data: ResultOf<typeof ComponentHeroBannerFieldsFragment>;

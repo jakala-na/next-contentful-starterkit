@@ -26,4 +26,3 @@ Adopt Storybook and Chromatic.com hosting for it
 
 - Ability for frontend developers to develop components in isolation
 - Ability for the team to set UI review and regression testing workflows outside of the codebase via Chromatic rules
-

@@ -4,18 +4,17 @@ Current project has a configured Cypress.io integration with both e2e support an
 
 Additionally the project is configured with the following plugins:
 
-* Image Snapshot
+- Image Snapshot
 
 See https://github.com/jaredpalmer/cypress-image-snapshot
 
 Used to take snapshots of components when they are tested for the first time and meant to represent a gating process when developing changes to components and introducing accidental visual regressions. This plugin could be used for E2E testing but will likely be less efficient
 
-* Cypress AXE
+- Cypress AXE
 
 See https://github.com/component-driven/cypress-axe
 
-Uses Axe Core to do accessibility testing 
-
+Uses Axe Core to do accessibility testing
 
 ## Installation and running locally
 
@@ -29,4 +28,3 @@ You can run cypress without a GUI in command line with
 `yarn cypress run` - for e2e tests
 
 `yarn cypress run --component` - for component tests
-

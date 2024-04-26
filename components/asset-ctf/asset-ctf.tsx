@@ -1,5 +1,6 @@
+import { FragmentOf, graphql, readFragment } from 'gql.tada';
+
 import { ImageCtf } from '#/components/image-ctf';
-import { FragmentOf, readFragment, graphql } from 'gql.tada';
 
 export const AssetFieldsFragment = graphql(`
   fragment AssetFields on Asset {

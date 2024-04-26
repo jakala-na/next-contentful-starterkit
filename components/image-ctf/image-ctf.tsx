@@ -1,6 +1,8 @@
-import { readFragment } from 'gql.tada';
-import { default as NextImage, ImageProps } from 'next/image';
 import React from 'react';
+import { ImageProps, default as NextImage } from 'next/image';
+
+import { readFragment } from 'gql.tada';
+
 import { AssetCtfProps, AssetFieldsFragment } from '../asset-ctf';
 
 // Omit src and alt from ImageProps because we're validating them at runtime.
