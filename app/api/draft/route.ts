@@ -1,4 +1,4 @@
-import { draftMode } from 'next/headers';
+import { cookies, draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import getPageSlug from '#/lib/getPageSlug';
@@ -26,6 +26,22 @@ export async function GET(request: Request) {
 
   // Enable Draft Mode by setting the cookie
   draftMode().enable();
+
+  // Set the __prerender_bypass as secure for local environment.
+  // Will work only in next dev mode.
+  // https://github.com/vercel/next.js/issues/49927
+  if (process.env.NODE_ENV === 'development') {
+    const cookieStore = cookies();
+    const cookie = cookieStore.get('__prerender_bypass');
+    cookies().set({
+      name: '__prerender_bypass',
+      value: cookie?.value || '',
+      httpOnly: true,
+      path: '/',
+      secure: true,
+      sameSite: 'none',
+    });
+  }
 
   // Redirect to the path from the fetched post
   // We don't redirect to searchParams.slug as that might lead to open redirect vulnerabilities
