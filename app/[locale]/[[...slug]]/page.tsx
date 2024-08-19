@@ -1,3 +1,4 @@
+import { setStaticParamsLocale } from 'next-international/server';
 import { draftMode } from 'next/headers';
 
 import { graphql } from 'gql.tada';
@@ -7,6 +8,7 @@ import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
 import { graphqlClient } from '#/lib/graphqlClient';
+import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
@@ -61,12 +63,14 @@ const getPageSlugs = async () => {
   );
 };
 
-export default async function LandingPage({ params }: { params: { slug: string[] } }) {
+export default async function LandingPage({ params }: { params: { slug: string[]; locale: string } }) {
+  const { locale } = params;
+  setStaticParamsLocale(locale);
   const slug = params.slug?.join('/') ?? 'home';
 
   const { isEnabled: isDraftMode } = draftMode();
 
-  const pageData = await getPage(slug, 'en-US', isDraftMode);
+  const pageData = await getPage(slug, getLocaleFromPath(locale), isDraftMode);
 
   const topComponents = pageData?.topSectionCollection?.items;
 
