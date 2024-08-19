@@ -1,3 +1,4 @@
+import { setStaticParamsLocale } from 'next-international/server';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
@@ -10,6 +11,7 @@ import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/
 import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
 import { addContentSourceMaps } from '#/lib/contentSourceMaps';
 import { graphqlClient } from '#/lib/graphqlClient';
+import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
@@ -69,12 +71,14 @@ const getPageSlugs = async () => {
   );
 };
 
-export default async function LandingPage({ params }: { params: { slug: string[] } }) {
+export default async function LandingPage({ params }: { params: { slug: string[]; locale: string } }) {
+  const { locale } = params;
+  setStaticParamsLocale(locale);
   const slug = params.slug?.join('/') ?? 'home';
 
   const { isEnabled: isDraftMode } = draftMode();
 
-  const pageData = await getPage(slug, 'en-US', isDraftMode);
+  const pageData = await getPage(slug, getLocaleFromPath(locale), isDraftMode);
 
   if (!pageData) {
     notFound();

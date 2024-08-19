@@ -16,9 +16,12 @@ import { SiteHeader } from '#/components/site-header';
 import { isContentSourceMapsEnabled } from '#/lib/contentSourceMaps';
 import { fontSans } from '#/lib/fonts';
 import { cn } from '#/lib/utils';
+import { getLocaleFromPath } from '#/locales/get-locale-from-path';
+import { getCurrentLocale } from '#/locales/server';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const shouldInjectToolbar = process.env.NODE_ENV === 'development';
+  const locale = getCurrentLocale();
   const { isEnabled: isDraftMode } = draftMode();
 
   const layoutQuery = graphql(
@@ -35,14 +38,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const layoutData = await graphqlClient(isDraftMode).query(
     layoutQuery,
     {
-      locale: 'en-US',
+      locale: getLocaleFromPath(locale),
       preview: isDraftMode,
     },
     { fetchOptions: { next: { revalidate: 60, tags: ['menu'] } } }
   );
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
