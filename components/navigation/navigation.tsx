@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { FragmentOf, graphql, readFragment } from 'gql.tada';
 
+import { LanguageSelector } from '#/components/language-selector';
 import { Button } from '#/components/ui/button';
 import {
   NavigationMenu,
@@ -208,6 +209,7 @@ export const Navigation = async (props: NavigationProps) => {
           <div className="hidden md:block">
             <Search />
           </div>
+          <LanguageSelector />
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="sm">
