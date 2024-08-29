@@ -82,7 +82,10 @@ export default async function LandingPage({ params }: { params: { slug: string[]
     <div>
       <DebugMode slug={slug} />
       <LanguageDataSetter
-        data={{ ...(pageData?.slugEn && { en: pageData.slugEn }), ...(pageData?.slugDe && { de: pageData.slugDe }) }}
+        data={{
+          ...(pageData?.slugEn && pageData.slugEn !== 'home' && { en: pageData.slugEn }),
+          ...(pageData?.slugDe && pageData.slugDe !== 'home' && { de: pageData.slugDe }),
+        }}
       />
       {topComponents ? <ComponentRenderer data={topComponents} /> : null}
     </div>
