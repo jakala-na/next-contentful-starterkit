@@ -1,19 +1,35 @@
 'use client';
 
-import { useChangeLocale, useCurrentLocale } from '#/locales/client';
+import { ChangeEvent, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { useCurrentLocale } from '#/locales/client';
+import { useLanguageDataContext } from '#/ui/hooks';
 
 export const LanguageSelector = () => {
   const locale = useCurrentLocale();
-  const changeLocale = useChangeLocale({ preserveSearchParams: true });
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const languageData = useLanguageDataContext();
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeLocale(e.target.value as 'en' | 'de');
+  const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    startTransition(() => {
+      const selectedLocale = e.target.value;
+      const [slugs] = languageData?.slugsState ?? [];
+      if (slugs?.[selectedLocale]) {
+        router.push(`/${selectedLocale}/${slugs[selectedLocale]}`);
+      } else {
+        router.push(`/${selectedLocale}`);
+      }
+    });
   };
 
   return (
-    <select value={locale} onChange={handleLanguageChange}>
-      <option value="en">English</option>
-      <option value="de">Deutsche</option>
-    </select>
+    <>
+      <select value={locale} onChange={handleLanguageChange} disabled={isPending}>
+        <option value="en">English</option>
+        <option value="de">Deutsche</option>
+      </select>
+    </>
   );
 };

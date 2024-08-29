@@ -7,6 +7,7 @@ import { ComponentRenderer } from '#/components/component-renderer';
 import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
+import { LanguageDataSetter } from '#/components/language-data-provider/language-data-setter';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 import { getStaticParams } from '#/locales/server';
@@ -23,6 +24,8 @@ const getPage = async (slug: string, locale: string, preview = false) => {
                 ...ComponentDuplexFields
               }
             }
+            slugEn: slug(locale: "en-US")
+            slugDe: slug(locale: "de-DE")
           }
         }
       }
@@ -38,7 +41,7 @@ const getPage = async (slug: string, locale: string, preview = false) => {
   ).data?.pageCollection?.items?.[0];
 };
 
-const getPageSlugs = async () => {
+const getPageSlugs = async (locale: string) => {
   const pageQuery = graphql(`
     query PageSlugs($locale: String) {
       # Fetch 50 pages. Ideally we would fetch a good sample of most popular pages for pre-rendering,
@@ -52,7 +55,7 @@ const getPageSlugs = async () => {
   `);
 
   const pages = await graphqlClient(false).query(pageQuery, {
-    locale: 'en-US',
+    locale: locale,
   });
 
   return (
@@ -78,6 +81,9 @@ export default async function LandingPage({ params }: { params: { slug: string[]
   return (
     <div>
       <DebugMode slug={slug} />
+      <LanguageDataSetter
+        data={{ ...(pageData?.slugEn && { en: pageData.slugEn }), ...(pageData?.slugDe && { de: pageData.slugDe }) }}
+      />
       {topComponents ? <ComponentRenderer data={topComponents} /> : null}
     </div>
   );
@@ -88,10 +94,10 @@ export const revalidate = 120;
 export async function generateStaticParams() {
   const params = getStaticParams();
   const returnData: Array<{ slug?: string[]; locale: string }> = [];
-  const slugs = (await getPageSlugs()).map((page) => ({
-    slug: page?.slug?.split('/'),
-  }));
-  for (const locale of params) {
+  for await (const locale of params) {
+    const slugs = (await getPageSlugs(getLocaleFromPath(locale.locale))).map((page) => ({
+      slug: page?.slug?.split('/'),
+    }));
     for (const slug of slugs) {
       returnData.push({ slug: slug.slug, locale: locale.locale });
     }
