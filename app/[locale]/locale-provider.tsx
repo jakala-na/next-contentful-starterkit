@@ -9,10 +9,10 @@ type LocaleProviderProps = {
   children: ReactNode;
 };
 
-export function LocaleProvider({ locale, children }: LocaleProviderProps) {
+export const LocaleProvider = ({ locale, children }: LocaleProviderProps) => {
   return (
     <I18nProviderClient locale={locale} fallback={<p>Loading...</p>}>
       {children}
     </I18nProviderClient>
   );
-}
+};

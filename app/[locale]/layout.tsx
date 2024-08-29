@@ -10,6 +10,7 @@ import '@contentful/live-preview/style.css';
 
 import { LocaleProvider } from '#/app/[locale]/locale-provider';
 import { ContentfulPreviewProvider } from '#/components/contentful-preview-provider';
+import { LanguageDataProvider } from '#/components/language-data-provider';
 import { NavigationFieldsFragment } from '#/components/navigation';
 import { SiteHeader } from '#/components/site-header';
 import { fontSans } from '#/lib/fonts';
@@ -56,10 +57,12 @@ export default async function RootLayout({
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <ContentfulPreviewProvider isDraftMode={isDraftMode}>
           <LocaleProvider locale={locale}>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
-              <div className="flex-1">{children}</div>
-            </div>
+            <LanguageDataProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
+                <div className="flex-1">{children}</div>
+              </div>
+            </LanguageDataProvider>
           </LocaleProvider>
         </ContentfulPreviewProvider>
       </body>
