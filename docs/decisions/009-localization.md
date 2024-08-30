@@ -48,4 +48,4 @@ Cons:
 1. App router pages have been moved under `[locale]` folder.
 2. language switcher has been added to the header.
 3. Middleware file with the code handling localization has been added to the project.
-4. In order to disable localization one developers have to uncomment `urlMappingStrategy: 'rewriteDefault'` in the middleware file and keep only on locale.
+4. In order to disable localization developers have to uncomment `urlMappingStrategy: 'rewriteDefault'` in the middleware file and keep only on locale.
