@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { setStaticParamsLocale } from 'next-international/server';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
@@ -14,6 +15,10 @@ import { LanguageDataSetter } from '#/components/language-data-provider/language
 import { graphqlClient } from '#/lib/graphqlClient';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 import { getStaticParams } from '#/locales/server';
+
+type PageProps = {
+  params: { slug: string[]; locale: string };
+};
 
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
@@ -75,7 +80,27 @@ const getPageSlugs = async (locale: string) => {
   );
 };
 
-export default async function LandingPage({ params }: { params: { slug: string[]; locale: string } }) {
+const getAlternateSlugs = async (slug: string, locale: string) => {
+  const pageQuery = graphql(`
+    query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+      pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
+        items {
+          slugEn: slug(locale: "en-US")
+          slugDe: slug(locale: "de-DE")
+        }
+      }
+    }
+  `);
+
+  return (
+    await graphqlClient(false).query(pageQuery, {
+      locale,
+      slug,
+    })
+  ).data?.pageCollection?.items?.[0];
+};
+
+export default async function LandingPage({ params }: PageProps) {
   const { locale } = params;
   setStaticParamsLocale(locale);
   const slug = params.slug?.join('/') ?? 'home';
@@ -107,6 +132,23 @@ export default async function LandingPage({ params }: { params: { slug: string[]
 }
 
 export const revalidate = 120;
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = params;
+  const slug = params.slug?.join('/') ?? 'home';
+  const data = await getAlternateSlugs(slug, getLocaleFromPath(locale));
+  if (data) {
+    return {
+      alternates: {
+        languages: {
+          en: `${process.env.NEXT_PUBLIC_BASE_URL}/en/${data.slugEn === 'home' ? '' : data.slugEn}`,
+          de: `${process.env.NEXT_PUBLIC_BASE_URL}/de/${data.slugDe === 'home' ? '' : data.slugDe}`,
+        },
+      },
+    };
+  }
+  return {};
+}
 
 export async function generateStaticParams() {
   const params = getStaticParams();
