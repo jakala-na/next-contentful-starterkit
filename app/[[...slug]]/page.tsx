@@ -1,17 +1,19 @@
 import { draftMode } from 'next/headers';
 
+import { encodeGraphQLResponse } from '@contentful/content-source-maps';
 import { graphql } from 'gql.tada';
 
 import { ComponentRenderer } from '#/components/component-renderer';
 import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
+import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
 import { graphqlClient } from '#/lib/graphqlClient';
 
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
     `
-      query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+      query PageQuery($slug: String, $locale: String, $preview: Boolean) @contentSourceMaps {
         pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
           items {
             topSectionCollection(limit: 10) {
@@ -20,19 +22,28 @@ const getPage = async (slug: string, locale: string, preview = false) => {
                 ...ComponentDuplexFields
               }
             }
+            pageContent {
+              ...ComponentTopicBusinessInfo
+            }
           }
         }
       }
     `,
-    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment]
+    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment, ComponentTopicBusinessInfoFieldsFragment]
   );
-  return (
-    await graphqlClient(preview).query(pageQuery, {
-      locale,
-      preview,
-      slug,
-    })
-  ).data?.pageCollection?.items?.[0];
+
+  const data: any = await graphqlClient(preview).query(pageQuery, {
+    locale,
+    preview,
+    slug,
+  });
+
+  const formattedData = preview ? encodeGraphQLResponse(data) : data;
+
+  return {
+    ...formattedData?.data?.pageCollection?.items?.[0],
+    ...formattedData?.data?.extensions,
+  };
 };
 
 const getPageSlugs = async () => {
@@ -69,11 +80,13 @@ export default async function LandingPage({ params }: { params: { slug: string[]
   const pageData = await getPage(slug, 'en-US', isDraftMode);
 
   const topComponents = pageData?.topSectionCollection?.items;
+  const pageContent = pageData?.pageContent;
 
   return (
     <div>
       <DebugMode slug={slug} />
       {topComponents ? <ComponentRenderer data={topComponents} /> : null}
+      {pageContent ? <ComponentRenderer data={pageContent} /> : null}
     </div>
   );
 }

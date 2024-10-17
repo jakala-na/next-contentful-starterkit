@@ -1,5 +1,7 @@
 import { draftMode } from 'next/headers';
 
+import { VercelToolbar } from '@vercel/toolbar/next';
+
 import { graphqlClient } from '#/lib/graphqlClient';
 
 import './globals.css';
@@ -15,6 +17,7 @@ import { fontSans } from '#/lib/fonts';
 import { cn } from '#/lib/utils';
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const shouldInjectToolbar = process.env.NODE_ENV === 'development';
   const { isEnabled: isDraftMode } = draftMode();
 
   const layoutQuery = graphql(
@@ -49,6 +52,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
             <div className="flex-1">{children}</div>
+            {shouldInjectToolbar && <VercelToolbar />}
           </div>
         </ContentfulPreviewProvider>
       </body>
