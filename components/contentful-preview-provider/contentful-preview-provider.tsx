@@ -9,6 +9,7 @@ const ContentfulPreviewProvider = ({ isDraftMode, children }: { isDraftMode: boo
       locale={'en-US'}
       enableInspectorMode={previewActive}
       enableLiveUpdates={previewActive}
+      experimental={{ ignoreManuallyTaggedElements: true }}
     >
       {children}
     </ContentfulLivePreviewProvider>
