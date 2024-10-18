@@ -32,18 +32,20 @@ const getPage = async (slug: string, locale: string, preview = false) => {
     [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment, ComponentTopicBusinessInfoFieldsFragment]
   );
 
-  const data: any = await graphqlClient(preview).query(pageQuery, {
+  const response = await graphqlClient(preview).query(pageQuery, {
     locale,
     preview,
     slug,
   });
 
-  const formattedData = preview ? encodeGraphQLResponse(data) : data;
+  const formattedData = preview
+    ? encodeGraphQLResponse({
+        data: response.data,
+        extensions: response.extensions,
+      })
+    : response;
 
-  return {
-    ...formattedData?.data?.pageCollection?.items?.[0],
-    ...formattedData?.data?.extensions,
-  };
+  return formattedData?.data?.pageCollection?.items?.[0];
 };
 
 const getPageSlugs = async () => {

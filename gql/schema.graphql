@@ -3,12 +3,12 @@ directive @contentSourceMaps on QUERY
 type Query {
   asset(id: String!, preview: Boolean, locale: String): Asset
   assetCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AssetFilter, order: [AssetOrder]): AssetCollection
+  page(id: String!, preview: Boolean, locale: String): Page
+  pageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: PageFilter, order: [PageOrder]): PageCollection
   topicPerson(id: String!, preview: Boolean, locale: String): TopicPerson
   topicPersonCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TopicPersonFilter, order: [TopicPersonOrder]): TopicPersonCollection
   topicBusinessInfo(id: String!, preview: Boolean, locale: String): TopicBusinessInfo
   topicBusinessInfoCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TopicBusinessInfoFilter, order: [TopicBusinessInfoOrder]): TopicBusinessInfoCollection
-  page(id: String!, preview: Boolean, locale: String): Page
-  pageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: PageFilter, order: [PageOrder]): PageCollection
   basicPage(id: String!, preview: Boolean, locale: String): BasicPage
   basicPageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: BasicPageFilter, order: [BasicPageOrder]): BasicPageCollection
   accordion(id: String!, preview: Boolean, locale: String): Accordion
@@ -2456,6 +2456,93 @@ enum AssetOrder {
   sys_publishedVersion_DESC
 }
 
+input PageFilter {
+  seo: cfSeoNestedFilter
+  topSection: cftopSectionMultiTypeNestedFilter
+  extraSection: cfextraSectionMultiTypeNestedFilter
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName_exists: Boolean
+  internalName: String
+  internalName_not: String
+  internalName_in: [String]
+  internalName_not_in: [String]
+  internalName_contains: String
+  internalName_not_contains: String
+  pageName_exists: Boolean
+  pageName: String
+  pageName_not: String
+  pageName_in: [String]
+  pageName_not_in: [String]
+  pageName_contains: String
+  pageName_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  seo_exists: Boolean
+  topSectionCollection_exists: Boolean
+  pageContent_exists: Boolean
+  extraSectionCollection_exists: Boolean
+  OR: [PageFilter]
+  AND: [PageFilter]
+}
+
+input cfSeoNestedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  image_exists: Boolean
+  noIndex_exists: Boolean
+  noIndex: Boolean
+  noIndex_not: Boolean
+  noFollow_exists: Boolean
+  noFollow: Boolean
+  noFollow_not: Boolean
+  OR: [cfSeoNestedFilter]
+  AND: [cfSeoNestedFilter]
+}
+
+enum PageOrder {
+  internalName_ASC
+  internalName_DESC
+  pageName_ASC
+  pageName_DESC
+  slug_ASC
+  slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 input TopicPersonFilter {
   sys: SysFilter
   contentfulMetadata: ContentfulMetadataFilter
@@ -2556,93 +2643,6 @@ enum TopicBusinessInfoOrder {
   internalName_DESC
   name_ASC
   name_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-}
-
-input PageFilter {
-  seo: cfSeoNestedFilter
-  topSection: cftopSectionMultiTypeNestedFilter
-  extraSection: cfextraSectionMultiTypeNestedFilter
-  sys: SysFilter
-  contentfulMetadata: ContentfulMetadataFilter
-  internalName_exists: Boolean
-  internalName: String
-  internalName_not: String
-  internalName_in: [String]
-  internalName_not_in: [String]
-  internalName_contains: String
-  internalName_not_contains: String
-  pageName_exists: Boolean
-  pageName: String
-  pageName_not: String
-  pageName_in: [String]
-  pageName_not_in: [String]
-  pageName_contains: String
-  pageName_not_contains: String
-  slug_exists: Boolean
-  slug: String
-  slug_not: String
-  slug_in: [String]
-  slug_not_in: [String]
-  slug_contains: String
-  slug_not_contains: String
-  seo_exists: Boolean
-  topSectionCollection_exists: Boolean
-  pageContent_exists: Boolean
-  extraSectionCollection_exists: Boolean
-  OR: [PageFilter]
-  AND: [PageFilter]
-}
-
-input cfSeoNestedFilter {
-  sys: SysFilter
-  contentfulMetadata: ContentfulMetadataFilter
-  name_exists: Boolean
-  name: String
-  name_not: String
-  name_in: [String]
-  name_not_in: [String]
-  name_contains: String
-  name_not_contains: String
-  title_exists: Boolean
-  title: String
-  title_not: String
-  title_in: [String]
-  title_not_in: [String]
-  title_contains: String
-  title_not_contains: String
-  description_exists: Boolean
-  description: String
-  description_not: String
-  description_in: [String]
-  description_not_in: [String]
-  description_contains: String
-  description_not_contains: String
-  image_exists: Boolean
-  noIndex_exists: Boolean
-  noIndex: Boolean
-  noIndex_not: Boolean
-  noFollow_exists: Boolean
-  noFollow: Boolean
-  noFollow_not: Boolean
-  OR: [cfSeoNestedFilter]
-  AND: [cfSeoNestedFilter]
-}
-
-enum PageOrder {
-  internalName_ASC
-  internalName_DESC
-  pageName_ASC
-  pageName_DESC
-  slug_ASC
-  slug_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
