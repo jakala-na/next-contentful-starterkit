@@ -8,8 +8,6 @@ import './globals.css';
 
 import { graphql } from 'gql.tada';
 
-import '@contentful/live-preview/style.css';
-
 import { ContentfulPreviewProvider } from '#/components/contentful-preview-provider';
 import { NavigationFieldsFragment } from '#/components/navigation';
 import { SiteHeader } from '#/components/site-header';
