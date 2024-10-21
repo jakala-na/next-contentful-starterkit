@@ -24,7 +24,6 @@ class ErrorBoundary extends React.Component<Props> {
 
   render() {
     if (this.state.errorMessage) {
-      console.log('this.state.hasError', this.state.errorMessage);
       return (
         <div className="mx-auto max-w-6xl px-5 py-12">
           <div className="rounded-xl bg-gray p-8 text-center">
