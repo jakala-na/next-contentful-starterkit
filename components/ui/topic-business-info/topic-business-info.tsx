@@ -21,7 +21,7 @@ export const TopicBusinessInfo = ({
     <div className="flex justify-center py-12">
       <div className="max-w-6xl px-5">
         {featuredImage && (
-          <div className="overflow-hidden rounded-lg shadow-lg">
+          <div className="inline-block overflow-hidden rounded-lg shadow-lg">
             <Image {...addAttributes('image')} {...featuredImage} alt={featuredImage.alt} />
           </div>
         )}
