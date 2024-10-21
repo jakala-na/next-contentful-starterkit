@@ -1,7 +1,7 @@
 interface EventsMap {
-  heroBannerViewed: heroBannerViewedProps,
-  duplexViewed: duplexViewedProps,
-  duplexClicked: duplexClickedProps,
+  heroBannerViewed: heroBannerViewedProps;
+  duplexViewed: duplexViewedProps;
+  duplexClicked: duplexClickedProps;
 }
 
 interface heroBannerViewedProps {
@@ -13,13 +13,14 @@ interface duplexViewedProps {
   type: string;
 }
 
-interface duplexClickedProps extends duplexViewedProps { }
+interface duplexClickedProps extends duplexViewedProps {}
 
 export type EventName = keyof EventsMap;
 export type EventData<T extends keyof EventsMap> = EventsMap[T];
 
 export function createAnalyticEvent<T extends EventName>(eventName: T, eventData: EventData<T>) {
   return {
-    eventName, eventData,
+    eventName,
+    eventData,
   };
-};
+}

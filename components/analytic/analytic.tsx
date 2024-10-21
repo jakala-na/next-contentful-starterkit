@@ -1,8 +1,10 @@
 'use client';
+
 import { PropsWithChildren, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+
 import Analytics from 'analytics';
 import { AnalyticsProvider } from 'use-analytics';
-import { usePathname, useSearchParams } from 'next/navigation';
 
 const analyticsInstance = Analytics({
   app: 'starterkit',
@@ -16,9 +18,5 @@ export function AnalyticsComponent({ children }: PropsWithChildren) {
     analyticsInstance.page();
   }, [pathname]);
 
-  return (
-    <AnalyticsProvider instance={analyticsInstance}>
-      {children}
-    </AnalyticsProvider>
-  );
+  return <AnalyticsProvider instance={analyticsInstance}>{children}</AnalyticsProvider>;
 }

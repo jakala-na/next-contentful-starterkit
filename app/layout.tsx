@@ -1,12 +1,11 @@
 import { graphqlClient } from "../lib/graphqlClient";
-import "./globals.css";
-import { graphql } from "#/gql";
 import "@contentful/live-preview/style.css";
 import { ContentfulPreviewProvider } from "#/components/contentful-preview-provider";
 import { AnalyticsComponent } from '#/components/analytic';
 import { draftMode } from 'next/headers';
 
 import { VercelToolbar } from '@vercel/toolbar/next';
+import { graphql } from 'gql.tada';
 
 import './globals.css';
 

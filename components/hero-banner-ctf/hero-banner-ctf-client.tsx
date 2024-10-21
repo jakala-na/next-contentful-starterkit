@@ -2,21 +2,21 @@
 
 import { ResultOf } from 'gql.tada';
 
-import { HeroBanner } from "../ui/hero-banner";
-import { ComponentHeroBannerFieldsFragment } from "#/gql/graphql";
-import { RichTextCtf } from "#/components/rich-text-ctf";
-import { getPageLinkChildProps } from "../page";
-import { useComponentPreview } from "../hooks/use-component-preview";
-import { getImageChildProps } from "../image-ctf";
-import { TrackInView } from "../analytic/trackInView";
-import { createAnalyticEvent } from "../analytic/tracking-events";
+import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
+import { RichTextCtf } from '#/components/rich-text-ctf';
+
+import { createAnalyticEvent } from '../analytic/tracking-events';
+import { TrackInView } from '../analytic/trackInView';
+import { useComponentPreview } from '../hooks/use-component-preview';
+import { getImageChildProps } from '../image-ctf';
+import { getPageLinkChildProps } from '../page';
+import { HeroBanner } from '../ui/hero-banner';
 
 export const HeroBannerCtfClient: React.FC<{
   data: ResultOf<typeof ComponentHeroBannerFieldsFragment>;
 }> = (props) => {
   const { data: originalData } = props;
-  const { data, addAttributes } =
-    useComponentPreview<ComponentHeroBannerFieldsFragment>(originalData);
+  const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
   // We use createAnalyticEvent helper to create typed event.
   const analyticInViewEvent = createAnalyticEvent('heroBannerViewed', {
     category: 'duplexViewed',

@@ -1,17 +1,17 @@
 'use client';
 
 import { ResultOf } from 'gql.tada';
+import { useAnalytics } from 'use-analytics';
 
 import { RichTextCtf } from '#/components/rich-text-ctf';
 
+import { createAnalyticEvent } from '../analytic/tracking-events';
+import { TrackInView } from '../analytic/trackInView';
 import { useComponentPreview } from '../hooks/use-component-preview';
 import { getImageChildProps } from '../image-ctf';
-import { TrackInView } from '../analytic/trackInView';
-import { createAnalyticEvent } from '../analytic/tracking-events';
 import { getPageLinkChildProps } from '../page';
 import { Duplex } from '../ui/duplex';
 import { ComponentDuplexFieldsFragment } from './duplex-ctf';
-import { useAnalytics } from 'use-analytics';
 
 // We can create analytic event typed data on top level
 // using createAnalyticEvent helper.
@@ -23,18 +23,16 @@ const analyticInViewEvent = createAnalyticEvent('duplexViewed', {
 
 // For the direct track() usage from hook we can destructure the object
 // returned from createAnalyticEvent helper to have separate values as props.
-const { eventName: analyticClickEventName, eventData: analyticClickEventData } =
-  createAnalyticEvent('duplexClicked', {
-    category: 'duplexClicked',
-    type: 'ctf',
-  });
+const { eventName: analyticClickEventName, eventData: analyticClickEventData } = createAnalyticEvent('duplexClicked', {
+  category: 'duplexClicked',
+  type: 'ctf',
+});
 
 export const DuplexCtfClient: React.FC<{
   data: ResultOf<typeof ComponentDuplexFieldsFragment>;
 }> = (props) => {
   const { data: originalData } = props;
-  const { data, addAttributes } =
-    useComponentPreview<ComponentDuplexFieldsFragment>(originalData);
+  const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
   const { track } = useAnalytics();
   return (
     <TrackInView {...analyticInViewEvent}>
@@ -66,9 +64,7 @@ export const DuplexCtfClient: React.FC<{
           })
         }
         colorPalette={data.colorPalette}
-        onClickAnalyticEvent={() =>
-          track(analyticClickEventName, analyticClickEventData)
-        }
+        onClickAnalyticEvent={() => track(analyticClickEventName, analyticClickEventData)}
       />
     </TrackInView>
   );
