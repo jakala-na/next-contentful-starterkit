@@ -1,3 +1,5 @@
+import ErrorBoundary from '#/components/error-boundary/error-boundary';
+
 import { componentMap } from './mappings';
 
 export default function ComponentRenderer({
@@ -30,7 +32,11 @@ export default function ComponentRenderer({
   // @ts-ignore
   const Component = componentMap[data.__typename];
   if (Component) {
-    return <Component data={data} />;
+    return (
+      <ErrorBoundary>
+        <Component data={data} />
+      </ErrorBoundary>
+    );
   }
 
   return null;
