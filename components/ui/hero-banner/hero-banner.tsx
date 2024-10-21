@@ -50,7 +50,7 @@ export function HeroBanner(props: HeroBannerProps) {
       ></div>
       <div
         className={cn('z-10 pt-10', {
-          'mx-auto w-full max-w-[65%] px-5': size,
+          'mx-auto w-full px-5 md:max-w-[65%]': size,
           'max-w-3xl px-10': !size,
         })}
       >
