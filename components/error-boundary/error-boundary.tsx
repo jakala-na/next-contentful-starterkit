@@ -10,12 +10,13 @@ interface ErrorBoundaryState {
   errorMessage: string;
 }
 class ErrorBoundary extends React.Component<Props> {
-  public state: ErrorBoundaryState = {
-    errorMessage: '',
-  };
   constructor(props: Props) {
     super(props);
   }
+
+  public state: ErrorBoundaryState = {
+    errorMessage: '',
+  };
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { errorMessage: error.message };
