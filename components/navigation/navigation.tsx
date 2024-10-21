@@ -198,7 +198,7 @@ export const Navigation = (props: NavigationProps) => {
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
         <div className="flex items-center justify-center sm:justify-start">
           <Link href="/">
-            <Icons.logo className="h-8 w-8 md:mr-10" />
+            <Icons.altLogo className="h-8 w-8 md:mr-10" />
           </Link>
           <MainMenuDesktop />
         </div>
@@ -231,11 +231,10 @@ export const Navigation = (props: NavigationProps) => {
                 <SheetTitle>Notifications</SheetTitle>
               </SheetHeader>
               <SheetDescription className="mt-2">
-                This is an example of the shadcn/ui{' '}
-                <a className="font-bold" href="https://ui.shadcn.com/docs/components/sheet">
-                  Sheet
-                </a>{' '}
-                component used to display a notification sidebar.
+                <strong>
+                  Your inbox is as quiet as a wizard’s spellbook at midnight. Check back later for magical updates,
+                  order statuses, or special offers from The Alchemist’s Vault.
+                </strong>
               </SheetDescription>
             </SheetContent>
           </Sheet>

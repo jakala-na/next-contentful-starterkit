@@ -35,6 +35,8 @@ export const HeroBannerCtfClient: React.FC<{
           priority: true,
         })
       }
+      size={data.heroSize}
+      colorPalette={data.colorPalette}
       addAttributes={addAttributes}
     />
   );

@@ -29,7 +29,7 @@ export const TopicBusinessInfo = ({
         <div className="py-6">
           <h2 className="text-3xl">{name}</h2>
           {shortDescription && <div className="pt-6">{shortDescription}</div>}
-          {body && <div className="pt-6">{body}</div>}
+          {body && <div className="wysiwyg pt-6">{body}</div>}
         </div>
       </div>
     </div>
