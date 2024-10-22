@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { setStaticParamsLocale } from 'next-international/server';
 import { draftMode } from 'next/headers';
 
+import { encodeGraphQLResponse } from '@contentful/content-source-maps';
 import { graphql } from 'gql.tada';
 
 import { ComponentRenderer } from '#/components/component-renderer';
@@ -9,6 +10,7 @@ import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
 import { LanguageDataSetter } from '#/components/language-data-provider/language-data-setter';
+import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 import { getStaticParams } from '#/locales/server';
@@ -20,7 +22,7 @@ type PageProps = {
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
     `
-      query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+      query PageQuery($slug: String, $locale: String, $preview: Boolean) @contentSourceMaps {
         pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
           items {
             topSectionCollection(limit: 10) {
@@ -29,21 +31,29 @@ const getPage = async (slug: string, locale: string, preview = false) => {
                 ...ComponentDuplexFields
               }
             }
+            pageContent {
+              ...ComponentTopicBusinessInfo
+            }
             slugEn: slug(locale: "en-US")
             slugDe: slug(locale: "de-DE")
           }
         }
       }
     `,
-    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment]
+    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment, ComponentTopicBusinessInfoFieldsFragment]
   );
-  return (
-    await graphqlClient(preview).query(pageQuery, {
-      locale,
-      preview,
-      slug,
-    })
-  ).data?.pageCollection?.items?.[0];
+  const response = await graphqlClient(preview).query(pageQuery, {
+    locale,
+    preview,
+    slug,
+  });
+  const formattedData = preview
+    ? encodeGraphQLResponse({
+        data: response.data,
+        extensions: response.extensions,
+      })
+    : response;
+  return formattedData?.data?.pageCollection?.items?.[0];
 };
 
 const getPageSlugs = async (locale: string) => {
@@ -102,6 +112,7 @@ export default async function LandingPage({ params }: PageProps) {
   const pageData = await getPage(slug, getLocaleFromPath(locale), isDraftMode);
 
   const topComponents = pageData?.topSectionCollection?.items;
+  const pageContent = pageData?.pageContent;
 
   return (
     <div>
@@ -113,6 +124,7 @@ export default async function LandingPage({ params }: PageProps) {
         }}
       />
       {topComponents ? <ComponentRenderer data={topComponents} /> : null}
+      {pageContent ? <ComponentRenderer data={pageContent} /> : null}
     </div>
   );
 }

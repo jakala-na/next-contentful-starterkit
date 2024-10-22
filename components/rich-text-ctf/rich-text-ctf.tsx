@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES, Block as RichtextBlock } from '@contentful/rich-text-types';
 
+import { TopicPersonClient } from '#/components/topic-person/topic-person-client';
 import { OmitRecursive, tryget } from '#/lib/utils';
 
 import { AssetCtf, AssetFieldsFragment } from '../asset-ctf';
@@ -51,14 +52,20 @@ export const RichTextCtf = (props: RichTextProps) => {
         const id = tryget(() => node.data.target.sys.id);
         if (id) {
           const entry = entryBlocks.find((block: any) => block!.sys.id === id);
+          let entryComponent = (
+            <>
+              <div>Entry:</div>
+              <pre>{JSON.stringify(entry, null, 2)}</pre>
+            </>
+          );
 
           if (entry) {
-            return (
-              <>
-                <div>Entry:</div>
-                <pre>{JSON.stringify(entry, null, 2)}</pre>
-              </>
-            );
+            switch (entry.__typename) {
+              case 'TopicPerson':
+                return (entryComponent = <TopicPersonClient data={entry} />);
+            }
+
+            return entryComponent;
           }
         }
         return <>{`${node.nodeType} ${id}`}</>;

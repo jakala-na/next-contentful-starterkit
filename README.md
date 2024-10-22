@@ -7,36 +7,45 @@ The starterkit's cornerstone is our data-fetching solution and it's typesafety. 
 ## Features
 
 - **NextJS App Router** usage for modern **React Server Components** approach - we think this is the way the industry will move and it is a huge benefit for traditional websites to do data fetching only on the server and keep client-bundle lean
-- **GraphQL** + **GraphQL Codegen** with **client-preset** plugin + Typescript for data fetching - we believe the best way to benefit from a GraphQL backend on the frontend is to use Typescript and be informed of what is available to you when you do data fetching, and GraphQL Codegen ensures you are not “lying to yourself” in your types by generating them from the API.
+- **GraphQL** + **gql.tada** plugin + Typescript for data fetching - we believe the best way to benefit from a GraphQL backend on the frontend is to use Typescript and be informed of what is available to you when you do data fetching, and gql.tada ensures you are not “lying to yourself” in your types by inferring them from the API.
 - **Cypress testing** - we include a configured Cypress.io testing suite with ability to do both Component and E2E testing using Cucumber/BDD style syntax (optionally you can use traditional spec files too)
 - **Component Renderer** - example of how to take a full tree of components and render them using a mapping of contentTypes to React components
 - **Draft Mode** - preview mode for your application for Contentful Preview API usage
-- Use of **Contentful Live Preview** - contentful live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in Contentful
+- Use of **Contentful Live Preview** - contentful live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in Contentful.
 
 ## Getting Started
 
-Clone the repo of course ;)
+1. This project is a template, feel free to either clone it (to preserve project history) or use click "Use this template" to create a repository with a single init commit.
+   As soon as you have a repository, clone it locally
+2. Install dependencies with:
 
-### Contentful access
+```
+yarn install
+```
 
-To develop locally, you will want to connect to a Contentful instance that has the same data model as we use to develop, there are 2 ways to do that:
+3. Setup Contenful access
+   To develop locally, you will want to connect to a Contentful instance that has the same data model as we use to develop, there are 2 ways to do that:
 
-1. You could get access to an existing space that follows Contentful Marketing Template content model, for example a collegue could share his space with you
-2. You could create your own space with https://www.contentful.com/starter-templates/marketing-website/. Keep in mind, new templates today can only be deployed on brand new Contentful accounts, so you might have to create a new account with a new email to do that, but this shouldn't be a problem, as it's free.
+- You could get access to an existing space that follows Contentful Marketing Template content model, for example a collegue could share his space with you
+- You could create your own space with https://www.contentful.com/starter-templates/marketing-website/. Keep in mind, new templates today can only be deployed on brand new Contentful accounts, so you might have to create a new account with a new email to do that, but this shouldn't be a problem, as it's free.
 
-### Configure environment
+You will want to get a CDA and CPA API keys by using this [guide](https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app)
+
+4. Configure environment
 
 Create .env.local in root directory of the repo with the following contents:
 
 ```
 CONTENTFUL_SPACE=<space id>
 CONTENTFUL_DELIVERY_API=<delivery api key>
-CONTENTFUL_PREVIEW_API=<preview api key>****
+CONTENTFUL_PREVIEW_API=<preview api key>
 CONTENTFUL_ENVIRONMENT=master
 CONTENTFUL_PREVIEW_SECRET=secret
+# Enable or disable Content Source Maps, see https://www.contentful.com/developers/docs/tools/vercel/content-source-maps-with-vercel/
+CONTENTFUL_USE_CONTENT_SOURCE_MAPS=true
 ```
 
-### Dev Server
+5. Run Dev Server
 
 ```bash
 yarn dev
@@ -73,6 +82,15 @@ yarn generate:output
 
 This command will also run `gql.tada turbo` which will generate a cache file that should also be commited. This cache file will speed up inference for new users who just checked out a new branch.
 More info [here](https://gql-tada.0no.co/devlog/2024-04-15)
+
+### Content Source Maps in Live Preview and on Vercel
+
+Contentful has released a new live-preview API compatible content source maps spec, you can read more [here](https://www.contentful.com/developers/docs/tools/vercel/content-source-maps-with-vercel/). This implementation enabled effortless inspector mode annotations in Live Preview, as well as full Edit Mode support on Vercel. Unfortunately for some folks testing the starterkit on FREE plan, this feature is only available on Pro+. While Content Source Maps enables Visual Editing on Vercel, Visual Editing is also only available in Pro+. If you're testing the starterkit and would like to not use content source maps, you are free to opt out by:
+
+1. Settings `CONTENTFUL_USE_CONTENT_SOURCE_MAPS=false` in .env.local or in Vercel
+2. Removing `@contentSourceMaps` directive from GraphQL queries
+
+** Note: @contentSourceMaps ideally could be added conditionally, but gql.tada prevents any dynamic strings from being typed TadaDocumentNode. In future we will add the @contentSourceMaps directive to all queries in urql exchange.**
 
 ## NextJS Docs
 

@@ -16,7 +16,8 @@
     "chromatic": "npx chromatic --project-token=chpt_6c8f830efe6cc9d"
   },
   "dependencies": {
-    "@contentful/live-preview": "^2.6.2",
+    "@contentful/content-source-maps": "^0.11.5",
+    "@contentful/live-preview": "^4.5.13",
     "@contentful/rich-text-react-renderer": "^15.17.1",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-navigation-menu": "^1.1.4",
@@ -26,6 +27,7 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@urql/exchange-persisted": "^4.2.0",
+    "@vercel/toolbar": "^0.1.22",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "encoding": "^0.1.13",
@@ -99,5 +101,6 @@
   "resolutions": {
     "jackspeak": "2.1.1",
     "@storybook/manager-webpack5/html-webpack-plugin": "^5.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

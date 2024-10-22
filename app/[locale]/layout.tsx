@@ -1,18 +1,19 @@
 import { draftMode } from 'next/headers';
 
+import { VercelToolbar } from '@vercel/toolbar/next';
+
 import { graphqlClient } from '#/lib/graphqlClient';
 
 import '../globals.css';
 
 import { graphql } from 'gql.tada';
 
-import '@contentful/live-preview/style.css';
-
 import { LocaleProvider } from '#/app/[locale]/locale-provider';
 import { ContentfulPreviewProvider } from '#/components/contentful-preview-provider';
 import { LanguageDataProvider } from '#/components/language-data-provider';
 import { NavigationFieldsFragment } from '#/components/navigation';
 import { SiteHeader } from '#/components/site-header';
+import { isContentSourceMapsEnabled } from '#/lib/contentSourceMaps';
 import { fontSans } from '#/lib/fonts';
 import { cn } from '#/lib/utils';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
@@ -24,6 +25,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  const shouldInjectToolbar = process.env.NODE_ENV === 'development';
   const { locale } = params;
   const { isEnabled: isDraftMode } = draftMode();
 
@@ -55,12 +57,13 @@ export default async function RootLayout({
       */}
       <head />
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        <ContentfulPreviewProvider isDraftMode={isDraftMode}>
+        <ContentfulPreviewProvider isDraftMode={isDraftMode} isContentSourceMapsEnabled={isContentSourceMapsEnabled}>
           <LocaleProvider locale={locale}>
             <LanguageDataProvider>
               <div className="relative flex min-h-screen flex-col">
                 <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
                 <div className="flex-1">{children}</div>
+                {shouldInjectToolbar && <VercelToolbar />}
               </div>
             </LanguageDataProvider>
           </LocaleProvider>
