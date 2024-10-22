@@ -11,6 +11,7 @@ import { graphql } from 'gql.tada';
 import { ContentfulPreviewProvider } from '#/components/contentful-preview-provider';
 import { NavigationFieldsFragment } from '#/components/navigation';
 import { SiteHeader } from '#/components/site-header';
+import { isContentSourceMapsEnabled } from '#/lib/contentSourceMaps';
 import { fontSans } from '#/lib/fonts';
 import { cn } from '#/lib/utils';
 
@@ -46,7 +47,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       */}
       <head />
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-        <ContentfulPreviewProvider isDraftMode={isDraftMode}>
+        <ContentfulPreviewProvider isDraftMode={isDraftMode} isContentSourceMapsEnabled={isContentSourceMapsEnabled}>
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
             <div className="flex-1">{children}</div>

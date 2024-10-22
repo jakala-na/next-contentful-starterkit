@@ -1,6 +1,6 @@
 import { draftMode } from 'next/headers';
+import { notFound } from 'next/navigation';
 
-import { encodeGraphQLResponse } from '@contentful/content-source-maps';
 import { graphql } from 'gql.tada';
 
 import { ComponentRenderer } from '#/components/component-renderer';
@@ -8,6 +8,7 @@ import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
 import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
+import { addContentSourceMaps } from '#/lib/contentSourceMaps';
 import { graphqlClient } from '#/lib/graphqlClient';
 
 const getPage = async (slug: string, locale: string, preview = false) => {
@@ -38,14 +39,8 @@ const getPage = async (slug: string, locale: string, preview = false) => {
     slug,
   });
 
-  const formattedData = preview
-    ? encodeGraphQLResponse({
-        data: response.data,
-        extensions: response.extensions,
-      })
-    : response;
-
-  return formattedData?.data?.pageCollection?.items?.[0];
+  const processedResponse = addContentSourceMaps(response);
+  return processedResponse?.data?.pageCollection?.items?.[0];
 };
 
 const getPageSlugs = async () => {
@@ -80,6 +75,10 @@ export default async function LandingPage({ params }: { params: { slug: string[]
   const { isEnabled: isDraftMode } = draftMode();
 
   const pageData = await getPage(slug, 'en-US', isDraftMode);
+
+  if (!pageData) {
+    notFound();
+  }
 
   const topComponents = pageData?.topSectionCollection?.items;
   const pageContent = pageData?.pageContent;

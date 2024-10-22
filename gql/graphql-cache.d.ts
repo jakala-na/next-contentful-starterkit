@@ -19,6 +19,7 @@ declare module 'gql.tada' {
         pageCollection: {
           items: ({
             pageContent:
+              | { __typename?: 'ComponentDuplex' | undefined }
               | { __typename?: 'ComponentProductTable' | undefined }
               | {
                   [$tada.fragmentRefs]: { ComponentTopicBusinessInfo: 'TopicBusinessInfo' };
@@ -130,6 +131,7 @@ declare module 'gql.tada' {
     '\n  fragment PageLinkFields on Page {\n    __typename\n    slug\n    sys {\n      id\n    }\n    pageName\n    pageContent(locale: $locale, preview: $preview) {\n      ... on Entry {\n        __typename\n        sys {\n          id\n        }\n      }\n    }\n  }\n': TadaDocumentNode<
       {
         pageContent:
+          | { sys: { id: string }; __typename: 'ComponentDuplex' }
           | { sys: { id: string }; __typename: 'ComponentProductTable' }
           | { sys: { id: string }; __typename: 'TopicBusinessInfo' }
           | { sys: { id: string }; __typename: 'TopicProduct' }
@@ -149,6 +151,7 @@ declare module 'gql.tada' {
           links: {
             entries: {
               block: (
+                | { __typename?: 'ComponentDuplex' | undefined }
                 | { __typename?: 'ComponentProductTable' | undefined }
                 | { __typename?: 'TopicProduct' | undefined }
                 | { __typename?: 'Accordion' | undefined }
@@ -162,7 +165,6 @@ declare module 'gql.tada' {
                 | { __typename?: 'NavigationMenu' | undefined }
                 | { __typename?: 'AccordionItem' | undefined }
                 | { __typename?: 'BasicPage' | undefined }
-                | { __typename?: 'ComponentDuplex' | undefined }
                 | { __typename?: 'ComponentHeroBanner' | undefined }
                 | { __typename?: 'EditorTest' | undefined }
                 | { __typename?: 'FooterMenu' | undefined }

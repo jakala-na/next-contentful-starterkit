@@ -90,6 +90,15 @@ scalar DateTime
 
 type ContentfulMetadata {
   tags: [ContentfulTag]!
+  concepts: [TaxonomyConcept]!
+}
+
+"""
+Represents a tag entity for finding and organizing content easily.
+        Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-concepts
+"""
+type TaxonomyConcept {
+  id: String
 }
 
 """
@@ -795,6 +804,21 @@ input SysFilter {
 input ContentfulMetadataFilter {
   tags_exists: Boolean
   tags: ContentfulMetadataTagsFilter
+  concepts_exists: Boolean
+  concepts: ContentfulMetadataConceptsFilter
+}
+
+input ContentfulMetadataConceptsFilter {
+  id_contains_all: [String]
+  id_contains_some: [String]
+  id_contains_none: [String]
+  descendants: ContentfulMetadataConceptsDescendantsFilter
+}
+
+input ContentfulMetadataConceptsDescendantsFilter {
+  id_contains_all: [String]
+  id_contains_some: [String]
+  id_contains_none: [String]
 }
 
 input ContentfulMetadataTagsFilter {
@@ -1849,7 +1873,7 @@ input PageTopSectionFilter {
   AND: [PageTopSectionFilter]
 }
 
-union PagePageContent = ComponentProductTable | TopicBusinessInfo | TopicProduct
+union PagePageContent = ComponentDuplex | ComponentProductTable | TopicBusinessInfo | TopicProduct
 
 """
 Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentProductTable)
