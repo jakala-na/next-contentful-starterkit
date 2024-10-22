@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { FragmentOf, graphql, readFragment } from 'gql.tada';
 
+import { LanguageSelector } from '#/components/language-selector';
 import { Button } from '#/components/ui/button';
 import {
   NavigationMenu,
@@ -12,6 +13,7 @@ import {
 } from '#/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '#/components/ui/sheet';
 import { cn } from '#/lib/utils';
+import { getI18n } from '#/locales/server';
 
 import { Icons } from '../icons';
 import { PageLinkFieldsFragment } from '../page';
@@ -56,9 +58,10 @@ export type NavigationProps = {
   data: FragmentOf<typeof NavigationFieldsFragment>;
 };
 
-export const Navigation = (props: NavigationProps) => {
+export const Navigation = async (props: NavigationProps) => {
   const data = readFragment(NavigationFieldsFragment, props.data);
   const items = data.items[0]?.menuItemsCollection?.items;
+  const t = await getI18n();
 
   // Fragment Masking is forcing us to split fragments to match our components or our helper functions.
   // https://github.com/dotansimha/graphql-code-generator/discussions/8554#discussioncomment-4131776
@@ -187,7 +190,7 @@ export const Navigation = (props: NavigationProps) => {
       </svg>
       <input
         className="bg-transparent text-gray-600 dark:text-gray-300 ml-2 w-full p-1.5 text-sm"
-        placeholder="Search"
+        placeholder={t('search')}
         type="search"
       />
     </div>
@@ -206,6 +209,7 @@ export const Navigation = (props: NavigationProps) => {
           <div className="hidden md:block">
             <Search />
           </div>
+          <LanguageSelector />
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="sm">
