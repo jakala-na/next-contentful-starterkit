@@ -54,7 +54,7 @@ interface DuplexProps extends VariantProps<typeof layoutVariants>, VariantProps<
   cta?: LinkProps | null;
   colorPalette?: string | null;
   addAttributes?: (name: string) => object | null;
-  onClickAnalyticEvent?: () => void;
+  onClickAnalyticsEvent?: () => void;
 }
 
 export function Duplex(props: DuplexProps) {
@@ -67,7 +67,7 @@ export function Duplex(props: DuplexProps) {
     imageHeight,
     colorPalette,
     addAttributes = () => ({}), // Default to no-op.
-    onClickAnalyticEvent,
+    onClickAnalyticsEvent,
   } = props;
   const colorConfig = getColorConfigFromPalette(colorPalette || '');
 
@@ -102,7 +102,7 @@ export function Duplex(props: DuplexProps) {
                 {...addAttributes('ctaText')}
                 asChild
                 onClick={() => {
-                  onClickAnalyticEvent?.();
+                  onClickAnalyticsEvent?.();
                 }}
               >
                 <Link {...cta} />

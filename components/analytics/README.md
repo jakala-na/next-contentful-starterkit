@@ -1,6 +1,6 @@
-# Analytic
+# Analytics
 
-Analytic solution is based on the [getanalytics.io](https://getanalytics.io/) library.
+Analytics solution is based on the [getanalytics.io](https://getanalytics.io/) library.
 The library provides three base API interfaces to sent tracking information:
 - `page()` - trigger page view. This will trigger page calls in any installed plugins
 - `identify()` - this will trigger identify calls in any installed plugins and will set user data in localStorage
@@ -9,7 +9,7 @@ The library provides three base API interfaces to sent tracking information:
 ## NextJS Integration
 
 We will provide integration with NextJS for three different cases: page view,
-component in view, click on target. See the `components/analytic/analytic.tsx`
+component in view, click on target. See the `components/analytics/analytics.tsx`
 file where we convey the global Analytics context and define a hook to track
 page view. Then go to the `app/layout.tsx` where we wrap all children components
 inside the analytics context.
@@ -33,12 +33,12 @@ inside UI components on demand.
 
 ## Type Safe Events
 
-We provide interfaces for each event in the `components/analytic/tracking-events.ts`.
+We provide interfaces for each event in the `components/analytics/tracking-events.ts`.
 Each event should be registered in the `EventsMap` interface and for each event
 data should be provided own interface that describes the event data modal and
 will be the value of type the registered event in the `EventsMap`
-Also that file provides a helper function `createAnalyticEvent()` that should be
-used to create any analytic event on the client level. This function will accept
+Also that file provides a helper function `createAnalyticsEvent()` that should be
+used to create any analytics event on the client level. This function will accept
 the event name string as the first argument and the event data object as the
 second argument and map given event name to the corresponding event data type.
 It will guarantee that all events will have correct data.

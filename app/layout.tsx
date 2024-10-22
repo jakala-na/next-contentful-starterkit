@@ -1,9 +1,9 @@
 import { draftMode } from 'next/headers';
 
 import { VercelToolbar } from '@vercel/toolbar/next';
+import { AnalyticsComponent } from 'components/analytics';
 import { graphql } from 'gql.tada';
 
-import { AnalyticsComponent } from '#/components/analytic';
 import { ContentfulPreviewProvider } from '#/components/contentful-preview-provider';
 
 import { graphqlClient } from '../lib/graphqlClient';
