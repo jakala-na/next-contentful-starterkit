@@ -1,11 +1,12 @@
-import { graphqlClient } from "../lib/graphqlClient";
-import "@contentful/live-preview/style.css";
-import { ContentfulPreviewProvider } from "#/components/contentful-preview-provider";
-import { AnalyticsComponent } from '#/components/analytic';
 import { draftMode } from 'next/headers';
 
 import { VercelToolbar } from '@vercel/toolbar/next';
 import { graphql } from 'gql.tada';
+
+import { AnalyticsComponent } from '#/components/analytic';
+import { ContentfulPreviewProvider } from '#/components/contentful-preview-provider';
+
+import { graphqlClient } from '../lib/graphqlClient';
 
 import './globals.css';
 
@@ -47,15 +48,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       */}
       <head />
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
-      <AnalyticsComponent>
-        <ContentfulPreviewProvider isDraftMode={isDraftMode} isContentSourceMapsEnabled={isContentSourceMapsEnabled}>
-          <div className="relative flex min-h-screen flex-col">
-            <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
-            <div className="flex-1">{children}</div>
-            {shouldInjectToolbar && <VercelToolbar />}
-          </div>
-        </ContentfulPreviewProvider>
-      </AnalyticsComponent>
+        <AnalyticsComponent>
+          <ContentfulPreviewProvider isDraftMode={isDraftMode} isContentSourceMapsEnabled={isContentSourceMapsEnabled}>
+            <div className="relative flex min-h-screen flex-col">
+              <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
+              <div className="flex-1">{children}</div>
+              {shouldInjectToolbar && <VercelToolbar />}
+            </div>
+          </ContentfulPreviewProvider>
+        </AnalyticsComponent>
       </body>
     </html>
   );
