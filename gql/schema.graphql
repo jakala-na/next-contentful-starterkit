@@ -1873,7 +1873,7 @@ input PageTopSectionFilter {
   AND: [PageTopSectionFilter]
 }
 
-union PagePageContent = ComponentProductTable | TopicBusinessInfo | TopicProduct
+union PagePageContent = ComponentDuplex | ComponentProductTable | TopicBusinessInfo | TopicProduct
 
 """
 Component that renders products in a table enabling a side-by-side comparison [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/componentProductTable)
