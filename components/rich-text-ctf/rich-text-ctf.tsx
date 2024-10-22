@@ -50,8 +50,9 @@ export const RichTextCtf = (props: RichTextProps) => {
       },
       [BLOCKS.EMBEDDED_ENTRY]: (node) => {
         const id = tryget(() => node.data.target.sys.id);
+        console.log(entryBlocks);
         if (id) {
-          const entry = entryBlocks.find((block: any) => block!.sys.id === id);
+          const entry = entryBlocks.find((block: any) => block.sys?.id === id);
           let entryComponent = (
             <>
               <div>Entry:</div>
