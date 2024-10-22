@@ -9,8 +9,6 @@ type Query {
   topicPersonCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TopicPersonFilter, order: [TopicPersonOrder]): TopicPersonCollection
   topicBusinessInfo(id: String!, preview: Boolean, locale: String): TopicBusinessInfo
   topicBusinessInfoCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: TopicBusinessInfoFilter, order: [TopicBusinessInfoOrder]): TopicBusinessInfoCollection
-  basicPage(id: String!, preview: Boolean, locale: String): BasicPage
-  basicPageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: BasicPageFilter, order: [BasicPageOrder]): BasicPageCollection
   accordion(id: String!, preview: Boolean, locale: String): Accordion
   accordionCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, where: AccordionFilter, order: [AccordionOrder]): AccordionCollection
   componentHeroBanner(id: String!, preview: Boolean, locale: String): ComponentHeroBanner
@@ -1203,7 +1201,6 @@ type Seo implements Entry & _Node {
 type SeoLinkingCollections {
   entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
   pageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, order: [SeoLinkingCollectionsPageCollectionOrder]): PageCollection
-  basicPageCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String, order: [SeoLinkingCollectionsBasicPageCollectionOrder]): BasicPageCollection
 }
 
 enum SeoLinkingCollectionsPageCollectionOrder {
@@ -1221,32 +1218,6 @@ enum SeoLinkingCollectionsPageCollectionOrder {
   sys_firstPublishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
-}
-
-type BasicPageCollection {
-  total: Int!
-  skip: Int!
-  limit: Int!
-  items: [BasicPage]!
-}
-
-"""
-Container that enables editors to publish a page, define its slug, enter basic Rich Text content. [See type definition](https://app.contentful.com/spaces/44pcbcmur9gk/content_types/basicPage)
-"""
-type BasicPage implements Entry & _Node {
-  sys: Sys!
-  contentfulMetadata: ContentfulMetadata!
-  linkedFrom(allowedLocales: [String]): BasicPageLinkingCollections
-  _id: ID!
-  internalName(locale: String): String
-  pageName(locale: String): String
-  slug(locale: String): String
-  seo(preview: Boolean, locale: String, where: SeoFilter): Seo
-  body(locale: String): BasicPageBody
-}
-
-type BasicPageLinkingCollections {
-  entryCollection(skip: Int = 0, limit: Int = 100, preview: Boolean, locale: String): EntryCollection
 }
 
 input SeoFilter {
@@ -1282,63 +1253,6 @@ input SeoFilter {
   noFollow_not: Boolean
   OR: [SeoFilter]
   AND: [SeoFilter]
-}
-
-type BasicPageBody {
-  json: JSON!
-  links: BasicPageBodyLinks!
-}
-
-type BasicPageBodyLinks {
-  entries: BasicPageBodyEntries!
-  assets: BasicPageBodyAssets!
-  resources: BasicPageBodyResources!
-}
-
-type BasicPageBodyEntries {
-  inline: [Entry]!
-  hyperlink: [Entry]!
-  block: [Entry]!
-}
-
-type BasicPageBodyAssets {
-  hyperlink: [Asset]!
-  block: [Asset]!
-}
-
-type BasicPageBodyResources {
-  block: [BasicPageBodyResourcesBlock!]!
-  inline: [BasicPageBodyResourcesInline!]!
-  hyperlink: [BasicPageBodyResourcesHyperlink!]!
-}
-
-type BasicPageBodyResourcesBlock implements ResourceLink {
-  sys: ResourceSys!
-}
-
-type BasicPageBodyResourcesInline implements ResourceLink {
-  sys: ResourceSys!
-}
-
-type BasicPageBodyResourcesHyperlink implements ResourceLink {
-  sys: ResourceSys!
-}
-
-enum SeoLinkingCollectionsBasicPageCollectionOrder {
-  internalName_ASC
-  internalName_DESC
-  pageName_ASC
-  pageName_DESC
-  slug_ASC
-  slug_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
 }
 
 type PageTopSectionCollection {
@@ -2667,56 +2581,6 @@ enum TopicBusinessInfoOrder {
   internalName_DESC
   name_ASC
   name_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-}
-
-input BasicPageFilter {
-  seo: cfSeoNestedFilter
-  sys: SysFilter
-  contentfulMetadata: ContentfulMetadataFilter
-  internalName_exists: Boolean
-  internalName: String
-  internalName_not: String
-  internalName_in: [String]
-  internalName_not_in: [String]
-  internalName_contains: String
-  internalName_not_contains: String
-  pageName_exists: Boolean
-  pageName: String
-  pageName_not: String
-  pageName_in: [String]
-  pageName_not_in: [String]
-  pageName_contains: String
-  pageName_not_contains: String
-  slug_exists: Boolean
-  slug: String
-  slug_not: String
-  slug_in: [String]
-  slug_not_in: [String]
-  slug_contains: String
-  slug_not_contains: String
-  seo_exists: Boolean
-  body_exists: Boolean
-  body_contains: String
-  body_not_contains: String
-  OR: [BasicPageFilter]
-  AND: [BasicPageFilter]
-}
-
-enum BasicPageOrder {
-  internalName_ASC
-  internalName_DESC
-  pageName_ASC
-  pageName_DESC
-  slug_ASC
-  slug_DESC
   sys_id_ASC
   sys_id_DESC
   sys_publishedAt_ASC
