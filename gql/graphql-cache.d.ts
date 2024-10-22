@@ -164,7 +164,6 @@ declare module 'gql.tada' {
                 | { __typename?: 'MenuGroup' | undefined }
                 | { __typename?: 'NavigationMenu' | undefined }
                 | { __typename?: 'AccordionItem' | undefined }
-                | { __typename?: 'BasicPage' | undefined }
                 | { __typename?: 'ComponentHeroBanner' | undefined }
                 | { __typename?: 'EditorTest' | undefined }
                 | { __typename?: 'FooterMenu' | undefined }
