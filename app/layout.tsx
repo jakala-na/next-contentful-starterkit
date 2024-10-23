@@ -10,6 +10,7 @@ import { graphqlClient } from '../lib/graphqlClient';
 
 import './globals.css';
 
+import { AnnouncementBannerComponent } from '#/components/announcement-banner';
 import { NavigationFieldsFragment } from '#/components/navigation';
 import { SiteHeader } from '#/components/site-header';
 import { isContentSourceMapsEnabled } from '#/lib/contentSourceMaps';
@@ -51,6 +52,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <AnalyticsComponent>
           <ContentfulPreviewProvider isDraftMode={isDraftMode} isContentSourceMapsEnabled={isContentSourceMapsEnabled}>
             <div className="relative flex min-h-screen flex-col">
+              <AnnouncementBannerComponent />
               <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
               <div className="flex-1">{children}</div>
               {shouldInjectToolbar && <VercelToolbar />}
