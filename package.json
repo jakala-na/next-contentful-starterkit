@@ -13,7 +13,6 @@
     "generate:output": "gql.tada generate-output && gql.tada turbo",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_6c8f830efe6cc9d",
     "commit": "git-cz"
   },
   "config": {
