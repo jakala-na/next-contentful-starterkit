@@ -25,9 +25,6 @@ export default function ComponentRenderer({
 
   // @TODO: Fix typings for componentMap.
   // @ts-ignore
-
-  // @TODO: Fix typings for componentMap.
-  // @ts-ignore
   const Component = componentMap[data.__typename];
   if (Component) {
     return <Component data={data} />;
