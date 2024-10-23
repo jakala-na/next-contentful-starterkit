@@ -11,6 +11,7 @@
     "lint": "next lint",
     "generate:schema": "source .env.local && gql.tada generate-schema --header \"Authorization: Bearer $CONTENTFUL_DELIVERY_API\" \"https://graphql.contentful.com/content/v1/spaces/$CONTENTFUL_SPACE\"",
     "generate:output": "gql.tada generate-output && gql.tada turbo",
+    "generate:ctf-seed": "contentful space export --space-id=44pcbcmur9gk --environment-id=nextjs-conf --export-dir=migrations/ --content-file=ctf-seed.json --use-verbose-renderer=true",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "commit": "git-cz"
