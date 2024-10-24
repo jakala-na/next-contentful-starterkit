@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
@@ -7,6 +8,7 @@ import { ComponentRenderer } from '#/components/component-renderer';
 import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
+import { ComponentSEOFieldsFragment } from '#/components/seo/seo-ctf';
 import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
 import { addContentSourceMaps } from '#/lib/contentSourceMaps';
 import { graphqlClient } from '#/lib/graphqlClient';
@@ -41,6 +43,48 @@ const getPage = async (slug: string, locale: string, preview = false) => {
 
   const processedResponse = addContentSourceMaps(response);
   return processedResponse?.data?.pageCollection?.items?.[0];
+};
+
+const getPageMetadata = async (slug: string, locale: string, preview = false): Promise<Metadata> => {
+  const pageQuery = graphql(
+    `
+      query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+        pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
+          items {
+            seo {
+              ...SEOFields
+            }
+          }
+        }
+      }
+    `,
+    [ComponentSEOFieldsFragment]
+  );
+
+  const response = await graphqlClient(preview).query(pageQuery, {
+    locale,
+    preview,
+    slug,
+  });
+
+  // @TODO: Fix typings for seoFields.
+  const seoFields: any = response?.data?.pageCollection?.items?.[0]?.seo;
+
+  return {
+    ...(seoFields?.title && { title: seoFields.title }),
+    ...(seoFields?.description && { description: seoFields.description }),
+    ...(seoFields?.image && {
+      openGraph: {
+        images: [seoFields?.image.url],
+      },
+    }),
+    ...((seoFields?.noFollow || seoFields?.noIndex) && {
+      robots: {
+        ...(seoFields?.noFollow && { follow: !seoFields.noFollow }),
+        ...(seoFields?.noIndex && { index: !seoFields.noIndex }),
+      },
+    }),
+  };
 };
 
 const getPageSlugs = async () => {
@@ -98,4 +142,18 @@ export async function generateStaticParams() {
   return (await getPageSlugs()).map((page) => ({
     slug: page?.slug?.split('/'),
   }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string[] } }): Promise<Metadata> {
+  const slug = params.slug?.join('/') ?? 'home';
+
+  const { isEnabled: isDraftMode } = draftMode();
+
+  const pageMetadata: Metadata = await getPageMetadata(slug, 'en-US', isDraftMode);
+
+  if (!pageMetadata) {
+    return notFound();
+  }
+
+  return pageMetadata;
 }
