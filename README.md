@@ -92,6 +92,10 @@ Contentful has released a new live-preview API compatible content source maps sp
 
 ** Note: @contentSourceMaps ideally could be added conditionally, but gql.tada prevents any dynamic strings from being typed TadaDocumentNode. In future we will add the @contentSourceMaps directive to all queries in urql exchange.**
 
+### Import Contentful content
+The repository contains demo content in contentful/import/seed.json file. To import this content into your Contentful space run this command:
+```contentful space import --space-id=[SPACE_ID] --environment-id=[ENVIRONMENT_ID] --management-token=[CMA_TOKEN] --content-file=contentful/import/seed.json --retry-limit=100```
+
 ## NextJS Docs
 
 To learn more about Next.js, take a look at the following resources:
