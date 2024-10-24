@@ -3,7 +3,9 @@
     {
       "sys": {
         "id": "componentCta",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "💎 CTA component",
@@ -135,7 +137,9 @@
     {
       "sys": {
         "id": "componentProductTable",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "💎 Product table component",
@@ -207,7 +211,9 @@
     {
       "sys": {
         "id": "topicPerson",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "#️⃣ Person topic",
@@ -328,7 +334,9 @@
     {
       "sys": {
         "id": "componentHeroBanner",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "💎 Hero banner component",
@@ -481,7 +489,9 @@
     {
       "sys": {
         "id": "componentDuplex",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "💎 Duplex component",
@@ -657,7 +667,9 @@
     {
       "sys": {
         "id": "componentInfoBlock",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "💎 Info block component",
@@ -879,7 +891,9 @@
     {
       "sys": {
         "id": "componentTextBlock",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "💎 Text block component",
@@ -980,7 +994,9 @@
     {
       "sys": {
         "id": "menuGroup",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalTitle",
       "name": "🚈 Menu Group",
@@ -1061,7 +1077,9 @@
     {
       "sys": {
         "id": "componentQuote",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "💎 Quote component",
@@ -1203,7 +1221,9 @@
     {
       "sys": {
         "id": "topicProduct",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "#️⃣ Product topic",
@@ -1338,7 +1358,9 @@
     {
       "sys": {
         "id": "page",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "📜 Landing page",
@@ -1483,7 +1505,9 @@
     {
       "sys": {
         "id": "topicBusinessInfo",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "#️⃣ Business info topic",
@@ -1624,7 +1648,9 @@
     {
       "sys": {
         "id": "seo",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "name",
       "name": "🎛️ SEO meta tags",
@@ -1707,7 +1733,9 @@
     {
       "sys": {
         "id": "topicProductFeature",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "#️⃣ Product feature topic",
@@ -1836,7 +1864,9 @@
     {
       "sys": {
         "id": "footerMenu",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "🚈 Footer Menu",
@@ -1946,7 +1976,9 @@
     {
       "sys": {
         "id": "navigationMenu",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "🚈 Navigation Menu",
@@ -1995,7 +2027,9 @@
     {
       "sys": {
         "id": "componentForm",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalTitle",
       "name": "💎 Form Component",
@@ -2044,7 +2078,9 @@
     {
       "sys": {
         "id": "accordionItem",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "#️⃣ Accordion Item",
@@ -2125,7 +2161,9 @@
     {
       "sys": {
         "id": "accordion",
-        "type": "ContentType"
+        "type": "ContentType",
+        "publishedVersion": 1,
+        "publishedCounter": 1
       },
       "displayField": "internalName",
       "name": "💎 Accordion",
@@ -3616,6 +3654,7 @@
       "sys": {
         "id": "5YEkWZ4oATSKbR2i7ZUF06",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -3713,6 +3752,7 @@
       "sys": {
         "id": "2r0v7iZ7SS0khYkCAK82lw",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -3808,401 +3848,9 @@
         ]
       },
       "sys": {
-        "id": "ohspi5gYQSqQdFADFTg6F",
-        "type": "Entry",
-        "fieldStatus": {
-          "*": {
-            "de-DE": "published",
-            "en-US": "published"
-          }
-        },
-        "automationTags": [
-        ],
-        "contentType": {
-          "sys": {
-            "type": "Link",
-            "linkType": "ContentType",
-            "id": "topicBusinessInfo"
-          }
-        }
-      },
-      "fields": {
-        "internalName": {
-          "en-US": "About us"
-        },
-        "name": {
-          "de-DE": "Über uns",
-          "en-US": "About us"
-        },
-        "shortDescription": {
-          "de-DE": "Wir setzen Technologie ein, um Bankgeschäfte bequem, persönlich und sicher zu machen."
-        },
-        "body": {
-          "de-DE": {
-            "data": {
-            },
-            "content": [
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Unser Unternehmen",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "heading-3"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Die Mission von Colorful Coin besteht darin, Menschen auf der ganzen Welt zu helfen, ihr Geld mit Leichtigkeit und Zuversicht zu verwalten. Durch die Zusammenführung modernster Technologien und die unermüdliche Konzentration auf Kundenerlebnisse bieten wir Bank-, Zahlungs- und Kreditdienstleistungen, die auf die Bedürfnisse unserer Kunden zugeschnitten sind.",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                  "target": {
-                    "sys": {
-                      "id": "4NWujw1qFOZ0HrxfHa550v",
-                      "type": "Link",
-                      "linkType": "Entry"
-                    }
-                  }
-                },
-                "content": [
-                ],
-                "nodeType": "embedded-entry-block"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Unsere Geschichte",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "heading-3"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Die Münzgeschichte beginnt mit einer einfachen Frage. Was wäre, wenn unser Bankgeschäft mit der gleichen Leidenschaft, dem gleichen Einfallsreichtum und der gleichen Liebe zum Detail gestaltet worden wäre, die in die Herstellung unserer Telefone einfließen? Im Jahr 2014 arbeitete Poppy Terrell an einem Umweltprojekt in einem kleinen Dorf in Sri Lanka. Entfernt von den Annehmlichkeiten einer Großstadt, wo sie sich bei all ihren Bankgeschäften auf ihr iPhone verlassen musste, erlebte Poppy Terrell so manches frustrierende Wochenende und kehrte entschlossen in die USA zurück, sich nie wieder auf eine traditionelle Bank für ihre täglichen finanziellen Bedürfnisse zu verlassen.",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Die anfängliche Frustration wich bald der Neugierde. Wie würde das digitale Bankwesen aussehen, wenn man es von Grund auf neu erfinden würde? Poppy nutzte all ihre Ersparnisse, um einen Prototyp zu bauen. 2015 traf sie den talentierten Entwickler Marc Young, und nachdem sie in das Y Combinator-Programm aufgenommen worden war, ging es für sie an die Rennen. Zwei große Umgestaltungen und eine Reihe von Engels-Investitionen später knackte das Duo schließlich den Code für das digitale Bankwesen und durchlief 2017 eine Phase des Hyperwachstums, in der es seinen Kundenstamm in weniger als 12 Monaten um 674% ausbaute.",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Das einzigartige Wertversprechen der Münze zog nicht nur Kunden, sondern auch Investoren an, die daran interessiert waren, das traditionelle Bankwesen zu revolutionieren. Im Februar 2019 trat der charismatische Vorsitzende des Colorful Collective, Terence Fisher, an Poppy Terrell heran, und die beiden begannen ein monatelanges Gespräch über die Zukunft von Coin. Schließlich kam der Kompromiss zustande, und das Colorful Collective erwarb Coin und machte es damit zu Colorful Coin, Europas führender digitaler Bank. Nach der Übernahme setzte das Unternehmen seine rasche Expansion fort, eröffnete 6 globale Niederlassungen und verdoppelte die Zahl der Mitarbeiter. ",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Führung",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "heading-3"
-              },
-              {
-                "data": {
-                  "target": {
-                    "sys": {
-                      "id": "1jt29A18iuzzBstXBpZXgL",
-                      "type": "Link",
-                      "linkType": "Entry"
-                    }
-                  }
-                },
-                "content": [
-                ],
-                "nodeType": "embedded-entry-block"
-              },
-              {
-                "data": {
-                  "target": {
-                    "sys": {
-                      "id": "2r0v7iZ7SS0khYkCAK82lw",
-                      "type": "Link",
-                      "linkType": "Entry"
-                    }
-                  }
-                },
-                "content": [
-                ],
-                "nodeType": "embedded-entry-block"
-              },
-              {
-                "data": {
-                  "target": {
-                    "sys": {
-                      "id": "5YEkWZ4oATSKbR2i7ZUF06",
-                      "type": "Link",
-                      "linkType": "Entry"
-                    }
-                  }
-                },
-                "content": [
-                ],
-                "nodeType": "embedded-entry-block"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              }
-            ],
-            "nodeType": "document"
-          },
-          "en-US": {
-            "data": {
-            },
-            "content": [
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "The Alchemist’s Vault is a mystical, fantasy-themed store offering handcrafted products inspired by ancient alchemy, magical elements, and the secrets of nature. Whether you’re a lover of fantasy worlds, mythical creatures, or simply enjoy unique, enchanting items, this shop brings a touch of magic to everyday life. Our carefully curated collections are designed to transport you to a realm where the lines between reality and fantasy blur, inviting you to explore the beauty of the unknown and the wonder of the mystical.",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "At The Alchemist’s Vault, we believe in the power of storytelling through art and craftsmanship. Every product we offer—from our Potion Elixir drinkware to our Spellbound Stationery and Arcane Jewelry—is imbued with a sense of history and fantasy, as though it were pulled straight from the pages of an ancient grimoire. Our artisans are passionate about creating pieces that feel as though they belong in another world, each with its own backstory, symbolism, and charm. Every item in our shop is crafted with care, blending traditional techniques with imaginative design to create a one-of-a-kind experience for our customers.",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "What sets The Alchemist’s Vault apart is our dedication to bringing the magic of fantasy into the real world. We don’t just sell products; we offer gateways to new realms of wonder and creativity. Our team is made up of avid fans of mythology, folklore, and the fantastical, which means that everything we create comes from a place of deep passion and love for the worlds we draw inspiration from. Whether you’re looking for a whimsical gift, a new piece for your home, or simply something to spark your imagination, we’re here to help you find that perfect, enchanting item.",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Sustainability and craftsmanship are core to our mission. We work with local artisans and ethically sourced materials to ensure that each piece reflects the values of both quality and environmental consciousness. Our products are not mass-produced; they are handmade, carefully designed to reflect the magic and beauty of the natural world. From the hand-poured Sorcerer’s Candles to the earthy tones of our Wizard’s Garden herb kits, we aim to celebrate the connection between magic and nature in everything we do.",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Ultimately, The Alchemist’s Vault is about creating a space where dreams and reality coexist. Whether you’re a dreamer, an adventurer, or someone who seeks a little magic in the mundane, our store is a place where imagination comes alive. We invite you to journey with us and discover products that speak to your sense of wonder and creativity. Step into The Alchemist’s Vault, and let the magic begin.",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "At The Alchemist’s Vault, our team is more than just a group of artisans and dreamers—we are alchemists in our own right, each with a unique role in bringing the magic of our store to life. With a shared passion for fantasy, myth, and craftsmanship, we work together to create a space where the mystical meets the everyday. Meet the creative minds behind The Alchemist’s Vault:",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              },
-              {
-                "data": {
-                  "target": {
-                    "sys": {
-                      "id": "1jt29A18iuzzBstXBpZXgL",
-                      "type": "Link",
-                      "linkType": "Entry"
-                    }
-                  }
-                },
-                "content": [
-                ],
-                "nodeType": "embedded-entry-block"
-              },
-              {
-                "data": {
-                  "target": {
-                    "sys": {
-                      "id": "2r0v7iZ7SS0khYkCAK82lw",
-                      "type": "Link",
-                      "linkType": "Entry"
-                    }
-                  }
-                },
-                "content": [
-                ],
-                "nodeType": "embedded-entry-block"
-              },
-              {
-                "data": {
-                  "target": {
-                    "sys": {
-                      "id": "5YEkWZ4oATSKbR2i7ZUF06",
-                      "type": "Link",
-                      "linkType": "Entry"
-                    }
-                  }
-                },
-                "content": [
-                ],
-                "nodeType": "embedded-entry-block"
-              },
-              {
-                "data": {
-                },
-                "content": [
-                  {
-                    "data": {
-                    },
-                    "marks": [
-                    ],
-                    "value": "Together, Eldric, Seraphina, and Thorne lead The Alchemist’s Vault on a mission to share the magic of alchemy, mythology, and nature through beautiful, handcrafted products. Each member of our team brings their own unique magic to the store, and together, we create a world where imagination and craftsmanship collide.",
-                    "nodeType": "text"
-                  }
-                ],
-                "nodeType": "paragraph"
-              }
-            ],
-            "nodeType": "document"
-          }
-        }
-      }
-    },
-    {
-      "metadata": {
-        "tags": [
-        ],
-        "concepts": [
-        ]
-      },
-      "sys": {
         "id": "1jt29A18iuzzBstXBpZXgL",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -4300,6 +3948,7 @@
       "sys": {
         "id": "7wGhPNCZNLknpSaJVWfnHf",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -4333,7 +3982,7 @@
             "sys": {
               "type": "Link",
               "linkType": "Entry",
-              "id": "ohspi5gYQSqQdFADFTg6F"
+              "id": "4NKnNHwpgtItks29T7tJpG"
             }
           }
         }
@@ -4349,6 +3998,7 @@
       "sys": {
         "id": "2SKWtzmGOnQm80nRGIIclu",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -4456,6 +4106,7 @@
       "sys": {
         "id": "5zxUwjzYlIpR8FcdVXbbbg",
         "type": "Entry",
+        "publishedVersion": 1,
         "automationTags": [
         ],
         "contentType": {
@@ -4495,6 +4146,7 @@
       "sys": {
         "id": "01HUvROKwHqty0fL84pyLi",
         "type": "Entry",
+        "publishedVersion": 1,
         "automationTags": [
         ],
         "contentType": {
@@ -4534,6 +4186,7 @@
       "sys": {
         "id": "5Llrq4mnBxMujXY6ArJC4f",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -4593,6 +4246,7 @@
       "sys": {
         "id": "BtIJpF1q3Td9pT0lkzipx",
         "type": "Entry",
+        "publishedVersion": 1,
         "automationTags": [
         ],
         "contentType": {
@@ -4644,6 +4298,7 @@
       "sys": {
         "id": "26OTgyiQuuj5QGkivAdi1j",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -4715,6 +4370,7 @@
       "sys": {
         "id": "py3REeJO4VLNgCTbLTZPF",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -4794,6 +4450,7 @@
       "sys": {
         "id": "7ESXdk5RLNmWrT0YvyJSYY",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -4879,6 +4536,7 @@
       "sys": {
         "id": "1OvhZa1r1LWMHpp7J9isCR",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -4964,6 +4622,7 @@
       "sys": {
         "id": "4u5YB3WkSY0heYMPCKsh54",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -5049,6 +4708,7 @@
       "sys": {
         "id": "5mIMUUzpJbEAMikMvqbL9t",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -5097,6 +4757,7 @@
       "sys": {
         "id": "iQuJWDKoJXkivvrMGBai6",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -5211,6 +4872,7 @@
       "sys": {
         "id": "5U45hfq4LmorFrRnmF9oYN",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -5259,6 +4921,7 @@
       "sys": {
         "id": "76W4W54mHtuBIyzVjYTIcO",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -5373,6 +5036,7 @@
       "sys": {
         "id": "7DzWjVfJaTmbb7Jft54vDw",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -5421,6 +5085,7 @@
       "sys": {
         "id": "4kmynkPs6XRS46etcJ81Ni",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "de-DE": "published",
@@ -5535,6 +5200,7 @@
       "sys": {
         "id": "6Q2QVUVovRGaow8Fi5q3V4",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -5608,6 +5274,7 @@
       "sys": {
         "id": "31vkTve9OsRGBMLHD3wFXa",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -5681,6 +5348,7 @@
       "sys": {
         "id": "7Lotqz1tc0utglxUysICCA",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -5754,6 +5422,7 @@
       "sys": {
         "id": "31VUCAkV9v3IaJHLAIZRdq",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -5830,6 +5499,7 @@
       "sys": {
         "id": "1Rnw3VZ9bGUPcWY2J41jwc",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -5906,6 +5576,7 @@
       "sys": {
         "id": "5AGaNCuSMmfssOaJN8EWr4",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -5982,6 +5653,7 @@
       "sys": {
         "id": "6CRl8YtHg96P2XYhz0okXG",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6055,6 +5727,7 @@
       "sys": {
         "id": "3Tq5F4UMSEzA7p4typqNYL",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6128,6 +5801,7 @@
       "sys": {
         "id": "4LvtjpE9PkHq6u0RURZPmQ",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6202,10 +5876,12 @@
         ]
       },
       "sys": {
-        "id": "3r3xcYNr0wsTKPYRrL7M8q",
+        "id": "4NKnNHwpgtItks29T7tJpG",
         "type": "Entry",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
+            "de-DE": "published",
             "en-US": "published"
           }
         },
@@ -6215,27 +5891,172 @@
           "sys": {
             "type": "Link",
             "linkType": "ContentType",
-            "id": "componentCta"
+            "id": "topicBusinessInfo"
           }
         }
       },
       "fields": {
         "internalName": {
-          "en-US": "Shop now"
+          "en-US": "Company info"
         },
-        "headline": {
-          "en-US": "Shop now"
+        "name": {
+          "de-DE": "About us",
+          "en-US": "About us"
         },
-        "ctaText": {
-          "en-US": "Shop now"
-        },
-        "targetPage": {
+        "body": {
           "en-US": {
-            "sys": {
-              "type": "Link",
-              "linkType": "Entry",
-              "id": "2SKWtzmGOnQm80nRGIIclu"
-            }
+            "nodeType": "document",
+            "data": {
+            },
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "The Alchemist’s Vault is a mystical, fantasy-themed store offering handcrafted products inspired by ancient alchemy, magical elements, and the secrets of nature. Whether you’re a lover of fantasy worlds, mythical creatures, or simply enjoy unique, enchanting items, this shop brings a touch of magic to everyday life. Our carefully curated collections are designed to transport you to a realm where the lines between reality and fantasy blur, inviting you to explore the beauty of the unknown and the wonder of the mystical.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "At The Alchemist’s Vault, we believe in the power of storytelling through art and craftsmanship. Every product we offer—from our Potion Elixir drinkware to our Spellbound Stationery and Arcane Jewelry—is imbued with a sense of history and fantasy, as though it were pulled straight from the pages of an ancient grimoire. Our artisans are passionate about creating pieces that feel as though they belong in another world, each with its own backstory, symbolism, and charm. Every item in our shop is crafted with care, blending traditional techniques with imaginative design to create a one-of-a-kind experience for our customers.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "What sets The Alchemist’s Vault apart is our dedication to bringing the magic of fantasy into the real world. We don’t just sell products; we offer gateways to new realms of wonder and creativity. Our team is made up of avid fans of mythology, folklore, and the fantastical, which means that everything we create comes from a place of deep passion and love for the worlds we draw inspiration from. Whether you’re looking for a whimsical gift, a new piece for your home, or simply something to spark your imagination, we’re here to help you find that perfect, enchanting item.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Sustainability and craftsmanship are core to our mission. We work with local artisans and ethically sourced materials to ensure that each piece reflects the values of both quality and environmental consciousness. Our products are not mass-produced; they are handmade, carefully designed to reflect the magic and beauty of the natural world. From the hand-poured Sorcerer’s Candles to the earthy tones of our Wizard’s Garden herb kits, we aim to celebrate the connection between magic and nature in everything we do.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Ultimately, The Alchemist’s Vault is about creating a space where dreams and reality coexist. Whether you’re a dreamer, an adventurer, or someone who seeks a little magic in the mundane, our store is a place where imagination comes alive. We invite you to journey with us and discover products that speak to your sense of wonder and creativity. Step into The Alchemist’s Vault, and let the magic begin.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "At The Alchemist’s Vault, our team is more than just a group of artisans and dreamers—we are alchemists in our own right, each with a unique role in bringing the magic of our store to life. With a shared passion for fantasy, myth, and craftsmanship, we work together to create a space where the mystical meets the everyday. Meet the creative minds behind The Alchemist’s Vault:",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              },
+              {
+                "nodeType": "embedded-entry-block",
+                "data": {
+                  "target": {
+                    "sys": {
+                      "id": "1jt29A18iuzzBstXBpZXgL",
+                      "type": "Link",
+                      "linkType": "Entry"
+                    }
+                  }
+                },
+                "content": [
+                ]
+              },
+              {
+                "nodeType": "embedded-entry-block",
+                "data": {
+                  "target": {
+                    "sys": {
+                      "id": "2r0v7iZ7SS0khYkCAK82lw",
+                      "type": "Link",
+                      "linkType": "Entry"
+                    }
+                  }
+                },
+                "content": [
+                ]
+              },
+              {
+                "nodeType": "embedded-entry-block",
+                "data": {
+                  "target": {
+                    "sys": {
+                      "id": "5YEkWZ4oATSKbR2i7ZUF06",
+                      "type": "Link",
+                      "linkType": "Entry"
+                    }
+                  }
+                },
+                "content": [
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Together, Eldric, Seraphina, and Thorne lead The Alchemist’s Vault on a mission to share the magic of alchemy, mythology, and nature through beautiful, handcrafted products. Each member of our team brings their own unique magic to the store, and together, we create a world where imagination and craftsmanship collide.",
+                    "marks": [
+                    ],
+                    "data": {
+                    }
+                  }
+                ]
+              }
+            ]
           }
         }
       }
@@ -6251,7 +6072,8 @@
       },
       "sys": {
         "id": "26SAApp0DZ4xvKXLBBEbeX",
-        "type": "Asset"
+        "type": "Asset",
+        "publishedVersion": 1
       },
       "fields": {
         "title": {
@@ -6285,7 +6107,8 @@
       },
       "sys": {
         "id": "69Z0seKXE1wpqezBsAv6Fg",
-        "type": "Asset"
+        "type": "Asset",
+        "publishedVersion": 1
       },
       "fields": {
         "title": {
@@ -6319,7 +6142,8 @@
       },
       "sys": {
         "id": "2762objjfxaE1DeUHFW1wf",
-        "type": "Asset"
+        "type": "Asset",
+        "publishedVersion": 1
       },
       "fields": {
         "title": {
@@ -6354,6 +6178,7 @@
       "sys": {
         "id": "5WZYwy2Hz1JP6VR7D6oxSP",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6393,6 +6218,7 @@
       "sys": {
         "id": "3XFijrkaGVNErF3mIG7Ksf",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6432,6 +6258,7 @@
       "sys": {
         "id": "60O8qScTNVGGOkDg8XalRK",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6471,6 +6298,7 @@
       "sys": {
         "id": "1UerPrGVqhdBa3QMA1d8B1",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6510,6 +6338,7 @@
       "sys": {
         "id": "620vK75DZaemr3Hpc8ZAKt",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6549,6 +6378,7 @@
       "sys": {
         "id": "2vwu9Y9GbB39NJvZ1C3r6j",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6588,6 +6418,7 @@
       "sys": {
         "id": "3R2ocy6rZQI9fwAOhD9y3U",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6627,6 +6458,7 @@
       "sys": {
         "id": "77w1gjwAU8EX6wgfi01ZL4",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6666,6 +6498,7 @@
       "sys": {
         "id": "6hOrZONm85QJLMXZ12RbsW",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6705,6 +6538,7 @@
       "sys": {
         "id": "2iuJFHr0sE1tIbbRKZUxJS",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6744,6 +6578,7 @@
       "sys": {
         "id": "7gSDBTZcfexOAKltFyG19J",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6783,6 +6618,7 @@
       "sys": {
         "id": "5B9yizVFOYbkbxvQpCGNk6",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6822,6 +6658,7 @@
       "sys": {
         "id": "5TOb3t72gmKs0PfRT0jBFd",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
@@ -6861,6 +6698,7 @@
       "sys": {
         "id": "22h4RgenUtxat9Py7Wjt2M",
         "type": "Asset",
+        "publishedVersion": 1,
         "fieldStatus": {
           "*": {
             "en-US": "published"
