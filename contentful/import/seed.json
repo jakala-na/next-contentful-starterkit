@@ -1997,6 +1997,9 @@
         "id": "componentForm",
         "type": "ContentType"
       },
+      "displayField": "internalTitle",
+      "name": "💎 Form Component",
+      "description": "Full-width container that displays a centered form and an optional headline.",
       "fields": [
         {
           "id": "internalTitle",
