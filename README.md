@@ -24,10 +24,11 @@ yarn install
 ```
 
 3. Setup Contenful access
-   To develop locally, you will want to connect to a Contentful instance that has the same data model as we use to develop, there are 2 ways to do that:
+   To develop locally, you will want to connect to a Contentful instance that has the same data model as we use to develop, there are 3 ways to do that:
 
-- You could get access to an existing space that follows Contentful Marketing Template content model, for example a collegue could share his space with you
+- You could get access to an existing space that follows Contentful Marketing Template content model, for example a colleague could share his space with you
 - You could create your own space with https://www.contentful.com/starter-templates/marketing-website/. Keep in mind, new templates today can only be deployed on brand new Contentful accounts, so you might have to create a new account with a new email to do that, but this shouldn't be a problem, as it's free.
+- You can start from scratch and use the contentful CLI and `/migrations/ctf-seed.json` to [import](https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/) our demo content into your own contentful instance: `yarn seed --environment-id=[ENVIRONMENT_ID] --space-id=[SPACE_ID]`
 
 You will want to get a CDA and CPA API keys by using this [guide](https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app)
 
@@ -91,6 +92,10 @@ Contentful has released a new live-preview API compatible content source maps sp
 2. Removing `@contentSourceMaps` directive from GraphQL queries
 
 ** Note: @contentSourceMaps ideally could be added conditionally, but gql.tada prevents any dynamic strings from being typed TadaDocumentNode. In future we will add the @contentSourceMaps directive to all queries in urql exchange.**
+
+## Content export
+
+If you were working on content model updates which will need to go into the starter kit demo content there's a helper script to help with the contentful export: `yarn generate:ctf-seed`. It will generate and replace current `ctf-seed.json` file.
 
 ## NextJS Docs
 
