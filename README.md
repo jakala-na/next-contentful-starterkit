@@ -28,7 +28,7 @@ yarn install
 
 - You could get access to an existing space that follows Contentful Marketing Template content model, for example a colleague could share his space with you
 - You could create your own space with https://www.contentful.com/starter-templates/marketing-website/. Keep in mind, new templates today can only be deployed on brand new Contentful accounts, so you might have to create a new account with a new email to do that, but this shouldn't be a problem, as it's free.
-- You can start from scratch and use the contentful CLI and `/migrations/ctf-seed.json` to [import](https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/) our demo content into your own contentful instance: `contentful space import --environment-id=[ENVIRONMENT_ID] --space-id=[SPACE_ID] --content-file migrations/ctf-seed.json`
+- You can start from scratch and use the contentful CLI and `/migrations/ctf-seed.json` to [import](https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/) our demo content into your own contentful instance: `yarn seed --environment-id=[ENVIRONMENT_ID] --space-id=[SPACE_ID]`
 
 You will want to get a CDA and CPA API keys by using this [guide](https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app)
 
