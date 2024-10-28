@@ -12,6 +12,7 @@ import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-bus
 import { addContentSourceMaps } from '#/lib/contentSourceMaps';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
+import { getStaticParams } from '#/locales/server';
 
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
@@ -99,7 +100,15 @@ export default async function LandingPage({ params }: { params: { slug: string[]
 export const revalidate = 120;
 
 export async function generateStaticParams() {
-  return (await getPageSlugs()).map((page) => ({
+  const params = getStaticParams();
+  const returnData: Array<{ slug?: string[]; locale: string }> = [];
+  const slugs = (await getPageSlugs()).map((page) => ({
     slug: page?.slug?.split('/'),
   }));
+  for (const locale of params) {
+    for (const slug of slugs) {
+      returnData.push({ slug: slug.slug, locale: locale.locale });
+    }
+  }
+  return returnData;
 }
