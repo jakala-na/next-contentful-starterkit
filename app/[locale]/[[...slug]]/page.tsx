@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+import { setStaticParamsLocale } from 'next-international/server';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
@@ -7,9 +9,16 @@ import { ComponentRenderer } from '#/components/component-renderer';
 import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
+import { LanguageDataSetter } from '#/components/language-data-provider';
 import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
 import { addContentSourceMaps } from '#/lib/contentSourceMaps';
 import { graphqlClient } from '#/lib/graphqlClient';
+import { getLocaleFromPath } from '#/locales/get-locale-from-path';
+import { getStaticParams } from '#/locales/server';
+
+type PageProps = {
+  params: { slug: string[]; locale: string };
+};
 
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
@@ -26,6 +35,8 @@ const getPage = async (slug: string, locale: string, preview = false) => {
             pageContent {
               ...ComponentTopicBusinessInfo
             }
+            slugEn: slug(locale: "en-US")
+            slugDe: slug(locale: "de-DE")
           }
         }
       }
@@ -43,7 +54,7 @@ const getPage = async (slug: string, locale: string, preview = false) => {
   return processedResponse?.data?.pageCollection?.items?.[0];
 };
 
-const getPageSlugs = async () => {
+const getPageSlugs = async (locale: string) => {
   const pageQuery = graphql(`
     query PageSlugs($locale: String) {
       # Fetch 50 pages. Ideally we would fetch a good sample of most popular pages for pre-rendering,
@@ -57,7 +68,7 @@ const getPageSlugs = async () => {
   `);
 
   const pages = await graphqlClient(false).query(pageQuery, {
-    locale: 'en-US',
+    locale: locale,
   });
 
   return (
@@ -69,12 +80,34 @@ const getPageSlugs = async () => {
   );
 };
 
-export default async function LandingPage({ params }: { params: { slug: string[] } }) {
+const getAlternateSlugs = async (slug: string, locale: string) => {
+  const pageQuery = graphql(`
+    query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+      pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
+        items {
+          slugEn: slug(locale: "en-US")
+          slugDe: slug(locale: "de-DE")
+        }
+      }
+    }
+  `);
+
+  return (
+    await graphqlClient(false).query(pageQuery, {
+      locale,
+      slug,
+    })
+  ).data?.pageCollection?.items?.[0];
+};
+
+export default async function LandingPage({ params }: PageProps) {
+  const { locale } = params;
+  setStaticParamsLocale(locale);
   const slug = params.slug?.join('/') ?? 'home';
 
   const { isEnabled: isDraftMode } = draftMode();
 
-  const pageData = await getPage(slug, 'en-US', isDraftMode);
+  const pageData = await getPage(slug, getLocaleFromPath(locale), isDraftMode);
 
   if (!pageData) {
     notFound();
@@ -86,6 +119,12 @@ export default async function LandingPage({ params }: { params: { slug: string[]
   return (
     <div>
       <DebugMode slug={slug} />
+      <LanguageDataSetter
+        data={{
+          ...(pageData?.slugEn && pageData.slugEn !== 'home' && { en: pageData.slugEn }),
+          ...(pageData?.slugDe && pageData.slugDe !== 'home' && { de: pageData.slugDe }),
+        }}
+      />
       {topComponents ? <ComponentRenderer data={topComponents} /> : null}
       {pageContent ? <ComponentRenderer data={pageContent} /> : null}
     </div>
@@ -94,8 +133,33 @@ export default async function LandingPage({ params }: { params: { slug: string[]
 
 export const revalidate = 120;
 
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = params;
+  const slug = params.slug?.join('/') ?? 'home';
+  const data = await getAlternateSlugs(slug, getLocaleFromPath(locale));
+  if (data) {
+    return {
+      alternates: {
+        languages: {
+          en: `${process.env.NEXT_PUBLIC_BASE_URL}/en/${data.slugEn === 'home' ? '' : data.slugEn}`,
+          de: `${process.env.NEXT_PUBLIC_BASE_URL}/de/${data.slugDe === 'home' ? '' : data.slugDe}`,
+        },
+      },
+    };
+  }
+  return {};
+}
+
 export async function generateStaticParams() {
-  return (await getPageSlugs()).map((page) => ({
-    slug: page?.slug?.split('/'),
-  }));
+  const params = getStaticParams();
+  const returnData: Array<{ slug?: string[]; locale: string }> = [];
+  for await (const locale of params) {
+    const slugs = (await getPageSlugs(getLocaleFromPath(locale.locale))).map((page) => ({
+      slug: page?.slug?.split('/'),
+    }));
+    for (const slug of slugs) {
+      returnData.push({ slug: slug.slug, locale: locale.locale });
+    }
+  }
+  return returnData;
 }
