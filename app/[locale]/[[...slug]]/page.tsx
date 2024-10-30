@@ -9,7 +9,7 @@ import { ComponentRenderer } from '#/components/component-renderer';
 import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
-import { LanguageDataSetter } from '#/components/language-data-provider';
+import { LanguageDataSetter } from '#/components/language-data-provider/language-data-provider';
 import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
 import { addContentSourceMaps } from '#/lib/contentSourceMaps';
 import { graphqlClient } from '#/lib/graphqlClient';

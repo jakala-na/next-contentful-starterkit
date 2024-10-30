@@ -10,9 +10,8 @@ import { graphqlClient } from '../../lib/graphqlClient';
 
 import '../globals.css';
 
-import { LocaleProvider } from '#/app/[locale]/locale-provider';
 import { AnnouncementBannerComponent } from '#/components/announcement-banner';
-import { LanguageDataProvider } from '#/components/language-data-provider';
+import { LanguageDataProvider } from '#/components/language-data-provider/language-data-provider';
 import { NavigationFieldsFragment } from '#/components/navigation';
 import { SiteHeader } from '#/components/site-header';
 import { isContentSourceMapsEnabled } from '#/lib/contentSourceMaps';
@@ -53,24 +52,17 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
-      <head />
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
         <AnalyticsComponent>
           <ContentfulPreviewProvider isDraftMode={isDraftMode} isContentSourceMapsEnabled={isContentSourceMapsEnabled}>
-            <LocaleProvider locale={locale}>
-              <LanguageDataProvider>
-                <div className="relative flex min-h-screen flex-col">
-                  <AnnouncementBannerComponent />
-                  <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
-                  <div className="flex-1">{children}</div>
-                  {shouldInjectToolbar && <VercelToolbar />}
-                </div>
-              </LanguageDataProvider>
-            </LocaleProvider>
+            <LanguageDataProvider>
+              <div className="relative flex min-h-screen flex-col">
+                <AnnouncementBannerComponent />
+                <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
+                <div className="flex-1">{children}</div>
+                {shouldInjectToolbar && <VercelToolbar />}
+              </div>
+            </LanguageDataProvider>
           </ContentfulPreviewProvider>
         </AnalyticsComponent>
       </body>

@@ -3,8 +3,8 @@
 import { ChangeEvent, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { useLanguageDataContext } from '#/components/language-data-provider/language-data-provider';
 import { useCurrentLocale } from '#/locales/client';
-import { useLanguageDataContext } from '#/ui/hooks';
 
 export const LanguageSelector = () => {
   const locale = useCurrentLocale();
