@@ -26,7 +26,7 @@ export const TopicPerson = ({
     <div className="my-12 flex flex-col items-center rounded-xl bg-secondaryDark px-10 py-6 text-white md:flex-row md:gap-10">
       {avatar && (
         <div className="flex shrink-0 flex-col items-center">
-          <div className="overflow-hiddenshadow-lg shrink-0 rounded-xl">
+          <div className="shrink-0 overflow-hidden rounded-xl shadow-lg">
             <Image {...addAttributes('image')} {...avatar} alt={avatar.alt} />
           </div>
           {!cardStyle && (

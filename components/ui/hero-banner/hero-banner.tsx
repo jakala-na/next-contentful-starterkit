@@ -58,7 +58,7 @@ export function HeroBanner(props: HeroBannerProps) {
           <h1
             style={{ color: colorConfig.headlineColor }}
             {...addAttributes('headline')}
-            className={'text-gray-900 mb-4 text-3xl font-extrabold leading-none tracking-tight md:text-4xl lg:text-5xl'}
+            className={'mb-4 text-3xl font-extrabold leading-none tracking-tight md:text-4xl lg:text-5xl'}
           >
             {headline}
           </h1>
