@@ -46,7 +46,7 @@ export function HeroBanner(props: HeroBannerProps) {
       )}
       <div
         style={{ backgroundColor: colorConfig.backgroundColor }}
-        className="absolute left-0 top-0 h-full w-full opacity-25"
+        className="absolute left-0 top-0 size-full opacity-25"
       ></div>
       <div
         className={cn('z-10 pt-10', {

@@ -8,7 +8,9 @@ import { X } from 'lucide-react';
 export function AnnouncementBannerComponent() {
   const [isVisible, setIsVisible] = useState(true);
 
-  if (!isVisible) return null;
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <div className="relative bg-primary px-4 py-3 text-center text-primary-foreground">
@@ -29,7 +31,7 @@ export function AnnouncementBannerComponent() {
         className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1 transition-colors hover:bg-primary-foreground/10"
         aria-label="Close announcement"
       >
-        <X className="h-5 w-5" />
+        <X className="size-5" />
       </button>
     </div>
   );

@@ -174,7 +174,7 @@ export const Navigation = async (props: NavigationProps) => {
   const Search = () => (
     <div className="bg-gray-100 dark:bg-zinc-700 flex items-center rounded-md p-2">
       <svg
-        className="text-gray-400 h-5 w-5"
+        className="text-gray-400 size-5"
         fill="none"
         height="24"
         stroke="currentColor"
@@ -201,7 +201,7 @@ export const Navigation = async (props: NavigationProps) => {
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
         <div className="flex items-center justify-center sm:justify-start">
           <Link href="/">
-            <Icons.altLogo className="h-8 w-8 md:mr-10" />
+            <Icons.altLogo className="size-8 md:mr-10" />
           </Link>
           <MainMenuDesktop />
         </div>
@@ -214,7 +214,7 @@ export const Navigation = async (props: NavigationProps) => {
             <SheetTrigger asChild>
               <Button variant="ghost" size="sm">
                 <svg
-                  className="text-gray-500 dark:text-gray-200 h-6 w-6"
+                  className="text-gray-500 dark:text-gray-200 size-6"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -247,7 +247,7 @@ export const Navigation = async (props: NavigationProps) => {
             <SheetTrigger asChild>
               <Button variant="ghost" size="sm" className="md:hidden">
                 <svg
-                  className="text-gray-500 dark:text-gray-200 h-6 w-6"
+                  className="text-gray-500 dark:text-gray-200 size-6"
                   fill="none"
                   height="24"
                   stroke="currentColor"
