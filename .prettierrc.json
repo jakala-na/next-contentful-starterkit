@@ -26,5 +26,5 @@
   "trailingComma": "es5",
   "tabWidth": 2,
   "useTabs": false,
-  "plugins": ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-curly", "prettier-plugin-tailwindcss"]
+  "plugins": ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-curly"]
 }
