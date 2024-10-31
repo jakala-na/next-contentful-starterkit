@@ -1,17 +1,19 @@
-# Next Contentful Starterkit
+# Next.js Contentful Starterkit
 
-This starterkit is meant to provide a good mix of best practices for working with Contentful in NextJS. It doesn't pretend to be the only way, but it is meant to address the main painpoints concerning data-fetching, component resolution, live previews, configuration management and App development. We believe a good starterkit is use-case based, but there is no good way to model all use-cases in same starter, so our use-case is a marketing or corporate site, it fact, it is modeled around Contentful's own [Marketing Template](https://www.contentful.com/starter-templates/marketing-website/) content model.
+This starterkit is meant to provide a good mix of best practices for working with Contentful in Next.js. It doesn't pretend to be the only way, but it is meant to address the main painpoints concerning data-fetching, component resolution, live previews, configuration management and App development. We believe a good starterkit is use-case based, but there is no good way to model all use-cases in same starter, so while we're starting as a marketing site, it may evolve later. In fact, it is modeled around Contentful's own [Marketing Template](https://www.contentful.com/starter-templates/marketing-website/) content model, with a slight twist on the content part.
 
-The starterkit's cornerstone is our data-fetching solution and it's typesafety. The goal is to have best-in-class Typescript-enabled, graphql-powered data fetching to eliminate guessing games in our components and provide full type definitions for free. The full list of current features with descriptions can be found below.
+The starterkit's cornerstone is our data-fetching solution and it's typesafety. The goal is to have best-in-class Typescript-enabled, graphql-powered data fetching to eliminate guessing games in our components and provide full type definitions for free. The list of current features with descriptions can be found below.
 
 ## Features
 
-- **NextJS App Router** usage for modern **React Server Components** approach - we think this is the way the industry will move and it is a huge benefit for traditional websites to do data fetching only on the server and keep client-bundle lean
+- **Next.js App Router** usage for modern **React Server Components** approach - we think this is the way the industry will move to and it is a huge benefit for traditional websites to do data fetching only on the server and keep client bundle lean
 - **GraphQL** + **gql.tada** plugin + Typescript for data fetching - we believe the best way to benefit from a GraphQL backend on the frontend is to use Typescript and be informed of what is available to you when you do data fetching, and gql.tada ensures you are not “lying to yourself” in your types by inferring them from the API.
 - **Cypress testing** - we include a configured Cypress.io testing suite with ability to do both Component and E2E testing using Cucumber/BDD style syntax (optionally you can use traditional spec files too)
+- **Reference Component Architecture** - we use Tailwind and shadcn/ui for the UI layer as a base, but more importantly the starter ships with reference component architecture that promotes UI component best practices. We focus on ability to reuse UI across projects, use of React Server Components for data-fetching and we demostrate how Contentful data can be integrated with a UI design system while preserving all Next.js features and Contentful features as part of the integration.
 - **Component Renderer** - example of how to take a full tree of components and render them using a mapping of contentTypes to React components
 - **Draft Mode** - preview mode for your application for Contentful Preview API usage
-- Use of **Contentful Live Preview** - contentful live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in Contentful.
+- **Contentful Live Preview** - Contentful live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in Contentful.
+- **Contentful Content Source Maps** - Optionally use Contentful Content Source Maps feature to get Live Preview SDK annotations without manually annotating your components, as well as get Vercel Content Link for Vercel customers.
 
 ## Getting Started
 
@@ -54,60 +56,39 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### GraphQL Docs
+## Documentation
 
-#### Regenerate graphql schema
+- [Component Architecture](./docs/components.md)
+- [Components UI Folder](./components/ui/README.md)
+- [Data-fetching guide](./docs/data-fetching.md)
+- [Features guide](./docs/features.md)
+- [Analytics guide](./components/analytics/README.md)
+- [Architecture Decision Records](./docs/decisions/)
+- [Next.js docs](https://nextjs.org/docs)
 
-If you're adding new content types or making changes to the content model, you will need to generate a new graphql schema to get type inference in Typescript working and to get autocomplete in IDE. This can be done by running:
-
-```bash
-yarn generate:schema
-```
-
-After new types are generated, you will get changes in `./gql/` folder that you'll have to commit after you are done developing the feature.
-Keep in mind, schema generation will take your `.env.local` and read the CONTENTFUL_ENVIRONMENT you are pointing to, so if you create a new content type on a different environment, it will not be pulled, or the opposite, if you have unwanted content types in your sandbox environment, they will all appear in the schema. Make sure you commit changes you intend to commit!
-
-### Configure editor to use gql.tada
-
-In order for gql.tada's GraphQLSP plugin to work (and infer types), you need to have local Typescript server making the type inference (`node_modules/typescript/lib`)
-
-If you are using VSCode, the .vscode/settings.json in the repo is already configured to use the local Typescript server.
-
-If using Webstorm, make sure you configure the Typescript interpretter from node_modules/typescript/lib as well under Settings -> Language & Frameworks -> Typescript
-
-If you can't use a Typescript server in your IDE, you can optionally generate a gql/graphql-env.d.ts by running this command.
-
-```bash
-yarn generate:output
-```
-
-This command will also run `gql.tada turbo` which will generate a cache file that should also be commited. This cache file will speed up inference for new users who just checked out a new branch.
-More info [here](https://gql-tada.0no.co/devlog/2024-04-15)
-
-### Content Source Maps in Live Preview and on Vercel
-
-Contentful has released a new live-preview API compatible content source maps spec, you can read more [here](https://www.contentful.com/developers/docs/tools/vercel/content-source-maps-with-vercel/). This implementation enabled effortless inspector mode annotations in Live Preview, as well as full Edit Mode support on Vercel. Unfortunately for some folks testing the starterkit on FREE plan, this feature is only available on Pro+. While Content Source Maps enables Visual Editing on Vercel, Visual Editing is also only available in Pro+. If you're testing the starterkit and would like to not use content source maps, you are free to opt out by:
-
-1. Settings `CONTENTFUL_USE_CONTENT_SOURCE_MAPS=false` in .env.local or in Vercel
-2. Removing `@contentSourceMaps` directive from GraphQL queries
-
-** Note: @contentSourceMaps ideally could be added conditionally, but gql.tada prevents any dynamic strings from being typed TadaDocumentNode. In future we will add the @contentSourceMaps directive to all queries in urql exchange.**
-
-## Content export
-
-If you were working on content model updates which will need to go into the starter kit demo content there's a helper script to help with the contentful export: `yarn generate:ctf-seed`. It will generate and replace current `ctf-seed.json` file.
-
-## NextJS Docs
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
+## Deploy to Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Support
+
+While this starterkit is in active development, fixing some UI bugs or unfinished components may not be a priority.
+
+This starterkit is meant to serve two purposes:
+
+1. Provide best practices for starting new projects with Contentful and Next.js
+2. Provide a demo site and a playground to test new features released in Next.js and Contenful
+
+You are free to use the starterkit as a template to start new projects, but you can also pick and choose which reference implementations you like and copy them into your own project.
+
+The demo site will evolve as we strive to demostrate more Next.js capabilities, but so will the Contentful part as Contentful adds more features (Contentful Studio, Taxonomy, etc)
+
+Some features are going to be implemented just enough to demonstrate the concept in a demo, other features may be relying on particular infrastructure like on Vercel, it will be a balancing act.
+
+Our commitment is to support majority of users and let them opt in, remove or modify certain functionality if they don't share the same infrastructure or feature set. We will provide documentation and guidance how to do that
+
+## Contributors
+
+This project is open-source under MIT license and accepts contributions, if you have any feedback, please create a discussion or an issue on Github.

@@ -4,57 +4,14 @@ import type { TadaDocumentNode, $tada } from 'gql.tada';
 
 declare module 'gql.tada' {
   interface setupCache {
-    '\n      query Layout($locale: String, $preview: Boolean) {\n        navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {\n          ...NavigationFields\n        }\n      }\n    ': TadaDocumentNode<
-      { navigationMenuCollection: { [$tada.fragmentRefs]: { NavigationFields: 'NavigationMenuCollection' } } | null },
-      { preview?: boolean | null | undefined; locale?: string | null | undefined },
-      void
-    >;
     '\n    query PageSlugQuery($slug: String, $locale: String, $preview: Boolean) {\n      pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {\n        items {\n          slug\n        }\n      }\n    }\n  ': TadaDocumentNode<
       { pageCollection: { items: ({ slug: string | null } | null)[] } | null },
       { preview?: boolean | null | undefined; locale?: string | null | undefined; slug?: string | null | undefined },
       void
     >;
-    '\n      query PageQuery($slug: String, $locale: String, $preview: Boolean) @contentSourceMaps {\n        pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {\n          items {\n            topSectionCollection(limit: 10) {\n              items {\n                ...ComponentHeroBannerFields\n                ...ComponentDuplexFields\n              }\n            }\n            pageContent {\n              ...ComponentTopicBusinessInfo\n            }\n          }\n        }\n      }\n    ': TadaDocumentNode<
-      {
-        pageCollection: {
-          items: ({
-            pageContent:
-              | { __typename?: 'ComponentDuplex' | undefined }
-              | { __typename?: 'ComponentProductTable' | undefined }
-              | {
-                  [$tada.fragmentRefs]: { ComponentTopicBusinessInfo: 'TopicBusinessInfo' };
-                  __typename?: 'TopicBusinessInfo' | undefined;
-                }
-              | { __typename?: 'TopicProduct' | undefined }
-              | null;
-            topSectionCollection: {
-              items: (
-                | { __typename?: 'Accordion' | undefined }
-                | { __typename?: 'ComponentCta' | undefined }
-                | {
-                    [$tada.fragmentRefs]: { ComponentDuplexFields: 'ComponentDuplex' };
-                    __typename?: 'ComponentDuplex' | undefined;
-                  }
-                | { __typename?: 'ComponentForm' | undefined }
-                | {
-                    [$tada.fragmentRefs]: { ComponentHeroBannerFields: 'ComponentHeroBanner' };
-                    __typename?: 'ComponentHeroBanner' | undefined;
-                  }
-                | { __typename?: 'ComponentInfoBlock' | undefined }
-                | { __typename?: 'ComponentQuote' | undefined }
-                | { __typename?: 'ComponentTextBlock' | undefined }
-                | null
-              )[];
-            } | null;
-          } | null)[];
-        } | null;
-      },
-      { preview?: boolean | null | undefined; locale?: string | null | undefined; slug?: string | null | undefined },
-      void
-    >;
-    "\n    query PageSlugs($locale: String) {\n      # Fetch 50 pages. Ideally we would fetch a good sample of most popular pages for pre-rendering,\n      # but for the sake of this example we'll just fetch the first 50.\n      pageCollection(locale: $locale, limit: 50) {\n        items {\n          slug\n        }\n      }\n    }\n  ": TadaDocumentNode<
-      { pageCollection: { items: ({ slug: string | null } | null)[] } | null },
-      { locale?: string | null | undefined },
+    '\n      query Layout($locale: String, $preview: Boolean) {\n        navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {\n          ...NavigationFields\n        }\n      }\n    ': TadaDocumentNode<
+      { navigationMenuCollection: { [$tada.fragmentRefs]: { NavigationFields: 'NavigationMenuCollection' } } | null },
+      { preview?: boolean | null | undefined; locale?: string | null | undefined },
       void
     >;
     '\n  fragment AssetFields on Asset {\n    __typename\n    sys {\n      id\n    }\n    contentType\n    title\n    url\n    width\n    height\n    description\n  }\n': TadaDocumentNode<
@@ -151,22 +108,21 @@ declare module 'gql.tada' {
           links: {
             entries: {
               block: (
-                | { __typename?: 'ComponentDuplex' | undefined }
-                | { __typename?: 'ComponentProductTable' | undefined }
-                | { __typename?: 'TopicProduct' | undefined }
+                | { __typename?: 'Page' | undefined }
                 | { __typename?: 'Accordion' | undefined }
+                | { __typename?: 'AccordionItem' | undefined }
                 | { __typename?: 'ComponentCta' | undefined }
+                | { __typename?: 'ComponentDuplex' | undefined }
                 | { __typename?: 'ComponentForm' | undefined }
+                | { __typename?: 'ComponentHeroBanner' | undefined }
                 | { __typename?: 'ComponentInfoBlock' | undefined }
+                | { __typename?: 'ComponentProductTable' | undefined }
                 | { __typename?: 'ComponentQuote' | undefined }
                 | { __typename?: 'ComponentTextBlock' | undefined }
-                | { __typename?: 'Page' | undefined }
-                | { __typename?: 'MenuGroup' | undefined }
-                | { __typename?: 'NavigationMenu' | undefined }
-                | { __typename?: 'AccordionItem' | undefined }
-                | { __typename?: 'ComponentHeroBanner' | undefined }
                 | { __typename?: 'EditorTest' | undefined }
                 | { __typename?: 'FooterMenu' | undefined }
+                | { __typename?: 'MenuGroup' | undefined }
+                | { __typename?: 'NavigationMenu' | undefined }
                 | { __typename?: 'NtAudience' | undefined }
                 | { __typename?: 'NtExperience' | undefined }
                 | { __typename?: 'Seo' | undefined }
@@ -175,6 +131,7 @@ declare module 'gql.tada' {
                     [$tada.fragmentRefs]: { ComponentTopicPerson: 'TopicPerson' };
                     __typename?: 'TopicPerson' | undefined;
                   }
+                | { __typename?: 'TopicProduct' | undefined }
                 | { __typename?: 'TopicProductFeature' | undefined }
                 | null
               )[];
@@ -203,6 +160,56 @@ declare module 'gql.tada' {
       },
       {},
       { fragment: 'ComponentTopicPerson'; on: 'TopicPerson'; masked: true }
+    >;
+    '\n      query PageQuery($slug: String, $locale: String, $preview: Boolean) @contentSourceMaps {\n        pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {\n          items {\n            topSectionCollection(limit: 10) {\n              items {\n                ...ComponentHeroBannerFields\n                ...ComponentDuplexFields\n              }\n            }\n            pageContent {\n              ...ComponentTopicBusinessInfo\n            }\n            slugEn: slug(locale: "en-US")\n            slugDe: slug(locale: "de-DE")\n          }\n        }\n      }\n    ': TadaDocumentNode<
+      {
+        pageCollection: {
+          items: ({
+            slugDe: string | null;
+            slugEn: string | null;
+            pageContent:
+              | { __typename?: 'ComponentDuplex' | undefined }
+              | { __typename?: 'ComponentProductTable' | undefined }
+              | { __typename?: 'TopicProduct' | undefined }
+              | {
+                  [$tada.fragmentRefs]: { ComponentTopicBusinessInfo: 'TopicBusinessInfo' };
+                  __typename?: 'TopicBusinessInfo' | undefined;
+                }
+              | null;
+            topSectionCollection: {
+              items: (
+                | { __typename?: 'Accordion' | undefined }
+                | { __typename?: 'ComponentCta' | undefined }
+                | { __typename?: 'ComponentForm' | undefined }
+                | { __typename?: 'ComponentInfoBlock' | undefined }
+                | { __typename?: 'ComponentQuote' | undefined }
+                | { __typename?: 'ComponentTextBlock' | undefined }
+                | {
+                    [$tada.fragmentRefs]: { ComponentDuplexFields: 'ComponentDuplex' };
+                    __typename?: 'ComponentDuplex' | undefined;
+                  }
+                | {
+                    [$tada.fragmentRefs]: { ComponentHeroBannerFields: 'ComponentHeroBanner' };
+                    __typename?: 'ComponentHeroBanner' | undefined;
+                  }
+                | null
+              )[];
+            } | null;
+          } | null)[];
+        } | null;
+      },
+      { preview?: boolean | null | undefined; locale?: string | null | undefined; slug?: string | null | undefined },
+      void
+    >;
+    "\n    query PageSlugs($locale: String) {\n      # Fetch 50 pages. Ideally we would fetch a good sample of most popular pages for pre-rendering,\n      # but for the sake of this example we'll just fetch the first 50.\n      pageCollection(locale: $locale, limit: 50) {\n        items {\n          slug\n        }\n      }\n    }\n  ": TadaDocumentNode<
+      { pageCollection: { items: ({ slug: string | null } | null)[] } | null },
+      { locale?: string | null | undefined },
+      void
+    >;
+    '\n    query PageQuery($slug: String, $locale: String, $preview: Boolean) {\n      pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {\n        items {\n          slugEn: slug(locale: "en-US")\n          slugDe: slug(locale: "de-DE")\n        }\n      }\n    }\n  ': TadaDocumentNode<
+      { pageCollection: { items: ({ slugDe: string | null; slugEn: string | null } | null)[] } | null },
+      { preview?: boolean | null | undefined; locale?: string | null | undefined; slug?: string | null | undefined },
+      void
     >;
   }
 }
