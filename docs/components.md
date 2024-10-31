@@ -9,12 +9,12 @@ You will notice the following structure in the this project.
 - app (reserved for routing and collocated imports)
 - components (separated from app folder in order to not commingle with routing)
   ...
-  - hero-banner-ctf (Contentful + NextJS component integration)
+  - hero-banner-ctf (Contentful + Next.js component integration)
     - hero-banner-ctf-client.tsx
     - hero-banner-ctf.tsx
     - index.tsx (optional)
   - ui
-    - hero-banner (UI component folder with no knowledge of Contentful or NextJS)
+    - hero-banner (UI component folder with no knowledge of Contentful or Next.js)
       - hero-banner.tsx
       - hero-banner-stories.tsx
       - index.ts (optional)
@@ -27,13 +27,13 @@ We'll start from UI components and work our way up.
 
 > hero-banner.tsx
 
-UI components are simply defined as pure React components with ability to manage state or render things in slots, but for the purposes of this project they are designed to be share-able across an ecosystem of React projects that are not necessarily built with NextJS or Contentful. More ideas about this concept are described in [UI folder docs](/components/ui/README.md).
+UI components are simply defined as pure React components with ability to manage state or render things in slots, but for the purposes of this project they are designed to be share-able across an ecosystem of React projects that are not necessarily built with Next.js or Contentful. More ideas about this concept are described in [UI folder docs](/components/ui/README.md).
 
 2. Contentful integration components
 
 > hero-banner-ctf.tsx
 
-These components are designed to integrate Contentful's content model to the UI components's props. This includes things like re-mapping fields to UI prop values, mapping slots, injecting NextJS primitives like links or images.
+These components are designed to integrate Contentful's content model to the UI components's props. This includes things like re-mapping fields to UI prop values, mapping slots, injecting Next.js primitives like links or images.
 
 This component is also responsible for data-fetching any additional data that is not available as props at the time of rendering the component.
 

@@ -16,7 +16,7 @@ It happens that REST API in Contentful has no good ability to fetch exact data y
 This results in 3 things:
 
 - Massive payloads that don't fit the body size of the response
-- Massive NextJS page caches as those payloads end up in props (unless you clean them up)
+- Massive Next.js page caches as those payloads end up in props (unless you clean them up)
 - Chance of circular references that can't be encoded in a serialized JSON and SDK failing with an error
 
 If you face those issues, you are going to be forced to underfetch with lower `?include=[depth]` param and fetch second/third/fourth pass to mitigate. Additionally you are going to be forced to trim the response from Contentful to remove any excess circular references loops and serialize the props yourself.
