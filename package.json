@@ -2,8 +2,8 @@
   "name": "next-contentful-starterkit",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=20.18.0"
+  "engines" : {
+    "node" : ">=20.18.0"
   },
   "scripts": {
     "prepare": "husky install",
