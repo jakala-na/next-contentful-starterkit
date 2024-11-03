@@ -6,9 +6,15 @@ jobs:
   chromatic-deployment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '>=20.18.0'
       - name: Install dependencies
-        run: yarn
+        run: yarn install --frozen-lockfile
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:

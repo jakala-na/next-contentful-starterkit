@@ -1,4 +1,4 @@
-# NextJS App Router
+# Next.js App Router
 
 Date: 2022-12-07
 
@@ -6,7 +6,7 @@ Status: accepted
 
 ## Context
 
-This starterkit is exclusively using NextJS App Router and was intended as a demonstration of App Router's new abilities with introduction of React Server Components (RSC)
+This starterkit is exclusively using Next.js App Router and was intended as a demonstration of App Router's new abilities with introduction of React Server Components (RSC)
 
 Let's explore some thoughts that went into this decision:
 
@@ -23,4 +23,4 @@ Go all in on RSC and App Router as the only platform at the time supporting this
 
 - At the time of writing, App Router is in alpha, but it will be stable when we release the starterkit
 - Folks familiar with regular React SSR-ed model will have to retrain and rewire the mendal modal with React Server Components in mind
-- Early adopter bugs will probably make the starterkit mostly good for demos until stable NextJS app router is released
+- Early adopter bugs will probably make the starterkit mostly good for demos until stable Next.js app router is released

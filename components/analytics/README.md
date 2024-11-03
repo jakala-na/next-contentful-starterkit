@@ -2,13 +2,14 @@
 
 Analytics solution is based on the [getanalytics.io](https://getanalytics.io/) library.
 The library provides three base API interfaces to sent tracking information:
+
 - `page()` - trigger page view. This will trigger page calls in any installed plugins
 - `identify()` - this will trigger identify calls in any installed plugins and will set user data in localStorage
 - `track()` - Track an analytics event. This will trigger track calls in any installed plugins
 
-## NextJS Integration
+## Next.js Integration
 
-We will provide integration with NextJS for three different cases: page view,
+We will provide integration with Next.js for three different cases: page view,
 component in view, click on target. See the `components/analytics/analytics.tsx`
 file where we convey the global Analytics context and define a hook to track
 page view. Then go to the `app/layout.tsx` where we wrap all children components
@@ -17,7 +18,7 @@ inside the analytics context.
 ### Page view tracking
 
 Page view will automatically triggered after the page will be loaded depending
-on the NextJS router `pathname` changes.
+on the Next.js router `pathname` changes.
 
 ### Component InView tracking
 

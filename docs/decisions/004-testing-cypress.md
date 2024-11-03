@@ -6,7 +6,7 @@ Status: accepted
 
 ## Context
 
-As the starterkit is supposed to provide certain best practices, an opportunity showed up to decide what a good testing strategy for typical projects on NextJS can be.
+As the starterkit is supposed to provide certain best practices, an opportunity showed up to decide what a good testing strategy for typical projects on Next.js can be.
 
 The solution had to cover a few things:
 

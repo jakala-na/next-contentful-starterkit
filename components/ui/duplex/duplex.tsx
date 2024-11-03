@@ -11,7 +11,7 @@ import { Button } from '../button';
 import { Image, ImageProps } from '../image';
 import { Link, LinkProps } from '../link';
 
-const layoutVariants = cva('md:flex px-5 max-w-6xl', {
+const layoutVariants = cva('max-w-6xl px-5 md:flex', {
   variants: {
     imageAlignment: {
       left: 'md:flex-row',
