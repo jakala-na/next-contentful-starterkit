@@ -10,6 +10,7 @@ import DebugMode from '#/components/debug-mode/debug-mode';
 import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
 import { LanguageDataSetter } from '#/components/language-data-provider/language-data-provider';
+import { ComponentSEOFieldsFragment, getSeoMetadata } from '#/components/seo/seo-ctf';
 import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
 import { addContentSourceMaps } from '#/lib/contentSourceMaps';
 import { graphqlClient } from '#/lib/graphqlClient';
@@ -80,24 +81,46 @@ const getPageSlugs = async (locale: string) => {
   );
 };
 
-const getAlternateSlugs = async (slug: string, locale: string) => {
-  const pageQuery = graphql(`
-    query PageQuery($slug: String, $locale: String, $preview: Boolean) {
-      pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
-        items {
-          slugEn: slug(locale: "en-US")
-          slugDe: slug(locale: "de-DE")
+const getPageMetadata = async (slug: string, locale: string, preview = false): Promise<Metadata> => {
+  const pageQuery = graphql(
+    `
+      query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+        pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
+          items {
+            seo {
+              ...SEOFields
+            }
+            slugEn: slug(locale: "en-US")
+            slugDe: slug(locale: "de-DE")
+          }
         }
       }
-    }
-  `);
+    `,
+    [ComponentSEOFieldsFragment]
+  );
 
-  return (
-    await graphqlClient(false).query(pageQuery, {
-      locale,
-      slug,
-    })
-  ).data?.pageCollection?.items?.[0];
+  const response = await graphqlClient(preview).query(pageQuery, {
+    locale,
+    preview,
+    slug,
+  });
+
+  const pageMetadata = response?.data?.pageCollection?.items?.[0];
+
+  if (!pageMetadata) {
+    notFound();
+  }
+
+  return {
+    ...getSeoMetadata(pageMetadata?.seo),
+    // TODO: Extract this into i18n fragment and helper.
+    alternates: {
+      languages: {
+        en: `/en/${pageMetadata?.slugEn === 'home' ? '' : pageMetadata?.slugEn}`,
+        de: `/de/${pageMetadata?.slugDe === 'home' ? '' : pageMetadata?.slugDe}`,
+      },
+    },
+  };
 };
 
 export default async function LandingPage({ params }: PageProps) {
@@ -131,23 +154,11 @@ export default async function LandingPage({ params }: PageProps) {
   );
 }
 
-export const revalidate = 120;
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = params;
   const slug = params.slug?.join('/') ?? 'home';
-  const data = await getAlternateSlugs(slug, getLocaleFromPath(locale));
-  if (data) {
-    return {
-      alternates: {
-        languages: {
-          en: `${process.env.NEXT_PUBLIC_BASE_URL}/en/${data.slugEn === 'home' ? '' : data.slugEn}`,
-          de: `${process.env.NEXT_PUBLIC_BASE_URL}/de/${data.slugDe === 'home' ? '' : data.slugDe}`,
-        },
-      },
-    };
-  }
-  return {};
+  const { isEnabled: isDraftMode } = draftMode();
+  return getPageMetadata(slug, getLocaleFromPath(locale), isDraftMode);
 }
 
 export async function generateStaticParams() {
@@ -163,3 +174,5 @@ export async function generateStaticParams() {
   }
   return returnData;
 }
+
+export const revalidate = 120;

@@ -101,6 +101,19 @@ declare module 'gql.tada' {
       {},
       { fragment: 'PageLinkFields'; on: 'Page'; masked: true }
     >;
+    '\n    fragment SEOFields on Seo {\n      __typename\n      sys {\n        id\n      }\n      title\n      description\n      noIndex\n      noFollow\n      image {\n        ...AssetFields\n      }\n    }\n  ': TadaDocumentNode<
+      {
+        image: { [$tada.fragmentRefs]: { AssetFields: 'Asset' } } | null;
+        noFollow: boolean | null;
+        noIndex: boolean | null;
+        description: string | null;
+        title: string | null;
+        sys: { id: string };
+        __typename: 'Seo';
+      },
+      {},
+      { fragment: 'SEOFields'; on: 'Seo'; masked: true }
+    >;
     '\n    fragment ComponentTopicBusinessInfo on TopicBusinessInfo {\n      __typename\n      sys {\n        id\n      }\n      name\n      shortDescription\n      body {\n        json\n        links {\n          entries {\n            block {\n              ...ComponentTopicPerson\n            }\n          }\n        }\n      }\n      featuredImage {\n        ...AssetFields\n      }\n    }\n  ': TadaDocumentNode<
       {
         featuredImage: { [$tada.fragmentRefs]: { AssetFields: 'Asset' } } | null;
@@ -119,12 +132,9 @@ declare module 'gql.tada' {
                 | { __typename?: 'ComponentProductTable' | undefined }
                 | { __typename?: 'ComponentQuote' | undefined }
                 | { __typename?: 'ComponentTextBlock' | undefined }
-                | { __typename?: 'EditorTest' | undefined }
                 | { __typename?: 'FooterMenu' | undefined }
                 | { __typename?: 'MenuGroup' | undefined }
                 | { __typename?: 'NavigationMenu' | undefined }
-                | { __typename?: 'NtAudience' | undefined }
-                | { __typename?: 'NtExperience' | undefined }
                 | { __typename?: 'Seo' | undefined }
                 | { __typename?: 'TopicBusinessInfo' | undefined }
                 | {
@@ -204,6 +214,11 @@ declare module 'gql.tada' {
     "\n    query PageSlugs($locale: String) {\n      # Fetch 50 pages. Ideally we would fetch a good sample of most popular pages for pre-rendering,\n      # but for the sake of this example we'll just fetch the first 50.\n      pageCollection(locale: $locale, limit: 50) {\n        items {\n          slug\n        }\n      }\n    }\n  ": TadaDocumentNode<
       { pageCollection: { items: ({ slug: string | null } | null)[] } | null },
       { locale?: string | null | undefined },
+      void
+    >;
+    '\n      query PageQuery($slug: String, $locale: String, $preview: Boolean) {\n        pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {\n          items {\n            seo {\n              ...SEOFields\n            }\n          }\n        }\n      }\n    ': TadaDocumentNode<
+      { pageCollection: { items: ({ seo: { [$tada.fragmentRefs]: { SEOFields: 'Seo' } } | null } | null)[] } | null },
+      { preview?: boolean | null | undefined; locale?: string | null | undefined; slug?: string | null | undefined },
       void
     >;
     '\n    query PageQuery($slug: String, $locale: String, $preview: Boolean) {\n      pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {\n        items {\n          slugEn: slug(locale: "en-US")\n          slugDe: slug(locale: "de-DE")\n        }\n      }\n    }\n  ': TadaDocumentNode<
