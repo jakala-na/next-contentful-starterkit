@@ -46,7 +46,7 @@ export function HeroBanner(props: HeroBannerProps) {
       )}
       <div
         style={{ backgroundColor: colorConfig.backgroundColor }}
-        className="absolute left-0 top-0 h-full w-full opacity-25"
+        className="absolute left-0 top-0 size-full opacity-25"
       ></div>
       <div
         className={cn('z-10 pt-10', {
@@ -58,7 +58,7 @@ export function HeroBanner(props: HeroBannerProps) {
           <h1
             style={{ color: colorConfig.headlineColor }}
             {...addAttributes('headline')}
-            className={'text-gray-900 mb-4 text-3xl font-extrabold leading-none tracking-tight md:text-4xl lg:text-5xl'}
+            className={'mb-4 text-3xl font-extrabold leading-none tracking-tight md:text-4xl lg:text-5xl'}
           >
             {headline}
           </h1>

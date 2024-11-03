@@ -114,10 +114,7 @@ export const Navigation = async (props: NavigationProps) => {
                     {groupLinks && (
                       <NavigationMenuContent>
                         {groupLinks.map((subMenuItem) => (
-                          <div
-                            key={subMenuItem?.id}
-                            className="text-gray-700 dark:text-gray-300 block px-4 py-2 text-sm"
-                          >
+                          <div key={subMenuItem?.id} className="block px-4 py-2 text-sm">
                             {subMenuItem?.slug && <Link href={subMenuItem.slug}>{subMenuItem?.name}</Link>}
                           </div>
                         ))}
@@ -172,9 +169,9 @@ export const Navigation = async (props: NavigationProps) => {
   );
 
   const Search = () => (
-    <div className="bg-gray-100 dark:bg-zinc-700 flex items-center rounded-md p-2">
+    <div className="flex items-center rounded-md p-2">
       <svg
-        className="text-gray-400 h-5 w-5"
+        className="size-5"
         fill="none"
         height="24"
         stroke="currentColor"
@@ -188,20 +185,16 @@ export const Navigation = async (props: NavigationProps) => {
         <circle cx="11" cy="11" r="8" />
         <path d="m21 21-4.3-4.3" />
       </svg>
-      <input
-        className="bg-transparent text-gray-600 dark:text-gray-300 ml-2 w-full p-1.5 text-sm"
-        placeholder={t('search')}
-        type="search"
-      />
+      <input className="ml-2 w-full p-1.5 text-sm" placeholder={t('search')} type="search" />
     </div>
   );
 
   return (
-    <header className="dark:bg-zinc-800 flex items-center justify-between bg-white px-6 py-4">
+    <header className="flex items-center justify-between bg-white px-6 py-4">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
         <div className="flex items-center justify-center sm:justify-start">
           <Link href="/">
-            <Icons.altLogo className="h-8 w-8 md:mr-10" />
+            <Icons.altLogo className="size-8 md:mr-10" />
           </Link>
           <MainMenuDesktop />
         </div>
@@ -214,7 +207,7 @@ export const Navigation = async (props: NavigationProps) => {
             <SheetTrigger asChild>
               <Button variant="ghost" size="sm">
                 <svg
-                  className="text-gray-500 dark:text-gray-200 h-6 w-6"
+                  className="size-6"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -236,7 +229,7 @@ export const Navigation = async (props: NavigationProps) => {
               </SheetHeader>
               <SheetDescription className="mt-2">
                 <strong>
-                  Your inbox is as quiet as a wizard’s spellbook at midnight. Check back later for magical updates,
+                  Your inbox is as quiet as a wizard’s spell book at midnight. Check back later for magical updates,
                   order statuses, or special offers from The Alchemist’s Vault.
                 </strong>
               </SheetDescription>
@@ -247,7 +240,7 @@ export const Navigation = async (props: NavigationProps) => {
             <SheetTrigger asChild>
               <Button variant="ghost" size="sm" className="md:hidden">
                 <svg
-                  className="text-gray-500 dark:text-gray-200 h-6 w-6"
+                  className="size-6"
                   fill="none"
                   height="24"
                   stroke="currentColor"

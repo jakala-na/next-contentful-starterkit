@@ -1,9 +1,26 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:storybook/recommended", "plugin:prettier/recommended", "prettier"],
+  "extends": [
+    "plugin:tailwindcss/recommended",
+    "next/core-web-vitals",
+    "plugin:storybook/recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
   "plugins": ["@typescript-eslint"],
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/no-unused-vars": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js"],
+      "parser": "@typescript-eslint/parser"
+    }
+  ],
+  "settings": {
+    "tailwindcss": {
+      "callees": ["cn"]
+    }
   },
   "ignorePatterns": ["storybook-static/**"]
 }
