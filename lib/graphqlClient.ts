@@ -37,8 +37,13 @@ const makeClient = (preview: boolean) => {
        */
       mapExchange({
         onError: (error) => {
-          // TODO: Add Sentry or similar error reporting.
-          console.error('GraphQL Error:', JSON.stringify(error, null, 2));
+          // Filter out expected errors like PERSISTED_QUERY_NOT_FOUND, pass others to the server.
+          const errors = error.graphQLErrors.filter((error) => error.message != 'PersistedQueryNotFound');
+
+          if (errors.length > 0) {
+            // TODO: Add Sentry or similar error reporting.
+            console.error('GraphQL Errors:', JSON.stringify(errors, null, 2));
+          }
         },
       }),
       fetchExchange,
