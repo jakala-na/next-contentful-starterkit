@@ -15,7 +15,7 @@
     "lint:fix": "next lint --fix",
     "generate:schema": "source .env.local && gql.tada generate-schema --header \"Authorization: Bearer $CONTENTFUL_DELIVERY_API\" \"https://graphql.contentful.com/content/v1/spaces/$CONTENTFUL_SPACE\"",
     "generate:output": "gql.tada generate-output && gql.tada turbo",
-    "generate:component": "yarn node --env-file=.env.local inquirer/generate-component.mjs",
+    "generate:component": "yarn node --env-file=.env.local cli/generate-component.mjs",
     "generate:ctf-seed": "contentful space export --export-dir=migrations/ --content-file=ctf-seed.json --use-verbose-renderer=true --download-assets",
     "seed": "contentful space import --content-file ./migrations/ctf-seed.json",
     "storybook": "storybook dev -p 6006",
