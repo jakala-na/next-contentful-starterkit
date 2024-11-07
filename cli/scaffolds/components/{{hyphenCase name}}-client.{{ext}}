@@ -1,0 +1,17 @@
+'use client';
+
+import { ResultOf } from 'gql.tada';
+
+import { Component{{pascalCase name}}FieldsFragment } from '#/components/{{hyphenCase name}}/{{hyphenCase name}}';
+import { {{pascalCase name}} } from '#/components/ui/{{hyphenCase name}}';
+
+import { useComponentPreview } from '../hooks/use-component-preview';
+
+export const {{pascalCase name}}Client: React.FC<{
+  data: ResultOf<typeof Component{{pascalCase name}}FieldsFragment>;
+}> = (props) => {
+  const { data: originalData } = props;
+  const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
+
+  return <{{pascalCase name}} id={data.sys.id} addAttributes={addAttributes} />;
+};
