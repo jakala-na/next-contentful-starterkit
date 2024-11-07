@@ -66,6 +66,7 @@
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@commitlint/cz-commitlint": "^19.5.0",
+    "@contentful/experiences-sdk-react": "^1.20.1",
     "@cypress/webpack-dev-server": "^3.2.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
     "@storybook/addon-essentials": "^8.0.4",

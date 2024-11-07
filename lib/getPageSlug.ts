@@ -13,13 +13,15 @@ const getPageSlug = async (slug: string, locale: string, preview = false) => {
     }
   `);
 
-  return (
-    await graphqlClient(preview).query(pageSlugQuery, {
-      locale,
-      preview,
-      slug,
-    })
-  ).data?.pageCollection?.items?.[0];
+  const queryResult = await graphqlClient(preview).query(pageSlugQuery, {
+    locale,
+    preview,
+    slug,
+  });
+
+  return slug.startsWith('/experience')
+    ? { slug: slug.replace('/', '') }
+    : queryResult.data?.pageCollection?.items?.[0];
 };
 
 export default getPageSlug;

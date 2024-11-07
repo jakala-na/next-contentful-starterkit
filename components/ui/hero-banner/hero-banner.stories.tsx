@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { HeroBanner } from './hero-banner';
+import { Button } from '#/components/ui/button';
+import { Link } from '#/components/ui/link';
+import React from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
@@ -53,6 +56,10 @@ export const WithReactComponent: Story = {
 export const WithCta: Story = {
   args: {
     ...defaultArgs,
-    cta: { children: 'Learn more', href: 'https://google.com' },
+    slotCtas: (
+      <Button asChild>
+        <Link href="https://google.com">Learn more</Link>
+      </Button>
+    ),
   },
 };
