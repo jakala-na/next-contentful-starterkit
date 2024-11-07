@@ -2,13 +2,13 @@ import { cookies, draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export async function GET() {
-  draftMode().disable();
+  (await draftMode()).disable();
 
   // Set __prerender_bypass expire date to past.
   if (process.env.NODE_ENV === 'development') {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const cookie = cookieStore.get('__prerender_bypass')!;
-    cookies().set({
+    (await cookies()).set({
       name: '__prerender_bypass',
       value: cookie?.value,
       expires: new Date(0), // Set expiration date to the past

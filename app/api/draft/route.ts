@@ -25,15 +25,15 @@ export async function GET(request: Request) {
   }
 
   // Enable Draft Mode by setting the cookie
-  draftMode().enable();
+  (await draftMode()).enable();
 
   // Set the __prerender_bypass as secure for local environment.
   // Will work only in next dev mode.
   // https://github.com/vercel/next.js/issues/49927
   if (process.env.NODE_ENV === 'development') {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const cookie = cookieStore.get('__prerender_bypass');
-    cookies().set({
+    (await cookies()).set({
       name: '__prerender_bypass',
       value: cookie?.value || '',
       httpOnly: true,
