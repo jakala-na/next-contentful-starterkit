@@ -1,7 +1,7 @@
 const prompts = {
   promptContentType: {
     name: 'promptContentType',
-    type: 'rawlist',
+    type: 'list',
     message: 'Please choose a CTF content type to generate the component for:',
     choices: ['---No content type yet---'],
   },

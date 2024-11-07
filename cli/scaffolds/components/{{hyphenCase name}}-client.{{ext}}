@@ -13,5 +13,5 @@ export const {{pascalCase name}}Client: React.FC<{
   const { data: originalData } = props;
   const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
 
-  return <{{pascalCase name}} data={data} addAttributes={addAttributes} />;
+  return <{{pascalCase name}} id={data.sys.id} addAttributes={addAttributes} />;
 };
