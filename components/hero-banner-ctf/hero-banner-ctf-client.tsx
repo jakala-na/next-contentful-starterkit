@@ -11,6 +11,9 @@ import { useComponentPreview } from '../hooks/use-component-preview';
 import { getImageChildProps } from '../image-ctf';
 import { getPageLinkChildProps } from '../page';
 import { HeroBanner } from '../ui/hero-banner';
+import { Button } from '#/components/ui/button';
+import { Link } from '#/components/ui/link';
+import React from 'react';
 
 export const HeroBannerCtfClient: React.FC<{
   data: ResultOf<typeof ComponentHeroBannerFieldsFragment>;
@@ -21,17 +24,26 @@ export const HeroBannerCtfClient: React.FC<{
   const analyticsInViewEvent = createAnalyticsEvent('heroBannerViewed', {
     category: 'duplexViewed',
   });
+
+  const cta =
+    data.targetPage &&
+    getPageLinkChildProps({
+      data: data.targetPage,
+      children: data.ctaText,
+    });
+
   return (
     <TrackInView {...analyticsInViewEvent}>
       <HeroBanner
         headline={data.headline}
         bodyText={data.bodyText && <RichTextCtf {...data.bodyText} />}
-        cta={
-          data.targetPage &&
-          getPageLinkChildProps({
-            data: data.targetPage,
-            children: data.ctaText,
-          })
+        slotCtas={
+          cta?.href &&
+          cta?.children && (
+            <Button {...addAttributes('ctaText')} asChild>
+              <Link {...cta} />
+            </Button>
+          )
         }
         image={
           data.image &&

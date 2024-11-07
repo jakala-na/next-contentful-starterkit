@@ -1,20 +1,18 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { cn } from '#/lib/utils';
 import { getColorConfigFromPalette } from '#/theme';
 
-import { Button } from '../button/button';
 import { Image, ImageProps } from '../image';
-import { Link, LinkProps } from '../link';
 
 interface HeroBannerProps {
   headline?: string | null;
   bodyText?: ReactNode;
   image?: ImageProps | null;
-  cta?: LinkProps | null;
   size?: boolean | null;
   colorPalette?: string | null;
   addAttributes?: (name: string) => object | null;
+  slotCtas?: ReactNode;
 }
 
 export function HeroBanner(props: HeroBannerProps) {
@@ -22,10 +20,10 @@ export function HeroBanner(props: HeroBannerProps) {
     image,
     headline,
     bodyText,
-    cta,
     size,
     colorPalette,
     addAttributes = () => ({}), // Default to no-op.
+    slotCtas,
   } = props;
 
   const colorConfig = getColorConfigFromPalette(colorPalette || '');
@@ -72,13 +70,7 @@ export function HeroBanner(props: HeroBannerProps) {
             {bodyText}
           </div>
         )}
-        {cta?.href && cta?.children && (
-          <div className="mt-6">
-            <Button {...addAttributes('ctaText')} asChild>
-              <Link {...cta} />
-            </Button>
-          </div>
-        )}
+        {slotCtas && <div className="mt-6">{slotCtas}</div>}
       </div>
     </div>
   );
