@@ -1,21 +1,16 @@
 const prompts = {
   promptContentType: {
-    name: 'promptContentType',
-    type: 'list',
     message: 'Please choose a CTF content type to generate the component for:',
     choices: ['---No content type yet---'],
+    pageSize: 10,
   },
   promptComponentName: {
-    name: 'promptComponentName',
-    type: 'input',
     message: 'Please input the component name (use kebab case):',
-    validate: (input) => {
-      if (!input || input === '') {
-        return 'Please provide a component name.';
-      } else {
-        return true;
-      }
-    },
+    required: true,
+  },
+  promptNewUIComponent: {
+    default: true,
+    message: 'Would you like to generate a matching UI component for your content type?',
   },
 };
 

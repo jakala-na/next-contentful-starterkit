@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import inquirer from 'inquirer';
+import { select, input, confirm } from '@inquirer/prompts';
 
 import prompts from './prompts.mjs';
 import { fetchCTFContentTypes, scaffoldComponentFiles } from './utils.mjs';
@@ -20,19 +20,15 @@ const contentTypesList = await fetchCTFContentTypes(
   prompts.promptContentType.choices
 );
 
-inquirer
-  .prompt([
-    {
-      ...prompts.promptContentType,
-      choices: contentTypesList,
-    },
-  ])
-  .then(({ promptContentType: contentType }) => {
-    if (contentType === prompts.promptContentType.choices[0]) {
-      inquirer.prompt([prompts.promptComponentName]).then(({ promptComponentName: componentName }) => {
-        scaffoldComponentFiles(componentName, false);
-      });
-    } else {
-      scaffoldComponentFiles(contentType, true);
-    }
-  });
+const existentContentType = await select({
+  ...prompts.promptContentType,
+  choices: contentTypesList,
+});
+const confirmNewUIComponent = await confirm(prompts.promptNewUIComponent);
+
+if (existentContentType === prompts.promptContentType.choices[0]) {
+  const newContentType = await input(prompts.promptComponentName);
+  scaffoldComponentFiles(newContentType, false, confirmNewUIComponent);
+} else {
+  scaffoldComponentFiles(existentContentType, true, confirmNewUIComponent);
+}
