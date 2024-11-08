@@ -129,7 +129,7 @@ export default async function LandingPage(props: PageProps) {
   setStaticParamsLocale(locale);
   const slug = params.slug?.join('/') ?? 'home';
 
-  const { isEnabled: isDraftMode } = await draftMode();
+  const isDraftMode = (await draftMode()).isEnabled;
 
   const pageData = await getPage(slug, getLocaleFromPath(locale), isDraftMode);
 
@@ -159,7 +159,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const params = await props.params;
   const { locale } = params;
   const slug = params.slug?.join('/') ?? 'home';
-  const { isEnabled: isDraftMode } = await draftMode();
+  const isDraftMode = (await draftMode()).isEnabled;
   return getPageMetadata(slug, getLocaleFromPath(locale), isDraftMode);
 }
 

@@ -26,7 +26,7 @@ export default async function RootLayout(props: { children: React.ReactNode; par
 
   const shouldInjectToolbar = process.env.NODE_ENV === 'development';
   const { locale } = params;
-  const { isEnabled: isDraftMode } = await draftMode();
+  const isDraftMode = (await draftMode()).isEnabled;
 
   const layoutQuery = graphql(
     `

@@ -1,11 +1,11 @@
-import { draftMode, type UnsafeUnwrappedDraftMode } from 'next/headers';
+import { draftMode } from 'next/headers';
 import Link from 'next/link';
 
 import { Navigation } from '#/components/navigation';
 
 // TODO: Fix fragment unmasking to type navigationData, if possible.
-export function SiteHeader(props: { navigationData: any }) {
-  const { isEnabled: isDraftMode } = draftMode() as unknown as UnsafeUnwrappedDraftMode;
+export async function SiteHeader(props: { navigationData: any }) {
+  const isDraftMode = (await draftMode()).isEnabled;
   return (
     <>
       {isDraftMode && (
