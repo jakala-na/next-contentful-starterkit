@@ -4952,6 +4952,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.17.13":
+  version: 4.17.13
+  resolution: "@types/lodash@npm:4.17.13"
+  checksum: 10c0/c3d0b7efe7933ac0369b99f2f7bff9240d960680fdb74b41ed4bd1b3ca60cca1e31fe4046d9abbde778f941a41bc2a75eb629abf8659fa6c27b66efbbb0802a9
+  languageName: node
+  linkType: hard
+
 "@types/mdx@npm:^2.0.0":
   version: 2.0.11
   resolution: "@types/mdx@npm:2.0.11"
@@ -13069,6 +13076,7 @@ __metadata:
     "@storybook/react": "npm:^8.4.2"
     "@storybook/test": "npm:^8.4.2"
     "@types/cypress-image-snapshot": "npm:^3.1.6"
+    "@types/lodash": "npm:^4.17.13"
     "@types/node": "npm:18.11.11"
     "@types/react": "npm:types-react@19.0.0-rc.1"
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
