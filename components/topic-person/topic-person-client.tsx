@@ -7,13 +7,13 @@ import { RichTextCtf } from '#/components/rich-text-ctf';
 import { TopicPerson } from '#/components/ui/topic-person';
 
 import { useComponentPreview } from '../hooks/use-component-preview';
-import { ComponentTopicPersonFieldsFragment } from '././topic-person';
+import { TopicPersonFieldsFragment } from '././topic-person';
 
 export const TopicPersonClient: React.FC<{
-  data: ResultOf<typeof ComponentTopicPersonFieldsFragment>;
+  data: ResultOf<typeof TopicPersonFieldsFragment>;
 }> = (props) => {
   const { data: originalData } = props;
-  const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
+  const { data, addAttributes } = useComponentPreview(originalData);
 
   return (
     <TopicPerson

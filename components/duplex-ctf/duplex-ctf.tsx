@@ -31,7 +31,7 @@ export const ComponentDuplexFieldsFragment = graphql(
 );
 
 export type DuplexProps = {
-  data: FragmentOf<typeof ComponentDuplexFieldsFragment>;
+  data: FragmentOf<typeof ComponentDuplexFieldsFragment> & Record<string, any>;
 };
 
 export const DuplexCtf: React.FC<DuplexProps> = (props) => {

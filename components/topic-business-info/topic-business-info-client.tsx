@@ -7,13 +7,13 @@ import { RichTextCtf } from '#/components/rich-text-ctf';
 import { TopicBusinessInfo } from '#/components/ui/topic-business-info';
 
 import { useComponentPreview } from '../hooks/use-component-preview';
-import { ComponentTopicBusinessInfoFieldsFragment } from './topic-business-info';
+import { TopicBusinessInfoFieldsFragment } from './topic-business-info';
 
 export const TopicBusinessInfoClient: React.FC<{
-  data: ResultOf<typeof ComponentTopicBusinessInfoFieldsFragment>;
+  data: ResultOf<typeof TopicBusinessInfoFieldsFragment>;
 }> = (props) => {
   const { data: originalData } = props;
-  const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
+  const { data, addAttributes } = useComponentPreview(originalData);
 
   return (
     <TopicBusinessInfo

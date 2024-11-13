@@ -1,13 +1,13 @@
 import { FragmentOf, graphql, readFragment } from 'gql.tada';
 
-import { ComponentTopicPersonFieldsFragment } from '#/components/topic-person/topic-person';
+import { TopicPersonFieldsFragment } from '#/components/topic-person/topic-person';
 
 import { AssetFieldsFragment } from '../asset-ctf';
 import { TopicBusinessInfoClient } from './topic-business-info-client';
 
-export const ComponentTopicBusinessInfoFieldsFragment = graphql(
+export const TopicBusinessInfoFieldsFragment = graphql(
   `
-    fragment ComponentTopicBusinessInfo on TopicBusinessInfo {
+    fragment TopicBusinessInfo on TopicBusinessInfo {
       __typename
       sys {
         id
@@ -19,7 +19,7 @@ export const ComponentTopicBusinessInfoFieldsFragment = graphql(
         links {
           entries {
             block {
-              ...ComponentTopicPerson
+              ...TopicPerson
             }
           }
         }
@@ -29,14 +29,14 @@ export const ComponentTopicBusinessInfoFieldsFragment = graphql(
       }
     }
   `,
-  [AssetFieldsFragment, ComponentTopicPersonFieldsFragment]
+  [AssetFieldsFragment, TopicPersonFieldsFragment]
 );
 
 export type TopicBusinessInfoProps = {
-  data: FragmentOf<typeof ComponentTopicBusinessInfoFieldsFragment>;
+  data: FragmentOf<typeof TopicBusinessInfoFieldsFragment & Record<string, any>>;
 };
 
 export const TopicBusinessInfo: React.FC<TopicBusinessInfoProps> = (props) => {
-  const data = readFragment(ComponentTopicBusinessInfoFieldsFragment, props.data);
+  const data = readFragment(TopicBusinessInfoFieldsFragment, props.data);
   return <TopicBusinessInfoClient data={data} />;
 };

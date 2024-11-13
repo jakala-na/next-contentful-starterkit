@@ -1,8 +1,11 @@
-import dynamic from 'next/dynamic';
+import { HeroBannerCtf } from '#/components/hero-banner-ctf/hero-banner-ctf';
+import { DuplexCtf } from '#/components/duplex-ctf/duplex-ctf';
+import { TopicBusinessInfo } from '#/components/topic-business-info/topic-business-info';
+import { TopicPerson } from '#/components/topic-person/topic-person';
 
 export const componentMap = {
-  ComponentHeroBanner: dynamic(() => import('#/components/hero-banner-ctf').then((mod) => mod.HeroBannerCtf)),
-  ComponentDuplex: dynamic(() => import('#/components/duplex-ctf').then((mod) => mod.DuplexCtf)),
-  TopicBusinessInfo: dynamic(() => import('#/components/topic-business-info').then((mod) => mod.TopicBusinessInfo)),
-  TopicPersons: dynamic(() => import('#/components/topic-person').then((mod) => mod.TopicPerson)),
-};
+  ComponentHeroBanner: HeroBannerCtf,
+  ComponentDuplex: DuplexCtf,
+  TopicBusinessInfo: TopicBusinessInfo,
+  TopicPersons: TopicPerson,
+} as const;

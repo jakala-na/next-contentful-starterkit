@@ -35,7 +35,7 @@ export const DuplexCtfClient: React.FC<{
   data: ResultOf<typeof ComponentDuplexFieldsFragment>;
 }> = (props) => {
   const { data: originalData } = props;
-  const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
+  const { data, addAttributes } = useComponentPreview(originalData);
   const { track } = useAnalytics();
   return (
     <TrackInView {...analyticsInViewEvent}>
