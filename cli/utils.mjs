@@ -51,17 +51,23 @@ export const fetchCTFContentTypes = async (spaceID, envID, token, contentTypesPl
   Generates component files using content type or custom input string.
   Updates mappings.ts with the new component.
  */
-export const scaffoldComponentFiles = (contentType, updateMappings) => {
+export const scaffoldComponentFiles = (contentType, updateMappings, includeUI) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
+  const templates = [path.join(__dirname, 'scaffolds', 'components')];
+
+  if (includeUI) {
+    templates.push(path.join(__dirname, 'scaffolds', 'ui'));
+  }
 
   // Scaffold component files.
   const config = {
     name: contentType,
     data: {
+      includeUI,
       ext: 'tsx',
     },
-    templates: [path.join(__dirname, 'scaffolds', 'components'), path.join(__dirname, 'scaffolds', 'ui')],
+    templates,
     createSubFolder: true,
     output: (fullPath, baseDir, baseName) => {
       let outputPath = '../components';

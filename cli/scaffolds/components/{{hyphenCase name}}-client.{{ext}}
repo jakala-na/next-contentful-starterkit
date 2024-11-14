@@ -3,15 +3,15 @@
 import { ResultOf } from 'gql.tada';
 
 import { {{pascalCase name}}Fragment } from '#/components/{{hyphenCase name}}/{{hyphenCase name}}';
-import { {{pascalCase name}} } from '#/components/ui/{{hyphenCase name}}';
-
+{{#if includeUI}}import { {{pascalCase name}} } from '#/components/ui/{{hyphenCase name}}';{{/if}}
 import { useComponentPreview } from '../hooks/use-component-preview';
 
 export const {{pascalCase name}}Client: React.FC<{
   data: ResultOf<typeof {{pascalCase name}}Fragment>;
 }> = (props) => {
   const { data: originalData } = props;
-  const { data, addAttributes } = useComponentPreview(originalData);
+  const { data{{#if includeUI}}, addAttributes{{/if}} } = useComponentPreview(originalData);
 
-  return <{{pascalCase name}} id={data.sys.id} addAttributes={addAttributes} />;
+{{#if includeUI}}  return <{{pascalCase name}} id={data.sys.id} addAttributes={addAttributes} />;{{/if~}}
+{{~#unless includeUI}}  return <div>{data.sys.id}</div>;{{/unless}}
 };
