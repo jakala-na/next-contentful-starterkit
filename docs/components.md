@@ -257,7 +257,7 @@ Remember why we bother to create a Client Component in the first place? To get R
 
 ```jsx
 const { data: originalData } = props;
-const { data, addAttributes } = useComponentPreview<typeof originalData>(originalData);
+const { data, addAttributes } = useComponentPreview(originalData);
 
 return <Accordion
   label={data.label}

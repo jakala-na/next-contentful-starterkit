@@ -88,11 +88,12 @@ export const scaffoldComponentFiles = (contentType, updateMappings, includeUI) =
       .then(() => {
         const mappingFilePath = path.join(__dirname, '../components/component-renderer/mappings.ts');
         const mappings = fs.readFileSync(mappingFilePath, 'utf-8').split('\n');
-        mappings.splice(
-          -2,
-          0,
-          `  ${hyphenToPascal(contentType)}: dynamic(() => import(\'#/components/${contentType}\').then((mod) => mod.${hyphenToPascal(contentType)})),`
+        // Add component import to the top of the file.
+        mappings.unshift(
+          `import { ${hyphenToPascal(contentType)} } from '#/components/${contentType}/${contentType}';`
         );
+        // Add the new component to the mappings file.
+        mappings.splice(-2, 0, `  ${hyphenToPascal(contentType)}: ${hyphenToPascal(contentType)},`);
         const updatedMappings = mappings.join('\n');
         fs.writeFileSync(mappingFilePath, updatedMappings, { encoding: 'utf-8' });
       })

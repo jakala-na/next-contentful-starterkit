@@ -38,7 +38,7 @@ export const ComponentHeroBannerFieldsFragment = graphql(
 );
 
 export type HeroBannerProps = {
-  data: FragmentOf<typeof ComponentHeroBannerFieldsFragment>;
+  data: FragmentOf<typeof ComponentHeroBannerFieldsFragment> & Record<string, any>;
 };
 
 export const HeroBannerCtf: React.FC<HeroBannerProps> = (props) => {

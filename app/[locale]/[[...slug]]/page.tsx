@@ -11,7 +11,7 @@ import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ct
 import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
 import { LanguageDataSetter } from '#/components/language-data-provider/language-data-provider';
 import { ComponentSEOFieldsFragment, getSeoMetadata } from '#/components/seo/seo-ctf';
-import { ComponentTopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
+import { TopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
 import { addContentSourceMaps } from '#/lib/contentSourceMaps';
 import { graphqlClient } from '#/lib/graphqlClient';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
@@ -29,12 +29,14 @@ const getPage = async (slug: string, locale: string, preview = false) => {
           items {
             topSectionCollection(limit: 10) {
               items {
+                __typename
                 ...ComponentHeroBannerFields
                 ...ComponentDuplexFields
               }
             }
             pageContent {
-              ...ComponentTopicBusinessInfo
+              __typename
+              ...TopicBusinessInfo
             }
             slugEn: slug(locale: "en-US")
             slugDe: slug(locale: "de-DE")
@@ -42,7 +44,7 @@ const getPage = async (slug: string, locale: string, preview = false) => {
         }
       }
     `,
-    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment, ComponentTopicBusinessInfoFieldsFragment]
+    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment, TopicBusinessInfoFieldsFragment]
   );
 
   const response = await graphqlClient(preview).query(pageQuery, {
