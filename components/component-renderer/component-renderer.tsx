@@ -12,6 +12,7 @@
 
 import { componentMap } from './mappings';
 import { ComponentProps } from 'react';
+import ErrorBoundary from '#/components/error-boundary/error-boundary';
 
 type ComponentMapType = typeof componentMap;
 type Data = ComponentProps<ComponentMapType[ComponentKey]>['data'];
@@ -41,7 +42,11 @@ export default function ComponentRenderer<T extends DataWithTypename | DataWithT
   if (isComponentKey(data.__typename)) {
     const Component = componentMap[data.__typename];
     // At this point we know data is one of the accepted props for the component
-    return <Component data={data as any} />;
+    return (
+      <ErrorBoundary>
+        <Component data={data as any} />
+      </ErrorBoundary>
+    );
   }
 
   // If we don't know the component, we don't render anything
