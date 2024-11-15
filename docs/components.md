@@ -79,7 +79,7 @@ You'll need to allow your component (Accordion) to be referenced from some field
 Lastly, you'll need to make sure your code knows about the new content model changes by pointing at the environment where you made changes using CONTENTFUL_ENVIRONMENT= variable, but also by exporting the GraphQL schema using:
 
 ```sh
-yarn generate:schema
+pnpm generate:schema
 ```
 
 More details about gql.tada usage can be found [here](./data-fetching.md).

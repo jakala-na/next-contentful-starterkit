@@ -22,7 +22,7 @@ The starterkit's cornerstone is our data-fetching solution and it's typesafety. 
 2. Install dependencies with:
 
 ```
-yarn install
+pnpm install
 ```
 
 3. Setup Contenful access
@@ -30,7 +30,7 @@ yarn install
 
 - You could get access to an existing space that follows Contentful Marketing Template content model, for example a colleague could share his space with you
 - You could create your own space with https://www.contentful.com/starter-templates/marketing-website/. Keep in mind, new templates today can only be deployed on brand new Contentful accounts, so you might have to create a new account with a new email to do that, but this shouldn't be a problem, as it's free.
-- You can start from scratch and use the contentful CLI and `/migrations/ctf-seed.json` to [import](https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/) our demo content into your own contentful instance: `yarn seed --environment-id=[ENVIRONMENT_ID] --space-id=[SPACE_ID]`
+- You can start from scratch and use the contentful CLI and `/migrations/ctf-seed.json` to [import](https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/) our demo content into your own contentful instance: `pnpm seed --environment-id=[ENVIRONMENT_ID] --space-id=[SPACE_ID]`
 
 You will want to get a CDA and CPA API keys by using this [guide](https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app)
 
@@ -51,7 +51,7 @@ CONTENTFUL_USE_CONTENT_SOURCE_MAPS=true
 5. Run Dev Server
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

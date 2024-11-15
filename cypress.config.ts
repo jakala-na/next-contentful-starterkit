@@ -4,9 +4,8 @@ import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
 import { devServer } from '@cypress/webpack-dev-server';
 import { defineConfig } from 'cypress';
 import { addMatchImageSnapshotPlugin } from 'cypress-image-snapshot/plugin';
-import * as Webpack from 'webpack';
 
-const webpackConfig = (cypressConfig: Cypress.PluginConfigOptions): Webpack.Configuration => {
+const webpackConfig = (cypressConfig: Cypress.PluginConfigOptions) => {
   return {
     resolve: {
       extensions: ['.js', '.ts', '.tsx'],

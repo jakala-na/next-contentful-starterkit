@@ -18,13 +18,13 @@ Uses Axe Core to do accessibility testing
 
 ## Installation and running locally
 
-After a project was cloned, make sure to install dependencies using `yarn`
+After a project was cloned, make sure to install dependencies using `pnpm`
 
-Next just run `yarn cypress open` to open the Cypress Web App
+Next just run `pnpm cypress open` to open the Cypress Web App
 
 ### CI execution or running headless
 
 You can run cypress without a GUI in command line with
-`yarn cypress run` - for e2e tests
+`pnpm cypress run` - for e2e tests
 
-`yarn cypress run --component` - for component tests
+`pnpm cypress run --component` - for component tests
