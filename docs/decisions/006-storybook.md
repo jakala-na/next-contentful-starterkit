@@ -10,7 +10,7 @@ After settling on a UI library, it was important to get the frontends excited ab
 It wasn't even a question, it would bring UI developers joy of developing components in isolation and let them be integrated in various scenarios as second pass.
 Storybook and a separate UI sandbox promotes cleanliness of component isolation/separation, where behavior is modeled externally from the UI.
 
-Along with adopting storybook, we had to decide where to host storybook builds. There were a few options, mainly Vercel (along with NextJS App) and Chromatic.com (hosting by Storybook creators)
+Along with adopting storybook, we had to decide where to host storybook builds. There were a few options, mainly Vercel (along with Next.js App) and Chromatic.com (hosting by Storybook creators)
 
 There were a few benefits to Chromatic over Vercel
 

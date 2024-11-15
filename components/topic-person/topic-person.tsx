@@ -3,9 +3,9 @@ import { FragmentOf, graphql, readFragment } from 'gql.tada';
 import { AssetFieldsFragment } from '../asset-ctf';
 import { TopicPersonClient } from './topic-person-client';
 
-export const ComponentTopicPersonFieldsFragment = graphql(
+export const TopicPersonFieldsFragment = graphql(
   `
-    fragment ComponentTopicPerson on TopicPerson {
+    fragment TopicPerson on TopicPerson {
       __typename
       sys {
         id
@@ -25,11 +25,11 @@ export const ComponentTopicPersonFieldsFragment = graphql(
   [AssetFieldsFragment]
 );
 
-export type TopicBusinessInfoProps = {
-  data: FragmentOf<typeof ComponentTopicPersonFieldsFragment>;
+export type TopicPersonProps = {
+  data: FragmentOf<typeof TopicPersonFieldsFragment & Record<string, any>>;
 };
 
-export const TopicPerson: React.FC<TopicBusinessInfoProps> = (props) => {
-  const data = readFragment(ComponentTopicPersonFieldsFragment, props.data);
+export const TopicPerson: React.FC<TopicPersonProps> = (props) => {
+  const data = readFragment(TopicPersonFieldsFragment, props.data);
   return <TopicPersonClient data={data} />;
 };

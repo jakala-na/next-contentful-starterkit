@@ -11,7 +11,7 @@ import { Button } from '../button';
 import { Image, ImageProps } from '../image';
 import { Link, LinkProps } from '../link';
 
-const layoutVariants = cva('md:flex px-5 max-w-6xl', {
+const layoutVariants = cva('max-w-6xl px-5 md:flex', {
   variants: {
     imageAlignment: {
       left: 'md:flex-row',
@@ -54,6 +54,7 @@ interface DuplexProps extends VariantProps<typeof layoutVariants>, VariantProps<
   cta?: LinkProps | null;
   colorPalette?: string | null;
   addAttributes?: (name: string) => object | null;
+  onClickAnalyticsEvent?: () => void;
 }
 
 export function Duplex(props: DuplexProps) {
@@ -66,6 +67,7 @@ export function Duplex(props: DuplexProps) {
     imageHeight,
     colorPalette,
     addAttributes = () => ({}), // Default to no-op.
+    onClickAnalyticsEvent,
   } = props;
   const colorConfig = getColorConfigFromPalette(colorPalette || '');
 
@@ -95,7 +97,14 @@ export function Duplex(props: DuplexProps) {
           )}
           {cta?.href && cta?.children && (
             <div className="mt-6">
-              <Button variant={colorConfig.buttonColor} {...addAttributes('ctaText')} asChild>
+              <Button
+                variant={colorConfig.buttonColor}
+                {...addAttributes('ctaText')}
+                asChild
+                onClick={() => {
+                  onClickAnalyticsEvent?.();
+                }}
+              >
                 <Link {...cta} />
               </Button>
             </div>

@@ -1,0 +1,13 @@
+export interface {{pascalCase name}}Props {
+  id: string;
+  addAttributes?: (name: string) => object | null;
+}
+
+export const {{pascalCase name}} = ({ id, addAttributes = () => ({}) }: {{pascalCase name}}Props) => {
+  return (
+    <div {...addAttributes('attributes')}>
+      <div>{{pascalCase name}}</div>
+      <div>{id}</div>
+    </div>
+  );
+};

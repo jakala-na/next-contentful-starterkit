@@ -8,6 +8,7 @@ import 'server-only';
 import { createClient, fetchExchange } from '@urql/core';
 import { persistedExchange } from '@urql/exchange-persisted';
 import memoize from 'lodash/memoize';
+import { mapExchange } from 'urql';
 
 const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENVIRONMENT}`;
 
@@ -26,6 +27,24 @@ const makeClient = (preview: boolean) => {
        */
       persistedExchange({
         preferGetForPersistedQueries: true,
+      }),
+      /**
+       * It map seem counter-intuitive, but exchanges are bi-directional, so mapExchange can both pass things to fetch,
+       * as well as receive errors back from fetch on it's way back.
+       * This exchange is meant to be before fetch!
+       *
+       * @see https://github.com/urql-graphql/urql/issues/225#issuecomment-482592203
+       */
+      mapExchange({
+        onError: (error) => {
+          // Filter out expected errors like PERSISTED_QUERY_NOT_FOUND, pass others to the server.
+          const errors = error.graphQLErrors.filter((error) => error.message != 'PersistedQueryNotFound');
+
+          if (errors.length > 0) {
+            // TODO: Add Sentry or similar error reporting.
+            console.error('GraphQL Errors:', JSON.stringify(errors, null, 2));
+          }
+        },
       }),
       fetchExchange,
     ],
