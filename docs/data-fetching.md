@@ -14,6 +14,7 @@ Static content, here defined as content that requires no user inputs and does no
 
 Let's say we're rendering the homepage, which consists of Header, Footer, SEO metadata, Page content, and top and bottom components. Some of the elements are shared between pages, like layout elements (header, footer), while others are page-specific. Components also come in hierarchies, for example:
 Page (entry)
+
 - Title
 - Components
   - HeroBanner (entry)
@@ -118,51 +119,50 @@ Notice how much knowledge our layout has now of various content types and units 
 Let's refactor our query to use fragments:
 
 ```tsx
-
-  const layoutQuery = graphql(`
-    fragment PageLinkFields on Page {
-      pageName
-      slug
+const layoutQuery = graphql(`
+  fragment PageLinkFields on Page {
+    pageName
+    slug
+  }
+  fragment MenuGroupFields on MenuGroup {
+    groupName
+    groupLink {
+      ...PageLinkFields
     }
-    fragment MenuGroupFields on MenuGroup {
-      groupName
-      groupLink {
+    featuredPagesCollection(limit: 10) {
+      items {
         ...PageLinkFields
       }
-      featuredPagesCollection(limit: 10) {
-        items {
-          ...PageLinkFields
-        }
-      }
     }
-    query Layout($locale: String, $preview: Boolean) {
-      navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
-        items {
-          menuItemsCollection {
-            items {
-              ...MenuGroupFields
-            }
-          }
-        }
-      }
-      footerMenuCollection(locale: $locale, preview: $preview, limit: 1) {
-        items {
-          instagramLink
-          twitterLink
-          linkedinLink
-          facebookLink
-          legalLinks {
+  }
+  query Layout($locale: String, $preview: Boolean) {
+    navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+      items {
+        menuItemsCollection {
+          items {
             ...MenuGroupFields
           }
-          menuItemsCollection {
-            items {
-              ...MenuGroupFields
-            }
+        }
+      }
+    }
+    footerMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+      items {
+        instagramLink
+        twitterLink
+        linkedinLink
+        facebookLink
+        legalLinks {
+          ...MenuGroupFields
+        }
+        menuItemsCollection {
+          items {
+            ...MenuGroupFields
           }
         }
       }
     }
-  `);
+  }
+`);
 ```
 
 Here we added 2 new fragments, one for displaying page fields needed to show a link, and another MenuGroupFields fragment for rendering a menu group with nested PageLinkFields fragment. This is much better.
@@ -207,6 +207,9 @@ Those plugins/extensions typically will load GraphQL config from any GraphQL Con
 - Go to definition
 
 If you need the plugin/extension to extract queries/fragments from more places, make sure to look at [.graphqlrc.yml](/.graphqlrc.yml) rules, as those define what files get scanned for GraphQL queries and fragments.
+
+[!WARNING]
+Keep in mind that if you're using VSCode or Cursor and you have issues with "Unknown fragment" errors, you'll want to downgrade GraphQL Language Feature Support extension to version 0.9.3 until this [issue](https://github.com/graphql/graphiql/issues/3620) is resolved.
 
 **gql.tada support**
 

@@ -1,13 +1,36 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "NODE_ENV"
+  ],
   "tasks": {
     "build": {
       "dependsOn": [
         "^build"
       ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ],
       "outputs": [
         ".next/**",
         "!.next/cache/**"
+      ]
+    },
+    "marketing#build": {
+      "env": [
+        "CONTENTFUL_PREVIEW_API",
+        "CONTENTFUL_DELIVERY_API",
+        "CONTENTFUL_SPACE",
+        "CONTENTFUL_ENVIRONMENT",
+        "CONTENTFUL_USE_CONTENT_SOURCE_MAPS",
+        "CONTENTFUL_PREVIEW_SECRET"
+      ]
+    },
+    "build-storybook": {
+      "outputs": [
+        "storybook-static/**"
       ]
     },
     "check-types": {
@@ -18,6 +41,7 @@
     "dev": {
       "persistent": true,
       "cache": false
-    }
+    },
+    "lint": {}
   }
 }

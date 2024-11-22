@@ -1,3 +1,9 @@
-schema: 'gql/schema.graphql'
-documents:
-  ['app/**/*.{graphql,js,ts,jsx,tsx}', 'components/**/*.{graphql,js,ts,jsx,tsx}', 'lib/**/*.{graphql,js,ts,jsx,tsx}']
+projects:
+  marketing:
+    schema: './apps/marketing/gql/schema.graphql'
+    documents:
+      [
+        'apps/marketing/app/**/*.{graphql,js,ts,jsx,tsx}',
+        'apps/marketing/components/**/*.{graphql,js,ts,jsx,tsx}',
+        'apps/marketing/lib/**/*.{graphql,js,ts,jsx,tsx}',
+      ]

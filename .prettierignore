@@ -1,3 +1,3 @@
 # Ignore gql
-gql/*
+apps/*/gql/*
 
