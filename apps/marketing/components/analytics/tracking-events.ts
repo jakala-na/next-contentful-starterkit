@@ -1,19 +1,19 @@
 interface EventsMap {
-  heroBannerViewed: heroBannerViewedProps;
-  duplexViewed: duplexViewedProps;
-  duplexClicked: duplexClickedProps;
+  heroBannerViewed: HeroBannerViewedProps;
+  duplexViewed: DuplexViewedProps;
+  duplexClicked: DuplexClickedProps;
 }
 
-interface heroBannerViewedProps {
+interface HeroBannerViewedProps {
   category: string;
 }
 
-interface duplexViewedProps {
+interface DuplexViewedProps {
   category: string;
   type: string;
 }
 
-interface duplexClickedProps extends duplexViewedProps {}
+type DuplexClickedProps = DuplexViewedProps;
 
 export type EventName = keyof EventsMap;
 export type EventData<T extends keyof EventsMap> = EventsMap[T];

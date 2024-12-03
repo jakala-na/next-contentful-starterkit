@@ -9,8 +9,6 @@ import { Image } from '../image';
 import type { LinkProps } from '../link';
 import { Link } from '../link';
 
-const Page = () => <>{'Page'}</>;
-
 const layoutVariants = cva('max-w-6xl px-5 md:flex', {
   variants: {
     imageAlignment: {
@@ -69,7 +67,7 @@ export function Duplex(props: DuplexProps) {
     addAttributes = () => ({}), // Default to no-op.
     onClickAnalyticsEvent,
   } = props;
-  const colorConfig = getColorConfigFromPalette(colorPalette || '');
+  const colorConfig = getColorConfigFromPalette(colorPalette ?? '');
 
   return (
     <div className="flex justify-center py-12" style={{ backgroundColor: colorConfig.backgroundColor }}>

@@ -10,13 +10,11 @@ import { persistedExchange } from '@urql/exchange-persisted';
 import memoize from 'lodash/memoize';
 import { mapExchange } from 'urql';
 
-const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENVIRONMENT}`;
+const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE ?? '<missing space>'}/environments/${process.env.CONTENTFUL_ENVIRONMENT ?? '<missing environment>'}`;
 
 const makeClient = (preview: boolean) => {
   return createClient({
-    url:
-      graphqlEndpoint +
-      `?access_token=${preview ? process.env.CONTENTFUL_PREVIEW_API : process.env.CONTENTFUL_DELIVERY_API}`,
+    url: `${graphqlEndpoint}?access_token=${(preview ? process.env.CONTENTFUL_PREVIEW_API : process.env.CONTENTFUL_DELIVERY_API) ?? '<missing token>'}`,
     exchanges: [
       /**
        * Enable Automated Persisted Queries to reduce the size of the request.
@@ -38,10 +36,11 @@ const makeClient = (preview: boolean) => {
       mapExchange({
         onError: (error) => {
           // Filter out expected errors like PERSISTED_QUERY_NOT_FOUND, pass others to the server.
-          const errors = error.graphQLErrors.filter((error) => error.message != 'PersistedQueryNotFound');
+          const errors = error.graphQLErrors.filter((err) => err.message !== 'PersistedQueryNotFound');
 
           if (errors.length > 0) {
             // TODO: Add Sentry or similar error reporting.
+            // eslint-disable-next-line no-console -- logging errors to node.js console
             console.error('GraphQL Errors:', JSON.stringify(errors, null, 2));
           }
         },

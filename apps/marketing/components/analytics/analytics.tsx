@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren, useEffect } from 'react';
+import { type PropsWithChildren, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 import Analytics from 'analytics';
@@ -15,7 +15,7 @@ export function AnalyticsComponent({ children }: PropsWithChildren) {
   const pathname = usePathname();
 
   useEffect(() => {
-    analyticsInstance.page();
+    void analyticsInstance.page();
   }, [pathname]);
 
   return <AnalyticsProvider instance={analyticsInstance}>{children}</AnalyticsProvider>;

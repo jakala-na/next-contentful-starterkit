@@ -1,6 +1,7 @@
 import { default as NextLink } from 'next/link';
 
-import { FragmentOf, graphql, readFragment } from 'gql.tada';
+import { type FragmentOf, graphql, readFragment } from 'gql.tada';
+import { type ReactNode } from 'react';
 
 export const PageLinkFieldsFragment = graphql(`
   fragment PageLinkFields on Page {
@@ -21,25 +22,24 @@ export const PageLinkFieldsFragment = graphql(`
   }
 `);
 
-export interface PageLinkProps {
-  data: FragmentOf<typeof PageLinkFieldsFragment>;
-  children?: React.ReactNode;
-  [key: string]: any;
-}
-
-export const getPageLinkProps = ({ data: fragmentData, children, ...props }: PageLinkProps) => {
+export const getPageLinkProps = (fragmentData: FragmentOf<typeof PageLinkFieldsFragment>, children?: ReactNode) => {
   const data = readFragment(PageLinkFieldsFragment, fragmentData);
 
+  const href = data.slug ? `/${data.slug}` : '';
+
   return {
-    href: `/${data.slug}`,
-    as: `/${data.slug}`,
-    children: children ?? data.pageName,
-    ...props,
+    id: data.sys.id,
+    href,
+    as: href,
+    children: children ?? data.pageName ?? '',
   };
 };
 
-export const getPageLinkChildProps = (props: PageLinkProps) => {
-  const linkProps = getPageLinkProps(props);
+export const getPageLinkChildProps = (
+  fragmentData: FragmentOf<typeof PageLinkFieldsFragment>,
+  children?: ReactNode
+) => {
+  const linkProps = getPageLinkProps(fragmentData, children);
 
   return {
     ...linkProps,
@@ -47,7 +47,3 @@ export const getPageLinkChildProps = (props: PageLinkProps) => {
     asChild: true,
   };
 };
-
-const Page = () => <>{'Page'}</>;
-
-export default Page;

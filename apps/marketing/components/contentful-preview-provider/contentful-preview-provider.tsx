@@ -2,19 +2,21 @@
 
 import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 
-const ContentfulPreviewProvider = ({
+function ContentfulPreviewProvider({
+  locale,
   isDraftMode,
   isContentSourceMapsEnabled,
   children,
 }: {
+  locale: string;
   isDraftMode: boolean;
   isContentSourceMapsEnabled: boolean;
-  children: any;
-}) => {
+  children: React.ReactNode;
+}) {
   const previewActive = isDraftMode;
   return (
     <ContentfulLivePreviewProvider
-      locale={'en-US'}
+      locale={locale}
       enableInspectorMode={previewActive}
       enableLiveUpdates={previewActive}
       experimental={{ ignoreManuallyTaggedElements: isContentSourceMapsEnabled }}
@@ -22,6 +24,6 @@ const ContentfulPreviewProvider = ({
       {children}
     </ContentfulLivePreviewProvider>
   );
-};
+}
 
 export default ContentfulPreviewProvider;

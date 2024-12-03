@@ -1,6 +1,7 @@
+/* eslint-disable react/no-unstable-nested-components -- this is a sample nav, unstable nested components are fine */
 import Link from 'next/link';
 
-import { FragmentOf, graphql, readFragment } from 'gql.tada';
+import { type FragmentOf, graphql, readFragment } from 'gql.tada';
 
 import { LanguageSelector } from '#/components/language-selector';
 import { Button } from '@repo/ui/components/button';
@@ -23,7 +24,7 @@ import { cn } from '@repo/ui/lib/utils';
 import { getI18n } from '#/locales/server';
 
 import { Icons } from '../icons';
-import { PageLinkFieldsFragment } from '../page';
+import { PageLinkFieldsFragment, getPageLinkProps } from '../page';
 
 const MenuGroupFeaturedPagesFragment = graphql(
   `
@@ -61,11 +62,11 @@ export const NavigationFieldsFragment = graphql(
   [PageLinkFieldsFragment, MenuGroupFeaturedPagesFragment]
 );
 
-export type NavigationProps = {
+export interface NavigationProps {
   data: FragmentOf<typeof NavigationFieldsFragment>;
-};
+}
 
-export const Navigation = async (props: NavigationProps) => {
+export async function Navigation(props: NavigationProps) {
   const data = readFragment(NavigationFieldsFragment, props.data);
   const items = data.items[0]?.menuItemsCollection?.items;
   const t = await getI18n();
@@ -74,134 +75,129 @@ export const Navigation = async (props: NavigationProps) => {
   // https://github.com/dotansimha/graphql-code-generator/discussions/8554#discussioncomment-4131776
   const getGroupLinks = (group: FragmentOf<typeof MenuGroupFeaturedPagesFragment>) => {
     const collection = readFragment(MenuGroupFeaturedPagesFragment, group);
-    return collection?.items?.map((menuItem) => {
-      // const page = getFragmentData(PageLinkFieldsFragment, menuItem);
-
-      // const page = getFragmentData(PageLinkFieldsFragment, menuItem);
+    return collection.items.map((menuItem) => {
       if (!menuItem) {
         return null;
       }
+      const linkProps = getPageLinkProps(menuItem);
 
-      const page = readFragment(PageLinkFieldsFragment, menuItem);
-
-      if (!page.slug) {
+      if (!linkProps.children) {
         return null;
       }
 
-      return {
-        id: page.sys.id,
-        slug: page.slug,
-        name: page.pageName,
-      };
+      return getPageLinkProps(menuItem);
     });
   };
 
-  const MainMenuDesktop = () => (
-    <div className="hidden md:flex">
-      {items && items.length > 0 && (
-        <NavigationMenu>
-          <NavigationMenuList>
-            {items?.map((menuItem) => {
-              const groupLinks = !menuItem?.link && menuItem?.children && getGroupLinks(menuItem.children);
+  function MainMenuDesktop() {
+    return (
+      <div className="hidden md:flex">
+        {items && items.length > 0 ? (
+          <NavigationMenu>
+            <NavigationMenuList>
+              {items.map((menuItem) => {
+                const groupLinks = !menuItem?.link && menuItem?.children && getGroupLinks(menuItem.children);
 
-              return (
-                menuItem &&
-                menuItem.groupName && (
-                  <NavigationMenuItem key={menuItem.sys.id}>
-                    {menuItem.link ? (
-                      <Link
-                        href={`/${readFragment(PageLinkFieldsFragment, menuItem.link).slug}`}
-                        className={cn('px-4 py-2 text-sm')}
-                      >
-                        {menuItem.groupName}
-                      </Link>
-                    ) : (
-                      <NavigationMenuTrigger>{menuItem.groupName}</NavigationMenuTrigger>
-                    )}
-                    {groupLinks && (
-                      <NavigationMenuContent>
-                        {groupLinks.map((subMenuItem) => (
-                          <div key={subMenuItem?.id} className="block px-4 py-2 text-sm">
-                            {subMenuItem?.slug && <Link href={subMenuItem.slug}>{subMenuItem?.name}</Link>}
-                          </div>
-                        ))}
-                      </NavigationMenuContent>
-                    )}
-                  </NavigationMenuItem>
-                )
-              );
-            })}
-          </NavigationMenuList>
-        </NavigationMenu>
-      )}
-    </div>
-  );
+                return (
+                  menuItem?.groupName && (
+                    <NavigationMenuItem key={menuItem.sys.id}>
+                      {menuItem.link ? (
+                        <Link {...getPageLinkProps(menuItem.link)} className={cn('px-4 py-2 text-sm')}>
+                          {menuItem.groupName}
+                        </Link>
+                      ) : (
+                        <NavigationMenuTrigger>{menuItem.groupName}</NavigationMenuTrigger>
+                      )}
+                      {groupLinks ? (
+                        <NavigationMenuContent>
+                          {groupLinks
+                            .filter((subMenuItem) => subMenuItem !== null)
+                            .map((subMenuItem) => (
+                              <div key={subMenuItem.id} className="block px-4 py-2 text-sm">
+                                <Link {...subMenuItem} />
+                              </div>
+                            ))}
+                        </NavigationMenuContent>
+                      ) : null}
+                    </NavigationMenuItem>
+                  )
+                );
+              })}
+            </NavigationMenuList>
+          </NavigationMenu>
+        ) : null}
+      </div>
+    );
+  }
 
-  const MainMenuMobile = () => (
-    <div>
-      {items && items.length > 0 && (
-        <nav>
-          <ul>
-            {items?.map((menuItem) => {
-              const groupLinks = !menuItem?.link && menuItem?.children && getGroupLinks(menuItem.children);
+  function MainMenuMobile() {
+    return (
+      <div>
+        {items && items.length > 0 ? (
+          <nav>
+            <ul>
+              {items.map((menuItem) => {
+                const groupLinks = !menuItem?.link && menuItem?.children && getGroupLinks(menuItem.children);
 
-              return (
-                menuItem &&
-                menuItem.groupName && (
-                  <li key={menuItem.sys.id} className="py-1.5">
-                    {menuItem.link ? (
-                      <Link href={`/${readFragment(PageLinkFieldsFragment, menuItem.link).slug}`}>
-                        {menuItem.groupName}
-                      </Link>
-                    ) : (
-                      <span>{menuItem.groupName}</span>
-                    )}
-                    {groupLinks && (
-                      <ul className="pl-5">
-                        {groupLinks.map((subMenuItem) => (
-                          <li key={subMenuItem?.id}>
-                            {subMenuItem?.slug && <Link href={subMenuItem.slug}>{subMenuItem?.name}</Link>}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                )
-              );
-            })}
-          </ul>
-        </nav>
-      )}
-    </div>
-  );
+                return (
+                  menuItem?.groupName && (
+                    <li key={menuItem.sys.id} className="py-1.5">
+                      {menuItem.link ? (
+                        <Link {...getPageLinkProps(menuItem.link)}>{menuItem.groupName}</Link>
+                      ) : (
+                        <span>{menuItem.groupName}</span>
+                      )}
+                      {groupLinks ? (
+                        <ul className="pl-5">
+                          {groupLinks
+                            .filter((subMenuItem) => subMenuItem !== null)
+                            .map((subMenuItem) => (
+                              <li key={subMenuItem.id}>
+                                <Link {...subMenuItem} />
+                              </li>
+                            ))}
+                        </ul>
+                      ) : null}
+                    </li>
+                  )
+                );
+              })}
+            </ul>
+          </nav>
+        ) : null}
+      </div>
+    );
+  }
 
-  const Search = () => (
-    <div className="flex items-center rounded-md p-2">
-      <svg
-        className="size-5"
-        fill="none"
-        height="24"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-        width="24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="11" cy="11" r="8" />
-        <path d="m21 21-4.3-4.3" />
-      </svg>
-      <input className="ml-2 w-full p-1.5 text-sm" placeholder={t('search')} type="search" />
-    </div>
-  );
+  function Search() {
+    return (
+      <div className="flex items-center rounded-md p-2">
+        <svg
+          className="size-5"
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input className="ml-2 w-full p-1.5 text-sm" placeholder={t('search')} type="search" />
+      </div>
+    );
+  }
 
   return (
     <header className="flex items-center justify-between bg-white px-6 py-4">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
         <div className="flex items-center justify-center sm:justify-start">
           <Link href="/">
-            <Icons.logo className="size-8 md:mr-10" />
+            <Icons.Logo className="size-8 md:mr-10" />
           </Link>
           <MainMenuDesktop />
         </div>
@@ -274,4 +270,4 @@ export const Navigation = async (props: NavigationProps) => {
       </div>
     </header>
   );
-};
+}

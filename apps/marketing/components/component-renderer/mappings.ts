@@ -6,6 +6,6 @@ import { TopicPerson } from '#/components/topic-person/topic-person';
 export const componentMap = {
   ComponentHeroBanner: HeroBannerCtf,
   ComponentDuplex: DuplexCtf,
-  TopicBusinessInfo: TopicBusinessInfo,
+  TopicBusinessInfo,
   TopicPersons: TopicPerson,
 } as const;

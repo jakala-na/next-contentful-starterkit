@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { Link } from '../link';
 
-import { Image, ImageProps } from '@repo/ui/components/image';
+import { Image, type ImageProps } from '@repo/ui/components/image';
 
 export interface TopicBusinessInfoProps {
   name?: string | null;
@@ -13,7 +13,7 @@ export interface TopicBusinessInfoProps {
   addAttributes?: (name: string) => object | null;
 }
 
-export const TopicPerson = ({
+export function TopicPerson({
   name,
   bio,
   avatar,
@@ -21,10 +21,10 @@ export const TopicPerson = ({
   location,
   cardStyle,
   addAttributes = () => ({}),
-}: TopicBusinessInfoProps) => {
+}: TopicBusinessInfoProps) {
   return (
     <div className="my-12 flex flex-col items-center rounded-xl bg-secondaryDark px-10 py-6 text-white md:flex-row md:gap-10">
-      {avatar && (
+      {avatar ? (
         <div className="flex shrink-0 flex-col items-center">
           <div className="shrink-0 overflow-hidden rounded-xl shadow-lg">
             <Image {...addAttributes('image')} {...avatar} alt={avatar.alt} />
@@ -35,18 +35,18 @@ export const TopicPerson = ({
             </div>
           )}
         </div>
-      )}
+      ) : null}
 
       <div className="py-6">
-        {name && <h2 className="text-3xl">{name}</h2>}
-        {bio && <div className="pt-6">{bio}</div>}
-        {website && (
+        {name ? <h2 className="text-3xl">{name}</h2> : null}
+        {bio ? <div className="pt-6">{bio}</div> : null}
+        {website ? (
           <div className="pt-6">
             <Link href={website}>{website}</Link>
           </div>
-        )}
-        {location && <div className="pt-6">{location}</div>}
+        ) : null}
+        {location ? <div className="pt-6">{location}</div> : null}
       </div>
     </div>
   );
-};
+}

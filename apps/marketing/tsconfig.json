@@ -14,6 +14,7 @@
     "jsx": "preserve",
     "incremental": true,
     "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
       "#/*": ["./*"],

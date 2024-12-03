@@ -1,7 +1,7 @@
 import { cookies, draftMode } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import getPageSlug from '#/lib/getPageSlug';
+import getPageSlug from '#/lib/get-page-slug';
 
 export async function GET(request: Request) {
   // Parse query string parameters
@@ -20,7 +20,7 @@ export async function GET(request: Request) {
   const page = await getPageSlug(slug, locale, true);
 
   // If the slug doesn't exist prevent draft mode from being enabled
-  if (!page || !page.slug) {
+  if (!page?.slug) {
     return new Response('Invalid slug', { status: 401 });
   }
 
@@ -35,7 +35,7 @@ export async function GET(request: Request) {
     const cookie = cookieStore.get('__prerender_bypass');
     cookies().set({
       name: '__prerender_bypass',
-      value: cookie?.value || '',
+      value: cookie?.value ?? '',
       httpOnly: true,
       path: '/',
       secure: true,
@@ -45,5 +45,5 @@ export async function GET(request: Request) {
 
   // Redirect to the path from the fetched post
   // We don't redirect to searchParams.slug as that might lead to open redirect vulnerabilities
-  redirect('/' + page.slug);
+  redirect(`/${page.slug}`);
 }

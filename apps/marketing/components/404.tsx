@@ -11,7 +11,7 @@ import { I18nProviderClient, useScopedI18n } from '#/locales/client';
 export function PageNotFound() {
   const params = useParams();
   return (
-    <I18nProviderClient locale={(params?.locale as string | undefined) || 'en'}>
+    <I18nProviderClient locale={params.locale as string}>
       <PageNotFoundInternal />
     </I18nProviderClient>
   );

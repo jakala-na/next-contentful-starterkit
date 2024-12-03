@@ -7,6 +7,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowImportingTsExtensions": true,
+    "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "inlineSources": false,
     "isolatedModules": true,
@@ -19,5 +20,7 @@
     "strict": true,
     "strictNullChecks": true
   },
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

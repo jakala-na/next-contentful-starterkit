@@ -1,17 +1,17 @@
 'use client';
 
-import { ResultOf } from 'gql.tada';
+import { type ResultOf } from 'gql.tada';
 import { useAnalytics } from 'use-analytics';
 
 import { createAnalyticsEvent } from '#/components/analytics/tracking-events';
-import { TrackInView } from '#/components/analytics/trackInView';
+import { TrackInView } from '#/components/analytics/track-in-view';
 import { RichTextCtf } from '#/components/rich-text-ctf';
 
 import { useComponentPreview } from '../hooks/use-component-preview';
 import { getImageChildProps } from '../image-ctf';
 import { getPageLinkChildProps } from '../page';
 import { Duplex } from '@repo/ui/components/duplex';
-import { ComponentDuplexFieldsFragment } from './duplex-ctf';
+import { type ComponentDuplexFieldsFragment } from './duplex-ctf';
 
 // We can create analytics event typed data on top level
 // using createAnalyticsEvent helper.
@@ -31,9 +31,7 @@ const { eventName: analyticsClickEventName, eventData: analyticsClickEventData }
   }
 );
 
-export const DuplexCtfClient: React.FC<{
-  data: ResultOf<typeof ComponentDuplexFieldsFragment>;
-}> = (props) => {
+export function DuplexCtfClient(props: { data: ResultOf<typeof ComponentDuplexFieldsFragment> }) {
   const { data: originalData } = props;
   const { data, addAttributes } = useComponentPreview(originalData);
   const { track } = useAnalytics();
@@ -42,33 +40,28 @@ export const DuplexCtfClient: React.FC<{
       <Duplex
         headline={data.headline}
         bodyText={
-          data.bodyText && (
+          data.bodyText ? (
             <div {...addAttributes('bodyText')}>
               <RichTextCtf {...data.bodyText} />
             </div>
-          )
+          ) : null
         }
         image={
-          data.image &&
-          getImageChildProps({
-            data: data.image,
-            priority: true,
-            sizes: '100vw',
-          })
+          data.image
+            ? getImageChildProps({
+                data: data.image,
+                priority: true,
+                sizes: '100vw',
+              })
+            : null
         }
         imageAlignment={data.containerLayout ? 'left' : 'right'}
         imageHeight={data.imageStyle ? 'fixed' : 'full'}
         addAttributes={addAttributes}
-        cta={
-          data.targetPage &&
-          getPageLinkChildProps({
-            data: data.targetPage,
-            children: data.ctaText,
-          })
-        }
+        cta={data.targetPage ? getPageLinkChildProps(data.targetPage, data.ctaText) : null}
         colorPalette={data.colorPalette}
-        onClickAnalyticsEvent={() => track(analyticsClickEventName, analyticsClickEventData)}
+        onClickAnalyticsEvent={() => void track(analyticsClickEventName, analyticsClickEventData)}
       />
     </TrackInView>
   );
-};
+}

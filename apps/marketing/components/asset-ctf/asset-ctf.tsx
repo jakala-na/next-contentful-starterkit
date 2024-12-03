@@ -1,5 +1,6 @@
-import { FragmentOf, graphql, readFragment } from 'gql.tada';
+import { type FragmentOf, graphql, readFragment } from 'gql.tada';
 
+// eslint-disable-next-line import/no-cycle -- assets and images are so intertwined, this will need to be refactored
 import { ImageCtf } from '#/components/image-ctf';
 
 export const AssetFieldsFragment = graphql(`
@@ -17,11 +18,11 @@ export const AssetFieldsFragment = graphql(`
   }
 `);
 
-export type AssetCtfProps = {
+export interface AssetCtfProps {
   data: FragmentOf<typeof AssetFieldsFragment>;
-};
+}
 
-export const AssetCtf = (props: AssetCtfProps) => {
+export function AssetCtf(props: AssetCtfProps) {
   const data = readFragment(AssetFieldsFragment, props.data);
 
   const { url, contentType } = data;
@@ -41,4 +42,4 @@ export const AssetCtf = (props: AssetCtfProps) => {
   // TODO: Handle other file types.
 
   return null;
-};
+}

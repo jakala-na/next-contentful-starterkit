@@ -1,6 +1,6 @@
 import { graphql } from 'gql.tada';
 
-import { graphqlClient } from '#/lib/graphqlClient';
+import { graphqlClient } from '#/lib/graphql-client';
 
 const getPageSlug = async (slug: string, locale: string, preview = false) => {
   const pageSlugQuery = graphql(`
@@ -19,7 +19,7 @@ const getPageSlug = async (slug: string, locale: string, preview = false) => {
       preview,
       slug,
     })
-  ).data?.pageCollection?.items?.[0];
+  ).data?.pageCollection?.items[0];
 };
 
 export default getPageSlug;

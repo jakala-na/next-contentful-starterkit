@@ -1,4 +1,4 @@
-import { FragmentOf, graphql, readFragment } from 'gql.tada';
+import { type FragmentOf, graphql, readFragment } from 'gql.tada';
 
 import { AssetFieldsFragment } from '../asset-ctf';
 import { PageLinkFieldsFragment } from '../page';
@@ -37,12 +37,11 @@ export const ComponentHeroBannerFieldsFragment = graphql(
   [AssetFieldsFragment, PageLinkFieldsFragment]
 );
 
-export type HeroBannerProps = {
-  data: FragmentOf<typeof ComponentHeroBannerFieldsFragment> & Record<string, any>;
-};
+export interface HeroBannerProps {
+  data: FragmentOf<typeof ComponentHeroBannerFieldsFragment>;
+}
 
-export const HeroBannerCtf: React.FC<HeroBannerProps> = (props) => {
+export function HeroBannerCtf(props: HeroBannerProps) {
   const data = readFragment(ComponentHeroBannerFieldsFragment, props.data);
-
   return <HeroBannerCtfClient data={data} />;
-};
+}

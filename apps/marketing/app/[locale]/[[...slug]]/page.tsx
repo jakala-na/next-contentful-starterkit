@@ -13,8 +13,8 @@ import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/
 import { LanguageDataSetter } from '#/components/language-data-provider/language-data-provider';
 import { ComponentSEOFieldsFragment, getSeoMetadata } from '#/components/seo/seo-ctf';
 import { TopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
-import { addContentSourceMaps } from '#/lib/contentSourceMaps';
-import { graphqlClient } from '#/lib/graphqlClient';
+import { addContentSourceMaps } from '#/lib/content-source-maps';
+import { graphqlClient } from '#/lib/graphql-client';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 import { getStaticParams } from '#/locales/server';
 
@@ -31,12 +31,22 @@ const getPage = async (slug: string, locale: string, preview = false) => {
             topSectionCollection(limit: 10) {
               items {
                 __typename
+                ... on Entry {
+                  sys {
+                    id
+                  }
+                }
                 ...ComponentHeroBannerFields
                 ...ComponentDuplexFields
               }
             }
             pageContent {
               __typename
+              ... on Entry {
+                sys {
+                  id
+                }
+              }
               ...TopicBusinessInfo
             }
             slugEn: slug(locale: "en-US")
@@ -80,7 +90,7 @@ const getPageSlugs = async (locale: string) => {
       .filter((page) => page?.slug)
       .map((page) => ({
         slug: page?.slug === 'home' ? '/' : page?.slug,
-      })) || []
+      })) ?? []
   );
 };
 
@@ -119,8 +129,8 @@ const getPageMetadata = async (slug: string, locale: string, preview = false): P
     // TODO: Extract this into i18n fragment and helper.
     alternates: {
       languages: {
-        en: `/en/${pageMetadata.slugEn === 'home' ? '' : pageMetadata.slugEn}`,
-        de: `/de/${pageMetadata.slugDe === 'home' ? '' : pageMetadata.slugDe}`,
+        en: `/en/${(pageMetadata.slugEn ?? 'home') === 'home' ? '' : pageMetadata.slugEn ?? ''}`,
+        de: `/de/${(pageMetadata.slugDe ?? 'home') === 'home' ? '' : pageMetadata.slugDe ?? ''}`,
       },
     },
   };
@@ -129,7 +139,7 @@ const getPageMetadata = async (slug: string, locale: string, preview = false): P
 export default async function LandingPage({ params }: PageProps) {
   const { locale } = params;
   setStaticParamsLocale(locale);
-  const slug = params?.slug?.join('/') ?? 'home';
+  const slug = params.slug?.join('/') ?? 'home';
 
   const { isEnabled: isDraftMode } = draftMode();
 
@@ -159,14 +169,15 @@ export default async function LandingPage({ params }: PageProps) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = params;
-  const slug = params?.slug?.join('/') ?? 'home';
+  const slug = params.slug?.join('/') ?? 'home';
   const { isEnabled: isDraftMode } = draftMode();
   return getPageMetadata(slug, getLocaleFromPath(locale), isDraftMode);
 }
 
 export async function generateStaticParams() {
-  const params = getStaticParams();
-  const returnData: { slug?: string[]; locale: string }[] = [];
+  // Teach Typescript what our locale segment name is.
+  const params = getStaticParams() as { locale: string }[];
+  const returnData: PageProps['params'][] = [];
   for await (const locale of params) {
     const slugs = (await getPageSlugs(getLocaleFromPath(locale.locale))).map((page) => ({
       slug: page.slug?.split('/'),

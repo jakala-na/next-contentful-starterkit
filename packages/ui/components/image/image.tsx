@@ -4,11 +4,12 @@ export interface ImageProps {
   src: string;
   alt: string;
   asChild?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- allow any additional props
   [key: string]: any;
 }
 
-export const Image = ({ asChild = false, ...props }: ImageProps) => {
+export function Image({ asChild = false, ...props }: ImageProps) {
   const Component = asChild ? Slot : 'img';
 
   return <Component {...props} />;
-};
+}

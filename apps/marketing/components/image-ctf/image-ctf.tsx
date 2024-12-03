@@ -1,9 +1,10 @@
 import React from 'react';
-import { ImageProps, default as NextImage } from 'next/image';
+import { type ImageProps, default as NextImage } from 'next/image';
 
 import { readFragment } from 'gql.tada';
 
-import { AssetCtfProps, AssetFieldsFragment } from '../asset-ctf';
+// eslint-disable-next-line import/no-cycle -- assets and images are so intertwined, this will need to be refactored
+import { type AssetCtfProps, AssetFieldsFragment } from '../asset-ctf';
 
 // Omit src and alt from ImageProps because we're validating them at runtime.
 // Apparently typescript doesn't like that ImageProps has src and alt as required but we're spreading props after we map them from Contentful fields,
@@ -16,10 +17,10 @@ export const getImageProps = ({ data: fragmentData, ...props }: ImageCtfProps) =
     return null;
   }
   return {
-    src: data?.url,
-    alt: data?.description || '',
-    width: data.width || undefined,
-    height: data.height || undefined,
+    src: data.url,
+    alt: data.description ?? '',
+    width: data.width ?? undefined,
+    height: data.height ?? undefined,
     ...props,
   };
 };
@@ -38,7 +39,7 @@ export const getImageChildProps = (props: ImageCtfProps) => {
   };
 };
 
-export const ImageCtf = (props: ImageCtfProps) => {
+export function ImageCtf(props: ImageCtfProps) {
   const imageProps = getImageProps(props);
 
   if (!imageProps) {
@@ -46,4 +47,4 @@ export const ImageCtf = (props: ImageCtfProps) => {
   }
 
   return <NextImage {...imageProps} />;
-};
+}

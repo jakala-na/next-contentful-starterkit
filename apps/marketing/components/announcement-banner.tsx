@@ -27,7 +27,10 @@ export function AnnouncementBannerComponent() {
         as a template
       </p>
       <button
-        onClick={() => setIsVisible(false)}
+        type="button"
+        onClick={() => {
+          setIsVisible(false);
+        }}
         className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1 transition-colors hover:bg-primary-foreground/10"
         aria-label="Close announcement"
       >

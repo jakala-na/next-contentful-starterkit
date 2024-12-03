@@ -28,6 +28,7 @@ module.exports = {
   plugins: [
     // WARNING: Convert errors to warnings for incremental migration
     'only-warn',
+    'jsx-expressions',
   ],
   parserOptions: {
     project,
@@ -53,5 +54,9 @@ module.exports = {
   // add rules configurations here
   rules: {
     'import/no-default-export': 'off',
+    'import/order': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    'react/jsx-no-leaked-render': 'off',
+    'jsx-expressions/strict-logical-expressions': 'error',
   },
 };

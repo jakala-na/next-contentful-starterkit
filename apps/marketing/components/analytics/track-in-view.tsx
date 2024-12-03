@@ -3,7 +3,7 @@
 import { InView } from 'react-intersection-observer';
 import { useAnalytics } from 'use-analytics';
 
-import { EventData, EventName } from './tracking-events';
+import { type EventData, type EventName } from './tracking-events';
 
 interface TrackInViewProps {
   eventName: EventName;
@@ -11,16 +11,16 @@ interface TrackInViewProps {
   children: React.ReactNode;
 }
 
-export const TrackInView = ({ eventName, eventData, children }: TrackInViewProps) => {
+export function TrackInView({ eventName, eventData, children }: TrackInViewProps) {
   const { track } = useAnalytics();
   const onComponentIntersection = (inView: boolean) => {
     if (inView) {
-      track(eventName, eventData);
+      void track(eventName, eventData);
     }
   };
   return (
-    <InView triggerOnce threshold={1} onChange={(inView) => onComponentIntersection(inView)}>
+    <InView triggerOnce threshold={1} onChange={onComponentIntersection}>
       {children}
     </InView>
   );
-};
+}

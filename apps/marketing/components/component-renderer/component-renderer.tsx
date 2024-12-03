@@ -11,15 +11,27 @@
  */
 
 import { componentMap } from './mappings';
-import { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
+
+interface BaseData {
+  __typename: string;
+  sys?: {
+    id: string;
+  };
+}
 
 type ComponentMapType = typeof componentMap;
 type Data = ComponentProps<ComponentMapType[ComponentKey]>['data'];
 type ComponentKey = keyof ComponentMapType;
-type DataWithTypename = (Data & { __typename: string }) | { __typename: string } | null;
+type DataWithTypename = (Data & BaseData) | BaseData | null;
 
 function isComponentKey(key: string): key is ComponentKey {
   return key in componentMap;
+}
+
+// Helper type guard to check if item has sys.id
+function hasSysId(item: BaseData): item is BaseData & { sys: { id: string } } {
+  return item.sys?.id !== undefined;
 }
 
 export default function ComponentRenderer<T extends DataWithTypename | DataWithTypename[]>({ data }: { data: T }) {
@@ -31,8 +43,14 @@ export default function ComponentRenderer<T extends DataWithTypename | DataWithT
   if (Array.isArray(data)) {
     return (
       <>
-        {data.map((item, index) => {
-          return <ComponentRenderer key={index} data={item} />;
+        {data.map((item) => {
+          if (item === null) {
+            return null;
+          }
+          if (isComponentKey(item.__typename) && hasSysId(item)) {
+            return <ComponentRenderer key={item.sys.id} data={item} />;
+          }
+          return null;
         })}
       </>
     );
@@ -40,10 +58,9 @@ export default function ComponentRenderer<T extends DataWithTypename | DataWithT
 
   if (isComponentKey(data.__typename)) {
     const Component = componentMap[data.__typename];
-    // At this point we know data is one of the accepted props for the component
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment -- At this point we know data is one of the accepted props for the component
     return <Component data={data as any} />;
   }
 
-  // If we don't know the component, we don't render anything
   return null;
 }

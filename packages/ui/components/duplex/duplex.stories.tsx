@@ -21,7 +21,7 @@ const meta = {
     image: { control: 'object' },
     colorPalette: {
       control: 'select',
-      options: Object.keys(colorConfigs).map((p) => p.replace('palette-', '')),
+      options: Object.keys(colorConfigs),
     },
     imageHeight: {
       control: { type: 'radio' },

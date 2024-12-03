@@ -1,4 +1,4 @@
-import { FragmentOf, graphql, readFragment } from 'gql.tada';
+import { type FragmentOf, graphql, readFragment } from 'gql.tada';
 
 import { AssetFieldsFragment } from '../asset-ctf';
 import { TopicPersonClient } from './topic-person-client';
@@ -25,11 +25,11 @@ export const TopicPersonFieldsFragment = graphql(
   [AssetFieldsFragment]
 );
 
-export type TopicPersonProps = {
-  data: FragmentOf<typeof TopicPersonFieldsFragment & Record<string, any>>;
-};
+export interface TopicPersonProps {
+  data: FragmentOf<typeof TopicPersonFieldsFragment>;
+}
 
-export const TopicPerson: React.FC<TopicPersonProps> = (props) => {
+export function TopicPerson(props: TopicPersonProps) {
   const data = readFragment(TopicPersonFieldsFragment, props.data);
   return <TopicPersonClient data={data} />;
-};
+}

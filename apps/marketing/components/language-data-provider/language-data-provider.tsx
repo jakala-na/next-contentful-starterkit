@@ -1,30 +1,42 @@
 'use client';
 
-import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
-type LanguageData = { slugsState: [Record<string, string>, Dispatch<SetStateAction<Record<string, string>>>] };
+interface LanguageData {
+  slugsState: [Record<string, string>, Dispatch<SetStateAction<Record<string, string>>>];
+}
 const LanguageDataContext = createContext<LanguageData | undefined>(undefined);
 
 interface LanguageDataProviderProps {
   children: ReactNode;
 }
 
-export const LanguageDataProvider = ({ children }: LanguageDataProviderProps) => {
+export function LanguageDataProvider({ children }: LanguageDataProviderProps) {
+  // eslint-disable-next-line react/hook-use-state -- refactor later.
   const slugsState = useState<Record<string, string>>({});
   return <LanguageDataContext.Provider value={{ slugsState }}>{children}</LanguageDataContext.Provider>;
-};
+}
 
-export const LanguageDataSetter = ({ data }: { data?: Record<string, string> }) => {
-  const [, setSlugs] = useLanguageDataContext()!.slugsState;
+export function LanguageDataSetter({ data }: { data?: Record<string, string> }) {
+  const context = useLanguageDataContext();
   useEffect(() => {
-    if (data) {
+    if (data && context?.slugsState) {
+      const [, setSlugs] = context.slugsState;
       setSlugs(data);
     }
-  }, [data]);
+  }, [context?.slugsState, data]);
   return null;
-};
+}
 
 export function useLanguageDataContext() {
   const context = useContext(LanguageDataContext);
-  return context ?? null;
+  return context;
 }

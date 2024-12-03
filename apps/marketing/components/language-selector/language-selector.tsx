@@ -1,12 +1,12 @@
 'use client';
 
-import { ChangeEvent, useTransition } from 'react';
+import { type ChangeEvent, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { useLanguageDataContext } from '#/components/language-data-provider/language-data-provider';
 import { useCurrentLocale } from '#/locales/client';
 
-export const LanguageSelector = () => {
+export function LanguageSelector() {
   const locale = useCurrentLocale();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -25,11 +25,9 @@ export const LanguageSelector = () => {
   };
 
   return (
-    <>
-      <select value={locale} onChange={handleLanguageChange} disabled={isPending}>
-        <option value="en">English</option>
-        <option value="de">Deutsche</option>
-      </select>
-    </>
+    <select value={locale} onChange={handleLanguageChange} disabled={isPending}>
+      <option value="en">English</option>
+      <option value="de">Deutsche</option>
+    </select>
   );
-};
+}

@@ -1,13 +1,14 @@
-/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable -- TODO: Rework this file to fix types and ESLINT errors */
+
 import { useMemo } from 'react';
 
-import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, INLINES, Block as RichtextBlock } from '@contentful/rich-text-types';
+import { documentToReactComponents, type Options } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, INLINES, type Block as RichtextBlock } from '@contentful/rich-text-types';
 
 import { TopicPersonClient } from '#/components/topic-person/topic-person-client';
-import { OmitRecursive, tryget } from '#/lib/utils';
+import { type OmitRecursive, tryget } from '#/lib/utils';
 
-import { AssetCtf, AssetFieldsFragment } from '../asset-ctf';
+import { AssetCtf, type AssetFieldsFragment } from '../asset-ctf';
 
 export interface RichTextProps {
   json: any;
@@ -29,16 +30,16 @@ interface Block extends RichtextBlock {
 
 type Asset = OmitRecursive<typeof AssetFieldsFragment, '__typename'>;
 
-export const RichTextCtf = (props: RichTextProps) => {
+export function RichTextCtf(props: RichTextProps) {
   const { json, links } = props;
 
   const entryBlocks = useMemo(
-    () => tryget(() => links!.entries!.block!.filter((b: any) => !!b), [] as Block[])!,
+    () => tryget(() => links!.entries!.block!.filter((b: any) => Boolean(b)), [] as Block[])!,
     [links]
   );
 
   const assetBlocks = useMemo(
-    () => tryget(() => links!.assets!.block!.filter((b: any) => !!b), [] as Asset[])!,
+    () => tryget(() => links!.assets!.block!.filter((b: any) => Boolean(b)), [] as Asset[])!,
     [links]
   );
 
@@ -47,14 +48,14 @@ export const RichTextCtf = (props: RichTextProps) => {
     opts.renderNode = {
       [INLINES.EMBEDDED_ENTRY]: (node) => {
         const id = tryget(() => node.data.target.sys.id);
-        // eslint-disable-next-line react/no-unstable-nested-components
+
         return <>{`${node.nodeType} ${id}`}</>;
       },
       [BLOCKS.EMBEDDED_ENTRY]: (node) => {
         const id = tryget(() => node.data.target.sys.id);
         if (id) {
           const entry = entryBlocks.find((block: any) => block.sys?.id === id);
-          let entryComponent = (
+          const entryComponent = (
             <>
               <div>Entry:</div>
               <pre>{JSON.stringify(entry, null, 2)}</pre>
@@ -91,4 +92,4 @@ export const RichTextCtf = (props: RichTextProps) => {
   }, [entryBlocks, assetBlocks]);
 
   return <>{documentToReactComponents(json, options)}</>;
-};
+}
