@@ -182,7 +182,7 @@ Coming soon...
 If you're adding new content types or making changes to the content model, you will need to generate a new graphql schema to get type inference in Typescript working and to get autocomplete in IDE. This can be done by running:
 
 ```bash
-pnpm generate:schema
+pnpm --filter=marketing generate:schema
 ```
 
 After new types are generated, you will get changes in `./gql/` folder that you'll have to commit after you are done developing the feature.
@@ -223,7 +223,7 @@ If using Webstorm, make sure you configure the Typescript interpreter from node_
 If you can't use a Typescript server in your IDE, you can optionally generate a gql/graphql-env.d.ts by running this command:
 
 ```bash
-pnpm generate:output
+pnpm --filter=marketing generate:output
 ```
 
 This command will also run `gql.tada turbo` which will generate a cache file that should also be commited. This cache file will speed up inference for new users who just checked out a new branch.
