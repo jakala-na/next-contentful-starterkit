@@ -73,7 +73,7 @@ export const scaffoldComponentFiles = (contentType, updateMappings, includeUI) =
       let outputPath = '../components';
 
       if (baseDir.includes('scaffolds/ui')) {
-        outputPath = '../components/ui';
+        outputPath = '../../../packages/ui/components';
       }
 
       return path.join(__dirname, outputPath, contentType);
@@ -93,7 +93,7 @@ export const scaffoldComponentFiles = (contentType, updateMappings, includeUI) =
           `import { ${hyphenToPascal(contentType)} } from '#/components/${contentType}/${contentType}';`
         );
         // Add the new component to the mappings file.
-        mappings.splice(-2, 0, `  ${hyphenToPascal(contentType)}: ${hyphenToPascal(contentType)},`);
+        mappings.splice(-2, 0, `  ${hyphenToPascal(contentType)},`);
         const updatedMappings = mappings.join('\n');
         fs.writeFileSync(mappingFilePath, updatedMappings, { encoding: 'utf-8' });
       })

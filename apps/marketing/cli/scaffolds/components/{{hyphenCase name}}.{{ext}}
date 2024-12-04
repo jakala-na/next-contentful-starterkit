@@ -1,4 +1,4 @@
-import { FragmentOf, graphql, readFragment } from 'gql.tada';
+import { type FragmentOf, graphql, readFragment } from 'gql.tada';
 
 import { {{pascalCase name}}Client } from './{{hyphenCase name}}-client';
 
@@ -11,11 +11,11 @@ export const {{pascalCase name}}Fragment = graphql(`
   }
 `);
 
-export type {{pascalCase name}}Props = {
+export interface {{pascalCase name}}Props {
   data: FragmentOf<typeof {{pascalCase name}}Fragment> & Record<string, any>;
-};
+}
 
-export const {{pascalCase name}}: React.FC<{{pascalCase name}}Props> = (props) => {
+export function {{pascalCase name}}(props: {{pascalCase name}}Props) {
   const data = readFragment({{pascalCase name}}Fragment, props.data);
   return <{{pascalCase name}}Client data={data} />;
-};
+}
