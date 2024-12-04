@@ -48,12 +48,12 @@
     "use-analytics": "^1.1.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "@0no-co/graphqlsp": "^1.7.0",
     "@badeball/cypress-cucumber-preprocessor": "^18.0.4",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "@cypress/webpack-dev-server": "^3.2.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+    "@repo/eslint-config": "workspace:*",
     "@types/cypress-image-snapshot": "^3.1.6",
     "@types/lodash": "^4.17.13",
     "@types/node": "18.11.11",
@@ -64,7 +64,7 @@
     "axe-core": "^4.6.1",
     "chalk": "^5.3.0",
     "contentful": "^11.2.0",
-    "cypress": "^12.2.0",
+    "cypress": "^13.16.0",
     "cypress-axe": "^1.2.0",
     "cypress-image-snapshot": "^4.0.1",
     "esbuild": "0.20.1",
