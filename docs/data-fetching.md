@@ -14,6 +14,7 @@ Static content, here defined as content that requires no user inputs and does no
 
 Let's say we're rendering the homepage, which consists of Header, Footer, SEO metadata, Page content, and top and bottom components. Some of the elements are shared between pages, like layout elements (header, footer), while others are page-specific. Components also come in hierarchies, for example:
 Page (entry)
+
 - Title
 - Components
   - HeroBanner (entry)
@@ -118,51 +119,50 @@ Notice how much knowledge our layout has now of various content types and units 
 Let's refactor our query to use fragments:
 
 ```tsx
-
-  const layoutQuery = graphql(`
-    fragment PageLinkFields on Page {
-      pageName
-      slug
+const layoutQuery = graphql(`
+  fragment PageLinkFields on Page {
+    pageName
+    slug
+  }
+  fragment MenuGroupFields on MenuGroup {
+    groupName
+    groupLink {
+      ...PageLinkFields
     }
-    fragment MenuGroupFields on MenuGroup {
-      groupName
-      groupLink {
+    featuredPagesCollection(limit: 10) {
+      items {
         ...PageLinkFields
       }
-      featuredPagesCollection(limit: 10) {
-        items {
-          ...PageLinkFields
-        }
-      }
     }
-    query Layout($locale: String, $preview: Boolean) {
-      navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
-        items {
-          menuItemsCollection {
-            items {
-              ...MenuGroupFields
-            }
-          }
-        }
-      }
-      footerMenuCollection(locale: $locale, preview: $preview, limit: 1) {
-        items {
-          instagramLink
-          twitterLink
-          linkedinLink
-          facebookLink
-          legalLinks {
+  }
+  query Layout($locale: String, $preview: Boolean) {
+    navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+      items {
+        menuItemsCollection {
+          items {
             ...MenuGroupFields
           }
-          menuItemsCollection {
-            items {
-              ...MenuGroupFields
-            }
+        }
+      }
+    }
+    footerMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+      items {
+        instagramLink
+        twitterLink
+        linkedinLink
+        facebookLink
+        legalLinks {
+          ...MenuGroupFields
+        }
+        menuItemsCollection {
+          items {
+            ...MenuGroupFields
           }
         }
       }
     }
-  `);
+  }
+`);
 ```
 
 Here we added 2 new fragments, one for displaying page fields needed to show a link, and another MenuGroupFields fragment for rendering a menu group with nested PageLinkFields fragment. This is much better.
@@ -177,13 +177,12 @@ In gql.tada there is a concept of [fragments collocation](https://gql-tada.0no.c
 
 Coming soon...
 
-
 ### Regenerate graphql schema
 
 If you're adding new content types or making changes to the content model, you will need to generate a new graphql schema to get type inference in Typescript working and to get autocomplete in IDE. This can be done by running:
 
 ```bash
-yarn generate:schema
+pnpm --filter=marketing generate:schema
 ```
 
 After new types are generated, you will get changes in `./gql/` folder that you'll have to commit after you are done developing the feature.
@@ -209,6 +208,9 @@ Those plugins/extensions typically will load GraphQL config from any GraphQL Con
 
 If you need the plugin/extension to extract queries/fragments from more places, make sure to look at [.graphqlrc.yml](/.graphqlrc.yml) rules, as those define what files get scanned for GraphQL queries and fragments.
 
+[!WARNING]
+Keep in mind that if you're using VSCode or Cursor and you have issues with "Unknown fragment" errors, you'll want to downgrade GraphQL Language Feature Support extension to version 0.9.3 until this [issue](https://github.com/graphql/graphiql/issues/3620) is resolved.
+
 **gql.tada support**
 
 While gql.tada comes pre-configured with the project, you might want to know a little about how it works. You can refer to [workflows docs](https://gql-tada.0no.co/get-started/workflows) to learn more about how to use gql.tada, but we'll give you the gist here.
@@ -221,7 +223,7 @@ If using Webstorm, make sure you configure the Typescript interpreter from node_
 If you can't use a Typescript server in your IDE, you can optionally generate a gql/graphql-env.d.ts by running this command:
 
 ```bash
-yarn generate:output
+pnpm --filter=marketing generate:output
 ```
 
 This command will also run `gql.tada turbo` which will generate a cache file that should also be commited. This cache file will speed up inference for new users who just checked out a new branch.

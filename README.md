@@ -14,6 +14,7 @@ The starterkit's cornerstone is our data-fetching solution and it's typesafety. 
 - **Draft Mode** - preview mode for your application for Contentful Preview API usage
 - **Contentful Live Preview** - Contentful live previews let you edit components side by side with a visual representation and Live Preview SDK also lets you annotate specific fields you are editing to get to the editor screen by just clicking “Edit” button on the frontend. We also integrated live updates, which will show result of content changes immediately as opposed to waiting for content to auto-save in Contentful.
 - **Contentful Content Source Maps** - Optionally use Contentful Content Source Maps feature to get Live Preview SDK annotations without manually annotating your components, as well as get Vercel Content Link for Vercel customers.
+- **Turborepo** - we use Turborepo for this project to showcase use of multiple packages for design system, CLI tooling, testing in addition to Next.js web app.
 
 ## Getting Started
 
@@ -22,7 +23,7 @@ The starterkit's cornerstone is our data-fetching solution and it's typesafety. 
 2. Install dependencies with:
 
 ```
-yarn install
+pnpm install
 ```
 
 3. Setup Contenful access
@@ -30,13 +31,13 @@ yarn install
 
 - You could get access to an existing space that follows Contentful Marketing Template content model, for example a colleague could share his space with you
 - You could create your own space with https://www.contentful.com/starter-templates/marketing-website/. Keep in mind, new templates today can only be deployed on brand new Contentful accounts, so you might have to create a new account with a new email to do that, but this shouldn't be a problem, as it's free.
-- You can start from scratch and use the contentful CLI and `/migrations/ctf-seed.json` to [import](https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/) our demo content into your own contentful instance: `yarn seed --environment-id=[ENVIRONMENT_ID] --space-id=[SPACE_ID]`
+- You can start from scratch and use the contentful CLI and `apps/marketing/migrations/ctf-seed.json` to [import](https://www.contentful.com/developers/docs/tutorials/cli/import-and-export/) our demo content into your own contentful instance: `pnpm --filter=marketing seed --environment-id=[ENVIRONMENT_ID] --space-id=[SPACE_ID]`
 
 You will want to get a CDA and CPA API keys by using this [guide](https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app)
 
 4. Configure environment
 
-Create .env.local in root directory of the repo with the following contents:
+Create .env.local in apps/marketing directory of the repo with the following contents:
 
 ```
 CONTENTFUL_SPACE=<space id>
@@ -48,10 +49,14 @@ CONTENTFUL_PREVIEW_SECRET=secret
 CONTENTFUL_USE_CONTENT_SOURCE_MAPS=true
 ```
 
-5. Run Dev Server
+5. Run Next.js Dev Server
 
 ```bash
-yarn dev
+turbo dev --filter=marketing
+```
+or run both Next.js and Storybook dev servers with:
+```bash
+turbo dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -59,7 +64,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Documentation
 
 - [Component Architecture](./docs/components.md)
-- [Components UI Folder](./components/ui/README.md)
+- [Components UI Folder](./packages/ui/README.md)
 - [Data-fetching guide](./docs/data-fetching.md)
 - [Features guide](./docs/features.md)
 - [Analytics guide](./components/analytics/README.md)
@@ -70,7 +75,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Customize the build command to be `turbo run build` and set the root directory to `apps/marketing`
+
+Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Support
 

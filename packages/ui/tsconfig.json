@@ -1,0 +1,11 @@
+{
+  "extends": "@repo/typescript-config/react-library.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@repo/ui/*": ["./*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "vite.config.mts", ".eslintrc.js"],
+  "exclude": ["node_modules"]
+}

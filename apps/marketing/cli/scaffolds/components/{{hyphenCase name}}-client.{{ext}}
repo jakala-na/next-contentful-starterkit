@@ -1,0 +1,15 @@
+'use client';
+
+import { type ResultOf } from 'gql.tada';
+
+import { type {{pascalCase name}}Fragment } from '#/components/{{hyphenCase name}}/{{hyphenCase name}}';
+{{#if includeUI}}import { {{pascalCase name}} } from '@repo/ui/components/{{hyphenCase name}}';{{/if}}
+import { useComponentPreview } from '../hooks/use-component-preview';
+
+export function {{pascalCase name}}Client(props: { data: ResultOf<typeof {{pascalCase name}}Fragment> }) {
+  const { data: originalData } = props;
+  const { data{{#if includeUI}}, addAttributes{{/if}} } = useComponentPreview(originalData);
+
+{{#if includeUI}}  return <{{pascalCase name}} id={data.sys.id} addAttributes={addAttributes} />;{{/if~}}
+{{~#unless includeUI}}  return <div>{data.sys.id}</div>;{{/unless}}
+}

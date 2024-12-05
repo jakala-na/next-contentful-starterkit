@@ -6,6 +6,8 @@ There are a few interesting opinions that go into the component design of this p
 
 You will notice the following structure in the this project.
 
+apps/marketing (Next.js app)
+
 - app (reserved for routing and collocated imports)
 - components (separated from app folder in order to not commingle with routing)
   ...
@@ -13,11 +15,14 @@ You will notice the following structure in the this project.
     - hero-banner-ctf-client.tsx
     - hero-banner-ctf.tsx
     - index.tsx (optional)
-  - ui
-    - hero-banner (UI component folder with no knowledge of Contentful or Next.js)
-      - hero-banner.tsx
-      - hero-banner-stories.tsx
-      - index.ts (optional)
+
+packages/ui (UI components package)
+
+- components
+  - hero-banner (UI component folder with no knowledge of Contentful or Next.js)
+    - hero-banner.tsx
+    - hero-banner-stories.tsx
+    - index.ts (optional)
 
 Let's break down each layer and component type and define it's role and purpose.
 
@@ -27,7 +32,7 @@ We'll start from UI components and work our way up.
 
 > hero-banner.tsx
 
-UI components are simply defined as pure React components with ability to manage state or render things in slots, but for the purposes of this project they are designed to be share-able across an ecosystem of React projects that are not necessarily built with Next.js or Contentful. More ideas about this concept are described in [UI folder docs](/components/ui/README.md).
+UI components are simply defined as pure React components with ability to manage state or render things in slots, but for the purposes of this project they are designed to be share-able across an ecosystem of React projects that are not necessarily built with Next.js or Contentful. More ideas about this concept are described in [UI folder docs](/packages/ui/README.md).
 
 2. Contentful integration components
 
@@ -60,7 +65,7 @@ Let's explore how we can create new components and implementthem end to end.
 1. Creating UI component
    This is a shadcn/ui project, and it means that simplest way to start building a new component is by either installing it from shadcn/ui library via shadcn CLI, or by generating one with AI on v0.dev and installing using same shadcn CLI.
 
-The end result should be a component added to [components/ui](/components/ui/). Let's say it's accordion.tsx which exports Accordion and AccordionItem. You can start by testint the component in Storybook, working on some variants, updating styles and polishing the UI.
+The end result should be a component added to [packages/ui/components](/packages/ui/components/). Let's say it's accordion.tsx which exports Accordion and AccordionItem. You can start by testint the component in Storybook, working on some variants, updating styles and polishing the UI.
 
 2. Creating a content model in Contentful.
    Now that you have your pure UI component, you'll want to give it some data, for that you need to create a data model in Contentful that can serve your needs.
@@ -79,7 +84,7 @@ You'll need to allow your component (Accordion) to be referenced from some field
 Lastly, you'll need to make sure your code knows about the new content model changes by pointing at the environment where you made changes using CONTENTFUL_ENVIRONMENT= variable, but also by exporting the GraphQL schema using:
 
 ```sh
-yarn generate:schema
+pnpm generate:schema
 ```
 
 More details about gql.tada usage can be found [here](./data-fetching.md).
@@ -137,7 +142,7 @@ export const ComponentAccordionFieldsFragment = graphql(
 
 You can define this fragment in any file, but we recommend collocating it with your component in the component folder. This will be enforced by [fragment-masking]() unless you opt out for some reason (not recommended).
 
-Proceed to import and expand your fragment in [page.tsx](/app/[[...slug]]/page.tsx) as shown below:
+Proceed to import and expand your fragment in [page.tsx](/apps/marketing/app/[[...slug]]/page.tsx) as shown below:
 
 ```jsx
 topSectionCollection(limit: 10) {
@@ -153,7 +158,7 @@ Check out [fragment docs]() on gql.tada site
 
 As soon as you have the GraphQL fragment expanded on the top-level page query, you will get the exact shape of the GraphQL response as props in your component, but only after you implement a ComponentRenderer mapping. We'll implement mapping and come back to finishing this component.
 
-4. Register your component in [components/component-renderer/mappings.ts](/components/component-renderer/mappings.ts)
+4. Register your component in [components/component-renderer/mappings.ts](/apps/marketing/components/component-renderer/mappings.ts)
 
 All you need to do here is return a dynamic import of your component mapped to the Contentful content type GraphQL \_\_typename. The typename will be derived from your content type ID, for example ComponentAccordion is going to be the name for componentAccordion content type id.
 
@@ -210,7 +215,7 @@ Now that we have the data, we could render the UI component here, but we'll take
 
 6. Add Client component
 
-We'll start of with a boilerplate in [components/accordion-ctf/accordion-ctf-client.tsx](/components/accordion-ctf/accordion-ctf-client.tsx). Create the component with the following code:
+We'll start of with a boilerplate in `/apps/marketing/components/accordion-ctf/accordion-ctf-client.tsx`. Create the component with the following code:
 
 ```jsx
 import { ResultOf } from 'gql.tada';

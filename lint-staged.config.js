@@ -1,7 +1,7 @@
 module.exports = {
-  '**/*.(ts|tsx)': () => 'yarn tsc --noEmit',
+  '**/*.(ts|tsx)': () => 'pnpm turbo run check-types',
   '**/*.(ts|tsx|js)': (filenames) => [
-    `yarn eslint --fix ${filenames.join(' ')}`,
-    `yarn prettier --write ${filenames.join(' ')}`,
+    `pnpm eslint ${filenames.join(' ')} --max-warnings=0`,
+    `pnpm prettier --write ${filenames.join(' ')}`,
   ],
 };
