@@ -19,7 +19,12 @@ import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 import { getStaticParams } from '#/locales/server';
 
 interface PageProps {
-  params: { slug?: string[]; locale: string };
+  params: Promise<Params>;
+}
+
+interface Params {
+  slug?: string[];
+  locale: string;
 }
 
 const getPage = async (slug: string, locale: string, preview = false) => {
@@ -136,12 +141,13 @@ const getPageMetadata = async (slug: string, locale: string, preview = false): P
   };
 };
 
-export default async function LandingPage({ params }: PageProps) {
+export default async function LandingPage(props: PageProps) {
+  const params = await props.params;
   const { locale } = params;
   setStaticParamsLocale(locale);
   const slug = params.slug?.join('/') ?? 'home';
 
-  const { isEnabled: isDraftMode } = draftMode();
+  const isDraftMode = (await draftMode()).isEnabled;
 
   const pageData = await getPage(slug, getLocaleFromPath(locale), isDraftMode);
 
@@ -167,17 +173,18 @@ export default async function LandingPage({ params }: PageProps) {
   );
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const { locale } = params;
   const slug = params.slug?.join('/') ?? 'home';
-  const { isEnabled: isDraftMode } = draftMode();
+  const { isEnabled: isDraftMode } = await draftMode();
   return getPageMetadata(slug, getLocaleFromPath(locale), isDraftMode);
 }
 
 export async function generateStaticParams() {
   // Teach Typescript what our locale segment name is.
   const params = getStaticParams() as { locale: string }[];
-  const returnData: PageProps['params'][] = [];
+  const returnData: Params[] = [];
   for await (const locale of params) {
     const slugs = (await getPageSlugs(getLocaleFromPath(locale.locale))).map((page) => ({
       slug: page.slug?.split('/'),

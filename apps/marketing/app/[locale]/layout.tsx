@@ -19,16 +19,14 @@ import { fontInter } from '#/lib/fonts';
 import { cn } from '@repo/ui/lib/utils';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
+export default async function RootLayout(props: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
+  const params = await props.params;
+
+  const { children } = props;
+
   const shouldInjectToolbar = process.env.NODE_ENV === 'development';
   const { locale } = params;
-  const { isEnabled: isDraftMode } = draftMode();
+  const isDraftMode = (await draftMode()).isEnabled;
 
   const layoutQuery = graphql(
     `

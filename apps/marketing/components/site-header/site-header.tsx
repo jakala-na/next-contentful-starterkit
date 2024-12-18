@@ -3,8 +3,9 @@ import { draftMode } from 'next/headers';
 import { Navigation } from '#/components/navigation';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- TODO: Fix fragment unmasking to type navigationData, if possible.
-export function SiteHeader(props: { navigationData: any }) {
-  const { isEnabled: isDraftMode } = draftMode();
+export async function SiteHeader(props: { navigationData: any }) {
+  const isDraftMode = (await draftMode()).isEnabled;
+
   return (
     <>
       {isDraftMode && (
