@@ -1,0 +1,102 @@
+---
+title: Getting started
+---
+
+## Setup repository
+
+This project is a Github template, you can click [Use this template](https://github.com/new?template_name=next-contentful-starterkit&template_owner=jakala-na) to create a repository with a single init commit.
+As soon as you have a repository, proceed with the setup.
+
+1. Clone repository locally
+
+```bash
+git clone [repository url]
+```
+
+2. Install dependencies
+
+```bash
+pnpm install
+```
+
+<Callout>
+  You'll notice we use [pnpm](https://pnpm.io/) as our package manager. We also use
+  [Turborepo](https://turbo.build/repo/docs) to manage the monorepo. You'll notice all commands in docs will reflect
+  that.
+</Callout>
+
+## Provision a Contentful space
+
+To develop locally, you will want to connect to a Contentful instance that has the same data model as we use to develop, there are 2 ways to do that:
+
+#### Provision Contentful Marketing Template space
+
+You could get access to an existing space that follows Contentful Marketing Template content model, for example a colleague could share his space with you, or alternatively you can create a new one.
+Contentful lets you create a new space from a template, but only for new accounts
+
+Follow instructions [here](https://www.contentful.com/starter-templates/marketing-website/) to create a new space from a template.
+
+<Callout>
+  While this method works now because our template uses the same content model, we will add new content types in future
+  and this option will be removed.
+</Callout>
+
+#### Provision a new space with our seed script
+
+You can start from scratch and use our seed script to provision the content model and content.
+First you will need to create an account and a space. You can follow first set of instructions [here](https://www.contentful.com/help/getting-started/contentful-101/)
+
+After you have a space, let's login to Contentful CLI (it's installed as a dev dependency in the project)
+
+```bash
+pnpm exec contentful login
+```
+
+Once you are logged in, you can provision the new space with a new content model and content using our seed script:
+
+```bash
+pnpm --filter=marketing seed --space-id=[SPACE_ID]
+```
+
+## Configure environment variables
+
+Once a space with content is provisioned, time to configure Next.js app to connect to it.
+
+You will want to get a CDA and CPA API keys by using this [guide](https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app)
+
+Create `.env.local` in `apps/marketing` directory of the repo with the following contents:
+
+```bash
+CONTENTFUL_SPACE=<space id>
+CONTENTFUL_DELIVERY_API=<delivery api key>
+CONTENTFUL_PREVIEW_API=<preview api key>
+CONTENTFUL_ENVIRONMENT=master
+CONTENTFUL_PREVIEW_SECRET=<preview secret of your choice>
+
+# Enable or disable Content Source Maps, see https://www.contentful.com/developers/docs/tools/vercel/content-source-maps-with-vercel/
+CONTENTFUL_USE_CONTENT_SOURCE_MAPS=true
+```
+
+## Run Next.js Dev Server
+
+```bash
+turbo dev --filter=marketing
+```
+
+or run both Next.js and Storybook dev servers with:
+
+```bash
+turbo dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## What's next?
+
+Now that you have a working setup, you can start exploring the code and building your own components and pages, here are some suggestions:
+
+- Create a new UI component in `packages/ui` package
+- Create a new content type in Contentful and integrate it in the project
+- Explore out data-fetching choices and tweak them to your needs
+
+You can learn more about those topics in dedicated sections of this documentation.

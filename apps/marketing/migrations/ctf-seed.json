@@ -5548,7 +5548,7 @@
         "id": "7wGhPNCZNLknpSaJVWfnHf",
         "type": "Entry",
         "createdAt": "2023-09-07T16:29:54.205Z",
-        "updatedAt": "2024-11-03T05:46:49.619Z",
+        "updatedAt": "2024-11-04T03:50:56.944Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -5556,8 +5556,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 19,
-        "publishedAt": "2024-11-03T05:46:49.619Z",
+        "publishedVersion": 20,
+        "publishedAt": "2024-11-04T03:50:56.944Z",
         "firstPublishedAt": "2023-09-07T16:30:16.752Z",
         "createdBy": {
           "sys": {
@@ -5573,8 +5573,8 @@
             "id": "3APw6TbGSS6UXDanRhgniW"
           }
         },
-        "publishedCounter": 9,
-        "version": 20,
+        "publishedCounter": 10,
+        "version": 21,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -5649,7 +5649,7 @@
         "id": "2SKWtzmGOnQm80nRGIIclu",
         "type": "Entry",
         "createdAt": "2023-09-07T16:29:55.216Z",
-        "updatedAt": "2024-11-03T05:48:57.807Z",
+        "updatedAt": "2024-12-03T04:30:31.528Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -5675,7 +5675,7 @@
           }
         },
         "publishedCounter": 15,
-        "version": 35,
+        "version": 40,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -5686,7 +5686,7 @@
         "fieldStatus": {
           "*": {
             "de-DE": "published",
-            "en-US": "published"
+            "en-US": "changed"
           }
         },
         "automationTags": [
@@ -5896,7 +5896,7 @@
         "id": "01HUvROKwHqty0fL84pyLi",
         "type": "Entry",
         "createdAt": "2023-09-07T16:29:56.192Z",
-        "updatedAt": "2024-10-28T03:06:46.540Z",
+        "updatedAt": "2024-12-02T22:27:21.312Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -5922,7 +5922,7 @@
           }
         },
         "publishedCounter": 2,
-        "version": 4,
+        "version": 7,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -5933,7 +5933,7 @@
         "fieldStatus": {
           "*": {
             "de-DE": "published",
-            "en-US": "published"
+            "en-US": "changed"
           }
         },
         "automationTags": [
@@ -6185,7 +6185,7 @@
         "id": "26OTgyiQuuj5QGkivAdi1j",
         "type": "Entry",
         "createdAt": "2024-10-21T19:54:41.819Z",
-        "updatedAt": "2024-11-03T05:46:26.875Z",
+        "updatedAt": "2024-12-04T17:04:45.919Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -6211,7 +6211,7 @@
           }
         },
         "publishedCounter": 7,
-        "version": 26,
+        "version": 28,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -6222,7 +6222,7 @@
         "fieldStatus": {
           "*": {
             "de-DE": "published",
-            "en-US": "published"
+            "en-US": "changed"
           }
         },
         "automationTags": [
@@ -6309,7 +6309,7 @@
         "id": "py3REeJO4VLNgCTbLTZPF",
         "type": "Entry",
         "createdAt": "2024-10-21T19:56:22.755Z",
-        "updatedAt": "2024-10-30T06:39:00.958Z",
+        "updatedAt": "2024-11-12T22:08:39.387Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -6317,8 +6317,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 47,
-        "publishedAt": "2024-10-30T06:39:00.958Z",
+        "publishedVersion": 50,
+        "publishedAt": "2024-11-12T22:08:39.387Z",
         "firstPublishedAt": "2024-10-21T20:01:35.198Z",
         "createdBy": {
           "sys": {
@@ -6334,8 +6334,8 @@
             "id": "3APw6TbGSS6UXDanRhgniW"
           }
         },
-        "publishedCounter": 19,
-        "version": 48,
+        "publishedCounter": 20,
+        "version": 51,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -6456,7 +6456,7 @@
         "id": "7ESXdk5RLNmWrT0YvyJSYY",
         "type": "Entry",
         "createdAt": "2024-10-21T21:36:16.626Z",
-        "updatedAt": "2024-11-03T07:29:56.393Z",
+        "updatedAt": "2024-12-03T19:30:33.450Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -6464,8 +6464,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 31,
-        "publishedAt": "2024-10-30T06:41:47.651Z",
+        "publishedVersion": 37,
+        "publishedAt": "2024-11-12T22:09:07.837Z",
         "firstPublishedAt": "2024-10-21T21:37:20.082Z",
         "createdBy": {
           "sys": {
@@ -6481,8 +6481,8 @@
             "id": "3APw6TbGSS6UXDanRhgniW"
           }
         },
-        "publishedCounter": 11,
-        "version": 33,
+        "publishedCounter": 12,
+        "version": 41,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -6492,8 +6492,8 @@
         },
         "fieldStatus": {
           "*": {
-            "de-DE": "changed",
-            "en-US": "published"
+            "de-DE": "published",
+            "en-US": "changed"
           }
         },
         "automationTags": [
@@ -6520,26 +6520,26 @@
         },
         "bodyText": {
           "de-DE": {
-            "nodeType": "document",
             "data": {
             },
             "content": [
               {
-                "nodeType": "paragraph",
                 "data": {
                 },
                 "content": [
                   {
-                    "nodeType": "text",
-                    "value": " ",
+                    "data": {
+                    },
                     "marks": [
                     ],
-                    "data": {
-                    }
+                    "value": " ",
+                    "nodeType": "text"
                   }
-                ]
+                ],
+                "nodeType": "paragraph"
               }
-            ]
+            ],
+            "nodeType": "document"
           },
           "en-US": {
             "data": {
@@ -6609,7 +6609,7 @@
         "id": "1OvhZa1r1LWMHpp7J9isCR",
         "type": "Entry",
         "createdAt": "2024-10-21T21:41:01.257Z",
-        "updatedAt": "2024-11-03T07:30:22.962Z",
+        "updatedAt": "2024-11-12T22:09:02.401Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -6617,8 +6617,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 21,
-        "publishedAt": "2024-11-03T07:30:22.962Z",
+        "publishedVersion": 24,
+        "publishedAt": "2024-11-12T22:09:02.401Z",
         "firstPublishedAt": "2024-10-21T21:41:42.888Z",
         "createdBy": {
           "sys": {
@@ -6634,8 +6634,8 @@
             "id": "3APw6TbGSS6UXDanRhgniW"
           }
         },
-        "publishedCounter": 9,
-        "version": 22,
+        "publishedCounter": 10,
+        "version": 25,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -6668,30 +6668,31 @@
           "en-US": false
         },
         "headline": {
+          "de-DE": "Zauberhafte Schreibwaren",
           "en-US": "Spellbound Stationery"
         },
         "bodyText": {
           "de-DE": {
-            "nodeType": "document",
             "data": {
             },
             "content": [
               {
-                "nodeType": "paragraph",
                 "data": {
                 },
                 "content": [
                   {
-                    "nodeType": "text",
-                    "value": "Handgefertigte Tagebücher und Notizbücher in Kunstleder gebunden, mit aufwendigen Designs von geheimnisvollen Symbolen, verzauberten Wäldern und mythischen Kreaturen. Inklusive Tintenfedern, die als Federkiele oder Zauberstäbe gestaltet sind, für ein wahrhaft magisches Schreiberlebnis.",
+                    "data": {
+                    },
                     "marks": [
                     ],
-                    "data": {
-                    }
+                    "value": "Handgefertigte Tagebücher und Notizbücher in Kunstleder gebunden, mit aufwendigen Designs von geheimnisvollen Symbolen, verzauberten Wäldern und mythischen Kreaturen. Inklusive Tintenfedern, die als Federkiele oder Zauberstäbe gestaltet sind, für ein wahrhaft magisches Schreiberlebnis.",
+                    "nodeType": "text"
                   }
-                ]
+                ],
+                "nodeType": "paragraph"
               }
-            ]
+            ],
+            "nodeType": "document"
           },
           "en-US": {
             "data": {
@@ -6760,7 +6761,7 @@
         "id": "4u5YB3WkSY0heYMPCKsh54",
         "type": "Entry",
         "createdAt": "2024-10-21T21:41:51.795Z",
-        "updatedAt": "2024-11-03T07:30:55.693Z",
+        "updatedAt": "2024-11-12T22:10:07.447Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -6768,8 +6769,8 @@
             "linkType": "Environment"
           }
         },
-        "publishedVersion": 19,
-        "publishedAt": "2024-11-03T07:30:55.693Z",
+        "publishedVersion": 25,
+        "publishedAt": "2024-11-12T22:10:07.447Z",
         "firstPublishedAt": "2024-10-21T21:42:23.544Z",
         "createdBy": {
           "sys": {
@@ -6785,8 +6786,8 @@
             "id": "3APw6TbGSS6UXDanRhgniW"
           }
         },
-        "publishedCounter": 8,
-        "version": 20,
+        "publishedCounter": 10,
+        "version": 26,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -6834,7 +6835,7 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": " ",
+                    "value": "Diese Sets enthalten eine Auswahl an Rohkristallen, denen jeweils mystische Eigenschaften wie Klarheit, Schutz und Heilung zugeschrieben werden. Das Set wird mit einem Handbuch geliefert, das erklärt, wie man seine Umgebung mit den Energien der Kristalle \"durchdringen\" kann.",
                     "marks": [
                     ],
                     "data": {
@@ -6911,7 +6912,7 @@
         "id": "5mIMUUzpJbEAMikMvqbL9t",
         "type": "Entry",
         "createdAt": "2024-10-21T21:50:45.168Z",
-        "updatedAt": "2024-11-03T05:51:24.033Z",
+        "updatedAt": "2024-12-03T04:39:59.078Z",
         "environment": {
           "sys": {
             "id": "master",
@@ -6937,7 +6938,7 @@
           }
         },
         "publishedCounter": 5,
-        "version": 19,
+        "version": 21,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -6948,7 +6949,7 @@
         "fieldStatus": {
           "*": {
             "de-DE": "published",
-            "en-US": "published"
+            "en-US": "changed"
           }
         },
         "automationTags": [
@@ -10964,170 +10965,6 @@
         },
         "updatedAt": "2024-10-28T03:05:17Z"
       }
-    }
-  ],
-  "webhooks": [
-    {
-      "name": "Algolia - Index entries",
-      "url": "https://6S4FJDL8DZ.algolia.net/1/indexes/global/{ /payload/sys/id }",
-      "httpBasicUsername": null,
-      "topics": [
-        "Entry.publish"
-      ],
-      "filters": [
-        {
-          "equals": [
-            {
-              "doc": "sys.environment.sys.id"
-            },
-            "master"
-          ]
-        }
-      ],
-      "transformation": {
-        "method": "PUT",
-        "contentType": "application/json; charset=utf-8"
-      },
-      "active": true,
-      "sys": {
-        "type": "WebhookDefinition",
-        "id": "3M5xL9VPq0wwPeOSdaFTgj",
-        "version": 0,
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "44pcbcmur9gk"
-          }
-        },
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "3APw6TbGSS6UXDanRhgniW"
-          }
-        },
-        "createdAt": "2023-09-23T07:26:50Z",
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "3APw6TbGSS6UXDanRhgniW"
-          }
-        },
-        "updatedAt": "2023-09-23T07:26:50Z"
-      },
-      "headers": [
-        {
-          "key": "X-Algolia-Application-Id",
-          "value": "6S4FJDL8DZ"
-        },
-        {
-          "key": "X-Algolia-API-Key",
-          "secret": true
-        }
-      ]
-    },
-    {
-      "name": "Algolia - Delete unpublished entries",
-      "url": "https://6S4FJDL8DZ.algolia.net/1/indexes/global/{ /payload/sys/id }",
-      "httpBasicUsername": null,
-      "topics": [
-        "Entry.unpublish"
-      ],
-      "filters": [
-        {
-          "equals": [
-            {
-              "doc": "sys.environment.sys.id"
-            },
-            "master"
-          ]
-        }
-      ],
-      "transformation": {
-        "method": "DELETE"
-      },
-      "active": true,
-      "sys": {
-        "type": "WebhookDefinition",
-        "id": "3M6yN9VRsBzafg3aCKxVUj",
-        "version": 0,
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "44pcbcmur9gk"
-          }
-        },
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "3APw6TbGSS6UXDanRhgniW"
-          }
-        },
-        "createdAt": "2023-09-23T07:26:50Z",
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "3APw6TbGSS6UXDanRhgniW"
-          }
-        },
-        "updatedAt": "2023-09-23T07:26:50Z"
-      },
-      "headers": [
-        {
-          "key": "X-Algolia-Application-Id",
-          "value": "6S4FJDL8DZ"
-        },
-        {
-          "key": "X-Algolia-API-Key",
-          "secret": true
-        }
-      ]
-    },
-    {
-      "name": "Revalidate cache",
-      "url": "http://localhost.com:3000/api/revalidateData",
-      "httpBasicUsername": null,
-      "topics": [
-        "*.*"
-      ],
-      "filters": null,
-      "transformation": null,
-      "active": true,
-      "sys": {
-        "type": "WebhookDefinition",
-        "id": "2nuXnvIFfUOI9qViIduiGS",
-        "version": 0,
-        "space": {
-          "sys": {
-            "type": "Link",
-            "linkType": "Space",
-            "id": "44pcbcmur9gk"
-          }
-        },
-        "createdBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "3APw6TbGSS6UXDanRhgniW"
-          }
-        },
-        "createdAt": "2024-04-21T11:57:52Z",
-        "updatedBy": {
-          "sys": {
-            "type": "Link",
-            "linkType": "User",
-            "id": "3APw6TbGSS6UXDanRhgniW"
-          }
-        },
-        "updatedAt": "2024-04-21T11:57:52Z"
-      },
-      "headers": [
-      ]
     }
   ],
   "roles": [

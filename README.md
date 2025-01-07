@@ -54,7 +54,9 @@ CONTENTFUL_USE_CONTENT_SOURCE_MAPS=true
 ```bash
 turbo dev --filter=marketing
 ```
+
 or run both Next.js and Storybook dev servers with:
+
 ```bash
 turbo dev
 ```
@@ -63,11 +65,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Documentation
 
-- [Component Architecture](./docs/components.md)
-- [Components UI Folder](./packages/ui/README.md)
-- [Data-fetching guide](./docs/data-fetching.md)
-- [Features guide](./docs/features.md)
-- [Analytics guide](./components/analytics/README.md)
+[Read the docs](https://next-contentful-starterkit.vercel.app/docs)
+
+Additional docs:
+
+- [Analytics guide](./apps/marketing/components/analytics/README.md)
 - [Architecture Decision Records](./docs/decisions/)
 - [Next.js docs](https://nextjs.org/docs)
 
