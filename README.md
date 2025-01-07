@@ -65,7 +65,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Documentation
 
-[Read the docs](https://next-contentful-starterkit.vercel.app/docs)
+[Read the docs](https://contentful.next-cms.dev/docs)
 
 Additional docs:
 

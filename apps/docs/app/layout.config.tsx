@@ -35,5 +35,9 @@ export const baseOptions: BaseLayoutProps = {
       url: '/docs',
       active: 'nested-url',
     },
+    {
+      text: 'Marketing Demo',
+      url: 'https://contentful-marketing.next-cms.dev/',
+    },
   ],
 };
