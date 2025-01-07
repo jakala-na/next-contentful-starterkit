@@ -28,7 +28,7 @@
         "name": "next"
       },
       {
-        "name": "@0no-co/graphqlsp",
+        "name": "gql.tada/ts-plugin",
         "schema": "./gql/schema.graphql",
         "tadaOutputLocation": "./gql/graphql-env.d.ts",
         "tadaTurboLocation": "./gql/graphql-cache.d.ts"

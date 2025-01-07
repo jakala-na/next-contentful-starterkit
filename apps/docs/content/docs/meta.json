@@ -1,0 +1,12 @@
+{
+  "title": "Documentation",
+  "pages": [
+    "---Guides---",
+    "index",
+    "components",
+    "data-fetching",
+    "---Features---",
+    "features/content-link",
+    "features/cli"
+  ]
+}
