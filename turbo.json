@@ -18,16 +18,6 @@
         "!.next/cache/**"
       ]
     },
-    "marketing#build": {
-      "env": [
-        "CONTENTFUL_PREVIEW_API",
-        "CONTENTFUL_DELIVERY_API",
-        "CONTENTFUL_SPACE",
-        "CONTENTFUL_ENVIRONMENT",
-        "CONTENTFUL_USE_CONTENT_SOURCE_MAPS",
-        "CONTENTFUL_PREVIEW_SECRET"
-      ]
-    },
     "build-storybook": {
       "outputs": [
         "storybook-static/**"

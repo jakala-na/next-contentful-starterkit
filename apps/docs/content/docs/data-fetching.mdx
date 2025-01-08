@@ -1,0 +1,632 @@
+---
+title: Data Fetching
+---
+import { File, Folder, Files } from 'fumadocs-ui/components/files';
+
+<Callout >
+  This guide will focus on using GraphQL to fetch content from Contenful. The decision to use GraphQL as opposed to Contentful Delivery API is documented [here](https://github.com/jakala-na/next-contentful-starterkit/blob/main/docs/decisions/001-graphql-typescript.md) and you should give it a look to get a general sense of what you need to expect, it covers limitations of both REST and GraphQL approaches and mitigations in place.
+</Callout>
+
+Fetching data with GraphQL is pretty simple, with it's introspective API you can explore the schema using 
+tools like GraphiQL available as a [Contentful app](https://www.contentful.com/marketplace/graphiql/), or 
+you can use your IDE/code editor if configured correctly, see [guide](#configure-editor-to-use-gqltada-and-autocomplete)
+
+We'll focus on the fundamentals for now. We'll work over a few scenarios for data fetching during this guide, starting with the most common and simple, fetching static content.
+
+## Fetching static content
+
+Static content, here defined as content that requires no user inputs and does not change based on application state, can be fetched ahead of time and pre-rendered in Next.js.
+We will assume this is 90% of the cases for marketing sites. Let's clarify with an example.
+
+Let's say we're rendering the homepage, which consists of Header, Footer, SEO metadata, Page content (Topic in [Contentful terms](https://www.contentful.com/help/topics-and-assemblies/)), and top and bottom components. 
+Some of the elements are shared between pages, like layout elements (header, footer), while others are page-specific.
+
+Layout elements are often stored in global configuration entries, like Header and Footer, and are shared between pages. Example hierarchy can look like this:
+
+<Files>
+  <Folder name="Navigation Menu (Entry)" defaultOpen>
+    <Folder name="Menu Items (Entry list)" defaultOpen>
+      <Folder name="Menu Group (Entry)" defaultOpen>
+        <File name="Group Name" icon="🔤 " />
+        <File name="Group Link" icon="🔗 " />
+        <Folder name="Featured Pages (Entry list)" defaultOpen>
+          <File name="Page (Entry)" icon="📄 " />
+          <File name="Page (Entry)" icon="📄 " />
+          <File name="Page (Entry)" icon="📄 " />
+        </Folder>
+      </Folder>
+    </Folder>
+  </Folder>
+  <Folder name="Footer Menu (Entry)" defaultOpen>
+    <Folder name="Menu Items (Entry list)" defaultOpen>
+      <Folder name="Menu Group (Entry)" defaultOpen>
+        <File name="Group Name" icon="🔤 " />
+        <File name="Group Link" icon="🔗 " />
+      </Folder>
+    </Folder>
+    <Folder name="Legal Links (Entry list)" defaultOpen>
+      <Folder name="Legal Link (Entry)" defaultOpen>
+        <File name="Group Name" icon="🔤 " />
+        <File name="Group Link" icon="🔗 " />
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+Content entries also come in hierarchies, for example a page Entry can include the following:
+
+<Files>
+  <Folder name="Page (Entry)" defaultOpen>
+    <File name="Page Name" icon="🔤 " />
+    <Folder name="Top Section (Entry list)" defaultOpen>
+      <Folder name="Hero Banner (Entry)" defaultOpen>
+        <File name="Headline" icon="🔤 " />
+        <File name="Body" icon="🔤 " />
+        <File name="Image" icon="📷 " />
+        <Folder name="CTA (Entry)" defaultOpen>
+          <File name="Title" icon="🔤 " />
+          <File name="URL" icon="🔗 " />
+        </Folder>
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+Ideally we want to describe one query for the layout (header, footer) and one for the page and it's components.
+
+### Layout query
+
+For layout level queries, we recommend using [RootLayout](https://nextjs.org/docs/app/api-reference/file-conventions/layout#root-layouts) or the top-most shared layout between all pages and query all global elements directly with GraphQL in a single request.
+
+Let's explore the demo content model, and how one can do top-level data fetching. The example content model has 3 content types related to navigation: Navigation Menu, Footer Menu and Menu Group, with Navigation Menu being used for header, while Footer menu being used for footer links.
+
+To construct the header, we'll need to query Navigation Menu and the hierarchy of linked Menu Groups, let's see how it looks like:
+
+<Files>
+  <Folder name="Navigation Menu (Entry)" defaultOpen>
+    <Folder name="Menu Items (Entry list)" defaultOpen>
+      <Folder name="Menu Group (Entry)" defaultOpen>
+        <File name="Group Name" icon="🔤 " />
+        <File name="Group Link" icon="🔗 " />
+        <Folder name="Featured Pages (Entry list)" defaultOpen>
+          <File name="Page (Entry)" icon="📄 " />
+          <File name="Page (Entry)" icon="📄 " />
+          <File name="Page (Entry)" icon="📄 " />
+        </Folder>
+      </Folder>
+    </Folder>
+  </Folder>
+</Files>
+
+To query the menu hierarchy we will construct a GraphQL query that looks like this:
+
+```graphql
+query Layout($locale: String, $preview: Boolean) {
+  navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+    items {
+      menuItemsCollection {
+        items {
+          groupName
+          groupLink {
+            ... on Page {
+              pageName
+              slug
+            }
+          }
+          featuredPagesCollection(limit: 10) {
+            items {
+              ... on Page {
+                pageName
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+    
+
+
+You can notice we are getting all navigation menus entries, but since we know there is only one available, we're limiting it to 1.
+
+Seems pretty straightforward, but let's expand our layout query to include footer menu as well.
+
+```graphql
+query Layout($locale: String, $preview: Boolean) {
+  navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+    items {
+      menuItemsCollection {
+        items {
+          groupName
+          groupLink {
+            ... on Page {
+              pageName
+              slug
+            }
+          }
+          featuredPagesCollection(limit: 10) {
+            items {
+              ... on Page {
+                pageName
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  footerMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+    items {
+      instagramLink
+      twitterLink
+      linkedinLink
+      facebookLink
+      legalLinks {
+        groupName
+        groupLink {
+          ... on Page {
+            pageName
+            slug
+          }
+        }
+        featuredPagesCollection(limit: 10) {
+          items {
+            ... on Page {
+              pageName
+              slug
+            }
+          }
+        }
+      }
+      menuItemsCollection {
+        items {
+          groupName
+          groupLink {
+            ... on Page {
+              pageName
+              slug
+            }
+          }
+          featuredPagesCollection(limit: 10) {
+            items {
+              ... on Page {
+                pageName
+                slug
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Notice our layout has knowledge of our content types internals (page) and units of our content architecture, also you will find some repetition, this is not good. 
+For example a Page content type has `pageName` and `slug` fields, but we're exposing this implementation detail to our Layout query instead of sharing it across our application.
+Same for Menu Group content available in menuItemsCollection fields on both header and footer menus, but also used in legalLinks. 
+We should be able to reuse some of this logic. This is what GraphQL Fragments are designed to solve.
+
+Let's refactor our query to use fragments:
+
+```graphql
+fragment PageLinkFields on Page {
+  pageName
+  slug
+}
+fragment MenuGroupFields on MenuGroup {
+  groupName
+  groupLink {
+    ...PageLinkFields
+  }
+  featuredPagesCollection(limit: 10) {
+    items {
+      ...PageLinkFields
+    }
+  }
+}
+query Layout($locale: String, $preview: Boolean) {
+  navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+    items {
+      menuItemsCollection {
+        items {
+          ...MenuGroupFields
+        }
+      }
+    }
+  }
+  footerMenuCollection(locale: $locale, preview: $preview, limit: 1) {
+    items {
+      instagramLink
+      twitterLink
+      linkedinLink
+      facebookLink
+      legalLinks {
+        ...MenuGroupFields
+      }
+      menuItemsCollection {
+        items {
+          ...MenuGroupFields
+        }
+      }
+    }
+  }
+}
+```
+
+Here we added 2 new fragments, one for displaying page fields needed to show a link, and another MenuGroupFields fragment for rendering a menu group with nested PageLinkFields fragment.
+For now inline fragments will do, we will explore later more ways to reuse fragments and you'll notice our actual code has a better implementation with co-located fragments, but more on that in next section.
+
+Now that we've constructed the query, you can fetch the data using graphqlClient (via urql) like so:
+```tsx title="apps/marketing/app/[locale]/layout.tsx"
+const layoutQuery = graphql(`
+  // LAYOUT QUERY DEFINED ABOVE 
+`);
+
+const layoutData = await graphqlClient(isDraftMode).query(
+  layoutQuery,
+  {
+    locale: getLocaleFromPath(locale),
+    preview: isDraftMode,
+  }
+);
+```
+
+For our layout query to work, we need to pass it locale and preview variables. Those determine the locale to fetch for menu items and whether we should fetch draft content or not.
+
+In this example we're using `getLocaleFromPath` to get the Contentful locale name (e.g. `en-US`) from the path (e.g. `/en/`), and passing it to the query.
+We also use `isDraftMode` to determine if we should fetch draft content or not. It's coming from `draftMode()` API from Next.js.
+
+We're wrapping the query in `graphql()` function call from gql.tada so that gql.tada can do it's magic, but we'll learn more about it in the next section.
+
+Let's explore a page-level query now.
+
+### Page query
+
+While layout query is being shared across all pages, for page-level queries we'll need to fetch data for a specific page, for this we'll need to know the page slug, which is controlled in Contentful.
+We'll use a dynamic route segment to implement dynamic routing for pages in our starter. This is organized the following way:
+
+```tsx title="apps/marketing/app/[locale]/[[...slug]]/page.tsx"
+interface PageProps {
+  params: { slug?: string[]; locale: string };
+}
+
+export default async function LandingPage({ params }: PageProps) {
+  const { locale } = params;
+  const slug = params.slug?.join('/') ?? 'home';
+  const { isEnabled: isDraftMode } = draftMode();
+
+  const pageData = await getPage(slug, getLocaleFromPath(locale), isDraftMode);
+
+  if (!pageData) {
+    notFound();
+  }
+
+  const topComponents = pageData.topSectionCollection?.items;
+  const pageContent = pageData.pageContent;
+
+  return (
+    <div>
+      {topComponents ? <ComponentRenderer data={topComponents} /> : null}
+      {pageContent ? <ComponentRenderer data={pageContent} /> : null}
+    </div>
+  );
+}
+```
+
+Let's break down this example
+
+* `[[...slug]]` is a dynamic route segment which will respond to any path that is not defined in the static routes, including the root path, due to `[[...slug]]` being an optional catch-all segment.
+* `[locale]` is a route segment that precedes the slug segment and will help us localize the page. Keep in mind that while it's not optional, you can tweak it to be optional using middleware rewrites
+* `getPage` is a function that will fetch the page data from Contentful, we will define it in the next step
+
+<Callout>
+We won't look at ComponentRenderer in this guide, but it's a component that will render our components based on the data we fetch from Contentful.
+Read more about our component architecture [here](/docs/components).
+</Callout>
+
+Let's build the query for `getPage` function. I've ommited some fragments for brevity, but added enough to illustrate complexity of the query.
+
+```graphql
+fragment AssetFields on Asset {
+  __typename
+  sys {
+    id
+  }
+  contentType
+  title
+  url
+  width
+  height
+  description
+}
+
+fragment PageLinkFields on Page {
+  __typename
+  slug
+  sys {
+    id
+  }
+  pageName
+  pageContent(locale: $locale, preview: $preview) {
+    ... on Entry {
+      __typename
+      sys {
+        id
+      }
+    }
+  }
+}
+
+fragment ComponentHeroBannerFields on ComponentHeroBanner {
+  __typename
+  sys {
+    id
+  }
+  headline
+  bodyText {
+    json
+    links {
+      assets {
+        block {
+          ...AssetFields
+        }
+      }
+    }
+  }
+  ctaText
+  targetPage {
+    ...PageLinkFields
+  }
+  image {
+    ...AssetFields
+  }
+  imageStyle
+  heroSize
+  colorPalette
+}
+
+fragment TopicBusinessInfo on TopicBusinessInfo {
+  __typename
+  sys {
+    id
+  }
+  name
+  shortDescription
+  body {
+    json
+    links {
+      entries {
+        block {
+          ...TopicPerson
+        }
+      }
+    }
+  }
+  featuredImage {
+    ...AssetFields
+  }
+}
+
+fragment TopicPerson on TopicPerson {
+  __typename
+  sys {
+    id
+  }
+  name
+  website
+  location
+  cardStyle
+  bio {
+    json
+  }
+  avatar {
+    ...AssetFields
+  }
+}
+
+query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+  pageCollection(
+    locale: $locale
+    preview: $preview
+    limit: 1
+    where: {slug: $slug}
+  ) {
+    items {
+      topSectionCollection(limit: 10) {
+        items {
+          __typename
+          ... on Entry {
+            sys {
+              id
+            }
+          }
+          ...ComponentHeroBannerFields
+        }
+      }
+      pageContent {
+        __typename
+        ... on Entry {
+          sys {
+            id
+          }
+          ... TopicBusinessInfo
+        }
+      }
+    }
+  }
+}
+```
+
+And now we can use that query in our `getPage` function.
+```tsx
+const getPage = async (slug: string, locale: string, preview = false) => {
+  const pageQuery = graphql(
+    `
+     // PAGE QUERY DEFINED ABOVE
+    `
+  );
+
+  const response = await graphqlClient(preview).query(pageQuery, {
+    locale,
+    preview,
+    slug,
+  });
+
+  return processedResponse.data?.pageCollection?.items[0];
+};
+```
+
+Those simple examples should illustrate the work that goes into data-fetching on both page and layout level, but we should
+unpack how we can make the query authoring, TypeScript inference and reusability better.
+
+## Query Authoring
+
+I mentioned gql.tada in the previous section, but let's explore it in more detail a few benefits it provides.
+
+### Typescript inference
+
+The biggest benefit of using GraphQL in any project would probably be the developer experience you can get with it. GraphQL being typed and having a schema,
+you can get autocomplete feature and type-safety in your IDE, with the right tooling.
+
+For this starter we adopted [gql.tada](https://github.com/0no-co/gql.tada) to implement typesafe data-fetching.
+
+In a nutshell, gql.tada is a tool that will help us get typed GraphQL responses in Typescript by running a Typescript plugin in our IDE/editor of choise,
+and teaching Typescript how to infer types from our GraphQL schema, our queries and fragments.
+
+Let's take our getPage funciton from the previous section and see how we can get autocomplete for the response, we'll model it without using gql.tada first to demonstrate the problem.
+
+```ts twoslash
+declare var graphqlClient: (preview: boolean) => import('@urql/core').Client;
+// ---cut---
+import { parse } from 'graphql';
+
+const getPage = async (slug: string, locale: string, preview = false) => {
+  const pageQuery = parse(/* GraphQL */ `
+    query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+      pageCollection(locale: $locale, preview: $preview, limit: 1, where: {slug: $slug}) {
+        items {
+          slug
+        }
+      }
+    }
+  `);
+
+  const response = await graphqlClient(true).query(pageQuery, { locale, preview, slug });
+//                                                 ^?
+  
+  return response.data?.pageCollection?.items[0];
+};
+
+const pageData = await getPage('home', 'en-US');
+//    ^?
+
+```
+
+See how we have `pageCollection` and `pageData` inferred as `any`? That's because we're sending effectively a string to urql 
+(we send a DocumentNode, but urql can only infer types from TypedDocumentNode)
+
+If we'd like to get autocomplete and type-safety, we can use gql.tada's `graphql()` function to get a `TypedDocumentNode` query.
+
+```ts twoslash
+declare var graphqlClient: (preview: boolean) => import('@urql/core').Client;
+import './gql/graphql-env.d.ts';
+// ---cut---
+import { graphql } from 'gql.tada';
+const getPage = async (slug: string, locale: string, preview = false) => {
+  const pageQuery = graphql(`
+    query PageQuery($slug: String, $locale: String, $preview: Boolean) {
+      pageCollection(locale: $locale, preview: $preview, limit: 1, where: {slug: $slug}) {
+        items {
+          slug
+        }
+      }
+    }
+  `);
+  const response = await graphqlClient(true).query(pageQuery, { locale, preview, slug });
+  
+  return response.data?.pageCollection?.items[0];
+};
+
+const pageData = await getPage('home', 'en-US');
+//    ^?
+
+
+
+
+
+// @noErrors
+
+
+if (pageData) {
+  // You also get autocomplete for the response.
+  const slug = pageData.s
+//                       ^|
+}
+
+```
+
+You can see how pageData variable is now typed with a proper shape of the response based on the query we sent, and you get autocomplete for the response if you start typing fields like `pageData.slug`.
+The `graphql()` function from gql.tada is doing the magic here, it's parsing the query and fragments and generating a `TypedDocumentNode` that can be used with urql, but it unlike some 
+alternative codegen solutions (like the popular [client preset with graphql-codegen](https://the-guild.dev/graphql/codegen/plugins/presets/preset-client)), it does that in IDE on the fly without the
+need to run a codegen step and compute files with types.
+
+There is a setup step to make it work though. Mainly you will need to have a graphql schema, and a configured Typescript GraphQLSP LSP plugin in your IDE. We'll explore both in the next subsections.
+
+### Regenerate graphql schema
+
+If you're adding new content types or making changes to the content model, you will need to generate a new graphql schema to get type inference in Typescript working and to get autocomplete in IDE. This can be done by running:
+
+```bash
+pnpm --filter=marketing generate:schema
+```
+
+After new types are generated, you will get changes in `./gql/` folder that you'll have to commit after you are done developing the feature.
+Keep in mind, schema generation will take your `.env.local` and read the CONTENTFUL_ENVIRONMENT you are pointing to, so if you create a new content type on a different environment, 
+it will not be pulled, or the opposite, if you have unwanted content types in your sandbox environment, 
+they will all appear in the schema. Make sure you commit changes you intend to commit!
+
+### Configure editor to use gql.tada and autocomplete
+
+GraphQL tooling needed locally consists of 2 parts:
+
+- GraphQL Language support
+- Typescript inference with gql.tada
+
+**Autocomplete and language support:**
+
+Make sure if you're using an editor with a plugin system, you'll want to install a plugin with GraphQL language support.
+In VSCode or Cursor you can use [GraphQL: Language Feature Support](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql).
+In Webstorm you can use [GraphQL Plugin](https://www.jetbrains.com/help/webstorm/graphql.html)
+Those plugins/extensions typically will load GraphQL config from any GraphQL Config file, mainly we use [.graphqlrc.yml](/.graphqlrc.yml) and enable features such as:
+
+- Query syntax highlighting
+- Autocompletion of queries
+- Go to definition
+
+If you need the plugin/extension to extract queries/fragments from more places, make sure to look at [.graphqlrc.yml](/.graphqlrc.yml) rules, as those define what files get scanned for GraphQL queries and fragments.
+
+[!WARNING]
+Keep in mind that if you're using VSCode or Cursor and you have issues with "Unknown fragment" errors, you'll want to downgrade GraphQL Language Feature Support extension to version 0.9.3 until this [issue](https://github.com/graphql/graphiql/issues/3620) is resolved.
+
+**gql.tada support**
+
+While gql.tada comes pre-configured with the project, you might want to know a little about how it works. You can refer to [workflows docs](https://gql-tada.0no.co/get-started/workflows) to learn more about how to use gql.tada, but we'll give you the gist here.
+
+In order for gql.tada's GraphQLSP plugin to work (and infer types), you need to have local Typescript server making the type inference (`node_modules/typescript/lib`)
+If you are using VSCode, the .vscode/settings.json in the repo is already configured to use the local Typescript server, but if things don't work, please double-check.
+
+If using Webstorm, make sure you configure the Typescript interpreter from node_modules/typescript/lib as well under Settings -> Language & Frameworks -> Typescript
+
+If you can't use a Typescript server in your IDE, you can optionally generate a gql/graphql-env.d.ts by running this command:
+
+```bash
+pnpm --filter=marketing generate:output
+```
+
+This command will also run `gql.tada turbo` which will generate a cache file that should also be commited. This cache file will speed up inference for new users who just checked out a new branch.
+More info [here](https://gql-tada.0no.co/devlog/2024-04-15)

@@ -1,0 +1,79 @@
+---
+title: CLI
+---
+
+import { File, Folder, Files } from 'fumadocs-ui/components/files';
+
+<Callout title="Work in progress" type="warn">
+  This is a work in progress feature, we will be adding more features to the CLI in the future.
+</Callout>
+
+We have a CLI that will focus on facilitating the dev workflow by scaffolding common patterns adopted by the starterkit.
+We plan to use it to generate components and may add other scaffolding features in the future. 
+
+## Generate a component
+
+Assuming you are trying to integrate a new component in Contentful. You may already have a UI component ready in `packages/ui`,
+or you may be creating one as part of the task. You may have a content type ready in Contentful, or you may be creating a new one.
+We're trying to meet you where you are and offer you a way to scaffold the missing pieces.
+
+Before you use the CLI, you need to have the following environment variables set in your `.env.local` file, but you should have already done that if you followed the [Getting Started](/docs) guide:
+
+- `CONTENTFUL_SPACE`
+- `CONTENTFUL_ENVIRONMENT`
+- `CONTENTFUL_DELIVERY_API`
+
+You can run the following command to generate a component stub:
+
+```bash
+pnpm run --filter=marketing generate:component
+```
+
+<Callout>
+Notice the `--filter=marketing` flag, this is because the CLI is installed in the `marketing` app (workspace), but you can run it from the root of the monorepo.
+</Callout>
+
+This will prompt you for the content type ID (from the list), and will ask you if you want to generate a matching UI component.
+If you don't have a content type in Contentful yet, you can pick `-- No content type yet --` and the CLI will prompt you for component name so it can name the files.
+
+![CLI generate component prompt](/images/cli-generate-component-prompt.png)
+
+You will be asked if you want to generate a UI component as well.
+
+The CLI will generate an component folder following the content type name, or custom name if you chose to specify no content type in `apps/marketing/components`.
+If you choose to generate a UI component, the CLI will create an additional folder in the `packages/ui/components` directory (shared UI library).
+
+The generated component will follow the naming convention of the starterkit as well as stub the server, client and mapping parts of the component.
+
+Results of the CLI command will look like this (if you chose to generate a UI component as well):
+
+<Files>
+  <Folder name="apps/marketing/components/component-form" defaultOpen>
+    <File name="component-form.tsx" />
+    <File name="component-form-client.tsx" />
+    <File name="index.tsx" />
+  </Folder>
+  <Folder name="packages/ui/components/component-form" defaultOpen>
+    <File name="component-form.tsx" />
+    <File name="component-form.stories.tsx" />
+    <File name="index.tsx" />
+  </Folder>
+</Files>
+
+The CLI will also add a mapping to the `apps/marketing/component-renderer/mappings.ts` file, similar to this:
+
+```ts title="apps/marketing/component-renderer/mappings.ts"
+export const mappings = {
+  // ... existing mappings
+  ContentTypeName, // [!code highlight]
+};
+```
+
+`ContentTypeName` is the name of the content type you chose to generate the component for, or the custom name if you chose to specify no content type.
+
+From here, you can inspect the generated outputs and adjust them to your needs.
+
+<Callout type="info">
+  The outputs of the CLI are going to match our described patterns in [Components guide](/docs/components), but the guide is still useful to understand
+  why we chose the patterns we did.
+</Callout>
