@@ -187,7 +187,7 @@ export async function generateStaticParams() {
   const returnData: Params[] = [];
   for await (const locale of params) {
     const slugs = (await getPageSlugs(getLocaleFromPath(locale.locale))).map((page) => ({
-      slug: page.slug?.split('/'),
+      slug: page.slug === '/' ? [''] : page.slug?.split('/'),
     }));
     for (const slug of slugs) {
       returnData.push({ slug: slug.slug, locale: locale.locale });
