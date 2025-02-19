@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "//"
+  ],
+  "tasks": {
+    "build": {
+      "env": [
+        "DRUPAL_AUTH_URI",
+        "DRUPAL_VIEWER_CLIENT_ID",
+        "DRUPAL_VIEWER_CLIENT_SECRET",
+        "DRUPAL_PREVIEWER_CLIENT_ID",
+        "DRUPAL_PREVIEWER_CLIENT_SECRET",
+        "DRUPAL_GRAPHQL_URI"
+      ]
+    }
+  }
+}
