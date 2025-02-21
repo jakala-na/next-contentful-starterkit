@@ -1,6 +1,7 @@
 import { type FragmentOf, graphql, readFragment } from 'gql.tada';
 
 import { TopicPersonFieldsFragment } from '#/components/topic-person/topic-person';
+import { ComponentProductTableFragment } from '#/components/component-product-table/component-product-table';
 
 import { AssetFieldsFragment } from '../asset-ctf';
 import { TopicBusinessInfoClient } from './topic-business-info-client';
@@ -20,6 +21,7 @@ export const TopicBusinessInfoFieldsFragment = graphql(
           entries {
             block {
               ...TopicPerson
+              ...ComponentProductTable
             }
           }
         }
@@ -29,7 +31,7 @@ export const TopicBusinessInfoFieldsFragment = graphql(
       }
     }
   `,
-  [AssetFieldsFragment, TopicPersonFieldsFragment]
+  [AssetFieldsFragment, TopicPersonFieldsFragment, ComponentProductTableFragment]
 );
 
 export interface TopicBusinessInfoProps {

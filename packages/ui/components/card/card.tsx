@@ -6,10 +6,11 @@ import { Image, type ImageProps } from '../image';
 import type { LinkProps } from '../link';
 import { Link } from '../link';
 
-interface CardProps {
+export interface CardProps {
   headline?: string | null;
   bodyText?: ReactNode;
   image?: ImageProps | null;
+  link?: string | null;
   cta?: LinkProps | null;
   colorPalette?: string | null;
   addAttributes?: (name: string) => object | null;
@@ -21,6 +22,7 @@ export function Card(props: CardProps) {
     headline,
     bodyText,
     image,
+    link,
     cta,
     colorPalette,
     addAttributes = () => ({}), // Default to no-op.
@@ -32,6 +34,13 @@ export function Card(props: CardProps) {
     <div
       className="max-w-sm rounded-lg shadow-lg overflow-hidden"
       style={{ backgroundColor: colorConfig.backgroundColor }}
+      onClick={
+        link
+          ? () => {
+              location.href = link;
+            }
+          : () => null
+      }
     >
       <div className="aspect-w-16 aspect-h-9">
         {image ? <Image {...addAttributes('image')} {...image} alt={image.alt} className="w-full" /> : null}{' '}
@@ -43,7 +52,7 @@ export function Card(props: CardProps) {
           </h3>
         ) : null}
         {bodyText ? (
-          <div className="wysiwyg" style={{ color: colorConfig.textColor }}>
+          <div className="wysiwyg my-5" style={{ color: colorConfig.textColor }}>
             {bodyText}
           </div>
         ) : null}

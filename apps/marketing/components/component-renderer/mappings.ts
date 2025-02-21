@@ -1,3 +1,4 @@
+import { ComponentProductTable } from '#/components/component-product-table/component-product-table';
 import { HeroBannerCtf } from '#/components/hero-banner-ctf/hero-banner-ctf';
 import { DuplexCtf } from '#/components/duplex-ctf/duplex-ctf';
 import { TopicBusinessInfo } from '#/components/topic-business-info/topic-business-info';
@@ -10,4 +11,5 @@ export const componentMap = {
   TopicBusinessInfo,
   TopicPersons: TopicPerson,
   TopicProduct,
+  ComponentProductTable,
 } as const;

@@ -5,6 +5,11 @@ import { TopicProductFeatureFragment } from '../topic-product-feature/topic-prod
 import { TopicProductClient } from './topic-product-client';
 import { TaxonomyConceptFragment, TaxonomyConcept } from '../taxonomy-concept';
 
+export const getTopicProductProps = ({ data: fragmentData, ...props }: TopicProductProps) => {
+  const data = readFragment(TopicProductFragment, fragmentData);
+  return data;
+};
+
 export const TopicProductFragment = graphql(
   `
     fragment TopicProduct on TopicProduct {
