@@ -1,16 +1,15 @@
 'use client';
 
-import { ResultOf } from 'gql.tada';
-
 import { getImageChildProps } from '#/components/image-ctf';
 import { RichTextCtf } from '#/components/rich-text-ctf';
 
 import { getTopicProductFeatureProps } from '../topic-product-feature/topic-product-feature';
-import { type TopicProductFragment } from '#/components/topic-product/topic-product';
 import { TopicProduct } from '@repo/ui/components/topic-product';
+import { LinkProps } from '@repo/ui/components/link';
 import { useComponentPreview } from '../hooks/use-component-preview';
+import { type TopicProductAddFields } from '#/components/topic-product/topic-product';
 
-export function TopicProductClient(props: { data: ResultOf<typeof TopicProductFragment> }) {
+export function TopicProductClient(props: { data: TopicProductAddFields }) {
   const { data: originalData } = props;
   const { data, addAttributes } = useComponentPreview(originalData);
 
@@ -19,6 +18,16 @@ export function TopicProductClient(props: { data: ResultOf<typeof TopicProductFr
       return feature ? getTopicProductFeatureProps({ data: feature })?.name : null;
     })
     .filter((feature) => feature !== null);
+
+  const tags: LinkProps[] = data.contentfulMetadata.concepts
+    .filter((concept) => concept !== null)
+    .map((concept) => {
+      return {
+        id: concept.id,
+        children: concept.prefLabel,
+        href: '#',
+      };
+    });
 
   return (
     <TopicProduct
@@ -41,6 +50,7 @@ export function TopicProductClient(props: { data: ResultOf<typeof TopicProductFr
       }
       features={features}
       price={data.price}
+      tags={tags}
       addAttributes={addAttributes}
     />
   );

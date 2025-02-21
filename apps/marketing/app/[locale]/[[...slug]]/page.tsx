@@ -16,6 +16,7 @@ import { TopicBusinessInfoFieldsFragment } from '#/components/topic-business-inf
 import { TopicProductFragment } from '#/components/topic-product/topic-product';
 import { addContentSourceMaps } from '#/lib/content-source-maps';
 import { graphqlClient } from '#/lib/graphql-client';
+import { getTaxonomyConcepts } from '#/lib/get-taxonomy-concepts';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 import { getStaticParams } from '#/locales/server';
 
@@ -29,6 +30,12 @@ interface Params {
 }
 
 const getPage = async (slug: string, locale: string, preview = false) => {
+  const taxonomyConcepts = await getTaxonomyConcepts(process.env.CONTENTFUL_ORGANIZATION ?? '<missing organization>');
+  const clientData = {
+    locale: locale,
+    taxonomyConcepts,
+  };
+
   const pageQuery = graphql(
     `
       query PageQuery($slug: String, $locale: String, $preview: Boolean) @contentSourceMaps {
@@ -70,7 +77,7 @@ const getPage = async (slug: string, locale: string, preview = false) => {
     ]
   );
 
-  const response = await graphqlClient(preview).query(pageQuery, {
+  const response = await graphqlClient({ preview, data: clientData }).query(pageQuery, {
     locale,
     preview,
     slug,
@@ -93,7 +100,7 @@ const getPageSlugs = async (locale: string) => {
     }
   `);
 
-  const pages = await graphqlClient(false).query(pageQuery, {
+  const pages = await graphqlClient({ preview: false }).query(pageQuery, {
     locale,
   });
 
@@ -124,7 +131,7 @@ const getPageMetadata = async (slug: string, locale: string, preview = false): P
     [ComponentSEOFieldsFragment]
   );
 
-  const response = await graphqlClient(preview).query(pageQuery, {
+  const response = await graphqlClient({ preview }).query(pageQuery, {
     locale,
     preview,
     slug,

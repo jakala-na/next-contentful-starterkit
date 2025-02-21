@@ -5,17 +5,33 @@
 
 import 'server-only';
 
-import { createClient, fetchExchange } from '@urql/core';
+import { createClient, fetchExchange, Exchange } from '@urql/core';
 import { persistedExchange } from '@urql/exchange-persisted';
 import memoize from 'lodash/memoize';
 import { mapExchange } from 'urql';
+import { ConceptProps } from 'contentful-management';
+
+import { modifyResponseExchange } from './modify-response-exchange';
 
 const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE ?? '<missing space>'}/environments/${process.env.CONTENTFUL_ENVIRONMENT ?? '<missing environment>'}`;
 
-const makeClient = (preview: boolean) => {
+interface MakeClientProps {
+  preview?: boolean;
+  data?: {
+    locale?: string;
+    taxonomyConcepts?: ConceptProps[];
+  };
+}
+
+const makeClient = ({ preview, data = {} }: MakeClientProps) => {
+  const { locale, taxonomyConcepts } = data;
   return createClient({
     url: `${graphqlEndpoint}?access_token=${(preview ? process.env.CONTENTFUL_PREVIEW_API : process.env.CONTENTFUL_DELIVERY_API) ?? '<missing token>'}`,
     exchanges: [
+      modifyResponseExchange({
+        locale,
+        taxonomyConcepts,
+      }),
       /**
        * Enable Automated Persisted Queries to reduce the size of the request.
        *

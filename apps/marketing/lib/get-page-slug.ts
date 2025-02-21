@@ -14,7 +14,7 @@ const getPageSlug = async (slug: string, locale: string, preview = false) => {
   `);
 
   return (
-    await graphqlClient(preview).query(pageSlugQuery, {
+    await graphqlClient({ preview }).query(pageSlugQuery, {
       locale,
       preview,
       slug,

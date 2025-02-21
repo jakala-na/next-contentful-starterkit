@@ -1,6 +1,8 @@
 import { type ReactNode } from 'react';
 
 import { Image, type ImageProps } from '@repo/ui/components/image';
+import { Button } from '../button';
+import { Link, type LinkProps } from '../link';
 
 export interface TopicProductProps {
   name: string | null;
@@ -8,6 +10,7 @@ export interface TopicProductProps {
   featuredImage?: ImageProps | null;
   features?: string[] | null;
   price: number | null;
+  tags: LinkProps[] | null;
   addAttributes?: (name: string) => object | null;
 }
 
@@ -17,6 +20,7 @@ export function TopicProduct({
   featuredImage,
   features,
   price,
+  tags,
   addAttributes = () => ({}),
 }: TopicProductProps) {
   return (
@@ -37,21 +41,29 @@ export function TopicProduct({
           <div className="basis-1/1 sm:basis-2/3 lg:basis-1/2">
             <h2 className="text-3xl">{name}</h2>
             {price ? (
-              <div className="pt-6">
-                <span className="font-bold">Price</span>: ${price}
+              <div className="mt-6">
+                <span className="font-bold">${price}</span>
               </div>
             ) : null}
-            {description ? <div className="wysiwyg max-w-none pt-6">{description}</div> : null}
+            {description ? <div className="wysiwyg max-w-none">{description}</div> : null}
             {features ? (
-              <div className="pt-6">
-                <h3 className="text-xl">Features</h3>
-                <ul className="pt-2">
+              <div className="mt-6">
+                <ul>
                   {features.map((feature, index) => (
                     <li key={`feature-${index}`} className="list-disc ml-6">
                       {feature}
                     </li>
                   ))}
                 </ul>
+              </div>
+            ) : null}
+            {tags ? (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {tags.map((tag, index) => (
+                  <Button key={`tag-${index}`} variant="outline" size="sm" {...addAttributes('ctaText')} asChild>
+                    <Link {...tag} />
+                  </Button>
+                ))}
               </div>
             ) : null}
           </div>

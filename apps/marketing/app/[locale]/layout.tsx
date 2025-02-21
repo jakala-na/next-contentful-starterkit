@@ -39,7 +39,7 @@ export default async function RootLayout(props: { children: React.ReactNode; par
     [NavigationFieldsFragment]
   );
 
-  const layoutData = await graphqlClient(isDraftMode).query(
+  const layoutData = await graphqlClient({ preview: isDraftMode }).query(
     layoutQuery,
     {
       locale: getLocaleFromPath(locale),

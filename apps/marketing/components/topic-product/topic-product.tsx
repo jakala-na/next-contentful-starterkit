@@ -1,4 +1,4 @@
-import { type FragmentOf, graphql, readFragment } from 'gql.tada';
+import { type FragmentOf, ResultOf, graphql, readFragment } from 'gql.tada';
 
 import { AssetFieldsFragment } from '../asset-ctf';
 import { TopicProductFeatureFragment } from '../topic-product-feature/topic-product-feature';
@@ -33,6 +33,17 @@ export const TopicProductFragment = graphql(
   `,
   [AssetFieldsFragment, TopicProductFeatureFragment]
 );
+
+export type ContentfulMetadataAddProps = {
+  contentfulMetadata: {
+    concepts: ({
+      id: string | null;
+      prefLabel?: string | null;
+    } | null)[];
+  };
+};
+
+export type TopicProductAddFields = ContentfulMetadataAddProps & ResultOf<typeof TopicProductFragment>;
 
 export interface TopicProductProps {
   data: FragmentOf<typeof TopicProductFragment> & Record<string, any>;

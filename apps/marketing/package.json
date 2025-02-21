@@ -63,6 +63,7 @@
     "axe-core": "^4.6.1",
     "chalk": "^5.3.0",
     "contentful": "^11.2.0",
+    "contentful-management": "^11.47.2",
     "cypress": "^13.16.0",
     "cypress-axe": "^1.2.0",
     "cypress-image-snapshot": "^4.0.1",
@@ -76,7 +77,8 @@
     "simple-scaffold": "^2.3.2",
     "tailwindcss": "^3.3.3",
     "ts-loader": "^9.4.2",
-    "webpack": "^5.75.0"
+    "webpack": "^5.75.0",
+    "wonka": "^6.3.4"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [

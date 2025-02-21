@@ -15,10 +15,11 @@ const meta = {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     name: { control: 'text' },
-    description: { control: 'text' },
+    description: { control: 'object' },
     featuredImage: { control: 'object' },
     features: { control: 'object' },
     price: { control: 'number' },
+    tags: { control: 'object' },
   },
 } satisfies Meta<typeof TopicProduct>;
 
@@ -29,8 +30,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     name: 'With great power comes great responsibility',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, libero eget ultricies aliquam, nisl nunc ultricies nunc, vitae ultricies nisl nunc eget nunc. Donec auctor, libero eget ultricies aliquam, nisl nunc ultricies nunc, vitae ultricies nisl nunc eget nunc.',
+    description: (
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, libero eget ultricies aliquam, nisl
+          nunc ultricies nunc, vitae ultricies nisl nunc eget nunc. Donec auctor, libero eget ultricies aliquam, nisl
+          nunc ultricies nunc, vitae ultricies nisl nunc eget nunc.
+        </p>
+      </div>
+    ),
     featuredImage: {
       src: 'https://picsum.photos/seed/picsum/1080/1080',
       alt: 'Placeholder image',
@@ -43,5 +51,19 @@ export const Default: Story = {
       'Morbi congue quam non elit consequat, vel dapibus sem pretium.',
     ],
     price: 49.99,
+    tags: [
+      {
+        children: <>Tincidunt</>,
+        href: '#',
+      },
+      {
+        children: <>Consequat</>,
+        href: '#',
+      },
+      {
+        children: <>Morbi</>,
+        href: '#',
+      },
+    ],
   },
 };
