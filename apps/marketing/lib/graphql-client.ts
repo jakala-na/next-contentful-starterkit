@@ -5,7 +5,7 @@
 
 import 'server-only';
 
-import { createClient, fetchExchange, Exchange } from '@urql/core';
+import { createClient, fetchExchange } from '@urql/core';
 import { persistedExchange } from '@urql/exchange-persisted';
 import memoize from 'lodash/memoize';
 import { mapExchange } from 'urql';
