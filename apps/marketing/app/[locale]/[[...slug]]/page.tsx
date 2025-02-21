@@ -32,7 +32,7 @@ interface Params {
 const getPage = async (slug: string, locale: string, preview = false) => {
   const taxonomyConcepts = await getTaxonomyConcepts(process.env.CONTENTFUL_ORGANIZATION ?? '<missing organization>');
   const clientData = {
-    locale: locale,
+    locale,
     taxonomyConcepts,
   };
 
