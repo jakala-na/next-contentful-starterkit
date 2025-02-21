@@ -30,20 +30,20 @@ export function Card(props: CardProps) {
 
   return (
     <div
-      className="max-w-sm rounded-2xl shadow-md overflow-hidden"
+      className="max-w-sm rounded-lg shadow-lg overflow-hidden"
       style={{ backgroundColor: colorConfig.backgroundColor }}
     >
       <div className="aspect-w-16 aspect-h-9">
         {image ? <Image {...addAttributes('image')} {...image} alt={image.alt} className="w-full" /> : null}{' '}
       </div>
-      <div className="p-4">
+      <div className="p-6">
         {headline ? (
-          <h2 className="mb-4 text-4xl font-bold" style={{ color: colorConfig.headlineColor }}>
+          <h3 className="text-2xl font-bold" style={{ color: colorConfig.headlineColor }}>
             {headline}
-          </h2>
+          </h3>
         ) : null}
         {bodyText ? (
-          <div className="wysiwyg text-lg" style={{ color: colorConfig.textColor }}>
+          <div className="wysiwyg" style={{ color: colorConfig.textColor }}>
             {bodyText}
           </div>
         ) : null}
