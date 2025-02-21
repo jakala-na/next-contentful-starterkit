@@ -28,7 +28,7 @@ export const modifyResponseExchange =
       );
     });
 
-    // Function to recursively find and modify TopicProduct objects
+    // Function to recursively find and modify concepts objects
     const modifyConcepts = (obj: any): any => {
       if (typeof obj !== 'object' || obj === null) {
         return obj;
