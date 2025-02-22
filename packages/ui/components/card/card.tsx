@@ -7,13 +7,14 @@ import type { LinkProps } from '../link';
 import { Link } from '../link';
 
 export interface CardProps {
-  headline?: string | null;
+  headline?: string;
   bodyText?: ReactNode;
-  image?: ImageProps | null;
-  link?: string | null;
-  cta?: LinkProps | null;
-  colorPalette?: string | null;
-  addAttributes?: (name: string) => object | null;
+  image?: ImageProps;
+  cta?: LinkProps;
+  link?: string;
+  colorPalette?: string;
+  addAttributes?: (name: string) => object;
+  onClickEvent?: React.MouseEventHandler<HTMLDivElement>;
   onClickAnalyticsEvent?: () => void;
 }
 
@@ -22,25 +23,30 @@ export function Card(props: CardProps) {
     headline,
     bodyText,
     image,
-    link,
     cta,
+    link,
     colorPalette,
     addAttributes = () => ({}), // Default to no-op.
+    onClickEvent,
     onClickAnalyticsEvent,
   } = props;
   const colorConfig = getColorConfigFromPalette(colorPalette ?? '');
 
+  const onClickHandler = (e: React.MouseEvent<HTMLInputElement>) => {
+    if (onClickEvent) {
+      return onClickEvent(e);
+    }
+    if (link && window) {
+      window.location.href = link;
+      return;
+    }
+  };
+
   return (
     <div
-      className={`max-w-sm rounded-lg shadow-lg overflow-hidden ${link ? 'cursor-pointer' : ''}`}
+      className={`max-w-sm rounded-lg shadow-lg overflow-hidden ${onClickEvent || link ? 'cursor-pointer' : ''}`}
       style={{ backgroundColor: colorConfig.backgroundColor }}
-      onClick={
-        link
-          ? () => {
-              location.href = link;
-            }
-          : () => null
-      }
+      onClick={onClickHandler}
     >
       <div className="aspect-w-16 aspect-h-9">
         {image ? <Image {...addAttributes('image')} {...image} alt={image.alt} className="w-full" /> : null}{' '}

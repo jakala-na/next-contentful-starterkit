@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { type ResultOf } from 'gql.tada';
 
 import { getImageChildProps } from '#/components/image-ctf';
@@ -15,6 +17,7 @@ import { type CardProps } from '@repo/ui/components/card';
 export function ComponentProductTableClient(props: { data: ResultOf<typeof ComponentProductTableFragment> }) {
   const { data: originalData } = props;
   const { data, addAttributes } = useComponentPreview(originalData);
+  const router = useRouter();
 
   const items: CardProps[] = data.productsCollection
     ? data.productsCollection?.items
@@ -23,21 +26,29 @@ export function ComponentProductTableClient(props: { data: ResultOf<typeof Compo
             return null;
           }
           const itemProps = getTopicProductProps({ data: item });
+          const image = itemProps.featuredImage
+            ? getImageChildProps({
+                data: itemProps.featuredImage,
+                sizes: '100vw',
+                priority: true,
+              })
+            : undefined;
+          const slug = itemProps.linkedFrom?.pageCollection?.items[0]?.slug;
           return {
-            headline: itemProps.name,
+            headline: itemProps.name ?? undefined,
             bodyText: itemProps.description ? (
               <div {...addAttributes('bodyText')}>
                 <RichTextCtf {...itemProps.description} />
               </div>
-            ) : null,
-            image: itemProps.featuredImage
-              ? getImageChildProps({
-                  data: itemProps.featuredImage,
-                  sizes: '100vw',
-                  priority: true,
-                })
-              : null,
-            link: itemProps.linkedFrom?.pageCollection?.items[0]?.slug,
+            ) : undefined,
+            image: image ?? undefined,
+            onClickEvent: slug
+              ? () => {
+                  if (slug) {
+                    router.push(slug);
+                  }
+                }
+              : undefined,
           };
         })
         .filter((item) => item !== null)
@@ -45,7 +56,6 @@ export function ComponentProductTableClient(props: { data: ResultOf<typeof Compo
 
   return (
     <ComponentProductTable
-      id={data.sys.id}
       headline={data.headline}
       subline={data.subline}
       items={items}

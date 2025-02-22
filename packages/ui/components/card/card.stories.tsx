@@ -36,6 +36,7 @@ const defaultArgs = {
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, libero eget ultricies aliquam, nisl.</p>
     </div>
   ),
+  link: '#',
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args

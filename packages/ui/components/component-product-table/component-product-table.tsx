@@ -1,8 +1,6 @@
-import { TopicProductProps } from '../topic-product';
 import { Card, type CardProps } from '../card';
 
 export interface ComponentProductTableProps {
-  id?: string;
   headline?: string | null;
   subline?: string | null;
   items?: CardProps[] | null;
@@ -10,7 +8,6 @@ export interface ComponentProductTableProps {
 }
 
 export function ComponentProductTable({
-  id,
   headline,
   subline,
   items,
@@ -29,6 +26,7 @@ export function ComponentProductTable({
               bodyText={item.bodyText}
               image={item.image}
               link={item.link}
+              onClickEvent={item.onClickEvent}
             />
           ))}
         </div>
