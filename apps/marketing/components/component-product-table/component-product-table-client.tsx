@@ -37,6 +37,7 @@ export function ComponentProductTableClient(props: { data: ResultOf<typeof Compo
                   priority: true,
                 })
               : null,
+            link: itemProps.linkedFrom?.pageCollection?.items[0]?.slug,
           };
         })
         .filter((item) => item !== null)

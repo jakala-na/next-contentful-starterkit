@@ -32,7 +32,7 @@ export function Card(props: CardProps) {
 
   return (
     <div
-      className="max-w-sm rounded-lg shadow-lg overflow-hidden"
+      className={`max-w-sm rounded-lg shadow-lg overflow-hidden ${link ? 'cursor-pointer' : ''}`}
       style={{ backgroundColor: colorConfig.backgroundColor }}
       onClick={
         link

@@ -35,6 +35,16 @@ export const TopicProductFragment = graphql(
         }
       }
       price
+      linkedFrom {
+        pageCollection(limit: 1) {
+          items {
+            sys {
+              id
+            }
+            slug
+          }
+        }
+      }
     }
   `,
   [TaxonomyConceptFragment, AssetFieldsFragment, TopicProductFeatureFragment]
