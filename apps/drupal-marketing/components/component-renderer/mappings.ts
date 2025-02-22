@@ -1,11 +1,8 @@
-import { HeroBannerCtf } from '#/components/hero-banner-ctf/hero-banner-ctf';
-import { DuplexCtf } from '#/components/duplex-ctf/duplex-ctf';
-import { TopicBusinessInfo } from '#/components/topic-business-info/topic-business-info';
-import { TopicPerson } from '#/components/topic-person/topic-person';
+/* eslint-disable no-unused-vars -- we have undefined components for now */
+import { ParagraphHeroBanner } from '#/components/paragraphs/hero-banner/hero-banner';
+import { NodePage } from '#/components/node-page/node-page';
 
 export const componentMap = {
-  ComponentHeroBanner: HeroBannerCtf,
-  ComponentDuplex: DuplexCtf,
-  TopicBusinessInfo,
-  TopicPersons: TopicPerson,
+  ParagraphHero: ParagraphHeroBanner,
+  NodePage,
 } as const;

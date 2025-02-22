@@ -15,23 +15,16 @@ import { type ComponentProps } from 'react';
 
 interface BaseData {
   __typename: string;
-  sys?: {
-    id: string;
-  };
+  id: string;
 }
 
 type ComponentMapType = typeof componentMap;
 type Data = ComponentProps<ComponentMapType[ComponentKey]>['data'];
 type ComponentKey = keyof ComponentMapType;
-type DataWithTypename = (Data & BaseData) | BaseData | null;
+export type DataWithTypename = (Data & BaseData) | BaseData | null;
 
 function isComponentKey(key: string): key is ComponentKey {
   return key in componentMap;
-}
-
-// Helper type guard to check if item has sys.id
-function hasSysId(item: BaseData): item is BaseData & { sys: { id: string } } {
-  return item.sys?.id !== undefined;
 }
 
 export default function ComponentRenderer<T extends DataWithTypename | DataWithTypename[]>({ data }: { data: T }) {
@@ -47,8 +40,8 @@ export default function ComponentRenderer<T extends DataWithTypename | DataWithT
           if (item === null) {
             return null;
           }
-          if (isComponentKey(item.__typename) && hasSysId(item)) {
-            return <ComponentRenderer key={item.sys.id} data={item} />;
+          if (isComponentKey(item.__typename)) {
+            return <ComponentRenderer key={item.id} data={item} />;
           }
           return null;
         })}

@@ -4,68 +4,61 @@ import { VercelToolbar } from '@vercel/toolbar/next';
 import { graphql } from 'gql.tada';
 
 import { AnalyticsComponent } from '#/components/analytics';
-import { ContentfulPreviewProvider } from '#/components/contentful-preview-provider';
 
-import { graphqlClient } from '../../lib/graphql-client';
+import { client } from '#/lib/drupal/client';
 
 import '@repo/ui/styles/globals.css';
 
 import { AnnouncementBannerComponent } from '#/components/announcement-banner';
 import { LanguageDataProvider } from '#/components/language-data-provider/language-data-provider';
-import { NavigationFieldsFragment } from '#/components/navigation';
 import { SiteHeader } from '#/components/site-header';
-import { isContentSourceMapsEnabled } from '#/lib/content-source-maps';
 import { fontInter } from '#/lib/fonts';
 import { cn } from '@repo/ui/lib/utils';
-import { getLocaleFromPath } from '#/locales/get-locale-from-path';
+import { MainNavigationFragment } from '#/components/navigation/navigation';
 
 export default async function RootLayout(props: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
+  // Inject Vercel toolbar during local development.
+  const shouldInjectToolbar = process.env.NODE_ENV === 'development';
   const params = await props.params;
 
   const { children } = props;
 
-  const shouldInjectToolbar = process.env.NODE_ENV === 'development';
   const { locale } = params;
   const isDraftMode = (await draftMode()).isEnabled;
 
   const layoutQuery = graphql(
     `
-      query Layout($locale: String, $preview: Boolean) {
-        navigationMenuCollection(locale: $locale, preview: $preview, limit: 1) {
-          ...NavigationFields
+      query Layout($locale: String) {
+        menu(name: MAIN, langcode: $locale) {
+          ...MainNav
         }
       }
     `,
-    [NavigationFieldsFragment]
+    [MainNavigationFragment]
   );
 
-  const layoutData = await graphqlClient(isDraftMode).query(
+  const layoutData = await (
+    await client(isDraftMode)
+  ).query(
     layoutQuery,
     {
-      locale: getLocaleFromPath(locale),
-      preview: isDraftMode,
+      locale,
     },
     { fetchOptions: { next: { revalidate: 60, tags: ['menu'] } } }
   );
 
   return (
     <html lang={locale}>
+      {shouldInjectToolbar && <VercelToolbar />}
       <body className={cn('min-h-screen bg-background font-sans antialiased', fontInter.variable)}>
         <AnalyticsComponent>
-          <ContentfulPreviewProvider
-            locale={getLocaleFromPath(locale)}
-            isDraftMode={isDraftMode}
-            isContentSourceMapsEnabled={isContentSourceMapsEnabled}
-          >
-            <LanguageDataProvider>
-              <div className="relative flex min-h-screen flex-col">
-                <AnnouncementBannerComponent />
-                <SiteHeader navigationData={layoutData.data?.navigationMenuCollection} />
-                <div className="flex-1">{children}</div>
-                {shouldInjectToolbar && <VercelToolbar />}
-              </div>
-            </LanguageDataProvider>
-          </ContentfulPreviewProvider>
+          <LanguageDataProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <AnnouncementBannerComponent />
+              {layoutData.data?.menu && <SiteHeader navigationData={layoutData.data.menu} />}
+              <div className="flex-1">{children}</div>
+            </div>
+          </LanguageDataProvider>
         </AnalyticsComponent>
       </body>
     </html>

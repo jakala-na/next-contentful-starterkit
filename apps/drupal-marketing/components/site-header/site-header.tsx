@@ -1,9 +1,9 @@
 import { draftMode } from 'next/headers';
 
-import { Navigation } from '#/components/navigation';
+import { Navigation, type MainNavigationFragment } from '#/components/navigation';
+import { type FragmentOf } from 'gql.tada';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- TODO: Fix fragment unmasking to type navigationData, if possible.
-export async function SiteHeader(props: { navigationData: any }) {
+export async function SiteHeader(props: { navigationData: FragmentOf<typeof MainNavigationFragment> }) {
   const isDraftMode = (await draftMode()).isEnabled;
 
   return (
@@ -17,7 +17,6 @@ export async function SiteHeader(props: { navigationData: any }) {
           .
         </div>
       )}
-      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- TODO: fix later */}
       <Navigation data={props.navigationData} />
     </>
   );

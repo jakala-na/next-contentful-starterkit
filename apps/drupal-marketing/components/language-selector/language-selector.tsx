@@ -27,7 +27,7 @@ export function LanguageSelector() {
   return (
     <select value={locale} onChange={handleLanguageChange} disabled={isPending}>
       <option value="en">English</option>
-      <option value="de">Deutsche</option>
+      <option value="es">Spanish</option>
     </select>
   );
 }

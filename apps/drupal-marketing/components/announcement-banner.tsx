@@ -15,9 +15,9 @@ export function AnnouncementBannerComponent() {
   return (
     <div className="relative bg-primary px-4 py-3 text-center text-primary-foreground">
       <p className="text-sm font-medium">
-        This site is a demo of Next.js Contentful Starterkit. You can find it on{' '}
+        This site is a demo of Next.js Drupal Starterkit. You can find it on{' '}
         <Link
-          href="https://git.new/next-ctfl-starter"
+          href="https://git.new/next-cms"
           target="_blank"
           rel="noopener noreferrer"
           className="underline underline-offset-2 transition-colors hover:text-primary-foreground/90"

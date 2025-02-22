@@ -5,17 +5,46 @@
 
 import 'server-only';
 
-import { createClient, fetchExchange } from '@urql/core';
+import { createClient, fetchExchange, mapExchange } from '@urql/core';
 import { persistedExchange } from '@urql/exchange-persisted';
+import { authExchange } from '@urql/exchange-auth';
 import memoize from 'lodash/memoize';
-import { mapExchange } from 'urql';
+import { getToken } from './auth';
 
-const graphqlEndpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE ?? '<missing space>'}/environments/${process.env.CONTENTFUL_ENVIRONMENT ?? '<missing environment>'}`;
-
-const makeClient = (preview: boolean) => {
+const makeClient = async (preview: boolean) => {
   return createClient({
-    url: `${graphqlEndpoint}?access_token=${(preview ? process.env.CONTENTFUL_PREVIEW_API : process.env.CONTENTFUL_DELIVERY_API) ?? '<missing token>'}`,
+    url: process.env.DRUPAL_GRAPHQL_URI ?? '<missing graphql uri>',
     exchanges: [
+      authExchange(async (utils) => {
+        const token = await getToken({
+          uri: process.env.DRUPAL_AUTH_URI ?? '<missing graphql uri>',
+          clientId:
+            (preview ? process.env.DRUPAL_PREVIEWER_CLIENT_ID : process.env.DRUPAL_VIEWER_CLIENT_ID) ??
+            '<missing client id>',
+          clientSecret:
+            (preview ? process.env.DRUPAL_PREVIEWER_CLIENT_SECRET : process.env.DRUPAL_VIEWER_CLIENT_ID) ??
+            '<missing client id>',
+        });
+
+        return {
+          addAuthToOperation(operation) {
+            if (!token) {
+              return operation;
+            }
+            return utils.appendHeaders(operation, {
+              Authorization: token,
+            });
+          },
+          didAuthError(error, _operation) {
+            return error.response?.status === 403;
+          },
+          refreshAuth() {
+            return new Promise(() => {
+              // TODO: Use refresh token or replace with new token.
+            });
+          },
+        };
+      }),
       /**
        * Enable Automated Persisted Queries to reduce the size of the request.
        *
@@ -29,7 +58,7 @@ const makeClient = (preview: boolean) => {
       /**
        * It map seem counter-intuitive, but exchanges are bi-directional, so mapExchange can both pass things to fetch,
        * as well as receive errors back from fetch on it's way back.
-       * This exchange is meant to be before fetch!
+       * This exchange is meant to be before fetch so that it can be executed right after fetch is done on the way back.
        *
        * @see https://github.com/urql-graphql/urql/issues/225#issuecomment-482592203
        */
@@ -60,5 +89,4 @@ const makeClient = (preview: boolean) => {
  * @see https://react.dev/reference/react/cache#pitfall-memoized-call-outside-component
  * @see https://commerce.nearform.com/open-source/urql/docs/advanced/server-side-rendering/#nextjs
  */
-
-export const graphqlClient = memoize(makeClient);
+export const client = memoize(makeClient);

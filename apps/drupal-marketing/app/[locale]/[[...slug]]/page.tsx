@@ -1,25 +1,19 @@
 import { setStaticParamsLocale } from 'next-international/server';
 import { draftMode } from 'next/headers';
-import { notFound } from 'next/navigation';
-
-import type { Metadata } from 'next';
+import { notFound, redirect } from 'next/navigation';
 
 import { graphql } from 'gql.tada';
 
 import { ComponentRenderer } from '#/components/component-renderer';
+import { client } from '#/lib/drupal/client';
+import { type SearchParams } from 'next/dist/server/request/search-params';
+import { NodePageFragment } from '#/components/node-page/node-page';
+import { type DataWithTypename } from '#/components/component-renderer/component-renderer';
 import DebugMode from '#/components/debug-mode/debug-mode';
-import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
-import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
-import { LanguageDataSetter } from '#/components/language-data-provider/language-data-provider';
-import { ComponentSEOFieldsFragment, getSeoMetadata } from '#/components/seo/seo-ctf';
-import { TopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
-import { addContentSourceMaps } from '#/lib/content-source-maps';
-import { graphqlClient } from '#/lib/graphql-client';
-import { getLocaleFromPath } from '#/locales/get-locale-from-path';
-import { getStaticParams } from '#/locales/server';
 
 interface PageProps {
   params: Promise<Params>;
+  searchParams: Promise<SearchParams>;
 }
 
 interface Params {
@@ -27,173 +21,114 @@ interface Params {
   locale: string;
 }
 
-const getPage = async (slug: string, locale: string, preview = false) => {
+const getRoute = async (path: string, locale: string, preview = false) => {
   const pageQuery = graphql(
     `
-      query PageQuery($slug: String, $locale: String, $preview: Boolean) @contentSourceMaps {
-        pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
-          items {
-            topSectionCollection(limit: 10) {
-              items {
-                __typename
-                ... on Entry {
-                  sys {
-                    id
-                  }
-                }
-                ...ComponentHeroBannerFields
-                ...ComponentDuplexFields
-              }
-            }
-            pageContent {
+      query Route($path: String!, $locale: String!) {
+        route(path: $path, langcode: $locale) {
+          __typename
+          ... on RouteRedirect {
+            url
+          }
+          ... on RouteInternal {
+            entity {
               __typename
-              ... on Entry {
-                sys {
-                  id
-                }
-              }
-              ...TopicBusinessInfo
+              ...NodePage
             }
-            slugEn: slug(locale: "en-US")
-            slugDe: slug(locale: "de-DE")
           }
         }
       }
     `,
-    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment, TopicBusinessInfoFieldsFragment]
+    [NodePageFragment]
   );
 
-  const response = await graphqlClient(preview).query(pageQuery, {
-    locale,
-    preview,
-    slug,
-  });
-
-  const processedResponse = addContentSourceMaps(response);
-  return processedResponse.data?.pageCollection?.items[0];
-};
-
-const getPageSlugs = async (locale: string) => {
-  const pageQuery = graphql(`
-    query PageSlugs($locale: String) {
-      # Fetch 50 pages. Ideally we would fetch a good sample of most popular pages for pre-rendering,
-      # but for the sake of this example we'll just fetch the first 50.
-      pageCollection(locale: $locale, limit: 50) {
-        items {
-          slug
-        }
-      }
-    }
-  `);
-
-  const pages = await graphqlClient(false).query(pageQuery, {
+  const response = await (
+    await client(preview)
+  ).query(pageQuery, {
+    path,
     locale,
   });
 
-  return (
-    pages.data?.pageCollection?.items
-      .filter((page) => page?.slug)
-      .map((page) => ({
-        slug: page?.slug === 'home' ? '/' : page?.slug,
-      })) ?? []
-  );
+  return response;
 };
 
-const getPageMetadata = async (slug: string, locale: string, preview = false): Promise<Metadata> => {
-  const pageQuery = graphql(
-    `
-      query PageQuery($slug: String, $locale: String, $preview: Boolean) {
-        pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
-          items {
-            seo {
-              ...SEOFields
-            }
-            slugEn: slug(locale: "en-US")
-            slugDe: slug(locale: "de-DE")
-          }
-        }
-      }
-    `,
-    [ComponentSEOFieldsFragment]
-  );
-
-  const response = await graphqlClient(preview).query(pageQuery, {
-    locale,
-    preview,
-    slug,
-  });
-
-  const pageMetadata = response.data?.pageCollection?.items[0];
-
-  if (!pageMetadata) {
-    notFound();
-  }
-
-  return {
-    ...getSeoMetadata(pageMetadata.seo),
-    // TODO: Extract this into i18n fragment and helper.
-    alternates: {
-      languages: {
-        en: `/en/${(pageMetadata.slugEn ?? 'home') === 'home' ? '' : pageMetadata.slugEn ?? ''}`,
-        de: `/de/${(pageMetadata.slugDe ?? 'home') === 'home' ? '' : pageMetadata.slugDe ?? ''}`,
-      },
-    },
-  };
-};
-
-export default async function LandingPage(props: PageProps) {
+export default async function Page(props: PageProps) {
   const params = await props.params;
+
   const { locale } = params;
   setStaticParamsLocale(locale);
-  const slug = params.slug?.join('/') ?? 'home';
+  let path = params.slug?.join('/') ?? 'home';
+
+  // Pass preview token to GraphQL Compose Preview.
+  // TODO: Dynamic API breaks static caching, move to draftMode data.
+  // const searchParams = await props.searchParams;
+  // if (searchParams.token) {
+  //   path = `${path}?token=${searchParams.token}`;
+  // }
 
   const isDraftMode = (await draftMode()).isEnabled;
 
-  const pageData = await getPage(slug, getLocaleFromPath(locale), isDraftMode);
+  const routeData = await getRoute(path, locale, isDraftMode);
 
-  if (!pageData) {
+  if (routeData.data?.route?.__typename === 'RouteRedirect') {
+    redirect(routeData.data.route.url);
+  }
+
+  const routeEntity = routeData.data?.route?.__typename === 'RouteInternal' ? routeData.data.route.entity : null;
+
+  if (!routeEntity) {
     notFound();
   }
 
-  const topComponents = pageData.topSectionCollection?.items;
-  const pageContent = pageData.pageContent;
-
   return (
     <div>
-      <DebugMode slug={slug} />
-      <LanguageDataSetter
-        data={{
-          ...(pageData.slugEn && pageData.slugEn !== 'home' && { en: pageData.slugEn }),
-          ...(pageData.slugDe && pageData.slugDe !== 'home' && { de: pageData.slugDe }),
-        }}
-      />
-      {topComponents ? <ComponentRenderer data={topComponents} /> : null}
-      {pageContent ? <ComponentRenderer data={pageContent} /> : null}
+      <DebugMode slug={path} />
+      <ComponentRenderer data={routeEntity as DataWithTypename} />
     </div>
   );
 }
 
-export async function generateMetadata(props: PageProps): Promise<Metadata> {
-  const params = await props.params;
-  const { locale } = params;
-  const slug = params.slug?.join('/') ?? 'home';
-  const { isEnabled: isDraftMode } = await draftMode();
-  return getPageMetadata(slug, getLocaleFromPath(locale), isDraftMode);
-}
-
 export async function generateStaticParams() {
-  // Teach Typescript what our locale segment name is.
-  const params = getStaticParams() as { locale: string }[];
-  const returnData: Params[] = [];
-  for await (const locale of params) {
-    const slugs = (await getPageSlugs(getLocaleFromPath(locale.locale))).map((page) => ({
-      slug: page.slug === '/' ? [''] : page.slug?.split('/'),
-    }));
-    for (const slug of slugs) {
-      returnData.push({ slug: slug.slug, locale: locale.locale });
-    }
-  }
-  return returnData;
+  // Fetch the paths for the first 50 articles and pages.
+  // We'll fall back to on-demand generation for the rest.
+  const response = await (
+    await client(false)
+  ).query(
+    graphql(`
+      query allNodePaths {
+        nodeArticles(first: 50) {
+          nodes {
+            translations {
+              langcode {
+                id
+              }
+              path
+            }
+          }
+        }
+        nodePages(first: 50) {
+          nodes {
+            translations {
+              langcode {
+                id
+              }
+              path
+            }
+          }
+        }
+      }
+    `),
+    []
+  );
+
+  // for await (const locale of params) {
+  return [...(response.data?.nodeArticles.nodes ?? []), ...(response.data?.nodePages.nodes ?? [])].flatMap((node) =>
+    node.translations.map((translation) => ({
+      locale: translation.langcode.id,
+      slug: (translation.path ?? '').split('/').filter(Boolean).slice(1), // slice the locale from the path.
+    }))
+  );
 }
 
+// Configure ISR.
 export const revalidate = 120;

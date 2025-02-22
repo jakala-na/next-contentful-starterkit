@@ -24,70 +24,37 @@ import { cn } from '@repo/ui/lib/utils';
 import { getI18n } from '#/locales/server';
 
 import { Icons } from '../icons';
-import { PageLinkFieldsFragment, getPageLinkProps } from '../page';
 
-const MenuGroupFeaturedPagesFragment = graphql(
+export const MenuItemFragment = graphql(`
+  fragment MenuItem on MenuItem {
+    title
+    url
+    children {
+      title
+      url
+    }
+  }
+`);
+
+export const MainNavigationFragment = graphql(
   `
-    fragment MenuGroupFields on MenuGroupFeaturedPagesCollection {
+    fragment MainNav on Menu {
       items {
-        ...PageLinkFields
+        ...MenuItem
       }
     }
   `,
-  [PageLinkFieldsFragment]
-);
-
-export const NavigationFieldsFragment = graphql(
-  `
-    fragment NavigationFields on NavigationMenuCollection {
-      items {
-        menuItemsCollection {
-          items {
-            __typename
-            sys {
-              id
-            }
-            groupName
-            link: groupLink {
-              ...PageLinkFields
-            }
-            children: featuredPagesCollection {
-              ...MenuGroupFields
-            }
-          }
-        }
-      }
-    }
-  `,
-  [PageLinkFieldsFragment, MenuGroupFeaturedPagesFragment]
+  [MenuItemFragment]
 );
 
 export interface NavigationProps {
-  data: FragmentOf<typeof NavigationFieldsFragment>;
+  data: FragmentOf<typeof MainNavigationFragment>;
 }
 
 export async function Navigation(props: NavigationProps) {
-  const data = readFragment(NavigationFieldsFragment, props.data);
-  const items = data.items[0]?.menuItemsCollection?.items;
+  const data = readFragment(MainNavigationFragment, props.data);
+  const items = data.items;
   const t = await getI18n();
-
-  // Fragment Masking is forcing us to split fragments to match our components or our helper functions.
-  // https://github.com/dotansimha/graphql-code-generator/discussions/8554#discussioncomment-4131776
-  const getGroupLinks = (group: FragmentOf<typeof MenuGroupFeaturedPagesFragment>) => {
-    const collection = readFragment(MenuGroupFeaturedPagesFragment, group);
-    return collection.items.map((menuItem) => {
-      if (!menuItem) {
-        return null;
-      }
-      const linkProps = getPageLinkProps(menuItem);
-
-      if (!linkProps.children) {
-        return null;
-      }
-
-      return getPageLinkProps(menuItem);
-    });
-  };
 
   function MainMenuDesktop() {
     return (
@@ -95,34 +62,28 @@ export async function Navigation(props: NavigationProps) {
         {items && items.length > 0 ? (
           <NavigationMenu>
             <NavigationMenuList>
-              {items.map((menuItem) => {
-                const groupLinks = !menuItem?.link && menuItem?.children && getGroupLinks(menuItem.children);
-
-                return (
-                  menuItem?.groupName && (
-                    <NavigationMenuItem key={menuItem.sys.id}>
-                      {menuItem.link ? (
-                        <Link {...getPageLinkProps(menuItem.link)} className={cn('px-4 py-2 text-sm')}>
-                          {menuItem.groupName}
-                        </Link>
-                      ) : (
-                        <NavigationMenuTrigger>{menuItem.groupName}</NavigationMenuTrigger>
-                      )}
-                      {groupLinks ? (
+              {items
+                .map((i) => readFragment(MenuItemFragment, i))
+                .map((menuItem) => (
+                  <NavigationMenuItem key={menuItem.url}>
+                    {menuItem.children.length ? (
+                      <>
+                        <NavigationMenuTrigger>{menuItem.title}</NavigationMenuTrigger>
                         <NavigationMenuContent>
-                          {groupLinks
-                            .filter((subMenuItem) => subMenuItem !== null)
-                            .map((subMenuItem) => (
-                              <div key={subMenuItem.id} className="block px-4 py-2 text-sm">
-                                <Link {...subMenuItem} />
-                              </div>
-                            ))}
+                          {menuItem.children.map((child) => (
+                            <div key={child.url} className="block px-4 py-2 text-sm">
+                              <Link href={child.url ?? ''}>{child.title}</Link>
+                            </div>
+                          ))}
                         </NavigationMenuContent>
-                      ) : null}
-                    </NavigationMenuItem>
-                  )
-                );
-              })}
+                      </>
+                    ) : (
+                      <Link href={menuItem.url ?? ''} className={cn('px-4 py-2 text-sm')}>
+                        {menuItem.title}
+                      </Link>
+                    )}
+                  </NavigationMenuItem>
+                ))}
             </NavigationMenuList>
           </NavigationMenu>
         ) : null}
@@ -136,32 +97,22 @@ export async function Navigation(props: NavigationProps) {
         {items && items.length > 0 ? (
           <nav>
             <ul>
-              {items.map((menuItem) => {
-                const groupLinks = !menuItem?.link && menuItem?.children && getGroupLinks(menuItem.children);
-
-                return (
-                  menuItem?.groupName && (
-                    <li key={menuItem.sys.id} className="py-1.5">
-                      {menuItem.link ? (
-                        <Link {...getPageLinkProps(menuItem.link)}>{menuItem.groupName}</Link>
-                      ) : (
-                        <span>{menuItem.groupName}</span>
-                      )}
-                      {groupLinks ? (
-                        <ul className="pl-5">
-                          {groupLinks
-                            .filter((subMenuItem) => subMenuItem !== null)
-                            .map((subMenuItem) => (
-                              <li key={subMenuItem.id}>
-                                <Link {...subMenuItem} />
-                              </li>
-                            ))}
-                        </ul>
-                      ) : null}
-                    </li>
-                  )
-                );
-              })}
+              {items
+                .map((i) => readFragment(MenuItemFragment, i))
+                .map((menuItem) => (
+                  <li key={menuItem.url} className="py-1.5">
+                    <Link href={menuItem.url ?? ''}>{menuItem.title}</Link>
+                    {menuItem.children?.length ? (
+                      <ul className="pl-5">
+                        {menuItem.children.map((child) => (
+                          <li key={child.url}>
+                            <Link href={child.url ?? ''}>{child.title}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </li>
+                ))}
             </ul>
           </nav>
         ) : null}
@@ -232,8 +183,8 @@ export async function Navigation(props: NavigationProps) {
               </SheetHeader>
               <SheetDescription className="mt-2">
                 <strong>
-                  Your inbox is as quiet as a wizard’s spell book at midnight. Check back later for magical updates,
-                  order statuses, or special offers from The Alchemist’s Vault.
+                  Your inbox is as quiet as a wizard's spell book at midnight. Check back later for magical updates,
+                  order statuses, or special offers from The Alchemist's Vault.
                 </strong>
               </SheetDescription>
             </SheetContent>
