@@ -13,7 +13,7 @@ const makeClient = (preview: boolean) => {
   return contentful.createClient({
     space: process.env.CONTENTFUL_SPACE ?? '<missing space>',
     accessToken:
-      (preview ? process.env.CONTENTFUL_PREVIEW_API : process.env.CONTENTFUL_MANAGEMENT_API) ?? '<missing token>',
+      (preview ? process.env.CONTENTFUL_PREVIEW_API : process.env.CONTENTFUL_DELIVERY_API) ?? '<missing token>',
   });
 };
 
