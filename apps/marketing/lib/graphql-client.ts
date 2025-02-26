@@ -9,7 +9,7 @@ import { createClient, fetchExchange } from '@urql/core';
 import { persistedExchange } from '@urql/exchange-persisted';
 import memoize from 'lodash/memoize';
 import { mapExchange } from 'urql';
-import { ConceptProps } from 'contentful-management';
+import type { ConceptProps } from 'contentful-management';
 
 import { modifyResponseExchange } from './modify-response-exchange';
 
@@ -28,10 +28,6 @@ const makeClient = ({ preview, data = {} }: MakeClientProps) => {
   return createClient({
     url: `${graphqlEndpoint}?access_token=${(preview ? process.env.CONTENTFUL_PREVIEW_API : process.env.CONTENTFUL_DELIVERY_API) ?? '<missing token>'}`,
     exchanges: [
-      modifyResponseExchange({
-        locale,
-        taxonomyConcepts,
-      }),
       /**
        * Enable Automated Persisted Queries to reduce the size of the request.
        *
@@ -41,6 +37,10 @@ const makeClient = ({ preview, data = {} }: MakeClientProps) => {
        */
       persistedExchange({
         preferGetForPersistedQueries: true,
+      }),
+      modifyResponseExchange({
+        locale,
+        taxonomyConcepts,
       }),
       /**
        * It map seem counter-intuitive, but exchanges are bi-directional, so mapExchange can both pass things to fetch,

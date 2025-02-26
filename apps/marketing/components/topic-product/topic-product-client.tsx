@@ -5,17 +5,16 @@ import { RichTextCtf } from '#/components/rich-text-ctf';
 
 import { getTopicProductFeatureProps } from '../topic-product-feature/topic-product-feature';
 import { TopicProduct } from '@repo/ui/components/topic-product';
-import { LinkProps } from '@repo/ui/components/link';
+import type { LinkProps } from '@repo/ui/components/link';
 import { useComponentPreview } from '../hooks/use-component-preview';
-import { type TopicProductAddFields } from '#/components/topic-product/topic-product';
+import { type TopicProductAddFieldsProps } from '#/components/topic-product/topic-product';
 
-export function TopicProductClient(props: { data: TopicProductAddFields }) {
-  const { data: originalData } = props;
+export function TopicProductClient({ data: originalData }: { data: TopicProductAddFieldsProps }) {
   const { data, addAttributes } = useComponentPreview(originalData);
 
   const features = data.featuresCollection?.items
     .map((feature) => {
-      return feature ? getTopicProductFeatureProps({ data: feature })?.name : null;
+      return feature ? getTopicProductFeatureProps({ data: feature }).name : null;
     })
     .filter((feature) => feature !== null);
 

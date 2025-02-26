@@ -1,21 +1,21 @@
 import memoize from 'lodash/memoize';
 
 import { managementClient } from './rest-client';
-import { type ConceptProps } from 'contentful-management';
+import type { ConceptProps } from 'contentful-management';
 
 /**
  * Get all taxonomy concepts for the specified organization_id.
  *
  * Recursively calls itself when additional pages exist.
  *
- * @param organization_id The Contentful Organization ID to fetch concepts for.
- * @param pageUrl The 'next' page URL returned in the Contentful API response.
- * @param limit The maximum number of concepts to return with each API request.
+ * @param organizationId - The Contentful Organization ID to fetch concepts for.
+ * @param pageUrl - The 'next' page URL returned in the Contentful API response.
+ * @param limit - The maximum number of concepts to return with each API request.
  * @returns A Promise of an array of concepts.
  */
-const fetchTaxonomyConcepts = async (organization_id: string, pageUrl = '', limit = 100): Promise<ConceptProps[]> => {
+const fetchTaxonomyConcepts = async (organizationId: string, pageUrl = '', limit = 100): Promise<ConceptProps[]> => {
   const { pages, items } = await managementClient().concept.getMany({
-    organizationId: organization_id,
+    organizationId,
     query: {
       limit,
       pageUrl,
@@ -23,7 +23,7 @@ const fetchTaxonomyConcepts = async (organization_id: string, pageUrl = '', limi
   });
 
   if (pages?.next) {
-    const nextItems = await fetchTaxonomyConcepts(organization_id, pages.next);
+    const nextItems = await fetchTaxonomyConcepts(organizationId, pages.next);
     return items.concat(nextItems);
   }
 

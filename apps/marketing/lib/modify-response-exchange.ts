@@ -1,6 +1,6 @@
-import { Exchange } from '@urql/core';
+import type { Exchange } from '@urql/core';
 import { pipe, map } from 'wonka';
-import { type ConceptProps } from 'contentful-management';
+import type { ConceptProps } from 'contentful-management';
 
 /** Input parameters for the {@link persistedExchange}. */
 export interface ModifyResponseExchangeOptions {
@@ -9,11 +9,8 @@ export interface ModifyResponseExchangeOptions {
 }
 
 export const modifyResponseExchange =
-  (options?: ModifyResponseExchangeOptions): Exchange =>
+  (options: ModifyResponseExchangeOptions = {}): Exchange =>
   ({ forward }) => {
-    if (!options) {
-      options = {};
-    }
     // Fallback locale, in case `options` does not specify one, or when a
     // concept.prefLabel does not include the specified locale.
     const defaultLocale = 'en-US';
@@ -29,34 +26,37 @@ export const modifyResponseExchange =
     });
 
     // Function to recursively find and modify concepts objects
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Unpredictable node types as result is parsed by modifyConcepts().
     const modifyConcepts = (obj: any): any => {
       if (typeof obj !== 'object' || obj === null) {
         return obj;
       }
 
-      // If the result contains concepts, apply our modifications.
-      if (obj.contentfulMetadata?.concepts) {
-        const resultConcepts = obj.contentfulMetadata?.concepts.map((concept: { id: string }) => {
-          return {
-            id: concept.id,
-            prefLabel: conceptMap.get(concept.id),
-          };
-        });
-
-        obj.contentfulMetadata.concepts = resultConcepts;
+      // If the result is a taxonomy concept, apply our modifications.
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Type narrowing of 'any' type to object is not possible. */
+      if (obj.__typename === 'TaxonomyConcept') {
+        return {
+          ...obj,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Type narrowing of 'any' type to object is not possible. */
+          prefLabel: conceptMap.get(obj.id as string),
+        };
       }
 
       // Recursively process arrays and objects
       return Array.isArray(obj)
         ? obj.map(modifyConcepts)
-        : Object.fromEntries(Object.entries(obj).map(([key, value]) => [key, modifyConcepts(value)]));
+        : // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- Unpredictable object key/value types. */
+          Object.fromEntries(Object.entries(obj).map(([key, value]) => [key, modifyConcepts(value)]));
     };
 
     return (operations$) =>
       pipe(
+        // First, forward to the next operation in the pipeline.
         forward(operations$),
+        // Now we can handle the results returned from the rest of the pipeline.
         map((result) => {
           if (result.data && taxonomyConcepts) {
+            /* eslint-disable @typescript-eslint/no-unsafe-assignment -- Unpredictable node types as result is parsed by modifyConcepts(). */
             return {
               ...result,
               data: modifyConcepts(result.data),
