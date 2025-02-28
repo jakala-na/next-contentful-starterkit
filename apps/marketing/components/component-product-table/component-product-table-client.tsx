@@ -45,7 +45,7 @@ export function ComponentProductTableClient(props: { data: ResultOf<typeof Compo
             onClickEvent: slug
               ? () => {
                   if (slug) {
-                    router.push(slug);
+                    router.push(`/${slug}`);
                   }
                 }
               : undefined,

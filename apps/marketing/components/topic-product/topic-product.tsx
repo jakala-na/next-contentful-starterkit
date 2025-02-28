@@ -35,7 +35,7 @@ export const TopicProductFragment = graphql(
         }
       }
       price
-      linkedFrom {
+      linkedFrom(allowedLocales: ["en-US", "de-DE"]) {
         pageCollection(limit: 1) {
           items {
             sys {
