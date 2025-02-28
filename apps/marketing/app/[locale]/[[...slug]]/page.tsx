@@ -18,6 +18,7 @@ import { addContentSourceMaps } from '#/lib/content-source-maps';
 import { graphqlClient } from '#/lib/graphql-client';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 import { getStaticParams } from '#/locales/server';
+import { fallbackLocale } from '#/locales/fallback-locale';
 
 interface PageProps {
   params: Promise<Params>;
@@ -31,7 +32,7 @@ interface Params {
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
     `
-      query PageQuery($slug: String, $locale: String, $preview: Boolean) @contentSourceMaps {
+      query PageQuery($slug: String, $locale: String, $fallbackLocale: String, $preview: Boolean) @contentSourceMaps {
         pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
           items {
             topSectionCollection(limit: 10) {
@@ -72,6 +73,7 @@ const getPage = async (slug: string, locale: string, preview = false) => {
 
   const response = await graphqlClient(preview).query(pageQuery, {
     locale,
+    fallbackLocale,
     preview,
     slug,
   });

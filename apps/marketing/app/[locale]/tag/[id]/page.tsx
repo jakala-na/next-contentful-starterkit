@@ -2,17 +2,13 @@ import { setStaticParamsLocale } from 'next-international/server';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import type { Metadata } from 'next';
+// import type { Metadata } from 'next';
 
 import { graphql, type ResultOf } from 'gql.tada';
 
-import { ComponentRenderer } from '#/components/component-renderer';
 import DebugMode from '#/components/debug-mode/debug-mode';
-import { ComponentDuplexFieldsFragment } from '#/components/duplex-ctf/duplex-ctf';
-import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/hero-banner-ctf';
 import { LanguageDataSetter } from '#/components/language-data-provider/language-data-provider';
-import { ComponentSEOFieldsFragment, getSeoMetadata } from '#/components/seo/seo-ctf';
-import { TopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
+// import { ComponentSEOFieldsFragment, getSeoMetadata } from '#/components/seo/seo-ctf';
 import { getTopicProductProps, TopicProductFragment } from '#/components/topic-product/topic-product';
 import { addContentSourceMaps } from '#/lib/content-source-maps';
 import { graphqlClient } from '#/lib/graphql-client';
@@ -23,6 +19,7 @@ import { TopicBusinessInfo } from '@repo/ui/components/topic-business-info';
 import { ComponentProductTableClient } from '#/components/component-product-table/component-product-table-client';
 import { type ComponentProductTableFragment } from '#/components/component-product-table/component-product-table';
 import { getI18n } from '#/locales/server';
+import { fallbackLocale } from '#/locales/fallback-locale';
 
 interface PageProps {
   params: Promise<Params>;
@@ -41,7 +38,8 @@ const getConcept = async (id: string, locale: string, preview = false) => {
 const getEntries = async (conceptId: string, locale: string, preview = false) => {
   const entryQuery = graphql(
     `
-      query TopicProductQuery($conceptId: String, $locale: String, $preview: Boolean) @contentSourceMaps {
+      query TopicProductQuery($conceptId: String, $locale: String, $fallbackLocale: String, $preview: Boolean)
+      @contentSourceMaps {
         topicProductCollection(
           locale: $locale
           preview: $preview
@@ -58,6 +56,7 @@ const getEntries = async (conceptId: string, locale: string, preview = false) =>
 
   const response = await graphqlClient({ preview }).query(entryQuery, {
     locale,
+    fallbackLocale,
     preview,
     conceptId,
   });
@@ -74,6 +73,8 @@ const getEntries = async (conceptId: string, locale: string, preview = false) =>
 };
 
 /*
+@TODO: perhaps we'll need a function get slugs of all concepts?
+
 const getPageSlugs = async (locale: string) => {
   const pageQuery = graphql(`
     query PageSlugs($locale: String) {
@@ -102,6 +103,8 @@ const getPageSlugs = async (locale: string) => {
 */
 
 /*
+@TODO: function to get the metadata for the current concept page.
+
 const getPageMetadata = async (slug: string, locale: string, preview = false): Promise<Metadata> => {
   const pageQuery = graphql(
     `
@@ -153,9 +156,11 @@ export default async function TagPage(props: PageProps) {
 
   const isDraftMode = (await draftMode()).isEnabled;
 
+  const slug = `tag/${id}`;
+
   const pageData = {
-    slugEn: `tag/${id}`,
-    slugDe: `tag/${id}`,
+    slugEn: slug,
+    slugDe: slug,
   };
 
   if (!id) {
@@ -190,6 +195,7 @@ export default async function TagPage(props: PageProps) {
 
   return (
     <>
+      <DebugMode slug={slug} />
       <LanguageDataSetter
         data={{
           ...(pageData.slugEn && { en: pageData.slugEn }),
@@ -197,22 +203,26 @@ export default async function TagPage(props: PageProps) {
         }}
       />
       <TopicBusinessInfo
-        name={concept.prefLabel['en-US'] ?? null}
-        shortDescription={concept.definition ? concept.definition['en-US'] : null}
+        name={concept.prefLabel[fallbackLocale] ?? null}
+        shortDescription={concept.definition ? concept.definition[fallbackLocale] : null}
         body={body}
       />
     </>
   );
 }
 
-// export async function generateMetadata(props: PageProps): Promise<Metadata> {
-//   const params = await props.params;
-//   const { locale } = params;
-//   const slug = params.slug?.join('/') ?? 'home';
-//   const { isEnabled: isDraftMode } = await draftMode();
-//   return getPageMetadata(slug, getLocaleFromPath(locale), isDraftMode);
-//   return {};
-// }
+/*
+@TODO: generate the metadata for the current tag page.
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
+  const { locale } = params;
+  const slug = params.slug?.join('/') ?? 'home';
+  const { isEnabled: isDraftMode } = await draftMode();
+  return getPageMetadata(slug, getLocaleFromPath(locale), isDraftMode);
+  return {};
+}
+*/
 
 export async function generateStaticParams() {
   // Teach Typescript what our locale segment name is.

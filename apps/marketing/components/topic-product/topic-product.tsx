@@ -10,6 +10,10 @@ export const getTopicProductProps = ({ data: fragmentData, ...props }: TopicProd
   return data;
 };
 
+// It is not clear why, but the `allowedLocales` parameter requires the
+// fallback locale rather than the actual current locale. We are specifying
+// both below, just to be safe (!), but perhaps in the future we'll only need
+// the current locale.
 export const TopicProductFragment = graphql(
   `
     fragment TopicProduct on TopicProduct {
@@ -35,7 +39,7 @@ export const TopicProductFragment = graphql(
         }
       }
       price
-      linkedFrom(allowedLocales: ["en-US", "de-DE"]) {
+      linkedFrom(allowedLocales: [$fallbackLocale, $locale]) {
         pageCollection(limit: 1) {
           items {
             sys {
