@@ -26,13 +26,13 @@ interface PageProps {
 }
 
 interface Params {
-  id: string;
+  slug: string;
   locale: string;
 }
 
-const getConcept = async (id: string, locale: string, preview = false) => {
+const getConcept = async (slug: string, locale: string, preview = false) => {
   const taxonomyConcepts = await getTaxonomyConcepts(process.env.CONTENTFUL_ORGANIZATION ?? '<missing organization>');
-  return taxonomyConcepts.find((concept) => concept.sys.id === id);
+  return taxonomyConcepts.find((concept) => concept.slug[locale] === slug);
 };
 
 const getEntries = async (conceptId: string, locale: string, preview = false) => {
@@ -150,24 +150,22 @@ const getPageMetadata = async (slug: string, locale: string, preview = false): P
 
 export default async function TagPage(props: PageProps) {
   const params = await props.params;
-  const { id, locale } = params;
+  const { slug, locale } = params;
   setStaticParamsLocale(locale);
   const t = await getI18n();
 
   const isDraftMode = (await draftMode()).isEnabled;
-
-  const slug = `tag/${id}`;
 
   const pageData = {
     slugEn: slug,
     slugDe: slug,
   };
 
-  if (!id) {
+  if (!slug) {
     notFound();
   }
 
-  const concept = await getConcept(id, locale, isDraftMode);
+  const concept = await getConcept(slug, getLocaleFromPath(locale), isDraftMode);
 
   if (!concept) {
     notFound();
@@ -230,8 +228,11 @@ export async function generateStaticParams() {
   const returnData: Params[] = [];
   const taxonomyConcepts = await getTaxonomyConcepts(process.env.CONTENTFUL_ORGANIZATION ?? '<missing organization>');
   for await (const locale of params) {
+    const localeFromPath = getLocaleFromPath(locale.locale);
     for (const concept of taxonomyConcepts) {
-      returnData.push({ id: concept.sys.id, locale: locale.locale });
+      if (concept.slug[localeFromPath]) {
+        returnData.push({ slug: concept.slug[localeFromPath], locale: locale.locale });
+      }
     }
   }
   return returnData;
