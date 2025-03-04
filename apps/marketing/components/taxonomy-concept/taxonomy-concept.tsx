@@ -1,0 +1,35 @@
+import { type ResultOf, type FragmentOf, graphql, readFragment } from 'gql.tada';
+
+import type { ConceptProps } from 'contentful-management';
+
+import { TaxonomyConceptClient } from './taxonomy-concept-client';
+import { getTaxonomyConcepts } from '#/lib/get-taxonomy-concepts';
+
+export const getTaxonomyConceptProps = async ({
+  data: fragmentData,
+}: TaxonomyConceptProps): Promise<TaxonomyConceptAddFieldsProps | null> => {
+  const data = readFragment(TaxonomyConceptFragment, fragmentData);
+  const taxonomyConcepts = await getTaxonomyConcepts(process.env.CONTENTFUL_ORGANIZATION ?? '<missing organization>');
+  const concept = taxonomyConcepts.find((item) => item.sys.id === data.id);
+  return concept ? { ...data, ...concept } : null;
+};
+
+// This fragment must be unmasked since we are adding data to its results.
+// Masking then unmasking it will cause typescript errors.
+export const TaxonomyConceptFragment = graphql(`
+  fragment TaxonomyConcept on TaxonomyConcept {
+    __typename
+    id
+  }
+`);
+
+export type TaxonomyConceptAddFieldsProps = ResultOf<typeof TaxonomyConceptFragment> & ConceptProps;
+
+export interface TaxonomyConceptProps {
+  data: FragmentOf<typeof TaxonomyConceptFragment>;
+}
+
+export async function TaxonomyConcept(props: TaxonomyConceptProps) {
+  const data = await getTaxonomyConceptProps({ data: props.data });
+  return data ? <TaxonomyConceptClient data={data} /> : null;
+}

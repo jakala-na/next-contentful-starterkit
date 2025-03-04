@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { TopicProduct } from './topic-product';
+import { Button } from '../button';
+import { Link } from '../link';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
@@ -52,18 +54,15 @@ export const Default: Story = {
     ],
     price: 49.99,
     tags: [
-      {
-        children: <>Tincidunt</>,
-        href: '#',
-      },
-      {
-        children: <>Consequat</>,
-        href: '#',
-      },
-      {
-        children: <>Morbi</>,
-        href: '#',
-      },
+      <Button variant="outline" size="sm" asChild>
+        <Link href="#">Tincidunt</Link>
+      </Button>,
+      <Button variant="outline" size="sm" asChild>
+        <Link href="#">Consequat</Link>
+      </Button>,
+      <Button variant="outline" size="sm" asChild>
+        <Link href="#">Morbi</Link>
+      </Button>,
     ],
   },
 };

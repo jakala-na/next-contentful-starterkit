@@ -1,9 +1,9 @@
-import { type FragmentOf, type ResultOf, graphql, readFragment } from 'gql.tada';
+import { type FragmentOf, graphql, readFragment } from 'gql.tada';
 
 import { AssetFieldsFragment } from '../asset-ctf';
 import { TopicProductFeatureFragment } from '../topic-product-feature/topic-product-feature';
 import { TopicProductClient } from './topic-product-client';
-import { TaxonomyConceptFragment, type TaxonomyConceptAddFieldsProps } from '../taxonomy-concept-ctf';
+import { TaxonomyConceptFragment, TaxonomyConcept } from '../taxonomy-concept';
 
 export const TopicProductFragment = graphql(
   `
@@ -35,17 +35,18 @@ export const TopicProductFragment = graphql(
   [TaxonomyConceptFragment, AssetFieldsFragment, TopicProductFeatureFragment]
 );
 
-export type TopicProductAddFieldsProps = {
-  contentfulMetadata: {
-    concepts: (TaxonomyConceptAddFieldsProps | null)[] | null;
-  };
-} & ResultOf<typeof TopicProductFragment>;
-
 export interface TopicProductProps {
   data: FragmentOf<typeof TopicProductFragment>;
 }
 
 export function TopicProduct(props: TopicProductProps) {
   const data = readFragment(TopicProductFragment, props.data);
-  return <TopicProductClient data={data} />;
+  const tags = data.contentfulMetadata.concepts
+    .filter((fragmentData) => fragmentData !== null)
+    .map((fragmentData) => {
+      const concept = readFragment(TaxonomyConceptFragment, fragmentData);
+      return <TaxonomyConcept key={concept.id} data={fragmentData} />;
+    });
+
+  return <TopicProductClient data={data} tags={tags} />;
 }

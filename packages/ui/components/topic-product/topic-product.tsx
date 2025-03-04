@@ -1,8 +1,6 @@
 import { type ReactNode } from 'react';
 
 import { Image, type ImageProps } from '@repo/ui/components/image';
-import { Button } from '../button';
-import { Link, type LinkProps } from '../link';
 
 export interface TopicProductProps {
   name: string | null;
@@ -10,7 +8,7 @@ export interface TopicProductProps {
   featuredImage?: ImageProps | null;
   features?: string[] | null;
   price: number | null;
-  tags: LinkProps[] | null;
+  tags?: ReactNode[] | null;
   addAttributes?: (name: string) => object | null;
 }
 
@@ -57,15 +55,7 @@ export function TopicProduct({
                 </ul>
               </div>
             ) : null}
-            {tags ? (
-              <div className="mt-6 flex flex-wrap gap-2">
-                {tags.map((tag, index) => (
-                  <Button key={`tag-${index}`} variant="outline" size="sm" {...addAttributes('ctaText')} asChild>
-                    <Link {...tag} />
-                  </Button>
-                ))}
-              </div>
-            ) : null}
+            {tags ? <div className="mt-6 flex flex-wrap gap-2">{tags}</div> : null}
           </div>
         </div>
       </div>

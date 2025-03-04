@@ -1,15 +1,23 @@
 'use client';
 
+import { type ReactNode } from 'react';
+import { type ResultOf } from 'gql.tada';
+
 import { getImageChildProps } from '#/components/image-ctf';
 import { RichTextCtf } from '#/components/rich-text-ctf';
+import { TopicProduct } from '@repo/ui/components/topic-product';
 
 import { getTopicProductFeatureProps } from '../topic-product-feature/topic-product-feature';
-import { TopicProduct } from '@repo/ui/components/topic-product';
-import type { LinkProps } from '@repo/ui/components/link';
 import { useComponentPreview } from '../hooks/use-component-preview';
-import { type TopicProductAddFieldsProps } from '#/components/topic-product/topic-product';
+import { type TopicProductFragment } from './topic-product';
 
-export function TopicProductClient({ data: originalData }: { data: TopicProductAddFieldsProps }) {
+export function TopicProductClient({
+  data: originalData,
+  tags,
+}: {
+  data: ResultOf<typeof TopicProductFragment>;
+  tags: ReactNode[];
+}) {
   const { data, addAttributes } = useComponentPreview(originalData);
 
   const features = data.featuresCollection?.items
@@ -17,16 +25,6 @@ export function TopicProductClient({ data: originalData }: { data: TopicProductA
       return feature ? getTopicProductFeatureProps({ data: feature }).name : null;
     })
     .filter((feature) => feature !== null);
-
-  const tags: LinkProps[] = data.contentfulMetadata.concepts
-    .filter((concept) => concept !== null)
-    .map((concept) => {
-      return {
-        id: concept.id,
-        children: concept.prefLabel,
-        href: '#',
-      };
-    });
 
   return (
     <TopicProduct
