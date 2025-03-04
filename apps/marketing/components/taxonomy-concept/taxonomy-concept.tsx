@@ -1,14 +1,10 @@
 import { type ResultOf, type FragmentOf, graphql, readFragment } from 'gql.tada';
 
-import type { ConceptProps } from 'contentful-management';
-
 import { TaxonomyConceptClient } from './taxonomy-concept-client';
-import { getTaxonomyConcepts } from '#/lib/get-taxonomy-concepts';
+import { getTaxonomyConcepts, type ConceptProps } from '#/lib/get-taxonomy-concepts';
 
-export const getTaxonomyConceptProps = async ({
-  data: fragmentData,
-}: TaxonomyConceptProps): Promise<TaxonomyConceptAddFieldsProps | null> => {
-  const data = readFragment(TaxonomyConceptFragment, fragmentData);
+const getTaxonomyConceptProps = async (props: TaxonomyConceptProps): Promise<TaxonomyConceptAddFieldsProps | null> => {
+  const data = readFragment(TaxonomyConceptFragment, props.data);
   const taxonomyConcepts = await getTaxonomyConcepts(process.env.CONTENTFUL_ORGANIZATION ?? '<missing organization>');
   const concept = taxonomyConcepts.find((item) => item.sys.id === data.id);
   return concept ? { ...data, ...concept } : null;
@@ -30,6 +26,6 @@ export interface TaxonomyConceptProps {
 }
 
 export async function TaxonomyConcept(props: TaxonomyConceptProps) {
-  const data = await getTaxonomyConceptProps({ data: props.data });
+  const data = await getTaxonomyConceptProps(props);
   return data ? <TaxonomyConceptClient data={data} /> : null;
 }

@@ -12,13 +12,12 @@ import { LanguageDataSetter } from '#/components/language-data-provider/language
 import { getTopicProductProps, TopicProductFragment } from '#/components/topic-product/topic-product';
 import { addContentSourceMaps } from '#/lib/content-source-maps';
 import { graphqlClient } from '#/lib/graphql-client';
-import { getTaxonomyConcepts } from '#/lib/get-taxonomy-concepts';
+import { getTaxonomyConcepts, getConceptBySlug } from '#/lib/get-taxonomy-concepts';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
-import { getStaticParams } from '#/locales/server';
+import { getStaticParams, getI18n } from '#/locales/server';
 import { TopicBusinessInfo } from '@repo/ui/components/topic-business-info';
 import { ComponentProductTableClient } from '#/components/component-product-table/component-product-table-client';
 import { type ComponentProductTableFragment } from '#/components/component-product-table/component-product-table';
-import { getI18n } from '#/locales/server';
 import { fallbackLocale } from '#/locales/fallback-locale';
 
 interface PageProps {
@@ -29,11 +28,6 @@ interface Params {
   slug: string;
   locale: string;
 }
-
-const getConcept = async (slug: string, locale: string, preview = false) => {
-  const taxonomyConcepts = await getTaxonomyConcepts(process.env.CONTENTFUL_ORGANIZATION ?? '<missing organization>');
-  return taxonomyConcepts.find((concept) => concept.slug[locale] === slug);
-};
 
 const getEntries = async (conceptId: string, locale: string, preview = false) => {
   const entryQuery = graphql(
@@ -54,7 +48,7 @@ const getEntries = async (conceptId: string, locale: string, preview = false) =>
     [TopicProductFragment]
   );
 
-  const response = await graphqlClient({ preview }).query(entryQuery, {
+  const response = await graphqlClient(preview).query(entryQuery, {
     locale,
     fallbackLocale,
     preview,
@@ -156,20 +150,23 @@ export default async function TagPage(props: PageProps) {
 
   const isDraftMode = (await draftMode()).isEnabled;
 
-  const pageData = {
-    slugEn: slug,
-    slugDe: slug,
-  };
-
   if (!slug) {
     notFound();
   }
 
-  const concept = await getConcept(slug, getLocaleFromPath(locale), isDraftMode);
+  // We know that only 'en-US' slugs exist since Taxonomy Manager does not
+  // currently support translations.
+  // const concept = await getConceptBySlug(slug, getLocaleFromPath(locale));
+  const concept = await getConceptBySlug(slug, fallbackLocale);
 
   if (!concept) {
     notFound();
   }
+
+  const pageData = {
+    slugEn: `tag/${slug}`,
+    slugDe: `tag/${slug}`,
+  };
 
   const entries = await getEntries(concept.sys.id, getLocaleFromPath(locale), isDraftMode);
 
@@ -202,7 +199,8 @@ export default async function TagPage(props: PageProps) {
       />
       <TopicBusinessInfo
         name={concept.prefLabel[fallbackLocale] ?? null}
-        shortDescription={concept.definition ? concept.definition[fallbackLocale] : null}
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- TODO: refactor
+        shortDescription={concept.definition !== null ? concept.definition[fallbackLocale] : null}
         body={body}
       />
     </>

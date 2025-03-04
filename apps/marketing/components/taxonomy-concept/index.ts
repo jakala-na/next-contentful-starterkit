@@ -1,1 +1,1 @@
-export * from './taxonomy-concept';
+export { TaxonomyConcept } from './taxonomy-concept';

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { type ResultOf } from 'gql.tada';
 
 import { getImageChildProps } from '#/components/image-ctf';
+// eslint-disable-next-line import/no-cycle -- TODO: refactor
 import { RichTextCtf } from '#/components/rich-text-ctf';
 
 import { type ComponentProductTableFragment } from '#/components/component-product-table/component-product-table';
@@ -20,7 +21,7 @@ export function ComponentProductTableClient(props: { data: ResultOf<typeof Compo
   const router = useRouter();
 
   const items: CardProps[] = data.productsCollection
-    ? data.productsCollection?.items
+    ? data.productsCollection.items
         .map((item) => {
           if (!item) {
             return null;

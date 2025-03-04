@@ -2,10 +2,11 @@ import { type FragmentOf, graphql, readFragment } from 'gql.tada';
 
 import { AssetFieldsFragment } from '../asset-ctf';
 import { TopicProductFeatureFragment } from '../topic-product-feature/topic-product-feature';
+// eslint-disable-next-line import/no-cycle -- TODO: refactor
 import { TopicProductClient } from './topic-product-client';
-import { TaxonomyConceptFragment, TaxonomyConcept } from '../taxonomy-concept';
+import { TaxonomyConceptFragment, TaxonomyConcept } from '../taxonomy-concept/taxonomy-concept';
 
-export const getTopicProductProps = ({ data: fragmentData, ...props }: TopicProductProps) => {
+export const getTopicProductProps = ({ data: fragmentData }: TopicProductProps) => {
   const data = readFragment(TopicProductFragment, fragmentData);
   return data;
 };
@@ -63,6 +64,7 @@ export function TopicProduct(props: TopicProductProps) {
   const tags = data.contentfulMetadata.concepts
     .filter((fragmentData) => fragmentData !== null)
     .map((fragmentData) => {
+      // Unmask the fragment to access the concept id, to use as a key.
       const concept = readFragment(TaxonomyConceptFragment, fragmentData);
       return <TaxonomyConcept key={concept.id} data={fragmentData} />;
     });

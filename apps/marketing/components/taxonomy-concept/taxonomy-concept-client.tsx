@@ -4,16 +4,18 @@ import { Button } from '@repo/ui/components/button';
 import { Link } from '@repo/ui/components/link';
 import { useCurrentLocale } from '#/locales/client';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
+import { fallbackLocale } from '#/locales/fallback-locale';
 
 import type { TaxonomyConceptAddFieldsProps } from './taxonomy-concept';
 
 export function TaxonomyConceptClient({ data }: { data: TaxonomyConceptAddFieldsProps }) {
-  const locale = getLocaleFromPath(useCurrentLocale());
-  const fallbackLocale = 'en-US';
+  const currentLocalePath = useCurrentLocale();
+  const locale = getLocaleFromPath(currentLocalePath);
   const label = data.prefLabel[locale] ?? data.prefLabel[fallbackLocale];
-  return (
+  const slug = data.slug[locale] ?? data.slug[fallbackLocale];
+  return label && slug ? (
     <Button variant="outline" size="sm" asChild>
-      <Link href="#">{label}</Link>
+      <Link href={`/${currentLocalePath}/tag/${slug}`}>{label}</Link>
     </Button>
-  );
+  ) : null;
 }

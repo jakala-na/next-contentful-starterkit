@@ -4,6 +4,7 @@ import { type ReactNode } from 'react';
 import { type ResultOf } from 'gql.tada';
 
 import { getImageChildProps } from '#/components/image-ctf';
+// eslint-disable-next-line import/no-cycle -- TODO: refactor
 import { RichTextCtf } from '#/components/rich-text-ctf';
 import { TopicProduct } from '@repo/ui/components/topic-product';
 
@@ -16,7 +17,7 @@ export function TopicProductClient({
   tags,
 }: {
   data: ResultOf<typeof TopicProductFragment>;
-  tags: ReactNode[];
+  tags?: ReactNode[];
 }) {
   const { data, addAttributes } = useComponentPreview(originalData);
 

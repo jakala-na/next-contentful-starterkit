@@ -23,7 +23,7 @@ export const ComponentProductTableFragment = graphql(
 );
 
 export interface ComponentProductTableProps {
-  data: FragmentOf<typeof ComponentProductTableFragment> & Record<string, any>;
+  data: FragmentOf<typeof ComponentProductTableFragment>;
 }
 
 export function ComponentProductTable(props: ComponentProductTableProps) {
