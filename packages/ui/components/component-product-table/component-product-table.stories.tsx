@@ -38,6 +38,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/212/720/480',
           alt: 'Placeholder image',
         }}
+        key="card-1"
       />,
       <Card
         headline="Wireless Smart Sensor Light"
@@ -46,6 +47,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/225/720/480',
           alt: 'Placeholder image',
         }}
+        key="card-2"
       />,
       <Card
         headline="Ergonomic Memory Foam Cushion"
@@ -54,6 +56,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/250/720/480',
           alt: 'Placeholder image',
         }}
+        key="card-3"
       />,
       <Card
         headline="Multi-Purpose Storage Box"
@@ -62,6 +65,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/212/720/480',
           alt: 'Placeholder image',
         }}
+        key="card-4"
       />,
       <Card
         headline="Wireless Smart Sensor Light"
@@ -70,6 +74,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/225/720/480',
           alt: 'Placeholder image',
         }}
+        key="card-5"
       />,
       <Card
         headline="Ergonomic Memory Foam Cushion"
@@ -78,6 +83,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/250/720/480',
           alt: 'Placeholder image',
         }}
+        key="card-6"
       />,
     ],
   },
