@@ -13,14 +13,14 @@ import { ComponentProductTable } from '@repo/ui/components/component-product-tab
 import { useComponentPreview } from '../hooks/use-component-preview';
 
 import { getTopicProductProps } from '#/components/topic-product/topic-product';
-import { type CardProps } from '@repo/ui/components/card';
+import { Card } from '@repo/ui/components/card/card';
 
 export function ComponentProductTableClient(props: { data: ResultOf<typeof ComponentProductTableFragment> }) {
   const { data: originalData } = props;
   const { data, addAttributes } = useComponentPreview(originalData);
   const router = useRouter();
 
-  const items: CardProps[] = data.productsCollection
+  const items = data.productsCollection
     ? data.productsCollection.items
         .map((item) => {
           if (!item) {
@@ -35,22 +35,36 @@ export function ComponentProductTableClient(props: { data: ResultOf<typeof Compo
               })
             : undefined;
           const slug = itemProps.linkedFrom?.pageCollection?.items[0]?.slug;
-          return {
-            headline: itemProps.name ?? undefined,
-            bodyText: itemProps.description ? (
-              <div {...addAttributes('bodyText')}>
-                <RichTextCtf {...itemProps.description} />
-              </div>
-            ) : undefined,
-            image: image ?? undefined,
-            onClickEvent: slug
-              ? () => {
-                  if (slug) {
-                    router.push(`/${slug}`);
-                  }
-                }
-              : undefined,
-          };
+          return (
+            <Card
+              key={itemProps.sys.id}
+              headline={itemProps.name ?? undefined}
+              body={
+                itemProps.description ? (
+                  <div {...addAttributes('bodyText')}>
+                    <RichTextCtf {...itemProps.description} />
+                  </div>
+                ) : undefined
+              }
+              image={
+                image
+                  ? {
+                      ...image,
+                      style: {
+                        aspectRatio: '1/1',
+                      },
+                    }
+                  : undefined
+              }
+              onClickEvent={
+                slug
+                  ? () => {
+                      router.push(`/${slug}`);
+                    }
+                  : undefined
+              }
+            />
+          );
         })
         .filter((item) => item !== null)
     : [];

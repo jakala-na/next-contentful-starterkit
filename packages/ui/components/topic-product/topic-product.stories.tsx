@@ -54,13 +54,13 @@ export const Default: Story = {
     ],
     price: 49.99,
     tags: [
-      <Button variant="outline" size="sm" asChild>
+      <Button variant="outline" size="sm" asChild key="button-1">
         <Link href="#">Tincidunt</Link>
       </Button>,
-      <Button variant="outline" size="sm" asChild>
+      <Button variant="outline" size="sm" asChild key="button-2">
         <Link href="#">Consequat</Link>
       </Button>,
-      <Button variant="outline" size="sm" asChild>
+      <Button variant="outline" size="sm" asChild key="button-3">
         <Link href="#">Morbi</Link>
       </Button>,
     ],

@@ -24,9 +24,9 @@ export function TopicProduct({
   return (
     <div className="flex justify-center py-12 ">
       <div className="max-w-6xl px-5">
-        <div className="flex flex-col sm:flex-row gap-6">
+        <div className="flex flex-col gap-6 sm:flex-row">
           {featuredImage ? (
-            <div className="basis-1/1 sm:basis-1/3 lg:basis-1/2 overflow-hidden">
+            <div className="basis-1/1 overflow-hidden sm:basis-1/3 lg:basis-1/2">
               <Image
                 {...addAttributes('image')}
                 {...featuredImage}
@@ -48,7 +48,7 @@ export function TopicProduct({
               <div className="mt-6">
                 <ul>
                   {features.map((feature, index) => (
-                    <li key={`feature-${index}`} className="list-disc ml-6">
+                    <li key={`feature-${index}`} className="ml-6 list-disc">
                       {feature}
                     </li>
                   ))}

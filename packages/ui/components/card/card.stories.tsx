@@ -17,7 +17,7 @@ const meta = {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     headline: { control: 'text' },
-    bodyText: { control: 'object' },
+    body: { control: 'object' },
     image: { control: 'object' },
     colorPalette: {
       control: 'select',
@@ -31,12 +31,11 @@ type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
   headline: 'With great power comes great responsibility',
-  bodyText: (
+  body: (
     <div>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, libero eget ultricies aliquam, nisl.</p>
     </div>
   ),
-  link: '#',
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args

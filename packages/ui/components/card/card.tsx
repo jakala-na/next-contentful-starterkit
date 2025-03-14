@@ -1,82 +1,105 @@
-import { type ReactNode } from 'react';
+'use client';
+
+import { forwardRef } from 'react';
+import type { ReactNode, HTMLAttributes, MouseEventHandler, MouseEvent } from 'react';
+
+import {
+  Card as ShadCNCard,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@repo/ui/components/card';
+import { cn } from '@repo/ui/lib/utils';
 
 import { getColorConfigFromPalette } from '../../theme';
 import { Button } from '../button';
 import { Image, type ImageProps } from '../image';
-import type { LinkProps } from '../link';
-import { Link } from '../link';
+import { type LinkProps, Link } from '../link';
 
-export interface CardProps {
-  headline?: string;
-  bodyText?: ReactNode;
+export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   image?: ImageProps;
+  headline?: string;
+  body?: ReactNode;
   cta?: LinkProps;
-  link?: string;
   colorPalette?: string;
   addAttributes?: (name: string) => object;
-  onClickEvent?: React.MouseEventHandler<HTMLDivElement>;
+  onClickEvent?: MouseEventHandler<HTMLDivElement>;
   onClickAnalyticsEvent?: () => void;
 }
 
-export function Card(props: CardProps) {
+export const Card = forwardRef<HTMLDivElement, CardProps>((props: CardProps, ref) => {
   const {
-    headline,
-    bodyText,
     image,
+    headline,
+    body,
     cta,
-    link,
     colorPalette,
-    addAttributes = () => ({}), // Default to no-op.
+    addAttributes = () => ({}),
     onClickEvent,
     onClickAnalyticsEvent,
+    ...restProps
   } = props;
   const colorConfig = getColorConfigFromPalette(colorPalette ?? '');
 
-  const onClickHandler = (e: React.MouseEvent<HTMLInputElement>) => {
+  const onClickHandler = (e: MouseEvent<HTMLInputElement>) => {
     if (onClickEvent) {
-      return onClickEvent(e);
-    }
-    if (link && window) {
-      window.location.href = link;
-      return;
+      onClickEvent(e);
     }
   };
 
   return (
-    <div
-      className={`max-w-sm rounded-lg shadow-lg overflow-hidden ${onClickEvent || link ? 'cursor-pointer' : ''}`}
-      style={{ backgroundColor: colorConfig.backgroundColor }}
+    <ShadCNCard
+      ref={ref}
+      className={cn(
+        'not-wysiwyg max-w-sm overflow-hidden transition-all hover:shadow-md',
+        onClickEvent && 'cursor-pointer hover:-translate-y-1'
+      )}
       onClick={onClickHandler}
+      {...restProps}
     >
-      <div className="aspect-w-16 aspect-h-9">
-        {image ? <Image {...addAttributes('image')} {...image} alt={image.alt} className="w-full" /> : null}{' '}
-      </div>
-      <div className="p-6">
-        {headline ? (
-          <h3 className="text-2xl font-bold" style={{ color: colorConfig.headlineColor }}>
-            {headline}
-          </h3>
-        ) : null}
-        {bodyText ? (
-          <div className="wysiwyg my-5" style={{ color: colorConfig.textColor }}>
-            {bodyText}
-          </div>
-        ) : null}
-        {cta?.href && cta.children ? (
-          <div className="mt-6">
-            <Button
-              variant={colorConfig.buttonColor}
-              {...addAttributes('ctaText')}
-              asChild
-              onClick={() => {
-                onClickAnalyticsEvent?.();
-              }}
-            >
-              <Link {...cta} />
-            </Button>
-          </div>
-        ) : null}
-      </div>
-    </div>
+      {image ? (
+        <div className="w-full overflow-hidden">
+          <Image
+            {...addAttributes('image')}
+            className="w-full object-cover"
+            style={{
+              aspectRatio: '16/9',
+            }}
+            {...image}
+          />
+        </div>
+      ) : null}
+
+      {headline ? (
+        <CardHeader>
+          <CardTitle className="text-2xl">{headline}</CardTitle>
+        </CardHeader>
+      ) : null}
+
+      {body ? (
+        <CardContent>
+          <CardDescription className="wysiwyg text-base">{body}</CardDescription>
+        </CardContent>
+      ) : null}
+
+      {cta?.href && cta.children ? (
+        <CardFooter>
+          <Button
+            variant={colorConfig.buttonColor}
+            {...addAttributes('ctaText')}
+            asChild
+            onClick={() => {
+              onClickAnalyticsEvent?.();
+            }}
+          >
+            <Link {...cta} />
+          </Button>
+        </CardFooter>
+      ) : null}
+    </ShadCNCard>
   );
-}
+});
+
+Card.displayName = 'CustomCard';
