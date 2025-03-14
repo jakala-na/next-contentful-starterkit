@@ -10,8 +10,6 @@ const getTaxonomyConceptProps = async (props: TaxonomyConceptProps): Promise<Tax
   return concept ? { ...data, ...concept } : null;
 };
 
-// This fragment must be unmasked since we are adding data to its results.
-// Masking then unmasking it will cause typescript errors.
 export const TaxonomyConceptFragment = graphql(`
   fragment TaxonomyConcept on TaxonomyConcept {
     __typename
