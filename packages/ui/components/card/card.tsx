@@ -25,7 +25,6 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   cta?: LinkProps;
   colorPalette?: string;
   addAttributes?: (name: string) => object;
-  onClickEvent?: MouseEventHandler<HTMLDivElement>;
   onClickAnalyticsEvent?: () => void;
 }
 
@@ -37,26 +36,15 @@ export const Card = forwardRef<HTMLDivElement, CardProps>((props: CardProps, ref
     cta,
     colorPalette,
     addAttributes = () => ({}),
-    onClickEvent,
     onClickAnalyticsEvent,
     ...restProps
   } = props;
   const colorConfig = getColorConfigFromPalette(colorPalette ?? '');
 
-  const onClickHandler = (e: MouseEvent<HTMLInputElement>) => {
-    if (onClickEvent) {
-      onClickEvent(e);
-    }
-  };
-
   return (
     <ShadCNCard
       ref={ref}
-      className={cn(
-        'not-wysiwyg max-w-sm overflow-hidden transition-all hover:shadow-md',
-        onClickEvent && 'cursor-pointer hover:-translate-y-1'
-      )}
-      onClick={onClickHandler}
+      className={cn('not-wysiwyg max-w-sm overflow-hidden transition-all hover:shadow-md')}
       {...restProps}
     >
       {image ? (

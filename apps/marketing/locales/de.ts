@@ -6,4 +6,5 @@ export default {
   'notFound.button': 'Zurück zum Tresor',
   products: 'Produkte',
   'no products': 'Keine produkte.',
+  shop: 'Kaufen',
 } as const;

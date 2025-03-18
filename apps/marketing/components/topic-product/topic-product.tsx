@@ -1,6 +1,7 @@
 import { type FragmentOf, graphql, readFragment } from 'gql.tada';
 
 import { AssetFieldsFragment } from '../asset-ctf';
+import { PageLinkFieldsFragment } from '../page';
 import { TopicProductFeatureFragment } from '../topic-product-feature/topic-product-feature';
 // eslint-disable-next-line import/no-cycle -- TODO: refactor
 import { TopicProductClient } from './topic-product-client';
@@ -43,16 +44,13 @@ export const TopicProductFragment = graphql(
       linkedFrom(allowedLocales: [$fallbackLocale, $locale]) {
         pageCollection(limit: 1) {
           items {
-            sys {
-              id
-            }
-            slug
+            ...PageLinkFields
           }
         }
       }
     }
   `,
-  [TaxonomyConceptFragment, AssetFieldsFragment, TopicProductFeatureFragment]
+  [TaxonomyConceptFragment, AssetFieldsFragment, TopicProductFeatureFragment, PageLinkFieldsFragment]
 );
 
 export interface TopicProductProps {

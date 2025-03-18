@@ -38,6 +38,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/212/720/480',
           alt: 'Placeholder image',
         }}
+        cta={{ children: 'Shop', href: '#' }}
         key="card-1"
       />,
       <Card
@@ -56,6 +57,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/250/720/480',
           alt: 'Placeholder image',
         }}
+        cta={{ children: 'Shop', href: '#' }}
         key="card-3"
       />,
       <Card
@@ -65,6 +67,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/212/720/480',
           alt: 'Placeholder image',
         }}
+        cta={{ children: 'Shop', href: '#' }}
         key="card-4"
       />,
       <Card
@@ -74,6 +77,7 @@ export const Default: Story = {
           src: 'https://picsum.photos/id/225/720/480',
           alt: 'Placeholder image',
         }}
+        cta={{ children: 'Shop', href: '#' }}
         key="card-5"
       />,
       <Card

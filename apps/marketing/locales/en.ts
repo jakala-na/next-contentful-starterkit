@@ -6,4 +6,5 @@ export default {
   'notFound.button': 'Return to the Vault',
   products: 'Products',
   'no products': 'No products.',
+  shop: 'Shop',
 } as const;

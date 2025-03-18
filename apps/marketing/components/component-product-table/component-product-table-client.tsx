@@ -1,12 +1,13 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import { type ResultOf } from 'gql.tada';
+
+import { I18nProviderClient, useI18n, useCurrentLocale } from '#/locales/client';
 
 import { getImageChildProps } from '#/components/image-ctf';
 // eslint-disable-next-line import/no-cycle -- TODO: refactor
 import { RichTextCtf } from '#/components/rich-text-ctf';
+import { getPageLinkChildProps } from '#/components/page';
 
 import { type ComponentProductTableFragment } from '#/components/component-product-table/component-product-table';
 import { ComponentProductTable } from '@repo/ui/components/component-product-table';
@@ -16,9 +17,19 @@ import { getTopicProductProps } from '#/components/topic-product/topic-product';
 import { Card } from '@repo/ui/components/card/card';
 
 export function ComponentProductTableClient(props: { data: ResultOf<typeof ComponentProductTableFragment> }) {
+  const locale = useCurrentLocale();
+  return (
+    <I18nProviderClient locale={locale as string}>
+      <ComponentProductTableClientInternal data={props.data} />
+    </I18nProviderClient>
+  );
+}
+
+function ComponentProductTableClientInternal(props: { data: ResultOf<typeof ComponentProductTableFragment> }) {
   const { data: originalData } = props;
   const { data, addAttributes } = useComponentPreview(originalData);
-  const router = useRouter();
+  const locale = useCurrentLocale();
+  const t = useI18n();
 
   const items = data.productsCollection
     ? data.productsCollection.items
@@ -34,7 +45,7 @@ export function ComponentProductTableClient(props: { data: ResultOf<typeof Compo
                 priority: true,
               })
             : undefined;
-          const slug = itemProps.linkedFrom?.pageCollection?.items[0]?.slug;
+          const targetPage = itemProps.linkedFrom?.pageCollection?.items?.[0];
           return (
             <Card
               key={itemProps.sys.id}
@@ -56,13 +67,7 @@ export function ComponentProductTableClient(props: { data: ResultOf<typeof Compo
                     }
                   : undefined
               }
-              onClickEvent={
-                slug
-                  ? () => {
-                      router.push(`/${slug}`);
-                    }
-                  : undefined
-              }
+              cta={targetPage ? getPageLinkChildProps(targetPage, t('shop')) : undefined}
             />
           );
         })
