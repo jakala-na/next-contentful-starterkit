@@ -7,3 +7,11 @@ projects:
         'apps/marketing/components/**/*.{graphql,js,ts,jsx,tsx}',
         'apps/marketing/lib/**/*.{graphql,js,ts,jsx,tsx}',
       ]
+  drupal-marketing:
+    schema: './apps/drupal-marketing/gql/schema.graphql'
+    documents:
+      [
+        'apps/drupal-marketing/app/**/*.{graphql,js,ts,jsx,tsx}',
+        'apps/drupal-marketing/components/**/*.{graphql,js,ts,jsx,tsx}',
+        'apps/drupal-marketing/lib/**/*.{graphql,js,ts,jsx,tsx}',
+      ]
