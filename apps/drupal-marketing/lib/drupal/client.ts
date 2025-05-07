@@ -22,7 +22,7 @@ const makeClient = async (preview: boolean) => {
             (preview ? process.env.DRUPAL_PREVIEWER_CLIENT_ID : process.env.DRUPAL_VIEWER_CLIENT_ID) ??
             '<missing client id>',
           clientSecret:
-            (preview ? process.env.DRUPAL_PREVIEWER_CLIENT_SECRET : process.env.DRUPAL_VIEWER_CLIENT_ID) ??
+            (preview ? process.env.DRUPAL_PREVIEWER_CLIENT_SECRET : process.env.DRUPAL_VIEWER_CLIENT_SECRET) ??
             '<missing client id>',
         });
 

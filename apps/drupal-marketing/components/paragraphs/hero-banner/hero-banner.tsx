@@ -7,7 +7,9 @@ export const ComponentHeroBannerFieldsFragment = graphql(
     fragment ComponentHeroBannerFields on ParagraphHero {
       __typename
       heading
-      description
+      description {
+        processed
+      }
       image {
         ...MediaImage
       }
@@ -26,8 +28,8 @@ export function ParagraphHeroBanner(props: HeroBannerProps) {
   return (
     <HeroBanner
       headline={data.heading}
-      bodyText={data.description}
-      image={getMediaImageProps(data.image)}
+      bodyText={<div dangerouslySetInnerHTML={{ __html: data.description?.processed as TrustedHTML }}></div>}
+      image={data.image ? getMediaImageProps(data.image) : null}
       size
       colorPalette="7. Black (#000000)"
     />
