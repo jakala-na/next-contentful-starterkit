@@ -3,6 +3,7 @@
 import { type PropsWithChildren, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 import Analytics from 'analytics';
 import { AnalyticsProvider } from 'use-analytics';
 
@@ -18,5 +19,10 @@ export function AnalyticsComponent({ children }: PropsWithChildren) {
     void analyticsInstance.page();
   }, [pathname]);
 
-  return <AnalyticsProvider instance={analyticsInstance}>{children}</AnalyticsProvider>;
+  return (
+    <AnalyticsProvider instance={analyticsInstance}>
+      {children}
+      <VercelAnalytics />
+    </AnalyticsProvider>
+  );
 }
