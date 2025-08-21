@@ -28,6 +28,7 @@
     "@repo/ui": "workspace:*",
     "@urql/core": "^5.0.8",
     "@urql/exchange-persisted": "^4.2.0",
+    "@vercel/analytics": "^1.5.0",
     "@vercel/toolbar": "^0.1.22",
     "analytics": "^0.8.11",
     "encoding": "^0.1.13",
