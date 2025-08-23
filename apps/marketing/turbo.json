@@ -1,10 +1,10 @@
 {
-  "extends": [
-    "//"
-  ],
+  "extends": ["//"],
   "tasks": {
     "build": {
       "env": [
+        "CONTENTFUL_ORGANIZATION",
+        "CONTENTFUL_MANAGEMENT_API",
         "CONTENTFUL_PREVIEW_API",
         "CONTENTFUL_DELIVERY_API",
         "CONTENTFUL_SPACE",

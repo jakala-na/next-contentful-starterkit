@@ -64,6 +64,7 @@
     "axe-core": "^4.6.1",
     "chalk": "^5.3.0",
     "contentful": "^11.2.0",
+    "contentful-management": "^11.47.2",
     "cypress": "^13.16.0",
     "cypress-axe": "^1.2.0",
     "cypress-image-snapshot": "^4.0.1",
