@@ -13,10 +13,12 @@ import { ComponentHeroBannerFieldsFragment } from '#/components/hero-banner-ctf/
 import { LanguageDataSetter } from '#/components/language-data-provider/language-data-provider';
 import { ComponentSEOFieldsFragment, getSeoMetadata } from '#/components/seo/seo-ctf';
 import { TopicBusinessInfoFieldsFragment } from '#/components/topic-business-info/topic-business-info';
+import { TopicProductFragment } from '#/components/topic-product/topic-product';
 import { addContentSourceMaps } from '#/lib/content-source-maps';
 import { graphqlClient } from '#/lib/graphql-client';
 import { getLocaleFromPath } from '#/locales/get-locale-from-path';
 import { getStaticParams } from '#/locales/server';
+import { fallbackLocale } from '#/locales/fallback-locale';
 
 interface PageProps {
   params: Promise<Params>;
@@ -30,7 +32,7 @@ interface Params {
 const getPage = async (slug: string, locale: string, preview = false) => {
   const pageQuery = graphql(
     `
-      query PageQuery($slug: String, $locale: String, $preview: Boolean) @contentSourceMaps {
+      query PageQuery($slug: String, $locale: String, $fallbackLocale: String, $preview: Boolean) @contentSourceMaps {
         pageCollection(locale: $locale, preview: $preview, limit: 1, where: { slug: $slug }) {
           items {
             topSectionCollection(limit: 10) {
@@ -53,6 +55,7 @@ const getPage = async (slug: string, locale: string, preview = false) => {
                 }
               }
               ...TopicBusinessInfo
+              ...TopicProduct
             }
             slugEn: slug(locale: "en-US")
             slugDe: slug(locale: "de-DE")
@@ -60,11 +63,17 @@ const getPage = async (slug: string, locale: string, preview = false) => {
         }
       }
     `,
-    [ComponentHeroBannerFieldsFragment, ComponentDuplexFieldsFragment, TopicBusinessInfoFieldsFragment]
+    [
+      ComponentHeroBannerFieldsFragment,
+      ComponentDuplexFieldsFragment,
+      TopicBusinessInfoFieldsFragment,
+      TopicProductFragment,
+    ]
   );
 
   const response = await graphqlClient(preview).query(pageQuery, {
     locale,
+    fallbackLocale,
     preview,
     slug,
   });

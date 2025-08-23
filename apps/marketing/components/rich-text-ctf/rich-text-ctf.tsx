@@ -6,6 +6,7 @@ import { documentToReactComponents, type Options } from '@contentful/rich-text-r
 import { BLOCKS, INLINES, type Block as RichtextBlock } from '@contentful/rich-text-types';
 
 import { TopicPersonClient } from '#/components/topic-person/topic-person-client';
+import { ComponentProductTableClient } from '#/components/component-product-table/component-product-table-client';
 import { type OmitRecursive, tryget } from '#/lib/utils';
 
 import { AssetCtf, type AssetFieldsFragment } from '../asset-ctf';
@@ -68,6 +69,12 @@ export function RichTextCtf(props: RichTextProps) {
                 return (
                   <div className="not-wysiwyg py-5">
                     <TopicPersonClient data={entry} />
+                  </div>
+                );
+              case 'ComponentProductTable':
+                return (
+                  <div className="not-wysiwyg py-5">
+                    <ComponentProductTableClient data={entry} />
                   </div>
                 );
             }

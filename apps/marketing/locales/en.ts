@@ -4,4 +4,7 @@ export default {
   'notFound.text':
     'It seems our experimental wayfinding elixir has had an unfortunate accident. The page you seek has dissolved into the ether.',
   'notFound.button': 'Return to the Vault',
+  products: 'Products',
+  'no products': 'No products.',
+  shop: 'Shop',
 } as const;

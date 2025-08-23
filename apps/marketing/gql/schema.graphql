@@ -1,3 +1,8 @@
+"""
+Indicates exactly one field must be supplied and this field must not be `null`.
+"""
+directive @oneOf on INPUT_OBJECT
+
 directive @contentSourceMaps on QUERY
 
 type Query {
@@ -86,7 +91,7 @@ type ContentfulMetadata {
 }
 
 """
-Represents a tag entity for finding and organizing content easily.
+Represents a taxonomy concept entity for finding and organizing content easily.
         Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-concepts
 """
 type TaxonomyConcept {

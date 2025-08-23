@@ -1,0 +1,85 @@
+'use client';
+
+import { type ResultOf } from 'gql.tada';
+
+import { I18nProviderClient, useI18n, useCurrentLocale } from '#/locales/client';
+
+import { getImageChildProps } from '#/components/image-ctf';
+// eslint-disable-next-line import/no-cycle -- TODO: refactor
+import { RichTextCtf } from '#/components/rich-text-ctf';
+import { getPageLinkChildProps } from '#/components/page';
+
+import { type ComponentProductTableFragment } from '#/components/component-product-table/component-product-table';
+import { ComponentProductTable } from '@repo/ui/components/component-product-table';
+import { useComponentPreview } from '../hooks/use-component-preview';
+
+import { getTopicProductProps } from '#/components/topic-product/topic-product';
+import { Card } from '@repo/ui/components/card/card';
+
+export function ComponentProductTableClient(props: { data: ResultOf<typeof ComponentProductTableFragment> }) {
+  const locale = useCurrentLocale();
+  return (
+    <I18nProviderClient locale={locale as string}>
+      <ComponentProductTableClientInternal data={props.data} />
+    </I18nProviderClient>
+  );
+}
+
+function ComponentProductTableClientInternal(props: { data: ResultOf<typeof ComponentProductTableFragment> }) {
+  const { data: originalData } = props;
+  const { data, addAttributes } = useComponentPreview(originalData);
+  const locale = useCurrentLocale();
+  const t = useI18n();
+
+  const items = data.productsCollection
+    ? data.productsCollection.items
+        .map((item) => {
+          if (!item) {
+            return null;
+          }
+          const itemProps = getTopicProductProps({ data: item });
+          const image = itemProps.featuredImage
+            ? getImageChildProps({
+                data: itemProps.featuredImage,
+                sizes: '100vw',
+                priority: true,
+              })
+            : undefined;
+          const targetPage = itemProps.linkedFrom?.pageCollection?.items?.[0];
+          return (
+            <Card
+              key={itemProps.sys.id}
+              headline={itemProps.name ?? undefined}
+              body={
+                itemProps.description ? (
+                  <div {...addAttributes('bodyText')}>
+                    <RichTextCtf {...itemProps.description} />
+                  </div>
+                ) : undefined
+              }
+              image={
+                image
+                  ? {
+                      ...image,
+                      style: {
+                        aspectRatio: '1/1',
+                      },
+                    }
+                  : undefined
+              }
+              cta={targetPage ? getPageLinkChildProps(targetPage, t('shop')) : undefined}
+            />
+          );
+        })
+        .filter((item) => item !== null)
+    : [];
+
+  return (
+    <ComponentProductTable
+      headline={data.headline}
+      subline={data.subline}
+      items={items}
+      addAttributes={addAttributes}
+    />
+  );
+}
