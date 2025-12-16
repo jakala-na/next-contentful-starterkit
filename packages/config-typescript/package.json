@@ -5,8 +5,5 @@
   "license": "MIT",
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "next": "15.1.9"
   }
 }
